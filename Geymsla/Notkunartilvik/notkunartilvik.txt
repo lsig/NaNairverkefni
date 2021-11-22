@@ -1,1 +1,27 @@
-her koma kröfur
+Notkunartilvik:
+
+Úr skjali frá canvas (): 
+
+Hvað er Use Case / notkunartilvik:
+
+aðferð til að móta virknikröfur kerfisins. 
+Mest áhersla á markmið notenda, meginatriði samt hvernig samskipti milli hugbúnaðar og notanda er, í staðinn fyrir markmiðið sjálft samhengislaust.
+
+Hér á að sýna það hvað notandi þarf í hugbúnaði til að leysa verkefnið, ekki hvernig hann gerir það.
+
+Þetta er basically user stories, sem eiga að tengja vel yfir í virknikröfur hugbúnaðarins. Þær innihalda því auka upplýsingar og í mörgum dálkum.
+
+
+Mikilvægasta innihald notendatilvika er:
+	Stutt nafn/lýsing á tilvikinu; Buy a Product
+	Númer tilviksins
+	safn krafanna úr kröfulistanum sem tilvikið vitnar mögulega í.
+	Lýsing á því hvað notandinn þarf að gera til að ná markmiði sínu (ef allt gengur upp)
+	Hvaða notendur tilvikið á við um. (customer, student, API (þarf ekki að vera manneskja?) )
+síðan geta aðrir dálkar verið gagnlegir, en eru ekki nauðsynlegir:
+	Frávik, hvað gerist þegar eitthvað gengur ekki upp.
+	Mikilvægi: a, hátt, 15, o.s.frv.
+	Forskilyrði: Hvað þarf að gilda til þess að tilvikið eigi sér stað.
+	Eftirskilyrði: Hvað gerist í kjölfar tilviksins.
+
+Notkunartilvikin fara á docs.
