@@ -1,0 +1,8 @@
+###Vika 1 markmið. 
+
+•Notkunartilvikum (e. Use cases).
+•Klasariti (e. Class diagram).
+•Stöðuritum (e. State diagram), eftir því sem við á.
+•Notendahópagreiningu.
+•Útlitshönnun (e. Wireframe) sett fram sem “happy path”.
+•Kröfulista til viðmóts, með virknikröfum og nytsemis- og notendaupplifunarkröfum.
