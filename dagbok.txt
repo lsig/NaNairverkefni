@@ -22,4 +22,11 @@ Fórum að skipta verkefnum á milli á þann hátt að styrkleikar allra myndu 
 Markmið er að reyna að vera komnir eitthvað áfram í öllu sem verður inni í hönnunarskýrslunni.
 Miðum við að klára skýrslu á morgun!
 
+<<<<<<< HEAD
+Uppgjör: Við kláruðum kröfulistann og fórum að vinna í stöðuritunum og klasaritinum,
+Dining byrjuðum við á use cases og erum komnir vel áfram í skýrslunni. Allt gengur sem skyldi
+og allir vel peppaðir fyrir verkefninu. Turboinn vel ferskur eftir pfizerinn og menn almennt í 
+góðu skapi. 
+=======
 Uppgjör:
+>>>>>>> 15b24ce2a613edc89c8b817e8cd0c5156e5ced84
