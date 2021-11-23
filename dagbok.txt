@@ -19,17 +19,7 @@ Fórum að skipta verkefnum á milli á þann hátt að styrkleikar allra myndu 
 Markmið er að reyna að vera komnir eitthvað áfram í öllu sem verður inni í hönnunarskýrslunni.
 Miðum við að klára skýrslu á morgun!
 
-Uppgjör:
-=======
-Færsla 1
-Stofnuðum git repo og fórum yfir málin. 
-Reyndum að skilja betur verkefnið og 
-Ætlum að reyna deila út verkefnum 
-og klára notendahópagreiningu og notendatilvik í dag og á morgun
-Færsla 2 
-Kláruðum að gera notendahópagreiningu og komumst áfram í
-Stöðuritinu og notendatilvikunum. Dagurinn byrjaði hægt 
-menn mis þreyttir en síðan kom smá kraftur í þetta, þegar
-það leið á kvöldið. 
-Dagur 2, 22.10.21
->>>>>>> ab3193661763d48ba4005f5a1779d0c9ed09d99d
+Uppgjör: Við kláruðum kröfulistann og fórum að vinna í stöðuritunum og klasaritinum,
+Dining byrjuðum við á use cases og erum komnir vel áfram í skýrslunni. Allt gengur sem skyldi
+og allir vel peppaðir fyrir verkefninu. Turboinn vel ferskur eftir pfizerinn og menn almennt í 
+góðu skapi. 
