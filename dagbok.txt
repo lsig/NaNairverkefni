@@ -1,5 +1,6 @@
 ### Vika 1
 Dagur 1, 22.10.21
+<<<<<<< HEAD
 Morgunfundur:
 Allir komu sér saman á discord og ræddum aðeins áfangann, ákváðum að hittast upp í skóla og kíkja á verkefnalýsinguna betur. 
 
@@ -19,3 +20,16 @@ Markmið er að reyna að vera komnir eitthvað áfram í öllu sem verður inni
 Miðum við að klára skýrslu á morgun!
 
 Uppgjör:
+=======
+Færsla 1
+Stofnuðum git repo og fórum yfir málin. 
+Reyndum að skilja betur verkefnið og 
+Ætlum að reyna deila út verkefnum 
+og klára notendahópagreiningu og notendatilvik í dag og á morgun
+Færsla 2 
+Kláruðum að gera notendahópagreiningu og komumst áfram í
+Stöðuritinu og notendatilvikunum. Dagurinn byrjaði hægt 
+menn mis þreyttir en síðan kom smá kraftur í þetta, þegar
+það leið á kvöldið. 
+Dagur 2, 22.10.21
+>>>>>>> ab3193661763d48ba4005f5a1779d0c9ed09d99d
