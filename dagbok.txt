@@ -39,3 +39,14 @@ Kristófer Fannar og Logi í notkunartilvikum og Markús og Marteinn í klassari
 
 Uppgjör: 
 Við kláruðum notendatilvikin, klasaritin og stöðuritin. Allir vel ferksir, turboinn vel þunnur af einhverjum ástæðum, kallinn átti erfiðan þriðjudag (cough cough, Man U vann og hann missti sig aðeins). Maxim betur þekktur sem folinn mætti kampa kátur enda á hann kærustu sem gaf honum þetta nickname. Markús er í smitgát og vann klasaritið heima og Kristó O betur þekktur sem kisuklórarinn var einnig vel ferskur. 
+
+Dagur 4, 25.10.21
+Morgunfundur:
+Markmið dagsins er að skipuleggja útlitshönnun (wireframing) og flæði forritsins, sem og að
+koma hönnunarskýrslunni á sem lengstan veg. Við ætlum einnig að slípa klasa- og stöðuritin og
+viljum, ef vel gengur, skila uppkasti að hönnunarskýrslunni í dag.
+
+Uppgjör: Myndir voru skissaðar sem sýna útlit á frumstigi og flæði forritsins var skilgreint.
+Fyrsta útlitshönnunin en nú komin. Unnið var í skýrslunni og er hún komin langt á veg en þó
+er hún enn ókláruð. Nytsemis- og notendaupplifunarkröfur á eftir að semja og verður það
+gert á morgun.
