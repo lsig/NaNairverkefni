@@ -66,3 +66,6 @@ Dagur 1, 29.10.21
 Morgunfundur: 
 Smá misræmi í mönnum þar sem nokkrir misstu af fyrirlestrinum og byrjum því ekki nógu snemma. Þurfum að tala við TA þar sem þrískiptingin á klösunum okkar er ekki, tja þrískipt. Tökum hörku í kvöld og komum okkur á góðan stað!
 
+Uppgjör: 
+komnir með öll helstu file og foldera, samanber klasaritið okkar og best practice sem við sáum úr fyrirlestrinum í morgun. Skiptum okkur niður í hlutverk og settum grunn í einhver python files. Byrjum á fullu á morgun!
+
