@@ -1,4 +1,8 @@
 #Employee Main Menu 
+from ui_layer.boss_propertymenu import PropertyMenu
+from ui_layer.boss_employeesmenu import EmployeesMenu
+
+
 STAR = '* '
 DASH = '-'
 class BossMenu: 
@@ -25,12 +29,14 @@ class BossMenu:
         while True:   
             user_choice = input()
             if user_choice == '1':
-                prop_menu = ''
+                propmenu = PropertyMenu()          # boss_propertymenu.py
+                propmenu.open()
             elif user_choice == '2':
-                emp_menu = ''
+                empsmenu = EmployeesMenu()          # boss_employeemenu.py
+                empsmenu.open()
             elif user_choice == '3':
-                maintnence_menu = ''
+                maintnence_menu = ''    # boss_maintenancemenu.py
             elif user_choice == '4':
-                contract_menu = ''
+                contract_menu = ''      # boss_contractormenu.py
             else:
                 print('Invalid choice, try again!')

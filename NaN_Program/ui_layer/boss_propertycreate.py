@@ -1,0 +1,1 @@
+#skrá nýja fasteign
