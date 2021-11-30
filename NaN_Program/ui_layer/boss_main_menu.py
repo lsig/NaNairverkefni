@@ -1,6 +1,8 @@
 #Employee Main Menu 
 from ui_layer.boss_propertymenu import PropertyMenu
-from ui_layer.boss_employeesmenu import EmployeesMenu
+from ui_layer.boss_employeesmenu import BossEmployeesMenu
+import os
+from time import sleep
 
 
 STAR = '* '
@@ -22,6 +24,7 @@ class BossMenu:
         '''
 
     def print_menu(self):
+        os.system('clear')
         print(self.options)
         self.user_input()
 
@@ -30,10 +33,10 @@ class BossMenu:
             user_choice = input()
             if user_choice == '1':
                 propmenu = PropertyMenu()          # boss_propertymenu.py
-                propmenu.open()
+                propmenu.display()
             elif user_choice == '2':
-                empsmenu = EmployeesMenu()          # boss_employeemenu.py
-                empsmenu.open()
+                empsmenu = BossEmployeesMenu()          # boss_employeemenu.py
+                empsmenu.display()
             elif user_choice == '3':
                 maintnence_menu = ''    # boss_maintenancemenu.py
             elif user_choice == '4':
