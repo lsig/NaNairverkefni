@@ -1,9 +1,12 @@
 #Employee Main Menu 
 STAR = '* '
 DASH = '-'
-class Employee_Main: 
-    def __init__(self):
-        self.options = f''' Location| Name | Staff ID 
+class EmployeeMenu: 
+    def __init__(self, id):
+        self.id = id
+        self.options = f''' 
+
+ Location | Name | {self.id} 
 {STAR*14}
       {DASH*15}
       1. Fasteignir 
@@ -28,7 +31,3 @@ class Employee_Main:
                 contract_menu = ''
             else:
                 print('Invalid choice, try again!')
-        
-
-menu = Employee_Main()
-menu.print_menu()
