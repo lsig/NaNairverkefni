@@ -1,32 +1,28 @@
 #skrá nýjan starfsmann
+#þarf að importa klösum eins og employee
 STAR = '* '
 DASH = '-'
 class BossEmployeCreate: 
     def __init__(self, id):
         self.id = id
         self.options = f''' 
-
  Location | Name | {self.id} 
 {STAR*14}
-      {DASH*15}
-      1. Skrá nýjan starfsmann
-      2. Starfsmannalisti
-      {DASH*15}
-      B. Til baka
-{STAR*14}
         '''
-
-    def display(self):
-        print(self.options)
     
-    def user_input(self):
-        while True:   
-            user_choice = input()
-            if user_choice == '1':
-                new_emp = ''
-            elif user_choice == '2':
-                emp_list = ''
-            elif user_choice == 'B':
-                return
-            else:
-                print('Invalid choice, try again!')
+    def display_menu(self):
+        print(self.options)
+        self.create_employee()
+
+    def create_employee(self):
+        name = input('Nafn starfsmanns: ')
+        social_sec = input('Kennitala starfsmanns: ')
+        address = input('Heimilisfang: ')
+        phone = input('Heimasími: ')
+        gsm =  input('GSM sími: ')
+        email = input('Netfang: ')
+        destination = input('Áfangastaður: ')
+        manager = input('Yfirmaður: ')
+        new_employee = Employee(name,social_sec,address,phone,gsm,email,destination,manager)
+    
+ 
