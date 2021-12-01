@@ -1,5 +1,5 @@
 ### Vika 1
-Dagur 1, 22.10.21
+Dagur 1, 22.11.21
 <<<<<<< HEAD
 Morgunfundur:
 Allir komu sér saman á discord og ræddum aðeins áfangann, ákváðum að hittast upp í skóla og kíkja á verkefnalýsinguna betur. 
@@ -15,7 +15,7 @@ menn mis þreyttir en síðan kom smá kraftur í þetta, þegar
 Plönuðum hitting upp í skóla á morgundaginn.
 
 
-Dagur 2, 23.10.21
+Dagur 2, 23.11.21
 Morgunfundur:
 Tókum hitting upp í skóla til þess að sjá til þess að allir væru á sömu blaðsíðu.
 Fórum að skipta verkefnum á milli á þann hátt að styrkleikar allra myndu nýtast sem best.
@@ -31,7 +31,7 @@ góðu skapi.
 Uppgjör:
 >>>>>>> 15b24ce2a613edc89c8b817e8cd0c5156e5ced84
 
-Dagur 3, 24.10.21
+Dagur 3, 24.11.21
 Morgunfundur:
 Tókum hitting upp í skóla. Stöðurit, klassarit og notkunartilvik eru komin langa leið. 
 Stöðurit verður líklegast klárað í dag. Kristófer Orri og Maxim eru að vinna í stöðuriti, 
@@ -40,7 +40,7 @@ Kristófer Fannar og Logi í notkunartilvikum og Markús og Marteinn í klassari
 Uppgjör: 
 Við kláruðum notendatilvikin, klasaritin og stöðuritin. Allir vel ferksir, turboinn vel þunnur af einhverjum ástæðum, kallinn átti erfiðan þriðjudag (cough cough, Man U vann og hann missti sig aðeins). Maxim betur þekktur sem folinn mætti kampa kátur enda á hann kærustu sem gaf honum þetta nickname. Markús er í smitgát og vann klasaritið heima og Kristó O betur þekktur sem kisuklórarinn var einnig vel ferskur. 
 
-Dagur 4, 25.10.21
+Dagur 4, 25.11.21
 Morgunfundur:
 Markmið dagsins er að skipuleggja útlitshönnun (wireframing) og flæði forritsins, sem og að
 koma hönnunarskýrslunni á sem lengstan veg. Við ætlum einnig að slípa klasa- og stöðuritin og
@@ -51,7 +51,7 @@ Fyrsta útlitshönnunin en nú komin. Unnið var í skýrslunni og er hún komin
 er hún enn ókláruð. Nytsemis- og notendaupplifunarkröfur á eftir að semja og verður það
 gert á morgun.
 
-Dagur 5, 26.10.21
+Dagur 5, 26.11.21
 Morgunfundur: 
 Óbeinn fundur tekinn þar sem í raun var eina verkefni dagsins að gera allt klárt fyrir skil á hönnunarskýrslu. Það þarf að kíkja á kröfurnar betur ásamt að fínpússa klasarit og stöðurit.
 
@@ -62,10 +62,24 @@ Skýrsla tilbúin og búið að skila, allir sáttir og tilbúnir í næstu viku
 
 
 ### Vika 2
-Dagur 1, 29.10.21
+Dagur 1, 29.11.21
 Morgunfundur: 
 Smá misræmi í mönnum þar sem nokkrir misstu af fyrirlestrinum og byrjum því ekki nógu snemma. Þurfum að tala við TA þar sem þrískiptingin á klösunum okkar er ekki, tja þrískipt. Tökum hörku í kvöld og komum okkur á góðan stað!
 
 Uppgjör: 
 komnir með öll helstu file og foldera, samanber klasaritið okkar og best practice sem við sáum úr fyrirlestrinum í morgun. Skiptum okkur niður í hlutverk og settum grunn í einhver python files. Byrjum á fullu á morgun!
+
+Dagur 2 30.11.21 
+Morgunfundur:
+Menn voru vel þreyttir en ferskir þar sem flestir vöknuðu við a paycheck og desemberuppbót, fundur tekinn um eitt leytið og menn héldur áfram að vinna í sitthvorum hópum.
+
+Uppgjör:
+Það var haldið áfram að setja upp forritð og búa til beinagrindina, strákarnir í storage layerinu stóðu sig vel
+
+Dagur 3 1.12.21 
+Morgunfundur:
+Menn vel þreyttir í dag, einhver þreyta í liðinu þessa vikuna, kannski útaf lengd dagsins en hver dagur verður bara styttri og styttri. Fundur tekinn um hálf þrjú leytið og ákeðið að halda áfram á sömu braut.
+
+Uppgjör:
+Við komumst áfram í forritinu og storage layer er næstum tilbúið sem mun gera forritun í logic og UI auðveldari. 
 
