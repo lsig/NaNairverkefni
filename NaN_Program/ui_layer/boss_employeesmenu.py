@@ -1,3 +1,4 @@
+from ui_layer.boss_employeecreate import BossEmployeeCreate
 #starfsmannagluggi
 #Employee Main Menu 
 STAR = '* '
@@ -16,18 +17,17 @@ class BossEmployeesMenu:
       B. Til baka
 {STAR*14}
         '''
-
-    def display(self):
-        print(self.options)
     
-    def user_input(self):
-        while True:   
+    def display(self):
+        while True:
+            print(self.options)
             user_choice = input()
             if user_choice == '1':
-                new_emp = ''
+                createemployee = BossEmployeeCreate(self.id)
+                createemployee.display_menu()
             elif user_choice == '2':
                 emp_list = ''
-            elif user_choice == 'B':
+            elif user_choice.upper() == 'B':
                 return
             else:
                 print('Invalid choice, try again!')
