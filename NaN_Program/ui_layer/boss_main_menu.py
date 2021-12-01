@@ -3,10 +3,10 @@ from ui_layer.boss_propertymenu import PropertyMenu
 from ui_layer.boss_employeesmenu import BossEmployeesMenu
 import os
 from time import sleep
-
-
 STAR = '* '
 DASH = '-'
+
+
 class BossMenu: 
     def __init__(self,id ):
         self.id = id
@@ -24,16 +24,14 @@ class BossMenu:
         '''
 
     def print_menu(self):
-        os.system('clear')
-        print(self.options)
-        self.user_input()
-
-    def user_input(self):
         while True:   
+            os.system('clear') # Clears the terminal screen 
+            print(self.options)
             user_choice = input()
+
             if user_choice == '1':
                 propmenu = PropertyMenu(self.id)          # boss_propertymenu.py
-                #propmenu.display()
+                propmenu.display()
             elif user_choice == '2':
                 empsmenu = BossEmployeesMenu(self.id)          # boss_employeemenu.py
                 empsmenu.display()
