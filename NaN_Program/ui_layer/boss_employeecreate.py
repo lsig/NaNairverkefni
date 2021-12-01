@@ -1,13 +1,16 @@
 #skrá nýjan starfsmann
 #þarf að importa klösum eins og employee
-STAR = '* '
-DASH = '-'
+from data_files.const import STAR, DASH
+
 class BossEmployeeCreate: 
     def __init__(self, id):
         self.id = id
         self.options = f''' 
  Location | Name | {self.id} 
 {STAR*14}
+    | STARFSMENN |
+     - skrá nýjan starfsmann
+      {DASH*15}
         '''
     
     def display_menu(self):

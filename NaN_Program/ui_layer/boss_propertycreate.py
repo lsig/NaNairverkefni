@@ -1,19 +1,22 @@
 #skrá nýja fasteign
+from data_files.const import CLEAR, STAR, DASH
 import os 
-STAR = '* '
-DASH = '-'
+from time import sleep
 
 class BossPropertyCreate:
     def __init__(self, id) -> None:
         self.id = id
-        self.screen = f''' 
+        self.screen = f'''
  Location | Name | {self.id} 
 {STAR*14}
+    | FASTEIGNIR |
+     - Skrá nýja fasteign
+      {DASH*15}
         '''
 
 
     def display(self):
-        os.system('clear')
+        os.system(CLEAR)
         print(self.screen)
         dest_info = 'Location' #Viljum mögulegalíklega nota bara locationið hjá yfirmanninum.
         address_info = input("Address: ")

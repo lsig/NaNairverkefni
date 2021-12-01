@@ -7,6 +7,9 @@ class BossContractorCreate:
         self.options = f''' 
  Location | Name | {self.id} 
 {STAR*14}
+    | VERKTAKAR |
+     - Skrá nýjan verktaka
+      {DASH*15}
         '''
     
     def display_contractormenu(self):

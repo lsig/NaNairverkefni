@@ -2,17 +2,15 @@
 from ui_layer.boss_propertymenu import PropertyMenu
 from ui_layer.boss_employeesmenu import BossEmployeesMenu
 from ui_layer.boss_contractormenu import BossContractorMenu
+from ui_layer.boss_maintenancemenu import MaintenanceMenu
 import os
 from time import sleep
-STAR = '* '
-DASH = '-'
-
+from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 
 class BossMenu: 
-    def __init__(self,id ):
+    def __init__(self, id):
         self.id = id
         self.options = f''' 
-
  Location | Name | {self.id}
 {STAR*14}
       {DASH*15}
@@ -21,25 +19,39 @@ class BossMenu:
       3. Viðhald
       4. Verktakar
       {DASH*15}
+      L. Log out
+      Q. Quit
 {STAR*14}
         '''
 
     def print_menu(self):
         while True:   
-            os.system('clear') # Clears the terminal screen 
+            os.system(CLEAR) # Clears the terminal screen 
             print(self.options)
             user_choice = input()
 
             if user_choice == '1':
                 propmenu = PropertyMenu(self.id)          # boss_propertymenu.py
                 propmenu.display()
+
             elif user_choice == '2':
                 empsmenu = BossEmployeesMenu(self.id)          # boss_employeemenu.py
                 empsmenu.display()
+
             elif user_choice == '3':
-                maintnence_menu = ''    # boss_maintenancemenu.py
+                maintmenu = MaintenanceMenu(self.id)    # boss_maintenancemenu.py
+                maintmenu.display()
+
             elif user_choice == '4':
-                contract_menu = ''      # boss_contractormenu.py
+                contrmenu = BossContractorMenu(self.id)      # boss_contractormenu.py
+                contrmenu.display()
+
+            elif user_choice.upper() == 'L':
+                return 
+            
+            elif user_choice.upper() == 'Q':
+                return 'Q'
+
             else:
-                print('Invalid choice, try again!')
-                sleep(1.5)
+                print(INVALID)
+                sleep(SLEEPTIME)

@@ -1,6 +1,8 @@
 #Employee Main Menu 
-STAR = '* '
-DASH = '-'
+import os
+from data_files.const import CLEAR, STAR, DASH, SLEEPTIME
+from time import sleep
+
 class EmployeeMenu: 
     def __init__(self, id):
         self.id = id
@@ -17,12 +19,11 @@ class EmployeeMenu:
         '''
 
     def print_menu(self):
-        print(self.options)
-        self.user_input()
-
-    def user_input(self):
         while True:   
+            os.system(CLEAR)
+            print(self.options)
             user_choice = input()
+            
             if user_choice == '1':
                 prop_menu = ''
             elif user_choice == '2':
@@ -31,3 +32,4 @@ class EmployeeMenu:
                 contract_menu = ''
             else:
                 print('Invalid choice, try again!')
+                sleep(SLEEPTIME)

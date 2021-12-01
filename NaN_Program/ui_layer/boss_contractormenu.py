@@ -1,14 +1,17 @@
 #verktakagluggi
 from ui_layer.boss_contractorcreate import BossContractorCreate
-STAR = '* '
-DASH = '-'
+from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
+import os
+from time import sleep
+
+
 class BossContractorMenu:
     def __init__(self, id):
         self.id = id
         self.options = f''' 
-
  Location | Name | {self.id} 
 {STAR*14}
+    | VERKTAKAR |
       {DASH*15}
       1. Skrá nýjan verktaka
       2. Verktakalisti
@@ -19,14 +22,19 @@ class BossContractorMenu:
     
     def display(self):
         while True:
+            os.system(CLEAR)
             print(self.options)
             user_choice = input()
+
             if user_choice == '1':
                 createcontractor = BossContractorCreate(self.id)
                 createcontractor.display_contractormenu()
+
             elif user_choice == '2':
-                contractor_list = ''
+                contractor_list = '' #TODO
+
             elif user_choice.upper() == 'B':
                 return
             else:
-                print('Invalid choice, try again!')
+                print(INVALID)
+                sleep(SLEEPTIME)

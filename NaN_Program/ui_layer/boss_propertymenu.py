@@ -1,15 +1,13 @@
 #fasteignagluggi
 from ui_layer.boss_propertycreate import BossPropertyCreate
+from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 import os
 from time import sleep
-STAR = '* '
-DASH = '-'
 
 class PropertyMenu:
     def __init__(self, id) -> None:
         self.id  = id
         self.screen =  f''' 
-
  Location | Name | {self.id}
 {STAR*14}
     | FASTEIGNIR |
@@ -23,7 +21,7 @@ class PropertyMenu:
     
     def display(self):
         while True:
-            os.system('clear')
+            os.system(CLEAR)
             print(self.screen)
             user_input = input()
 
@@ -36,5 +34,5 @@ class PropertyMenu:
             elif user_input.upper() == 'B':
                 return
             else:
-                print("Invalid option! Try again.")
-                sleep(1.5)
+                print(INVALID)
+                sleep(SLEEPTIME)
