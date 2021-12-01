@@ -1,7 +1,8 @@
 #fasteignagluggi
+from ui_layer.boss_propertycreate import BossPropertyCreate
 import os
 from time import sleep
-STAR = '*'
+STAR = '* '
 DASH = '-'
 
 class PropertyMenu:
@@ -17,7 +18,6 @@ class PropertyMenu:
       2. Fasteignalisti
       {DASH*15}
       B. Til baka
-      H. Heim
 {STAR*14}
         '''
     
@@ -28,15 +28,13 @@ class PropertyMenu:
             user_input = input()
 
             if user_input == '1':
-                pass
+                bosspropcreate = BossPropertyCreate(self.id)
+                bosspropcreate.display()
+
             elif user_input == '2':
                 pass
             elif user_input.upper() == 'B':
                 return
-            elif user_input.upper() == 'H':
-                #return 'H'
-                print("Get the home option with the pro version for $9,99/month!")
             else:
                 print("Invalid option! Try again.")
-            
-            sleep(1)
+                sleep(1.5)
