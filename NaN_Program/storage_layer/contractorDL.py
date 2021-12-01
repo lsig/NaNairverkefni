@@ -1,5 +1,5 @@
 import csv
-from contractor import Contractor
+
 
 class ContractorDL:
     def __init__(self):
