@@ -41,6 +41,6 @@ class PropertyDL:
     #lis = g.get_all_property()
     #prop = Property("31","lol","oll","100","6","Snowhouse","lol11","snowhouse")
     #g.add_property(prop)
-    #g.change_emp_info(lis)
+    #g.change_prop_info(lis)
     
         

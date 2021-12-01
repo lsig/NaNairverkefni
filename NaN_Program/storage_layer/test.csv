@@ -1,5 +1,32 @@
-Name,Country,Airport,phone,working-hours,Manager,Manager_id
-Longyearbyen,Svalbard,NaN,00,00,Jan Jacobsen,1
-Tórshavn,Faroe Islands,NaN,00,00,Annette Djurhuus,1
-Kulsuk,Greenland,NaN,00,00,Minik Wallace,1
-Reykjavík,iceland,NAN,00,00,Arnar Singh,1
+id,Destination,Address,Size,Rooms,Type,Property-number,Extras
+1,Longyearbyen,Vei 217,150,4,single-family,F959594,windows
+2,kulsuk,iGloo-Ville,35,1,igloo,64-3900,snowhouse
+3,kulsuk,iGloo-Ville,35,1,igloo,64-3901,snowhouse
+4,kulsuk,iGloo-Ville,35,1,igloo,64-3902,snowhouse
+5,kulsuk,iGloo-Ville,35,1,igloo,64-3903,snowhouse
+6,kulsuk,iGloo-Ville,35,1,igloo,64-3904,snowhouse
+7,kulsuk,iGloo-Ville,35,1,igloo,64-3905,snowhouse
+8,kulsuk,iGloo-Ville,35,1,igloo,64-3906,snowhouse
+9,kulsuk,iGloo-Ville,35,1,igloo,64-3907,snowhouse
+10,kulsuk,iGloo-Ville,35,1,igloo,64-3908,snowhouse
+11,kulsuk,iGloo-Ville,35,1,igloo,64-3909,snowhouse
+12,kulsuk,iGloo-Ville,35,1,igloo,64-3910,snowhouse
+13,Kulsuk,Suloraq 42,69,2,aparment,64-3875-6,windows
+14,Kulsuk,Igimaq 7,10,1,igloo,64-3831,snowhouse
+15,Kulsuk,Nuussuaq 4,400,8,villa,64-3812,
+16,Tórshavn,Skákið 15,33,1,townhouse,ix-9331,windows
+17,Tórshavn,Skákið 15,33,1,townhouse,ix-9332,windows
+18,Tórshavn,Skákið 15,33,1,townhouse,ix-9333,windows
+19,Tórshavn,Svalbarðsvegur 22,200,5,single-family,ix-2239,windows
+20,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9492,mud-house
+21,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9493,mud-house
+22,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9494,mud-house
+23,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9495,mud-house
+24,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9496,mud-house
+25,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9497,mud-house
+26,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9498,mud-house
+27,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9499,mud-house
+28,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9500,mud-house
+29,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9501,mud-house
+30,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9502,mud-house31
+31,lol,oll,100,6,Snowhouse,lol11,snowhouse

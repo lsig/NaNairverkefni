@@ -1,4 +1,4 @@
-id,Destination,Address,Size,Rooms,type,Property-number,extras
+id,Destination,Address,Size,Rooms,Type,Property-number,Extras
 1,Longyearbyen,Vei 217,150,4,single-family,F959594,windows
 2,kulsuk,iGloo-Ville,35,1,igloo,64-3900,snowhouse
 3,kulsuk,iGloo-Ville,35,1,igloo,64-3901,snowhouse
