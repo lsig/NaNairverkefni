@@ -1,4 +1,5 @@
 import csv
+from employee import Employee
 
 class EmployeeDL:
     def __init__(self):
@@ -38,8 +39,7 @@ class EmployeeDL:
 if __name__ == "__main__":
     g = EmployeeDL()
     lis = g.get_all_employee()
-    #emp = Employee("10","siggi","0","Traðartún 3; 108; Argir; Faroe Islands","6666666","6666667","siggi@Nanair.is","Tórshavn","0")
-    g.add_employee(emp)
+    #emp = Employee("12","siggi","0","Traðartún 3; 108; Argir; Faroe Islands","6666666","6666667","siggi@Nanair.is","Tórshavn","0")
+    #g.add_employee(emp)
     g.change_emp_info(lis)
-    
         
