@@ -1,6 +1,6 @@
 from employeeDL import EmployeeDL
 from locationDL import LocationDL
-
+from propertyDL import PropertyDL
 
 
 from employee import Employee
@@ -9,7 +9,7 @@ class DlAPI:
     def __init__(self):
         self.empDL = EmployeeDL() 
         self.locDL = LocationDL() 
-        self.houseDL = None #þarf að bæta við
+        self.propDL = PropertyDL() 
         self.contDL = None #þarf að bæta við
         self.reportDL = None #þarf að bæta við
         self.jobDL = None # þarf að bæta við
@@ -35,14 +35,14 @@ class DlAPI:
     def change_loc_info(self,all_loc_lis):
         self.locDL.change_loc_info(all_loc_lis)
 
-    def get_house_info(self):
-        return self.houseDL # þarf að klára
+    def get_property_info(self):
+        return self.propDL.get_all_property() 
 
-    def add_house(self,house_lis):
-        self.houseDL # þarf að klára
+    def add_property(self,prop_lis):
+        self.propDL.add_property(prop_lis) 
 
-    def change_house_info(self,all_house_lis):
-        self.houseDL #þarf að klára
+    def change_property_info(self,all_prop_lis):
+        self.propDL.change_prop_info(all_prop_lis) 
 
     def get_all_cont(self):
         return self.contDL # þarf að klára
