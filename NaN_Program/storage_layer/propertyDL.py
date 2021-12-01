@@ -23,12 +23,12 @@ class PropertyDL:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({'id': prop.id, "Destination": prop.dest, "Address": prop.addr, "Size": prop.size, "Rooms": prop.rooms, "Type": prop.typeOf,"Property-number":prop.propNum, "Extras":prop.extras})
 
-    def change_prop_info(self,prop_list):
+    def change_prop_info(self,prop_lis):
         with open("test.csv", 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
-            header = prop_list[0]
+            header = prop_lis[0]
             writer.writerow(header)
-            for dic in prop_list:
+            for dic in prop_lis:
                 writer.writerow([dic["id"],dic["Destination"],dic["Address"],dic["Size"],dic["Rooms"],dic["Type"],dic["Property-number"],dic["Extras"]])
         
             
