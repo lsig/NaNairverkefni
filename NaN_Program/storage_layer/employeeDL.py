@@ -23,7 +23,7 @@ class EmployeeDL:
             writer.writerow({'id': emp.id, "Name": emp.name, "Social Security": emp.social, "Address": emp.addr, "Phone ": emp.phone, "GSM": emp.gsm,"Email":emp.email, "Destination":emp.dest,"Manager":emp.manager})
 
     def change_emp_info(self,emp_lis):
-        with open("test.csv", 'w+', newline='',encoding='utf-8') as f:
+        with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = emp_lis[0]
             writer.writerow(header)
