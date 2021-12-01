@@ -1,6 +1,7 @@
 #Employee Main Menu 
 from ui_layer.boss_propertymenu import PropertyMenu
 from ui_layer.boss_employeesmenu import BossEmployeesMenu
+from ui_layer.boss_contractormenu import BossContractorMenu
 import os
 from time import sleep
 STAR = '* '
@@ -41,3 +42,4 @@ class BossMenu:
                 contract_menu = ''      # boss_contractormenu.py
             else:
                 print('Invalid choice, try again!')
+                sleep(1.5)
