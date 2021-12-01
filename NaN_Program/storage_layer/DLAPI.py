@@ -10,6 +10,7 @@ class DlAPI:
         self.reportDL = None #þarf að bæta við
         self.jobDL = None # þarf að bæta við
         self.maintenjobDL = None # þarf að bæta við
+        # hadpiahd
 
 
     def get_all_emp(self):
