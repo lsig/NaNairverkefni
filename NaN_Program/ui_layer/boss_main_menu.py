@@ -32,10 +32,10 @@ class BossMenu:
         while True:   
             user_choice = input()
             if user_choice == '1':
-                propmenu = PropertyMenu()          # boss_propertymenu.py
-                propmenu.display()
+                propmenu = PropertyMenu(self.id)          # boss_propertymenu.py
+                #propmenu.display()
             elif user_choice == '2':
-                empsmenu = BossEmployeesMenu()          # boss_employeemenu.py
+                empsmenu = BossEmployeesMenu(self.id)          # boss_employeemenu.py
                 empsmenu.display()
             elif user_choice == '3':
                 maintnence_menu = ''    # boss_maintenancemenu.py

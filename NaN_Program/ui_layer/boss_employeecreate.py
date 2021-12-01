@@ -2,7 +2,7 @@
 #þarf að importa klösum eins og employee
 STAR = '* '
 DASH = '-'
-class BossEmployeCreate: 
+class BossEmployeeCreate: 
     def __init__(self, id):
         self.id = id
         self.options = f''' 
@@ -13,6 +13,7 @@ class BossEmployeCreate:
     def display_menu(self):
         print(self.options)
         self.create_employee()
+        return 
 
     def create_employee(self):
         name = input('Nafn starfsmanns: ')
@@ -23,6 +24,9 @@ class BossEmployeCreate:
         email = input('Netfang: ')
         destination = input('Áfangastaður: ')
         manager = input('Yfirmaður: ')
-        new_employee = Employee(name,social_sec,address,phone,gsm,email,destination,manager)
+        #new_employee = Employee(name,social_sec,address,phone,gsm,email,destination,manager)
+
+        if True: #TODO
+            return
     
  
