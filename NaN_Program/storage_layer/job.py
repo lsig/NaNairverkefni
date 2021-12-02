@@ -1,6 +1,3 @@
-from employee import Employee
-
-
 class Job:
     def __init__(self,id,date_created,employee,employee_id,description ,location,propertyName,propertyNumber,propertyid,priority,status):
         self.id = id 

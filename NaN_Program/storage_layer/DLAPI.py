@@ -2,7 +2,7 @@ from employeeDL import EmployeeDL
 from locationDL import LocationDL
 from propertyDL import PropertyDL
 from contractorDL import ContractorDL
-
+from jobDL import JobDL
 
 from employee import Employee
 
@@ -13,7 +13,7 @@ class DlAPI:
         self.propDL = PropertyDL() 
         self.contDL = ContractorDL() #þarf að bæta við
         self.reportDL = None #þarf að bæta við
-        self.jobDL = None # þarf að bæta við
+        self.jobDL = JobDL() 
         self.maintenjobDL = None # þarf að bæta við
         # hadpiahd
 
@@ -64,13 +64,13 @@ class DlAPI:
         self.reportDL # þarf að klára
 
     def get_jobs(self):
-        return self.jobDL # þarf að klára 
+        return self.jobDL.get_all_jobs()  
 
     def add_job(self,job):
-        self.jobDL # þarf að klára
+        self.jobDL.add_job(job) 
 
     def change_job(self,jobs):
-        self.jobDL # þarf að klára
+        self.jobDL.change_job_info(jobs) 
 
     def get_maintenance_jobs(self):
         return self.maintenjobDL # þarf að klára
