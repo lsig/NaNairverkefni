@@ -32,7 +32,7 @@ class BossEmployeesMenu:
                 createemployee.display_menu()
 
             elif user_choice == '2':
-                emp_list = ''
+                emp_list = '' #TODO
 
             elif user_choice.upper() == 'B':
                 return
