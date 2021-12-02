@@ -25,16 +25,17 @@ class BossEmployeeCreate:
         print(self.screen)
 
         for i in range(len(CONTRACTTEMPLATE)):
-            user_input = input(f"{CONTRACTTEMPLATE[i]}: ")
+            user_input = input(f"{i+1}. {CONTRACTTEMPLATE[i]}: ")
             if user_input.upper() == 'Q':
                 return
             self.contractlist.append(user_input)
+            #send_info(CONTRACTTEMPLATE[i], user_input)
         
         self.confirm_employee()
         
     
     def make_employee(self):
-        contract_overview = '\n | STARFSMENN |\n'
+        contract_overview = '\n | STARFSMAÐUR |\n'
         listint = 0
         for i in range(len(CONTRACTTEMPLATE)):
             if self.contractlist[listint] != '':
@@ -52,7 +53,7 @@ class BossEmployeeCreate:
                 return
             elif confirm.upper() == 'E': # TODO
                 pass
-            elif confirm.upper() == 'Q': # TODO
+            elif confirm.upper() == 'Q':
                 return
             else:
                 print(INVALID)

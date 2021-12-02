@@ -2,6 +2,7 @@
 from data_files.const import CLEAR, STAR, DASH
 import os 
 from time import sleep
+PROPERTYTEMPLATE = []
 
 class BossPropertyCreate:
     def __init__(self, id) -> None:
