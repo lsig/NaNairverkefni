@@ -1,5 +1,5 @@
-Report-id,Request-id,Employee,Employee-id,Title,Description,Contractor-name,Contractor-id,Contractor-rating,Status
-1,1,Siggi,0,Gluggar,"þarf að þrýfa, glugganga",Haraldur,smiður,8,0
-1,1,Siggi,0,Gluggar,"þarf að þrýfa, glugganga",Haraldur,smiður,7,óklárað
-1,1,Siggi,0,Gluggar,"þarf að þrýfa, glugganga",Haraldur,smiður,7,óklárað
-1,1,Siggi,0,Gluggar,"þarf að þrýfa, glugganga",Haraldur,smiður,7,óklárað
+id,Date-from,Date-to,Title,Description,Location,Property,Property-number,Property-id,Employee,Employee-id,Frequency,Priority,Suggested-contractors
+1,20,10,þrif,þarf að þrýfa húsið,nuuk,siggastaðir,20,50,Haraldur,23,7,High,"Arnar, guðni, Ármann"
+1,20,10,þrif,þarf að þrýfa húsið,nuuk,siggastaðir,20,50,Haraldur,23,7,High,"Arnar, guðni, Ármann"
+1,20,10,þrif,þarf að þrýfa húsið,nuuk,siggastaðir,20,50,Haraldur,23,7,High,"Arnar, guðni, Ármann"
+1,20,10,þrif,þarf að þrýfa húsið,nuuk,siggastaðir,20,50,Haraldur,23,7,High,"Arnar, guðni, Ármann"

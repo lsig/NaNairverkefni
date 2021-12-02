@@ -24,7 +24,7 @@ class PropertyDL:
             writer.writerow({'id': prop.id, "Destination": prop.dest, "Address": prop.addr, "Size": prop.size, "Rooms": prop.rooms, "Type": prop.typeOf,"Property-number":prop.propNum, "Extras":prop.extras})
 
     def change_prop_info(self,prop_lis):
-        with open("test.csv", 'w+', newline='',encoding='utf-8') as f:
+        with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = prop_lis[0]
             writer.writerow(header)

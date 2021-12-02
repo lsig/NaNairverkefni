@@ -1,1 +1,2 @@
-id,Date-from,Date-to,Title,Description,Employee,Employee-id,Frequency,Priority,Suggested-contractors
+id,Date-from,Date-to,Title,Description,Location,Property,Property-number,Property-id,Employee,Employee-id,Frequency,Priority,Suggested-contractors
+1,10,20,þrif,þarf að þrýfa húsið,nuuk,siggastaðir,20,50,Haraldur,23,7,High,"Arnar, guðni, Ármann"

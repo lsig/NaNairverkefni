@@ -25,12 +25,13 @@ class ReportDL():
 
     
     def change_report_info(self,rep_lis):
-         with open("test.csv", 'w+', newline='',encoding='utf-8') as f:
+         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = rep_lis[0]
             writer.writerow(header)
             for dic in rep_lis:
-                writer.writerow([dic["Report-id"],dic["Request-id"],dic["Employee"],dic["Employee-id"],dic["Title"],dic["Description"],dic["Contractor-name"],dic["Contractor-id"],dic["Contractor-rating"],dic["Status"]])
+                writer.writerow([dic["Report-id"],dic["Request-id"],dic["Employee"],dic["Employee-id"],
+                dic["Title"],dic["Description"],dic["Contractor-name"],dic["Contractor-id"],dic["Contractor-rating"],dic["Status"]])
 
 
 if __name__ == "__main__":
