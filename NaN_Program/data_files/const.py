@@ -8,5 +8,4 @@ STAR = '* '
 DASH = '-'
 SLEEPTIME = 1.5
 INVALID = 'Invalid option, try again!'
-
-
+QUIT = 'Q'

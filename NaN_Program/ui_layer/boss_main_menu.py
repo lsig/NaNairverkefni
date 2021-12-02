@@ -5,7 +5,7 @@ from ui_layer.boss_contractormenu import BossContractorMenu
 from ui_layer.boss_maintenancemenu import MaintenanceMenu
 import os
 from time import sleep
-from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
+from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME
 
 class BossMenu: 
     def __init__(self, id):
@@ -20,7 +20,7 @@ class BossMenu:
       4. Verktakar
       {DASH*15}
       L. Log out
-      Q. Quit
+      {QUIT}. Quit 
 {STAR*14}
         '''
 
@@ -49,8 +49,8 @@ class BossMenu:
             elif user_choice.upper() == 'L':
                 return 
             
-            elif user_choice.upper() == 'Q':
-                return 'Q'
+            elif user_choice.upper() == QUIT:
+                return QUIT
 
             else:
                 print(INVALID)
