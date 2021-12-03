@@ -2,10 +2,12 @@
 from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, QUIT, PROPERTYTEMPLATE
 import os 
 from time import sleep
+from logic_layer.LLAPI import LLAPI
 
 
 class BossPropertyCreate:
     def __init__(self, id) -> None:
+        self.llapi = LLAPI()
         self.id = id
         self.propertylist = []
         self.screen = f'''
@@ -57,6 +59,7 @@ class BossPropertyCreate:
         confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
             if confirm.upper() == 'C':  # TODO
+                self.llapi.add_prop(self.propertylist)
                 #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
                 return
         
