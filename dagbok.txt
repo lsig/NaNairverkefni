@@ -90,6 +90,14 @@ Morgunfundur:
 Allir farnir að vakna seinna og seinna, sem gæti orðið vesen. Erum samt ekkert stressaðir þar sem verkefnið gengur ágætlega vel. Ætlum að reyna að klára flest allt í data layer og UI svo það sé hægt að fara í logic layer, sem tengir síðan allt saman.
 
 Uppgjör:
+Data layer kláraðist (yeesss!!) og öll feature í ui eru tilbúin, þarf að klára að sauma seinustu spor saman í ui svo hann geti talist fullkláraður.
+
+
+Dagur 5 3.12.21 
+Morgunfundur:
+seinasti dagur í næst seinustu vikunni og ætlum við allir að mæta upp í skóla í dag til að grinda seinasta í UI og tengja saman LL við allt hitt, (erum fjórir mættir so far). Maxim eldaði world record breakfast (að hans sögn), en tók víst enga mynd svo það er ekki hægt að staðfesta með vissu hve mikinn ofurkóðakraft hann mun hafa í dag til að koma okkur áfram. Sjáum til.
+
+Uppgjör:
 
 
 

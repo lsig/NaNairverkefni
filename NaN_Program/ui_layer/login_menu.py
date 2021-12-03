@@ -22,7 +22,7 @@ NaN Air Properties
             staffid = input(self.loginscreen)
             if staffid == 'Y0301' or staffid == '': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
                 print(f"\nWelcome, {staffid}") 
-                #sleep(SLEEPTIME-1)
+                sleep(SLEEPTIME)
                 bossmenu = BossMenu(staffid)
                 returnvalue = bossmenu.print_menu()
                 if returnvalue == QUIT:
