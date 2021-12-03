@@ -18,7 +18,9 @@ class BossEmployeeCreate:
      - Skrá nýja starfsmann
       {DASH*15}
     {QUIT}. Hætta við
-        '''
+
+    | STARFSMAÐUR |
+{DASH * 25}'''
 
     def display_menu(self):
         os.system(CLEAR)
@@ -57,7 +59,7 @@ class BossEmployeeCreate:
                 #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
                 return
         
-            elif confirm.upper() == 'E': # TODO
+            elif confirm.upper() == 'E':
                 self.editcontactinfo()
                 confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
@@ -79,7 +81,7 @@ class BossEmployeeCreate:
 
         self.reset_screen()
     
-    def reset_screen(self, user_row):
+    def reset_screen(self, user_row = None):
         os.system(CLEAR)
         print(self.screen)
         self.printcontactinfo(user_row)
