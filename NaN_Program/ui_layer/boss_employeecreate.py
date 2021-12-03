@@ -1,11 +1,9 @@
 #skrá nýjan starfsmann
 #þarf að importa klösum eins og employee
 
-
-from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME
+from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME, CONTACTTEMPLATE
 from time import sleep
 import os
-CONTACTTEMPLATE = ['Nafn', 'Kennitala', 'Heimilisfang', 'Heimasími', 'GSM símanúmer', 'Netfang', 'Áfangastaður', 'Yfirmaður']
 
 class BossEmployeeCreate:
     def __init__(self, id) -> None:

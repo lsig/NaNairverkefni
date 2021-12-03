@@ -1,8 +1,8 @@
 #skrá nýja verkbeiðni
-from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT
+from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT, CONTRACTTEMPLATE
 from time import sleep
 import os
-CONTRACTTEMPLATE = ['Stofnun verkbeiðnar','Starfsmaður', 'Starfsmanna ID', 'Titill', 'Lýsing', 'Áfangastaður', 'Fasteign', 'Númer fasteignar', 'Fasteignar ID', 'Forgangur','Staða']
+
 
 class ContractCreate:
     def __init__(self, id) -> None:
@@ -14,8 +14,10 @@ class ContractCreate:
     | VIÐHALD |
      - Skrá nýja verkbeiðni
       {DASH*15}
-    Q. Hætta við
-        '''
+    {QUIT}. Hætta við
+
+    | VERKBEIÐNI |
+{DASH * 25}'''
 
     def display(self):
 

@@ -1,8 +1,7 @@
 #skrá nýjan verktaka
-from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT
+from data_files.const import CLEAR, CONTRACTORTEMPLATE, INVALID, STAR, DASH, SLEEPTIME, QUIT
 from time import sleep
 import os
-CONTRACTTEMPLATE = ['Nafn verktaka', 'Nafn tengiliðs', 'Sími', 'Opnunartími','Áfangastaður', 'Einkunn']
 
 class BossContractorCreate:
     def __init__(self, id) -> None:
@@ -23,13 +22,13 @@ class BossContractorCreate:
         os.system(CLEAR)
         print(self.screen)
 
-        for i in range( len(CONTRACTTEMPLATE)): 
-            user_input = input(f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
+        for i in range( len(CONTRACTORTEMPLATE)): 
+            user_input = input(f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
             #check validity
             #while self.input_is_valid(user_input) == False:
-                #user_input = input(f"{i+1}: {CONTRACTTEMPLATE[i]}")
+                #user_input = input(f"{i+1}: {CONTRACTORTEMPLATE[i]}")
             self.contractorlist.append(user_input)
         print(DASH*25)
         
@@ -38,11 +37,11 @@ class BossContractorCreate:
         
     def printcontractorinfo(self, number = None):
         propertystring = ''
-        for i in range( len(CONTRACTTEMPLATE)):
+        for i in range( len(CONTRACTORTEMPLATE)):
             if number != None and i == number - 1:
-                propertystring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<25} ____\n"
+                propertystring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<25} ____\n"
             else:
-                propertystring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<25} {self.contractorlist[i]}\n"
+                propertystring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<25} {self.contractorlist[i]}\n"
         propertystring += DASH*25
         
         print(propertystring)
@@ -73,7 +72,7 @@ class BossContractorCreate:
         user_row = int(input("Row to change: "))
         self.reset_screen(user_row)
 
-        user_input = input(f"{CONTRACTTEMPLATE[user_row - 1]}: ")
+        user_input = input(f"{CONTRACTORTEMPLATE[user_row - 1]}: ")
         self.contractorlist[user_row - 1] = user_input
 
         self.reset_screen()

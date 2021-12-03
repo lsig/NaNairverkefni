@@ -1,8 +1,8 @@
 #skrá nýja fasteign
-from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, QUIT
+from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, QUIT, PROPERTYTEMPLATE
 import os 
 from time import sleep
-PROPERTYTEMPLATE = ['Áfangastaður', 'Heimilisfang', 'Stærð', 'Herbergi', 'Tegund', 'Númer fasteignar', 'Auka']
+
 
 class BossPropertyCreate:
     def __init__(self, id) -> None:
