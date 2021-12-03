@@ -2,14 +2,12 @@
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT
 from time import sleep
 import os
-STAR = '* '
-DASH = '-'
 CONTRACTTEMPLATE = ['Nafn verktaka', 'Kennitala starfsmanns', 'Heimasími', 'GSM sími', 'Netfang', 'Áfangastaður']
 
 class BossContractorCreate:
     def __init__(self, id) -> None:
         self.id = id
-        self.contractlist = []
+        self.contractorlist = []
         self.screen = f'''
  Location | Name | {self.id} 
 {STAR*14}
@@ -17,7 +15,9 @@ class BossContractorCreate:
      - Skrá nýja verktaka
       {DASH*15}
     Q. Hætta við
-        '''
+
+    | VERKTAKI |
+{DASH * 25}'''
 
     def display_contractormenu(self):
         os.system(CLEAR)
@@ -30,55 +30,55 @@ class BossContractorCreate:
             #check validity
             #while self.input_is_valid(user_input) == False:
                 #user_input = input(f"{i+1}: {CONTRACTTEMPLATE[i]}")
-            self.contractlist.append(user_input)
+            self.contractorlist.append(user_input)
         print(DASH*25)
         
-        self.confirmcontract()
+        self.confirmcontractor()
 
         
-    def printcontractinfo(self, number = None):
+    def printcontractorinfo(self, number = None):
         propertystring = ''
         for i in range( len(CONTRACTTEMPLATE)):
             if number != None and i == number - 1:
-                propertystring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ____\n"
+                propertystring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<25} ____\n"
             else:
-                propertystring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} {self.contractlist[i]}\n"
+                propertystring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<25} {self.contractorlist[i]}\n"
         propertystring += DASH*25
         
         print(propertystring)
     
 
-    def confirmcontract(self):
+    def confirmcontractor(self):
 
         confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
-            if confirm.upper() == 'C':  # TODO
-                #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
+            if confirm.upper() == 'C':  # TODO, tengja við LL
+                #Contractor(self.contractorlist)
                 return
         
-            elif confirm.upper() == 'E': # TODO
-                self.editcontractinfo()
+            elif confirm.upper() == 'E':
+                self.editcontractorinfo()
                 confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
-            elif confirm.upper() == 'Q': # eigum við að setja QUIT hér inn?
+            elif confirm.upper() == 'Q': # QUIT??
                 return
 
             else:
                 print(INVALID)
-                confirm = input()
+                sleep(SLEEPTIME)
+                self.reset_screen()
+                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
     
-    def editcontractinfo(self):
+    def editcontractorinfo(self):
         user_row = int(input("Row to change: "))
         self.reset_screen(user_row)
 
         user_input = input(f"{CONTRACTTEMPLATE[user_row - 1]}: ")
-        self.contractlist[user_row - 1] = user_input
+        self.contractorlist[user_row - 1] = user_input
 
-        os.system(CLEAR)
-        print(self.screen)
-        self.printcontractinfo()
+        self.reset_screen()
     
-    def reset_screen(self, user_row):
+    def reset_screen(self, user_row = None):
         os.system(CLEAR)
         print(self.screen)
-        self.printcontractinfo(user_row)
+        self.printcontractorinfo(user_row)
