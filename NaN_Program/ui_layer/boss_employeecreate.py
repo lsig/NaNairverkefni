@@ -66,7 +66,9 @@ class BossEmployeeCreate:
 
             else:
                 print(INVALID)
-                confirm = input()
+                sleep(SLEEPTIME)
+                self.reset_screen()
+                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
     
     def editcontactinfo(self):
         user_row = int(input("Row to change: "))
@@ -75,9 +77,7 @@ class BossEmployeeCreate:
         user_input = input(f"{CONTACTTEMPLATE[user_row - 1]}: ")
         self.contactlist[user_row - 1] = user_input
 
-        os.system(CLEAR)
-        print(self.screen)
-        self.printcontactinfo()
+        self.reset_screen()
     
     def reset_screen(self, user_row):
         os.system(CLEAR)
