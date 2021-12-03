@@ -2,7 +2,7 @@
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT
 from time import sleep
 import os
-CONTRACTTEMPLATE = ['Nafn verktaka', 'Kennitala starfsmanns', 'Heimasími', 'GSM sími', 'Netfang', 'Áfangastaður']
+CONTRACTTEMPLATE = ['Nafn verktaka', 'Nafn tengiliðs', 'Sími', 'Opnunartími','Áfangastaður', 'Einkunn']
 
 class BossContractorCreate:
     def __init__(self, id) -> None:

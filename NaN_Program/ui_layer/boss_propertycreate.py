@@ -2,7 +2,7 @@
 from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, QUIT
 import os 
 from time import sleep
-PROPERTYTEMPLATE = ['id', 'Destination', 'Address', 'Size', 'Rooms', 'Type', 'Property-number', 'Extras']
+PROPERTYTEMPLATE = ['Áfangastaður', 'Heimilisfang', 'Stærð', 'Herbergi', 'Tegund', 'Númer fasteignar', 'Auka']
 
 class BossPropertyCreate:
     def __init__(self, id) -> None:

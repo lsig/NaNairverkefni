@@ -2,7 +2,7 @@
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT
 from time import sleep
 import os
-CONTRACTTEMPLATE = ['id', 'date-created', 'employee', 'employee-id', 'description', 'location', 'property', 'Property-number', 'priority', 'status']
+CONTRACTTEMPLATE = ['Stofnun verkbeiðnar','Starfsmaður', 'Starfsmanna ID', 'Titill', 'Lýsing', 'Áfangastaður', 'Fasteign', 'Númer fasteignar', 'Fasteignar ID', 'Forgangur','Staða']
 
 class ContractCreate:
     def __init__(self, id) -> None:
