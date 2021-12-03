@@ -54,7 +54,6 @@ class BossContractorCreate:
         confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
             if confirm.upper() == 'C':  # TODO, tengja við LL
-                print(self.contractorlist)
                 self.llapi.add_cont(self.contractorlist)
                 return
         
