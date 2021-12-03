@@ -16,42 +16,74 @@ class ContractCreate:
       {DASH*15}
     Q. Hætta við
         '''
-    
+
     def display(self):
+
         os.system(CLEAR)
         print(self.screen)
 
-        for i in range(len(CONTRACTTEMPLATE)):
-            user_input = input(f"{CONTRACTTEMPLATE[i]}: ")
-            if user_input.upper() == 'Q':
+        for i in range( len(CONTRACTTEMPLATE)): 
+            user_input = input(f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
+            if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
+            #check validity
+            #while self.input_is_valid(user_input) == False:
+                #user_input = input(f"{i+1}: {CONTRACTTEMPLATE[i]}")
             self.contractlist.append(user_input)
+        print(DASH*25)
         
-        self.confirm_contract()
+        self.confirmcontract()
+
         
+    def printcontractinfo(self, number = None):
+
+        contractstring = ''
+        for i in range( len(CONTRACTTEMPLATE)):
+            if number != None and i == number - 1:
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ____\n"
+            else:
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} {self.contractlist[i]}\n"
+        contractstring += DASH*25
+        
+        print(contractstring)
     
-    def make_contract(self):
-        contract_overview = '\n | VERKBEIÐNI |\n'
-        listint = 0
-        for i in range(len(CONTRACTTEMPLATE)):
-            if self.contractlist[listint] != '':
-                contract_overview += f"{CONTRACTTEMPLATE[i]}: {self.contractlist[listint]}\n"
-                listint += 1
-        
-        return contract_overview
-    
-    def confirm_contract(self):
-        contract = self.make_contract()
-        print(contract)
-        confirm = input("""C. Confirm \nE. Edit \nQ. Quit \n""")
+
+    def confirmcontract(self):
+
+        confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
             if confirm.upper() == 'C':  # TODO
+                #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
                 return
+        
             elif confirm.upper() == 'E': # TODO
-                pass
-            elif confirm.upper() == 'Q': # TODO
+                self.editcontractinfo()
+                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
+
+            elif confirm.upper() == 'Q': # eigum við að setja QUIT hér inn?
                 return
+
             else:
                 print(INVALID)
+                sleep(SLEEPTIME)
+                self.reset_screen()
+                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
+    
+    def editcontractinfo(self):
+
+        user_row = int(input("Row to change: ")) # þarf að vera tala á milli 1 og len(CONTRACTTEMPLATE) + 1
+        self.reset_screen(user_row)
+
+        user_input = input(f"{CONTRACTTEMPLATE[user_row - 1]}: ")
+        self.contractlist[user_row - 1] = user_input
+
+        self.reset_screen()
+    
+    def reset_screen(self, user_row = None):
+
+        os.system(CLEAR)
+        print(self.screen)
+        self.printcontractinfo(user_row)
+
 
 
