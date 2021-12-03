@@ -3,10 +3,10 @@
 from logic_layer.LLAPI import LLAPI
 from ui_layer.boss_main_menu import BossMenu
 from ui_layer.emp_main_menu import EmployeeMenu
-from data_files.const import CLEAR, SLEEPTIME
+from data_files.const import CLEAR, QUIT, SLEEPTIME
 import os
 from time import sleep
-STAR = '*'
+STAR = '*' # not the same star as in the constants 
 
 class LoginMenu:
     def __init__(self) -> None:
@@ -20,20 +20,20 @@ NaN Air Properties
         while True:
             os.system(CLEAR)
             staffid = input(self.loginscreen)
-            if staffid == 'Y0301': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
+            if staffid == 'Y0301' or staffid == '': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
                 print(f"\nWelcome, {staffid}") 
                 sleep(SLEEPTIME)
                 bossmenu = BossMenu(staffid)
                 returnvalue = bossmenu.print_menu()
-                if returnvalue == 'Q':
+                if returnvalue == QUIT:
                     return
 
             elif staffid == 'S0304': #TODO, (employee id hér)
                 print(f"\nWelcome, {staffid}")
-                sleep(SLEEPTIME)
+                #sleep(SLEEPTIME-1)
                 empmenu = EmployeeMenu(staffid)
                 empmenu.print_menu()
                 
             else:
                 print("Invalid ID, try again.")
-                sleep(SLEEPTIME)
+                sleep(SLEEPTIME-1)

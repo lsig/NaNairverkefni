@@ -1,4 +1,5 @@
 from ui_layer.boss_employeecreate import BossEmployeeCreate
+from ui_layer.employeelist import EmployeeList
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 import os
 from time import sleep
@@ -32,7 +33,8 @@ class BossEmployeesMenu:
                 createemployee.display_menu()
 
             elif user_choice == '2':
-                emp_list = ''
+                emplist = EmployeeList(self.id) #This is the ui class
+                emplist.display_list()
 
             elif user_choice.upper() == 'B':
                 return

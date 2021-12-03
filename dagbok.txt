@@ -1,6 +1,5 @@
 ### Vika 1
 Dagur 1, 22.11.21
-<<<<<<< HEAD
 Morgunfundur:
 Allir komu sér saman á discord og ræddum aðeins áfangann, ákváðum að hittast upp í skóla og kíkja á verkefnalýsinguna betur. 
 Stofnuðum git repo og fórum yfir málin. Docs fyrir töflur og myndir, almennar glósur bara.
@@ -22,14 +21,11 @@ Fórum að skipta verkefnum á milli á þann hátt að styrkleikar allra myndu 
 Markmið er að reyna að vera komnir eitthvað áfram í öllu sem verður inni í hönnunarskýrslunni.
 Miðum við að klára skýrslu á morgun!
 
-<<<<<<< HEAD
 Uppgjör: Við kláruðum kröfulistann og fórum að vinna í stöðuritunum og klasaritinum,
 Dining byrjuðum við á use cases og erum komnir vel áfram í skýrslunni. Allt gengur sem skyldi
 og allir vel peppaðir fyrir verkefninu. Turboinn vel ferskur eftir pfizerinn og menn almennt í 
 góðu skapi. 
-=======
-Uppgjör:
->>>>>>> 15b24ce2a613edc89c8b817e8cd0c5156e5ced84
+
 
 Dagur 3, 24.11.21
 Morgunfundur:
@@ -39,6 +35,7 @@ Kristófer Fannar og Logi í notkunartilvikum og Markús og Marteinn í klassari
 
 Uppgjör: 
 Við kláruðum notendatilvikin, klasaritin og stöðuritin. Allir vel ferksir, turboinn vel þunnur af einhverjum ástæðum, kallinn átti erfiðan þriðjudag (cough cough, Man U vann og hann missti sig aðeins). Maxim betur þekktur sem folinn mætti kampa kátur enda á hann kærustu sem gaf honum þetta nickname. Markús er í smitgát og vann klasaritið heima og Kristó O betur þekktur sem kisuklórarinn var einnig vel ferskur. 
+
 
 Dagur 4, 25.11.21
 Morgunfundur:
@@ -51,12 +48,14 @@ Fyrsta útlitshönnunin en nú komin. Unnið var í skýrslunni og er hún komin
 er hún enn ókláruð. Nytsemis- og notendaupplifunarkröfur á eftir að semja og verður það
 gert á morgun.
 
+
 Dagur 5, 26.11.21
 Morgunfundur: 
 Óbeinn fundur tekinn þar sem í raun var eina verkefni dagsins að gera allt klárt fyrir skil á hönnunarskýrslu. Það þarf að kíkja á kröfurnar betur ásamt að fínpússa klasarit og stöðurit.
 
 Uppgjör:
 Skýrsla tilbúin og búið að skila, allir sáttir og tilbúnir í næstu viku!
+
 
 
 
@@ -69,6 +68,7 @@ Smá misræmi í mönnum þar sem nokkrir misstu af fyrirlestrinum og byrjum þv
 Uppgjör: 
 komnir með öll helstu file og foldera, samanber klasaritið okkar og best practice sem við sáum úr fyrirlestrinum í morgun. Skiptum okkur niður í hlutverk og settum grunn í einhver python files. Byrjum á fullu á morgun!
 
+
 Dagur 2 30.11.21 
 Morgunfundur:
 Menn voru vel þreyttir en ferskir þar sem flestir vöknuðu við a paycheck og desemberuppbót, fundur tekinn um eitt leytið og menn héldur áfram að vinna í sitthvorum hópum.
@@ -76,10 +76,29 @@ Menn voru vel þreyttir en ferskir þar sem flestir vöknuðu við a paycheck og
 Uppgjör:
 Það var haldið áfram að setja upp forritð og búa til beinagrindina, strákarnir í storage layerinu stóðu sig vel
 
+
 Dagur 3 1.12.21 
 Morgunfundur:
 Menn vel þreyttir í dag, einhver þreyta í liðinu þessa vikuna, kannski útaf lengd dagsins en hver dagur verður bara styttri og styttri. Fundur tekinn um hálf þrjú leytið og ákeðið að halda áfram á sömu braut.
 
 Uppgjör:
-Við komumst áfram í forritinu og storage layer er næstum tilbúið sem mun gera forritun í logic og UI auðveldari. 
+Við komumst áfram í forritinu og storage layer er næstum tilbúið sem mun gera forritun í logic og UI auðveldari.
+
+
+Dagur 4 2.12.21
+Morgunfundur:
+Allir farnir að vakna seinna og seinna, sem gæti orðið vesen. Erum samt ekkert stressaðir þar sem verkefnið gengur ágætlega vel. Ætlum að reyna að klára flest allt í data layer og UI svo það sé hægt að fara í logic layer, sem tengir síðan allt saman.
+
+Uppgjör:
+Data layer kláraðist (yeesss!!) og öll feature í ui eru tilbúin, þarf að klára að sauma seinustu spor saman í ui svo hann geti talist fullkláraður.
+
+
+Dagur 5 3.12.21 
+Morgunfundur:
+seinasti dagur í næst seinustu vikunni og ætlum við allir að mæta upp í skóla í dag til að grinda seinasta í UI og tengja saman LL við allt hitt, (erum fjórir mættir so far). Maxim eldaði world record breakfast (að hans sögn), en tók víst enga mynd svo það er ekki hægt að staðfesta með vissu hve mikinn ofurkóðakraft hann mun hafa í dag til að koma okkur áfram. Sjáum til.
+
+Uppgjör:
+
+
+
 

@@ -1,5 +1,6 @@
 #verktakagluggi
 from ui_layer.boss_contractorcreate import BossContractorCreate
+from ui_layer.contractorlist import ContractorList
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 import os
 from time import sleep
@@ -31,7 +32,8 @@ class BossContractorMenu:
                 createcontractor.display_contractormenu()
 
             elif user_choice == '2':
-                contractor_list = '' #TODO
+                contractorlist = ContractorList(self.id) #TODO
+                contractorlist.display_list()
 
             elif user_choice.upper() == 'B':
                 return
