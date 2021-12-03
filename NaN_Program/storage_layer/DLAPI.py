@@ -1,12 +1,12 @@
-from employeeDL import EmployeeDL
-from locationDL import LocationDL
-from propertyDL import PropertyDL
-from contractorDL import ContractorDL
-from jobDL import JobDL
-from reportDL import ReportDL
-from maintenanceDL import MaintenanceDL
+from storage_layer.employeeDL import EmployeeDL
+from storage_layer.locationDL import LocationDL
+from storage_layer.propertyDL import PropertyDL
+from storage_layer.contractorDL import ContractorDL
+from storage_layer.jobDL import JobDL
+from storage_layer.reportDL import ReportDL
+from storage_layer.maintenanceDL import MaintenanceDL
 
-from employee import Employee
+
 
 class DlAPI:
     def __init__(self):
@@ -94,5 +94,5 @@ class DlAPI:
 if __name__ == "__main__":
     d = DlAPI()
     # print(d.get_all_emp())
-    emp = Employee("10","siggi","0","Traðartún 3; 108; Argir; Faroe Islands","6666666","6666667","siggi@Nanair.is","Tórshavn","0")
-    d.add_emp(emp)
+    # emp = Employee("10","siggi","0","Traðartún 3; 108; Argir; Faroe Islands","6666666","6666667","siggi@Nanair.is","Tórshavn","0")
+    # d.add_emp(emp)

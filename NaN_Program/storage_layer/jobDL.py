@@ -1,5 +1,5 @@
 import csv
-from job import Job
+# from job import Job
 
 class JobDL:
     def __init__(self):
