@@ -2,9 +2,11 @@
 from data_files.const import CLEAR, CONTRACTORTEMPLATE, INVALID, STAR, DASH, SLEEPTIME, QUIT
 from time import sleep
 import os
+from logic_layer.LLAPI import LLAPI
 
 class BossContractorCreate:
     def __init__(self, id) -> None:
+        self.llapi = LLAPI()
         self.id = id
         self.contractorlist = []
         self.screen = f'''
@@ -21,7 +23,7 @@ class BossContractorCreate:
     def display_contractormenu(self):
         os.system(CLEAR)
         print(self.screen)
-
+        self.contractorlist = []
         for i in range( len(CONTRACTORTEMPLATE)): 
             user_input = input(f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
@@ -52,7 +54,8 @@ class BossContractorCreate:
         confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
             if confirm.upper() == 'C':  # TODO, tengja við LL
-                #Contractor(self.contractorlist)
+                print(self.contractorlist)
+                self.llapi.add_cont(self.contractorlist)
                 return
         
             elif confirm.upper() == 'E':
