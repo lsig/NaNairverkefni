@@ -1,5 +1,5 @@
 #skrá nýja fasteign
-from data_files.const import CLEAR, INVALID, STAR, DASH, QUIT
+from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, QUIT
 import os 
 from time import sleep
 PROPERTYTEMPLATE = ['id', 'Destination', 'Address', 'Size', 'Rooms', 'Type', 'Property-number', 'Extras']
@@ -22,6 +22,7 @@ class BossPropertyCreate:
 
 
     def display(self):
+
         os.system(CLEAR)
         print(self.screen)
 
@@ -39,6 +40,7 @@ class BossPropertyCreate:
 
         
     def printpropertyinfo(self, number = None):
+
         propertystring = ''
         for i in range( len(PROPERTYTEMPLATE)):
             if number != None and i == number - 1:
@@ -67,27 +69,23 @@ class BossPropertyCreate:
 
             else:
                 print(INVALID)
-                confirm = input()
+                sleep(SLEEPTIME)
+                self.reset_screen()
+                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
     
     def editpropertyinfo(self):
-        user_row = int(input("Row to change: "))
+
+        user_row = int(input("Row to change: ")) # þarf að vera tala á milli 1 og len(PROPERTYTEMPLATE) + 1
         self.reset_screen(user_row)
 
         user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ")
         self.propertylist[user_row - 1] = user_input
 
-        os.system(CLEAR)
-        print(self.screen)
-        self.printpropertyinfo()
+        self.reset_screen()
     
-    def reset_screen(self, user_row):
+    def reset_screen(self, user_row = None):
+
         os.system(CLEAR)
         print(self.screen)
         self.printpropertyinfo(user_row)
-
-
-
-        
-
-
 
