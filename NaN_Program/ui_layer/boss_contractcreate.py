@@ -1,5 +1,5 @@
 #skrá nýja verkbeiðni
-from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
+from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT
 from time import sleep
 import os
 CONTRACTTEMPLATE = ['id', 'date-created', 'employee', 'employee-id', 'description', 'location', 'property', 'Property-number', 'priority', 'status']
