@@ -45,6 +45,7 @@ class BossPropertyCreate:
                 propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} ____\n"
             else:
                 propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} {self.propertylist[i]}\n"
+        propertystring += DASH*25
         
         print(propertystring)
     
@@ -70,15 +71,20 @@ class BossPropertyCreate:
     
     def editpropertyinfo(self):
         user_row = int(input("Row to change: "))
-        os.system(CLEAR)
-        print(self.screen)
-        self.printpropertyinfo(user_row)
+        self.reset_screen(user_row)
+
         user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ")
         self.propertylist[user_row - 1] = user_input
 
         os.system(CLEAR)
         print(self.screen)
         self.printpropertyinfo()
+    
+    def reset_screen(self, user_row):
+        os.system(CLEAR)
+        print(self.screen)
+        self.printpropertyinfo(user_row)
+
 
 
         
