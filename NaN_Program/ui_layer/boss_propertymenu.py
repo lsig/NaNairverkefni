@@ -1,5 +1,6 @@
 #fasteignagluggi
 from ui_layer.boss_propertycreate import BossPropertyCreate
+from ui_layer.propertylist import PropertyList
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 import os
 from time import sleep
@@ -30,7 +31,9 @@ class PropertyMenu:
                 bosspropcreate.display()
 
             elif user_input == '2':
-                pass
+                proplist = PropertyList(self.id)
+                proplist.display_list()
+
             elif user_input.upper() == 'B':
                 return
             else:

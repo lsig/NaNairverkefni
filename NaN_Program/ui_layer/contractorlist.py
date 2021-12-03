@@ -2,6 +2,8 @@
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
 from time import sleep
 import os
+
+from ui_layer.boss_seecontractor import SeeContractor
 MAXROWS = 10
 
 
@@ -31,13 +33,14 @@ Nafn | Sími | Netfang | Kennitala
 {DASH*35}'''
     
     def display_list(self):
+        self.firstrow = self.slide * self.rows 
         os.system(CLEAR)
         print(self.screen)
-        for i in range(self.rows): #ef að við displayum 10 verktaka í röð.
-            contractorinfostr = f'{self.slide * self.rows + i + 1}. - '
+        for i in range(self.rows): #til að displaya self.rows verktaka í röð.
+            contractorinfostr = f'{self.firstrow + i + 1}. - '
             try:
-                for k in range(len(self.contractorlist[self.slide * self.rows + i])):
-                    contractorinfostr += f"{self.contractorlist[self.slide * self.rows + i][k] :<10}" # afh 10?
+                for k in range(len(self.contractorlist[self.firstrow + i])):
+                    contractorinfostr += f"{self.contractorlist[self.firstrow + i][k] :<10}" # afh 10?
                     
             except IndexError:
                 pass
@@ -51,7 +54,7 @@ Nafn | Sími | Netfang | Kennitala
         if (self.slide + 1) * self.rows < len(self.contractorlist):
             print("n. Next - ", end='')
         
-        user_input = input(f"#. to Select Employee\n")
+        user_input = input(f"#. to Select Contractor\n")
 
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
@@ -73,7 +76,15 @@ Nafn | Sími | Netfang | Kennitala
             pass 
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn verktaka
-            pass
+            self.lastrow = (self.slide + 1) * self.rows
+            
+            if self.firstrow <= int(user_input) < self.lastrow and len(self.contractorlist) >= int(user_input) :
+                seecontractor = SeeContractor(self.id) 
+                seecontractor.display()
+            else: 
+                print("Invalid row, try again!")
+                sleep(SLEEPTIME)
+                self.display_list()
 
         else:
             print(INVALID)
