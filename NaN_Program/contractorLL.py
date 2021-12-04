@@ -9,7 +9,7 @@ class ContractorLL:
 
     def add_contractor(self,cont_lis):
         if self.is_valid(cont_lis):
-            cont = Contractor(self.assign_id_cont(),cont_lis[0],cont_lis[1],cont_lis[2],cont_lis[3],cont_lis[4],None)
+            cont = Contractor(self.assign_id_cont(),cont_lis[0],cont_lis[1],cont_lis[2],cont_lis[3],cont_lis[4],cont_lis[5],None)
             self.dlapi.add_cont(cont)
             return True
         return False
@@ -20,7 +20,7 @@ class ContractorLL:
         return new_id
 
     def is_valid(self,cont_lis) -> bool:
-        dic = {"name":str, "cont_name":str, "phone":int, "working_hours":int,"location":str}
+        dic = {"name":str, "cont_name":str,"profession":str, "phone":int, "working_hours":int,"location":str}
         counter = 0
         for key in dic.keys():
             if dic[key] == str:
@@ -38,12 +38,13 @@ class ContractorLL:
         return True
 
     
-        
+    def get_location_con(self):
+        pass    
 
 
 if __name__ == "__main__":
     g = ContractorLL()
-    bool_1 = g.add_contractor(["John nohands","Elton john","35499900","00","Tórshavn"])
+    bool_1 = g.add_contractor(["John nohands","Elton john","bulider","35499900","00","Tórshavn"])
     print(bool_1)
     # g.assign_id_cont()
 
