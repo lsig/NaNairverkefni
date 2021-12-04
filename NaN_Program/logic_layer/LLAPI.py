@@ -14,6 +14,8 @@ class LLAPI:
     def add_prop(self,prop_lis):
         self.propLL.add_property(prop_lis)
 
+    def get_prop_info(self):
+        self.propLL.get_all_prop()
 
 if __name__ == "__main__":
     g = LLAPI()

@@ -53,7 +53,7 @@ class BossPropertyCreate:
         
         print(propertystring)
     
-
+    #1:Kulsuk, 2:Þórshöfn, 3: longyearbyen
     def confirmproperty(self):
 
         confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")

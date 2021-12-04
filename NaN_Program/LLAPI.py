@@ -15,6 +15,8 @@ class LLAPI:
         self.propLL.add_property(prop_lis)
 
 
+
+
 if __name__ == "__main__":
     g = LLAPI()
     g.add_cont(["John nohands","Elton john","3549990000","00","Tórshavn"])

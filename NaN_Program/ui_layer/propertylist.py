@@ -2,11 +2,13 @@
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
 from time import sleep
 import os
+from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
 
 
 class PropertyList: 
     def __init__(self, id) -> None:
+        self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
@@ -31,6 +33,7 @@ Nafn | Sími | Netfang | Kennitala
 {DASH*35}'''
     
     def display_list(self):
+        #self.propertylist = self.llapi.get_prop_info()
         firstrow = self.slide * self.rows 
         os.system(CLEAR)
         print(self.screen)
