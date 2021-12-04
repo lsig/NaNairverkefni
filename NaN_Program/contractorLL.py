@@ -47,8 +47,8 @@ class ContractorLL:
             return None
         return False
 
-    def find_name_con(self,name):
-        if name.
+    # def find_name_con(self,name):
+    #     if name.
         
 
 
