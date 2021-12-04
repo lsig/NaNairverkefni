@@ -38,15 +38,27 @@ class ContractorLL:
         return True
 
     
-    def get_location_con(self):
-        pass    
+    def find_con_id(self,id):
+        if id.isdigit():
+            all_cont_lis=self.dlapi.get_all_cont()
+            for dic in all_cont_lis:
+                if int(dic["id"]) == int(id):
+                    return dic 
+            return None
+        return False
+
+    def find_name_con(self,name):
+        if name.
+        
+
 
 
 if __name__ == "__main__":
     g = ContractorLL()
-    bool_1 = g.add_contractor(["John nohands","Elton john","bulider","35499900","00","Tórshavn"])
-    print(bool_1)
-    # g.assign_id_cont()
+    # bool_1 = g.add_contractor(["John nohands","Elton john","bulider","35499900","00","Tórshavn"])
+    # print(bool_1)
+    print(g.find_con_id("5"))
+
 
     # def print_lis(lis):
     #     print(lis)
