@@ -6,9 +6,9 @@ class ContractorLL:
     def __init__(self):
         self.dlapi = DlAPI()
 
-    def add_contractor(self,cont_lis):
-        if self.is_valid(cont_lis):
-            cont = Contractor(self.assign_id_cont(),cont_lis[0],cont_lis[1],cont_lis[2],cont_lis[3],cont_lis[4],cont_lis[5],None)
+    def add_contractor(self,cont_dic):
+        if self.is_valid(cont_dic):
+            cont = Contractor(self.assign_id_cont(),cont_dic["Name"],cont_dic["Contact-name"],cont_dic["Profession"],cont_dic["Phone"],cont_dic["Working-hours"],cont_dic["Location"],None)
             self.dlapi.add_cont(cont)
             return True
         return False
@@ -18,65 +18,51 @@ class ContractorLL:
         new_id = int(all_cont_lis[len(all_cont_lis)-1]["id"])+1
         return new_id
 
-    def is_valid(self,cont_lis) -> bool:
-        dic = {"name":str, "cont_name":str,"profession":str, "phone":int, "working_hours":int,"location":str}
-        counter = 0
+    def is_valid(self,cont_dic) -> bool:
+        dic = {"Name":str, "Contact-name":str,"Profession":str, "Phone":int, "Working-hours":int,"Location":str}
         for key in dic.keys():
             if dic[key] == str:
-                get_validation = cont_lis[counter].replace(" ", "").isalpha()
+                get_validation = cont_dic[key].replace(" ", "").isalpha()
             else:
-                get_validation = cont_lis[counter].replace("-","").isdigit()
+                get_validation = cont_dic[key].replace("-","").isdigit()
             # to check if the phone number is a valid length    
             if key.lower() == "phone" and get_validation:
-                if len(cont_lis[counter]) < 7 or len(cont_lis[counter]) > 15:
+                if len(cont_dic[key]) < 7 or len(cont_dic[key]) > 15:
                     return False
             if get_validation == False:
 
                     return False
-            counter += 1
         return True
 
     
-    def find_con_id(self,id,all):
+    def find_con_id(self,id,all_cont_lis):
         if id.isdigit():
-            all_cont_lis=self.dlapi.get_all_cont()
             for dic in all_cont_lis:
                 if int(dic["id"]) == int(id):
                     return dic 
             return None
         return False
 
-    def find_name_con(self,name):
+    def find_name_con(self,name,cont_lis):
         ret_lis=[]
         if name.replace(" ","").isalpha():
-            for dic in self.dlapi.get_all_cont():
+            for dic in cont_lis:
                 if name.lower() in dic["Name"].lower():
                     ret_lis.append(dic)
             return ret_lis
         return False
 
 
-    def lis_all_cont(self):
-        ret_lis = []
-        for dic in self.dlapi.get_all_cont():
-            temp_lis = []
-            for key in dic:
-               temp_lis.append(dic[key])
-            ret_lis.append(temp_lis)
-        return ret_lis
+    def lis_all_cont(self): # þarf að breyta 
+        return self.dlapi.get_all_cont()
 
-    def edit_info(self,con_lis):
-        if self.is_valid(con_lis[1:len(con_lis)-1]):
+    def edit_info(self,edit_con_dic):
+        if self.is_valid(edit_con_dic):
             all_lis_cont= self.dlapi.get_all_cont()
-            new_dic = {}
-            dic = self.find_con_id(con_lis[0])
-            print(dic,con_lis)
-            counter = 0
-            for key in dic:
-                new_dic[key] = con_lis[counter]
-                counter += 1
+            dic = self.find_con_id(edit_con_dic["id"],all_lis_cont)
+ 
             con_loc_in_lis = self.find_id_location_con(dic,all_lis_cont)
-            all_lis_cont[con_loc_in_lis]= new_dic
+            all_lis_cont[con_loc_in_lis]= edit_con_dic
             self.dlapi.change_cont(all_lis_cont)
             return True
         return False
@@ -105,7 +91,8 @@ if __name__ == "__main__":
     # print(g.lis_all_cont())
     # if "sig" in "siggi":
     #     print("12")
-    bool_2=g.edit_info(["4","John is hands","Elton john","bulider","35499900","00","Tórshavn",None])
+    # bool_2=g.edit_info({"4",,,,,"00",,None})
+    bool_2=g.edit_info( {"id":"4","Name":"John is grate", "Contact-name":"Elton john","Profession":"bulider", "Phone":"35499900", "Working-hours":"00","Location":"Tórshavn","Rating(0-10)":None})
 
     
 
@@ -113,6 +100,6 @@ if __name__ == "__main__":
     #     print(lis)
     # print("".isdigit())
     # print_lis([1,2,34])
-    lis = [1,2,3,4,5,6]
-    print(len(lis))
-    print(lis[1:len(lis)-1])
+    # lis = [1,2,3,4,5,6]
+    # print(len(lis))
+    # print(lis[1:len(lis)-1])

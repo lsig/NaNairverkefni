@@ -36,6 +36,7 @@ Nafn | Sími | Netfang | Kennitala
             propertyinfostr = f'{firstrow + i + 1}. - '
             try:
                 for key in self.propertylist[firstrow + i]:
+                    
                     propertyinfostr += f"{self.propertylist[firstrow + i][key] :<10}" # afh 10?
                     
             except IndexError:

@@ -8,7 +8,7 @@ class BossContractorCreate:
     def __init__(self, id) -> None:
         self.llapi = LLAPI()
         self.id = id
-        self.contractorlist = []
+        self.contractorlist = {}
         self.screen = f'''
  Location | Name | {self.id} 
 {STAR*14}
@@ -23,7 +23,7 @@ class BossContractorCreate:
     def display_contractormenu(self):
         os.system(CLEAR)
         print(self.screen)
-        self.contractorlist = []
+        self.contractorlist = {}
         for i in range( len(CONTRACTORTEMPLATE)): 
             user_input = input(f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
@@ -31,7 +31,7 @@ class BossContractorCreate:
             #check validity
             #while self.input_is_valid(user_input) == False:
                 #user_input = input(f"{i+1}: {CONTRACTORTEMPLATE[i]}")
-            self.contractorlist.append(user_input)
+            self.contractorlist[CONTRACTORTEMPLATE[i]] = user_input
         print(DASH*25)
         
         self.confirmcontractor()
