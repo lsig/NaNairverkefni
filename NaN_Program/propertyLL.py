@@ -33,6 +33,9 @@ class PropertyLL:
         counter = 0
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
+                if key.lower() == "extras": #replace empty string with none for extras
+                    if prop_lis[counter] == "":
+                        prop_lis[counter] = "None"
                 get_validation = prop_lis[counter].replace(" ", "").isalpha()
             elif dic[key] == int and dic[key] != "both":
                 get_validation = prop_lis[counter].replace("-","").isdigit()
@@ -59,17 +62,27 @@ class PropertyLL:
             for keys in row:
                temp_lis.append(row[keys])
             ret_lis.append(temp_lis)
-            temp_lis = []
         return ret_lis
        
+    def find_prop_id(self,id):
+        ret_lis = []
+        if id.isdigit():
+            all_prop_lis=self.dlapi.get_property_info()
+            for dic in all_prop_lis:
+                if int(dic["id"]) == int(id):
+                    for key in dic:
+                        ret_lis.append(dic[key])
+                    return ret_lis 
+            return None
+        return False
 
     
 
 
 if __name__ == "__main__":
     g = PropertyLL()
-    d = g.get_all_prop_lis()
-    print(d[0])
+    d = g.find_prop_id('3')
+    print(d)
 #     ret_lis = []
 #     for row in d:
 #         temp_lis = []

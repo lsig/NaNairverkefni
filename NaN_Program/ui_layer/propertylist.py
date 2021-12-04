@@ -12,7 +12,7 @@ class PropertyList:
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
-        self.propertylist = []
+        self.propertylist = self.llapi.all_prop_lis()
         self.screen = f''' 
  Location | Name | {self.id} 
 {STAR*14}
@@ -23,13 +23,13 @@ class PropertyList:
      B. Til baka
      /row. Breytir lengd raðar
 
-Nafn | Sími | Netfang | Kennitala
+id | Destination | Address | Size | Rooms | Property number | Extras 
 {DASH*35}'''
     
     def display_list(self):
-        self.propertylist = self.llapi.all_prop_lis()
+        #Header á ensku í bili!!!
+        #self.propertylist = self.llapi.all_prop_lis()
         firstrow = self.slide * self.rows 
-        print(self.propertylist)
         os.system(CLEAR)
         print(self.screen)
         for i in range(self.rows): #til að displaya self.rows verktaka í röð.
@@ -72,7 +72,8 @@ Nafn | Sími | Netfang | Kennitala
             pass 
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
-            pass
+            self.propertylist = self.llapi.filter_property_id(user_input) #virkar ekki alveg, þarf að laga
+            self.display_list()
 
         else:
             print(INVALID)
