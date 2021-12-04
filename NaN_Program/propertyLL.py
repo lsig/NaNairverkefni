@@ -63,7 +63,11 @@ class PropertyLL:
                temp_lis.append(row[keys])
             ret_lis.append(temp_lis)
         return ret_lis
-       
+    
+    def get_all_prop(self):
+        all_prop = self.dlapi.get_property_info()
+        return all_prop
+
     def find_prop_id(self,id):
         ret_lis = []
         if id.isdigit():
@@ -76,13 +80,15 @@ class PropertyLL:
             return None
         return False
 
-    
+
 
 
 if __name__ == "__main__":
     g = PropertyLL()
-    d = g.find_prop_id('3')
+    d = g.get_all_prop()
     print(d)
+    #d = g.find_prop_id('3')
+    #print(d)
 #     ret_lis = []
 #     for row in d:
 #         temp_lis = []
