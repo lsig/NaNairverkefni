@@ -15,10 +15,15 @@ class LLAPI:
         self.propLL.add_property(prop_lis)
 
     def get_prop_info(self):
-        self.propLL.get_all_prop()
+        return self.propLL.get_all_prop()
     
     def all_prop_lis(self):
         return self.propLL.get_all_prop_lis()
+
+
+    def filter_property_id(self,id):
+        return self.propLL.find_prop_id(id)
+
         
 
 if __name__ == "__main__":
