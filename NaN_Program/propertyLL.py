@@ -51,18 +51,34 @@ class PropertyLL:
         return True
 
         
-    def get_all_prop(self):
-       all_prop = self.dlapi.get_property_info()
-       return all_prop
+    def get_all_prop_lis(self):
+        all_prop = self.dlapi.get_property_info()
+        ret_lis = []
+        for row in all_prop:
+            temp_lis = []
+            for keys in row:
+               temp_lis.append(row[keys])
+            ret_lis.append(temp_lis)
+            temp_lis = []
+        return ret_lis
+       
+
+    
 
 
 if __name__ == "__main__":
     g = PropertyLL()
-    d = g.get_all_prop()
-    for row in d:
-        for keys in row:
-            print(row[keys])
-        
+    d = g.get_all_prop_lis()
+    print(d[0])
+#     ret_lis = []
+#     for row in d:
+#         temp_lis = []
+#         for keys in row:
+#             temp_lis.append(row[keys])
+#         ret_lis.append(temp_lis)
+#         temp_lis = []
+#     print(ret_lis[0][1])
+#         #row[keys]
 
     #print(d[0]['Destination'])
     #b = g.replace_loc_num_with_name()

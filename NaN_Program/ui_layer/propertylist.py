@@ -12,13 +12,7 @@ class PropertyList:
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
-        self.propertylist = [['Jói','1303576040','8776545','joi@nanair.is'],
-            ['Spói','1403579040','8876545','spoi@nanair.is'],
-            ['Gói','0903576030','','Gói@nanair.is'],
-            ['Karl'],
-            ['Siggi', '58-12345'],
-            ['Maxim', 'idk'],
-            ['Markús', 'newphone']]
+        self.propertylist = []
         self.screen = f''' 
  Location | Name | {self.id} 
 {STAR*14}
@@ -33,8 +27,9 @@ Nafn | Sími | Netfang | Kennitala
 {DASH*35}'''
     
     def display_list(self):
-        #self.propertylist = self.llapi.get_prop_info()
+        self.propertylist = self.llapi.all_prop_lis()
         firstrow = self.slide * self.rows 
+        print(self.propertylist)
         os.system(CLEAR)
         print(self.screen)
         for i in range(self.rows): #til að displaya self.rows verktaka í röð.

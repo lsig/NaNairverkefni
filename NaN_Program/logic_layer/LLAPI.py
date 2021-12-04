@@ -16,9 +16,13 @@ class LLAPI:
 
     def get_prop_info(self):
         self.propLL.get_all_prop()
+    
+    def all_prop_lis(self):
+        return self.propLL.get_all_prop_lis()
+        
 
 if __name__ == "__main__":
     g = LLAPI()
-    g.add_cont(["John nohands","Elton john","3549990000","00","Tórshavn"])
-
+    #g.add_cont(["John nohands","Elton john","3549990000","00","Tórshavn"])
+    #print(g.all_prop_lis)
     
