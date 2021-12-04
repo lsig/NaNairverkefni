@@ -1,5 +1,4 @@
 
-
 from storage_layer.DLAPI import DlAPI
 from models.contractor import Contractor
 
@@ -38,7 +37,7 @@ class ContractorLL:
         return True
 
     
-    def find_con_id(self,id):
+    def find_con_id(self,id,all):
         if id.isdigit():
             all_cont_lis=self.dlapi.get_all_cont()
             for dic in all_cont_lis:
@@ -47,8 +46,53 @@ class ContractorLL:
             return None
         return False
 
-    # def find_name_con(self,name):
-    #     if name.
+    def find_name_con(self,name):
+        ret_lis=[]
+        if name.replace(" ","").isalpha():
+            for dic in self.dlapi.get_all_cont():
+                if name.lower() in dic["Name"].lower():
+                    ret_lis.append(dic)
+            return ret_lis
+        return False
+
+
+    def lis_all_cont(self):
+        ret_lis = []
+        for dic in self.dlapi.get_all_cont():
+            temp_lis = []
+            for key in dic:
+               temp_lis.append(dic[key])
+            ret_lis.append(temp_lis)
+        return ret_lis
+
+    def edit_info(self,con_lis):
+        if self.is_valid(con_lis[1:len(con_lis)-1]):
+            all_lis_cont= self.dlapi.get_all_cont()
+            new_dic = {}
+            dic = self.find_con_id(con_lis[0])
+            print(dic,con_lis)
+            counter = 0
+            for key in dic:
+                new_dic[key] = con_lis[counter]
+                counter += 1
+            con_loc_in_lis = self.find_id_location_con(dic,all_lis_cont)
+            all_lis_cont[con_loc_in_lis]= new_dic
+            self.dlapi.change_cont(all_lis_cont)
+            return True
+        return False
+
+
+
+    def find_id_location_con(self,dic,all_lis_cont):
+        for i in range(len(all_lis_cont)):
+            if dic == all_lis_cont[i]:
+                return i
+            
+            
+
+
+        
+        
         
 
 
@@ -57,10 +101,18 @@ if __name__ == "__main__":
     g = ContractorLL()
     # bool_1 = g.add_contractor(["John nohands","Elton john","bulider","35499900","00","Tórshavn"])
     # print(bool_1)
-    print(g.find_con_id("5"))
+    # print(g.find_name_con(""))
+    # print(g.lis_all_cont())
+    # if "sig" in "siggi":
+    #     print("12")
+    bool_2=g.edit_info(["4","John is hands","Elton john","bulider","35499900","00","Tórshavn",None])
 
+    
 
     # def print_lis(lis):
     #     print(lis)
-
+    # print("".isdigit())
     # print_lis([1,2,34])
+    lis = [1,2,3,4,5,6]
+    print(len(lis))
+    print(lis[1:len(lis)-1])

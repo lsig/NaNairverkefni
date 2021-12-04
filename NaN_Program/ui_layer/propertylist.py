@@ -35,8 +35,8 @@ Nafn | Sími | Netfang | Kennitala
         for i in range(self.rows): #til að displaya self.rows verktaka í röð.
             propertyinfostr = f'{firstrow + i + 1}. - '
             try:
-                for k in range(len(self.propertylist[firstrow + i])):
-                    propertyinfostr += f"{self.propertylist[firstrow + i][k] :<10}" # afh 10?
+                for key in self.propertylist[firstrow + i]:
+                    propertyinfostr += f"{self.propertylist[firstrow + i][key] :<10}" # afh 10?
                     
             except IndexError:
                 pass
