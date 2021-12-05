@@ -10,6 +10,7 @@ from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME
 class BossMenu: 
     def __init__(self, id):
         self.id = id
+        self.id = "1" #add for testing!!
         self.options = f''' 
  Location | Name | {self.id}
 {STAR*14}

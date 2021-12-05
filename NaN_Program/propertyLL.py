@@ -31,7 +31,6 @@ class PropertyLL:
     
     def is_valid(self,prop_dic) -> bool:
         dic = {"Destination":int, "Address":"both", "Size":int, "Rooms":int,"Type":str,"Property-number":"both","Extras":str}
-        counter = 0
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 if key.lower() == "extras": #replace empty string with none for extras
@@ -51,7 +50,6 @@ class PropertyLL:
             if get_validation == False:
 
                     return False
-            counter += 1
         return True
 
         
@@ -94,12 +92,6 @@ class PropertyLL:
             return ret_lis
         return False
 
-    def prop_address_from_id(self,id):
-        addresses = self.dlapi.get_property_info()
-        for dic in addresses:
-            if id in dic["id"]:
-                prop_info = [dic["Address"],dic["Property-number"]]
-        return prop_info
 
 if __name__ == "__main__":
     g = PropertyLL()
