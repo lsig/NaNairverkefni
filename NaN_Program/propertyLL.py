@@ -63,8 +63,9 @@ class PropertyLL:
         if id.isdigit():
             for dic in all_prop_lis:
                 if int(dic["id"]) == int(id):
+                    dic = [dic]
                     return dic 
-            return None
+            return [{"Text":"No employee with this id"}]
         return False
 
     def edit_info(self,edit_prop_dic):
@@ -96,7 +97,8 @@ class PropertyLL:
 if __name__ == "__main__":
     g = PropertyLL()
     #d = g.get_all_prop()
-    #print(d)
+    #d = g.find_prop_id("2",g.get_all_prop())
+    #print(d[0]["id"])
     #g.edit_info({"id":"33","Destination":"1", "Address":"Heima 2", "Size":"10", "Rooms":"15","Type":"Best","Property-number":"poom street 2","Extras":"Windows"})
     #print(g.find_prop_by_str("ud",g.get_all_prop(),"Extras"))
-    print(g.prop_address_from_id("10")[0])
+    #print(g.get_all_prop)

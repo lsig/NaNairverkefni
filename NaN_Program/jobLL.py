@@ -12,7 +12,8 @@ class JobLL:
             auto_id = self.assign_id_job()
             cur_date = datetime.date(datetime.now())
             emp_name = self.find_employee_name(job_dic["Employee-id"])
-            job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],job_dic["Suggested-contractors"],"0")
+            con_name = self.get_con_name_and_location(job_dic["Suggested-contractor"])["Name"]
+            job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],con_name,"0")
             self.dlapi.add_job(job)
             return True
         return False
@@ -41,7 +42,7 @@ class JobLL:
         
         #big validation check
     def is_valid(self,job_dic) -> bool:
-        dic = {"Employee-id":int, "Title":"both", "Description":"both", "Property-id":int,"Priority":int,"Suggested-contractors":int}
+        dic = {"Employee-id":int, "Title":"both", "Description":"both", "Property-id":int,"Priority":int,"Suggested-contractor":int}
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 get_validation = job_dic[key].replace(" ", "").isalpha()
@@ -58,6 +59,9 @@ class JobLL:
                         return False
                     else:
                         job_dic[key] = self.priority_word(job_dic[key])
+                if key == "Suggested-contractor":
+                    if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
+                        return False
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if job_dic[key] == "":
@@ -97,6 +101,15 @@ class JobLL:
         return all_jobs
     
 
+    def get_con_name_and_location(self,id):
+        con_list = self.dlapi.get_all_cont()
+        for dic in con_list:
+            if int(id) == int(dic["id"]):
+                con_info = {"Name":dic["Name"],"Location":dic["Location"]}
+                return con_info        
+        con_info = {"Name":"null","Location":"null"}
+        return con_info 
+        
 
 if __name__ == "__main__":
     g = JobLL("1")
@@ -105,4 +118,5 @@ if __name__ == "__main__":
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))
-    print(g.find_jobs_by_str("o",g.get_all_jobs(),"Title"))
+    #print(g.find_jobs_by_str("o",g.get_all_jobs(),"Title"))
+    print(g.get_con_name_and_location("1")["Name"])

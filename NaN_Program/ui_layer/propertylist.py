@@ -8,11 +8,12 @@ MAXROWS = 10
 
 class PropertyList: 
     def __init__(self, id) -> None:
-        self.llapi = LLAPI()
+        self.llapi = LLAPI(id)
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
         self.propertylist = self.llapi.get_prop_info()
+        self.propertylist_backup = self.propertylist
         self.screen = f''' 
  Location | Name | {self.id} 
 {STAR*14}
@@ -73,7 +74,10 @@ id | Destination | Address | Size | Rooms | Property number | Extras
             pass 
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
-            self.propertylist = self.llapi.filter_property_id(user_input) #virkar ekki alveg, þarf að laga
+            self.propertylist = self.propertylist_backup
+            self.propertylist = self.llapi.filter_property_id(user_input,self.propertylist) 
+            user_input = ""
+            self.rows = len(self.propertylist)
             self.display_list()
 
         else:

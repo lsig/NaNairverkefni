@@ -7,7 +7,7 @@ from logic_layer.LLAPI import LLAPI
 
 class ContractCreate:
     def __init__(self, id) -> None:
-        self.llapi = LLAPI()
+        self.llapi = LLAPI(id)
         self.id = id
         self.contractlist = {}
         self.screen = f'''
