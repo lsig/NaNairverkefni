@@ -9,7 +9,7 @@ class PropertyLL:
     def add_property(self,prop_dic):
         if self.is_valid(prop_dic):
             prop_dic = self.replace_loc_num_with_name(prop_dic)
-            prop = Property(self.assign_id_prop(),prop_dic["Destination"],prop_dic["Address"],prop_dic["Size"],prop_dic["Rooms"],prop_dic["Type"],prop_dic["Property-number"],prop_dic["Extras"],0)
+            prop = Property(self.assign_id_prop(),prop_dic["Destination"],prop_dic["Address"],prop_dic["Size"],prop_dic["Rooms"],prop_dic["Type"],prop_dic["Property-number"],prop_dic["Extras"])
             self.dlapi.add_property(prop)
             return True
         return False

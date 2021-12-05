@@ -7,7 +7,7 @@ class LLAPI:
     def __init__(self):
         self.contLL = ContractorLL()
         self.propLL = PropertyLL()
-        self.jLL = JobLL()
+        self.jLL = JobLL("1")
 
 
     def add_cont(self,con_lis):

@@ -81,14 +81,28 @@ class JobLL:
         ret_val = priority[int(prior)-1]
         return ret_val
 
+    def find_jobs_by_str(self,user_string,job_lis,key):
+        ret_lis=[]
+        if user_string.replace(" ",""):
+            for dic in job_lis:
+                if user_string.lower() in dic[key].lower():
+                    ret_lis.append(dic)
+            return ret_lis
+        return False
 
+
+    
+    def get_all_jobs(self):
+        all_jobs = self.dlapi.get_jobs()
+        return all_jobs
     
 
 
 if __name__ == "__main__":
     g = JobLL("1")
     #print(g.find_employee_name("5"))
-    g.add_job({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
+    #g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))
+    print(g.find_jobs_by_str("o",g.get_all_jobs(),"Title"))
