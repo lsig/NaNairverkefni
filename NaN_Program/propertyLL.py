@@ -1,5 +1,6 @@
 from storage_layer.DLAPI import DlAPI
 from models.property import Property
+from datetime import datetime
 
 class PropertyLL:
     def __init__(self):
@@ -8,7 +9,7 @@ class PropertyLL:
     def add_property(self,prop_dic):
         if self.is_valid(prop_dic):
             prop_dic = self.replace_loc_num_with_name(prop_dic)
-            prop = Property(self.assign_id_prop(),prop_dic["Destination"],prop_dic["Address"],prop_dic["Size"],prop_dic["Rooms"],prop_dic["Type"],prop_dic["Property-number"],prop_dic["Extras"])
+            prop = Property(self.assign_id_prop(),prop_dic["Destination"],prop_dic["Address"],prop_dic["Size"],prop_dic["Rooms"],prop_dic["Type"],prop_dic["Property-number"],prop_dic["Extras"],0)
             self.dlapi.add_property(prop)
             return True
         return False
@@ -93,9 +94,17 @@ class PropertyLL:
             return ret_lis
         return False
 
+    def prop_address_from_id(self,id):
+        addresses = self.dlapi.get_property_info()
+        for dic in addresses:
+            if id in dic["id"]:
+                prop_info = [dic["Address"],dic["Property-number"]]
+        return prop_info
+
 if __name__ == "__main__":
     g = PropertyLL()
     #d = g.get_all_prop()
     #print(d)
     #g.edit_info({"id":"33","Destination":"1", "Address":"Heima 2", "Size":"10", "Rooms":"15","Type":"Best","Property-number":"poom street 2","Extras":"Windows"})
-    print(g.find_prop_by_str("ud",g.get_all_prop(),"Extras"))
+    #print(g.find_prop_by_str("ud",g.get_all_prop(),"Extras"))
+    print(g.prop_address_from_id("10")[0])

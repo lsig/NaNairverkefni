@@ -2,10 +2,12 @@
 from os import name
 from contractorLL import ContractorLL
 from propertyLL import PropertyLL
+from jobLL import JobLL
 class LLAPI:
     def __init__(self):
         self.contLL = ContractorLL()
         self.propLL = PropertyLL()
+        self.jLL = JobLL()
 
 
     def add_cont(self,con_lis):
@@ -23,6 +25,9 @@ class LLAPI:
 
     def filter_property_id(self,id):
         return self.propLL.find_prop_id(id)
+
+    def add_job(self,job_lis):
+        self.jLL.add_job(job_lis)
 
         
 
