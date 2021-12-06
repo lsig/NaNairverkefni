@@ -3,7 +3,7 @@
 from logic_layer.LLAPI import LLAPI
 from ui_layer.boss_main_menu import BossMenu
 from ui_layer.emp_main_menu import EmployeeMenu
-from data_files.const import CLEAR, QUIT, SLEEPTIME
+from data_files.const import CLEAR, DASH, QUIT, SLEEPTIME
 import os
 from time import sleep
 STAR = '*' # not the same star as in the constants 
@@ -14,13 +14,22 @@ class LoginMenu:
         self.loginscreen = f"""
 NaN Air Properties
 {STAR*18}
- Enter ID: """
+{STAR} Enter ID:{' '*6 + STAR}
+{STAR*18}
+
+ - 's' fyrir starfsmenn, annars yfirmenn.
+Q. Quit
+{DASH * 14}
+"""
 
     def start(self):
         while True:
             os.system(CLEAR)
             staffid = input(self.loginscreen)
             valid = True # = self.llapi.valid_id(staffid)
+            if staffid.upper() == 'Q':    
+                return
+
             if valid: 
                 #print(f"\nWelcome, {staffid}") 
                 #sleep(SLEEPTIME)
@@ -34,7 +43,7 @@ NaN Air Properties
                 
                 if returnvalue == QUIT:
                         return
-                
+
             else:
                 print("Invalid ID, try again.")
                 sleep(SLEEPTIME-1)

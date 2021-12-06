@@ -2,7 +2,7 @@
 from ui_layer.boss_propertymenu import PropertyMenu
 from ui_layer.boss_employeesmenu import BossEmployeesMenu
 from ui_layer.boss_contractormenu import BossContractorMenu
-from ui_layer.boss_maintenancemenu import MaintenanceMenu
+from ui_layer.boss_maintenancemenu import BossMaintenanceMenu
 import os
 from time import sleep
 from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME
@@ -40,7 +40,7 @@ class BossMenu:
                 empsmenu.display()
 
             elif user_choice == '3':
-                maintmenu = MaintenanceMenu(self.id)    # boss_maintenancemenu.py
+                maintmenu = BossMaintenanceMenu(self.id)    # boss_maintenancemenu.py
                 maintmenu.display()
 
             elif user_choice == '4':
