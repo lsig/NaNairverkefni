@@ -50,6 +50,9 @@ class LLAPI:
 
     def login_information(self):
         return self.empll.login_info()
+    
+    def search_property(self, string, propertylist, key):
+        return self.propLL.find_prop_by_str(string, propertylist, key)
 
     
     
