@@ -4,11 +4,11 @@ from contractorLL import ContractorLL
 from propertyLL import PropertyLL
 from jobLL import JobLL
 class LLAPI:
-    def __init__(self,id):
+    def __init__(self):
         self.id = id
         self.contLL = ContractorLL()
         self.propLL = PropertyLL()
-        self.jLL = JobLL(id)
+        self.jLL = JobLL()
 
 
     def add_cont(self,con_lis):
@@ -27,8 +27,8 @@ class LLAPI:
     def filter_property_id(self,id,prop_lis):
         return self.propLL.find_prop_id(id,prop_lis)
 
-    def add_job(self,job_lis):
-        self.jLL.add_job(job_lis)
+    def add_job(self,job_lis,id):
+        self.jLL.add_job(job_lis,id)
 
     
 

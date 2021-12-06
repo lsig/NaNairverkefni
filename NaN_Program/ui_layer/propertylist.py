@@ -9,7 +9,7 @@ MAXROWS = 10
 
 class PropertyList: 
     def __init__(self, id) -> None:
-        self.llapi = LLAPI(id)
+        self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
