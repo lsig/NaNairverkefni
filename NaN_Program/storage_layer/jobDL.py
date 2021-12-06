@@ -1,9 +1,10 @@
 import csv
+from os import sep
 # from job import Job
 
 class JobDL:
     def __init__(self):
-        self.csv = "CSV_Files/Maintenance_request.csv"
+        self.csv = f"CSV_Files{sep}Maintenance_request.csv"
 
     def get_all_jobs(self):
         ret_lis = []

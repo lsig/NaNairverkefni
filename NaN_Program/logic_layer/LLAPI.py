@@ -12,10 +12,10 @@ class LLAPI:
 
 
     def add_cont(self,con_lis):
-        self.contLL.add_contractor(con_lis)
+        return self.contLL.add_contractor(con_lis)
 
     def add_prop(self,prop_lis):
-        self.propLL.add_property(prop_lis)
+        return self.propLL.add_property(prop_lis)
 
     def get_prop_info(self):
         return self.propLL.get_all_prop()

@@ -1,9 +1,10 @@
 import csv
+from os import sep
 
 
 class PropertyDL:
     def __init__(self):
-        self.csv = "CSV_Files/Property.csv"
+        self.csv = f"CSV_Files{sep}Property.csv"
 
     def get_all_property(self):
         ret_lis = []

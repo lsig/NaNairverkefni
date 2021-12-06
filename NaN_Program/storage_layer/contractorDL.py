@@ -1,9 +1,10 @@
 import csv
+from os import sep
 
 
 class ContractorDL:
     def __init__(self):
-        self.csv = "CSV_Files/Contractor.csv"
+        self.csv = f"CSV_Files{sep}Contractor.csv"
 
     def get_all_contractor(self):
         ret_lis = []
