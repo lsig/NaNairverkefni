@@ -23,7 +23,7 @@ class EmployeeLL:
         valid, key = self.validation(emp_dic)
         if valid:
             email = self.email_generate(emp_dic["Name"])
-            emp_dic = self.replace_loc_num_with_name(emp_dic)
+            emp_dic["Destination"] = emp_dic["Destination"].capitalize()
             emp = Employee(self.assign_id_job(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],email,emp_dic["Destination"],"0")
             self.dlapi.add_emp(emp)
             return True, key
@@ -32,7 +32,7 @@ class EmployeeLL:
 
     def edit_employee(self, edit_emp_dic):
         if self.validation(edit_emp_dic):
-            edit_emp_dic = self.replace_loc_num_with_name(edit_emp_dic)
+            edit_emp_dic["Destination"] = edit_emp_dic["Destination"].capitalize()
             all_list_emp = self.dlapi.get_all_emp()
             dic = self.find_emp_id(edit_emp_dic["id"], all_list_emp)
 
@@ -43,6 +43,12 @@ class EmployeeLL:
         return False
 
 
+    def get_destination_name(self):
+        desti_names = []
+        all_desti_lis = self.dlapi.get_loc_info()
+        for row in all_desti_lis:    
+            desti_names.append(row["Name"])
+        return desti_names
 
 
     def find_id_location_emp(self, dic, all_list_emp):
@@ -70,6 +76,7 @@ class EmployeeLL:
 
 
     def email_generate(self, name):
+        name = name.replace(" ","")
         email = name + "@nanair.is"
         all_emp_lis = self.dlapi.get_all_emp()
         for key in all_emp_lis:
@@ -81,7 +88,9 @@ class EmployeeLL:
 
 
     def validation(self, emp_dic):
-        dic = {"Name":str, "Social Security":int, "Address":"both", "Phone":int,"GSM":int, "Destination":int}
+        dic = {"Name":str, "Social Security":int, "Address":"both", "Phone":int,"GSM":int, "Destination":"unique"}
+        get_validation = True
+        loc_correct = False
         for key in dic.keys():
             #get_validation
             if dic[key] == str and dic[key] != "both":
@@ -100,9 +109,11 @@ class EmployeeLL:
                     return False, key
             #check if Destination is within bounds
             if key.lower() == "destination" and get_validation:
-                if  int(emp_dic[key]) <= 0 or int(emp_dic[key]) > self.get_destination_count():
+                for row in self.get_destination_name():
+                    if emp_dic["Destination"].lower() == row.lower():
+                        loc_correct = True
+                if loc_correct == False:
                     return False, key
-
             if key.lower() == "phone" and get_validation:
                 if 7 > len(emp_dic[key]) or len(emp_dic[key]) > 15:
                     return False, key

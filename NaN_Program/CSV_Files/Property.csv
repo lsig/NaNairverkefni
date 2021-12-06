@@ -6,7 +6,7 @@ id,Destination,Address,Size,Rooms,Type,Property-number,Extras
 5,Kulusuk,iGloo-Ville,35,1,igloo,64-3903,snowhouse
 6,Kulusuk,iGloo-Ville,35,1,igloo,64-3904,snowhouse
 7,Kulusuk,iGloo-Ville,35,1,igloo,64-3905,snowhouse
-8,Kulusuk,iGloo-Ville,35,1,igloo,64-3906,snowhouse
+8,Kulusuk,iGloo-Ville,35,10,igloo,64-3906,snowhouse
 9,Kulusuk,iGloo-Ville,35,1,igloo,64-3907,snowhouse
 10,Kulusuk,iGloo-Ville,35,1,igloo,64-3908,snowhouse
 11,Kulusuk,iGloo-Ville,35,1,igloo,64-3909,snowhouse
@@ -29,3 +29,4 @@ id,Destination,Address,Size,Rooms,Type,Property-number,Extras
 28,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9500,mud-house
 29,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9501,mud-house
 30,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9502,mud-house
+

@@ -116,7 +116,7 @@ class PropertyLL:
             if user_string.lower() in dic[key].lower():
                 ret_lis.append(dic)
         if ret_lis == []:
-            return False
+            return False #skoða þetta svo filter drepur ekki forritið
         return ret_lis
         #return False
 
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     #d = g.find_prop_id("2",g.get_all_prop())
     #print(d[0]["id"])
     #g.edit_info({"id":"31","Destination":"Kulsuk", "Address":"lol", "Size":"2", "Rooms":"3","Type":"biiiig","Property-number":"poom street 2","Extras":"Windows"})
-    #print(g.find_prop_by_str("window",g.get_all_prop(),"Extras"))
+    print(g.find_prop_by_str("windowss",g.get_all_prop(),"Extras"))
     #print(g.get_all_prop)
     #{"Name":"John"}
     #d=g.get_destination_name()
