@@ -21,14 +21,14 @@ NaN Air Properties
             os.system(CLEAR)
             staffid = input(self.loginscreen)
             valid = True # = self.llapi.valid_id(staffid)
-            if valid: #ekki setja invalid id, þa faiði error
-                print(f"\nWelcome, {staffid}") 
+            if valid: 
+                #print(f"\nWelcome, {staffid}") 
                 #sleep(SLEEPTIME)
-                if staffid.upper() == 'Y0301' or staffid == '': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
+                if staffid.upper() == 'Y0301' or staffid.upper() != 'S': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
                     bossmenu = BossMenu(staffid)
                     returnvalue = bossmenu.print_menu()
 
-                elif staffid.upper() == 'S0304' or staffid.upper() == 'S': #TODO, (employee id hér)
+                elif staffid.upper() == 'S': #TODO, (employee id hér)
                     empmenu = EmployeeMenu(staffid)
                     returnvalue = empmenu.print_menu()
                 
