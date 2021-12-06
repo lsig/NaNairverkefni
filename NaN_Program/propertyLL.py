@@ -34,17 +34,17 @@ class PropertyLL:
             desti_names.append(row["Name"])
         return desti_names
 
-    def replace_loc_num_with_name(self,dic):
-        loc_names_lis = self.dlapi.get_loc_info()
-        dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
-        return dic
+    # def replace_loc_num_with_name(self,dic):
+    #     loc_names_lis = self.dlapi.get_loc_info()
+    #     dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
+    #     return dic
 
-    def replace_loc_name_with_num(self,dic_edit):
-        loc_info = self.dlapi.get_loc_info()
-        for dic in loc_info:
-            if dic_edit["Destination"].lower() == dic["Name"].lower():
-                dic_edit["Destination"] = dic["id"]
-                return dic_edit
+    # def replace_loc_name_with_num(self,dic_edit):
+    #     loc_info = self.dlapi.get_loc_info()
+    #     for dic in loc_info:
+    #         if dic_edit["Destination"].lower() == dic["Name"].lower():
+    #             dic_edit["Destination"] = dic["id"]
+    #             return dic_edit
     
     def is_valid(self,prop_dic) -> bool:
         dic = {"Destination":"unique", "Address":"both", "Size":int, "Rooms":int,"Type":str,"Property-number":"both","Extras":str}

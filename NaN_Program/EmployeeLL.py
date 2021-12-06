@@ -127,19 +127,9 @@ class EmployeeLL:
         return True, key
 
 
-    def get_destination_count(self):
-        all_desti_lis = self.dlapi.get_loc_info()
-        desti_count = int(all_desti_lis[len(all_desti_lis)-1]["id"])
-        return desti_count
-
-
     def list_all_employees(self):
         return self.dlapi.get_all_emp()
 
-    def replace_loc_num_with_name(self,dic):
-        loc_names_lis = self.dlapi.get_loc_info()
-        dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
-        return dic
 
 if __name__ == "__main__":
     e = EmployeeLL()
