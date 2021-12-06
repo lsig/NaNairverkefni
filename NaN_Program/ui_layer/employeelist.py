@@ -27,58 +27,55 @@ Nafn | Sími | Netfang | Kennitala
 {DASH*35}'''
     
     def display_list(self):
-        os.system(CLEAR)
-        print(self.screen)
-        for i in range(self.rows): #ef að við displayum 10 starfsmenn í röð.
-            employeeinfostr = f'{self.slide * self.rows + i + 1}. - '
-            try:
-                for k in range(len(self.employeelist[self.slide * self.rows + i])):
+        returnvalue = ''
+        while returnvalue != 'B':
 
-                    employeeinfostr += f"{self.employeelist[self.slide * self.rows + i][k] :<10}"
-                    
-            except IndexError:
-                pass
-            print(employeeinfostr)
-        
-        
-        self.prompt_user()
+            os.system(CLEAR)
+            print(self.screen)
+
+            for i in range(self.rows): #ef að við displayum 10 starfsmenn í röð.
+                employeeinfostr = f'{self.slide * self.rows + i + 1}. - '
+                try:
+                    for k in range(len(self.employeelist[self.slide * self.rows + i])):
+
+                        employeeinfostr += f"{self.employeelist[self.slide * self.rows + i][k] :<10}"
+                        
+                except IndexError:
+                    pass
+                print(employeeinfostr)
+            
+            print(f"{DASH*35}\n")
+            if self.slide > 0:
+                print("p. Previous - ", end='')
+            if (self.slide + 1) * self.rows < len(self.employeelist):
+                print("n. Next - ", end='')
+
+            returnvalue = self.prompt_user()
     
     def prompt_user(self):
-        print(f"{DASH*35}\n")
-        if self.slide > 0:
-            print("p. Previous - ", end='')
-        if (self.slide + 1) * self.rows < len(self.employeelist):
-            print("n. Next - ", end='')
-        
         user_input = input(f"#. to Select Employee\n")
 
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
-            self.display_list()
 
         elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.employeelist):
             self.slide += 1
-            self.display_list()
-        
+
         elif user_input.upper() == 'B':
-            return
+            return 'B'
 
         elif user_input.upper() == '/ROW':
-            self.rows = int(input("Rows: "))
-            self.display_list()
+            self.rows = int(input("Rows: ")) #validate
         
         elif user_input.upper() == 'L': #TODO
             #seeemployee = SeeEmployee(self.id) 
             pass 
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
-            pass
+            self.employeelist = self.llapi.filter_employee_id(user_input, self.employeelist) 
+            user_input = ""
+            self.rows = len(self.employeelist)
 
         else:
             print(INVALID)
             sleep(SLEEPTIME)
-            self.display_list()
-
-
-
-

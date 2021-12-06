@@ -9,7 +9,7 @@ class PropertyLL:
     def add_property(self,prop_dic):
         if self.is_valid(prop_dic):
             prop_dic = self.replace_loc_num_with_name(prop_dic)
-            prop = Property(self.assign_id_prop(),prop_dic["Destination"],prop_dic["Address"],prop_dic["Size"],prop_dic["Rooms"],prop_dic["Type"],prop_dic["Property-number"],prop_dic["Extras"],0)
+            prop = Property(self.assign_id_prop(),prop_dic["Destination"],prop_dic["Address"],prop_dic["Size"],prop_dic["Rooms"],prop_dic["Type"],prop_dic["Property-number"],prop_dic["Extras"])
             self.dlapi.add_property(prop)
             return True
         return False
@@ -31,7 +31,6 @@ class PropertyLL:
     
     def is_valid(self,prop_dic) -> bool:
         dic = {"Destination":int, "Address":"both", "Size":int, "Rooms":int,"Type":str,"Property-number":"both","Extras":str}
-        counter = 0
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 if key.lower() == "extras": #replace empty string with none for extras
@@ -51,7 +50,6 @@ class PropertyLL:
             if get_validation == False:
 
                     return False
-            counter += 1
         return True
 
         
@@ -65,17 +63,18 @@ class PropertyLL:
         if id.isdigit():
             for dic in all_prop_lis:
                 if int(dic["id"]) == int(id):
+                    dic = [dic]
                     return dic 
-            return None
+            return None #[{"Text":"No employee with this id"}]
         return False
 
     def edit_info(self,edit_prop_dic):
         if self.is_valid(edit_prop_dic):
             edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
-            all_lis_prop= self.dlapi.get_property_info()
+            all_lis_prop = self.dlapi.get_property_info()
             dic = self.find_prop_id(edit_prop_dic["id"],all_lis_prop)
-            con_loc_in_lis = self.find_id_location_prop(dic,all_lis_prop)
-            all_lis_prop[con_loc_in_lis]= edit_prop_dic
+            prop_loc_in_lis = self.find_id_location_prop(dic,all_lis_prop)
+            all_lis_prop[prop_loc_in_lis]= edit_prop_dic
             self.dlapi.change_property_info(all_lis_prop)
             return True
         return False
@@ -94,17 +93,12 @@ class PropertyLL:
             return ret_lis
         return False
 
-    def prop_address_from_id(self,id):
-        addresses = self.dlapi.get_property_info()
-        for dic in addresses:
-            if id in dic["id"]:
-                prop_info = [dic["Address"],dic["Property-number"]]
-        return prop_info
 
 if __name__ == "__main__":
     g = PropertyLL()
     #d = g.get_all_prop()
-    #print(d)
+    #d = g.find_prop_id("2",g.get_all_prop())
+    #print(d[0]["id"])
     #g.edit_info({"id":"33","Destination":"1", "Address":"Heima 2", "Size":"10", "Rooms":"15","Type":"Best","Property-number":"poom street 2","Extras":"Windows"})
     #print(g.find_prop_by_str("ud",g.get_all_prop(),"Extras"))
-    print(g.prop_address_from_id("10")[0])
+    #print(g.get_all_prop)

@@ -33,43 +33,46 @@ Nafn | Sími | Netfang | Kennitala
 {DASH*35}'''
     
     def display_list(self):
-        self.firstrow = self.slide * self.rows 
-        os.system(CLEAR)
-        print(self.screen)
-        for i in range(self.rows): #til að displaya self.rows verktaka í röð.
-            contractorinfostr = f'{self.firstrow + i + 1}. - '
-            try:
-                for k in range(len(self.contractorlist[self.firstrow + i])):
-                    contractorinfostr += f"{self.contractorlist[self.firstrow + i][k] :<10}" # afh 10?
-                    
-            except IndexError:
-                pass
-            print(contractorinfostr)
-        self.prompt_user()
-    
-    def prompt_user(self):
-        print(f"{DASH*35}\n")
-        if self.slide > 0:
-            print("p. Previous - ", end='')
-        if (self.slide + 1) * self.rows < len(self.contractorlist):
-            print("n. Next - ", end='')
+        returnvalue = ''
+        while returnvalue != 'B':
+            
+            self.firstrow = self.slide * self.rows 
+            os.system(CLEAR)
+            print(self.screen)
+
+            for i in range(self.rows): #til að displaya self.rows verktaka í röð.
+                contractorinfostr = f'{self.firstrow + i + 1}. - '
+                try:
+                    for k in range(len(self.contractorlist[self.firstrow + i])):
+                        contractorinfostr += f"{self.contractorlist[self.firstrow + i][k] :<10}" # afh 10?
+                        
+                except IndexError:
+                    pass
+                print(contractorinfostr)
+            
+            print(f"{DASH*35}\n")
+            if self.slide > 0:
+                print("p. Previous - ", end='')
+            if (self.slide + 1) * self.rows < len(self.contractorlist):
+                print("n. Next - ", end='')
         
+            returnvalue = self.prompt_user()
+    
+
+    def prompt_user(self):
         user_input = input(f"#. to Select Contractor\n")
 
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
-            self.display_list()
 
         elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.contractorlist):
             self.slide += 1
-            self.display_list()
         
         elif user_input.upper() == 'B':
-            return
+            return 'B'
 
         elif user_input.upper() == '/ROW':
-            self.rows = int(input("Rows: "))
-            self.display_list()
+            self.rows = int(input("Rows: ")) #TODO validate
         
         elif user_input.upper() == 'L': #TODO
             #seecontractor = SeeContractor(self.id) 
@@ -84,12 +87,10 @@ Nafn | Sími | Netfang | Kennitala
             else: 
                 print("Invalid row, try again!")
                 sleep(SLEEPTIME)
-                self.display_list()
 
         else:
             print(INVALID)
             sleep(SLEEPTIME)
-            self.display_list()
 
 
 

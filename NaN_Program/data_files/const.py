@@ -6,12 +6,12 @@ else: # hér hlýtur os.name == 'posix', og os-ið hjá notandanum er mac eða l
 
 STAR = '* '
 DASH = '-'
-SLEEPTIME = 1.5
+SLEEPTIME = 1 #var 1.5
 INVALID = 'Invalid option, try again!'
 QUIT = 'Q'
 
 CONTACTTEMPLATE = ['Nafn', 'Kennitala', 'Heimilisfang', 'Heimasími', 'GSM símanúmer', 'Netfang', 'Áfangastaður', 'Yfirmaður'] #listi fyrir starfsmenn
-CONTRACTTEMPLATE = ["Employee-id","Title","Description","Location","Property-id","Priority","Suggested-contractors"] #listi fyrir verkbeiðnir
+CONTRACTTEMPLATE = ["Employee-id","Title","Description","Property-id","Priority","Suggested-contractor"] #listi fyrir verkbeiðnir
 PROPERTYTEMPLATE = ['Destination', 'Address', 'Size', 'Rooms', 'Type', 'Property-number', 'Extras'] # listi fyrir fasteignir
 CONTRACTORTEMPLATE = ["Name","Contact-name","Profession","Phone","Working-hours","Location"] #listi fyrir verktaka
 

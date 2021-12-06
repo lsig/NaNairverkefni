@@ -1,5 +1,5 @@
 class Maintenance:
-    def __init__(self,id,Date_from,Date_to,Title,Description,Location,Property,Property_number,Property_id,Employee,Employee_id,Frequency,Priority,Suggested_contractors):
+    def __init__(self,id,Date_from,Date_to,Title,Description,Location,Property,Property_number,Property_id,Employee,Employee_id,Frequency,Priority,Suggested_contractor):
         self.id = id
         self.date_from = Date_from
         self.date_to = Date_to
@@ -13,4 +13,4 @@ class Maintenance:
         self.emp_id = Employee_id
         self.freq = Frequency
         self.priority = Priority
-        self.suggested_cont = Suggested_contractors
+        self.suggested_cont = Suggested_contractor

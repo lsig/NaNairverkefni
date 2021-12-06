@@ -57,7 +57,7 @@ class ContractCreate:
         confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
             if confirm.upper() == 'C':  # TODO
-                self.llapi.add_job(self.contractlist)
+                self.llapi.add_job(self.contractlist,self.id)
                 #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
                 return
         
