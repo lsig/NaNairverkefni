@@ -19,9 +19,9 @@ class ContractorDL:
 
     def add_contractor(self,con):
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["id","Name","Contact-name","Phone","Working-hours","Location","Rating(0-10)"]
+            fieldnames = ["id","Name","Contact-name","Profession","Phone","Working-hours","Location","Rating(0-10)"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writerow({'id': con.id, "Name": con.name, "Contact-name": con.cont_name, "Phone": con.phone, "Working-hours": con.work_h, "Location": con.loc,"Rating(0-10)":con.rating})
+            writer.writerow({'id': con.id, "Name": con.name, "Contact-name": con.cont_name,"Profession":con.profess, "Phone": con.phone, "Working-hours": con.work_h, "Location": con.loc,"Rating(0-10)":con.rating})
 
     def change_con_info(self,con_lis):
         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
@@ -29,7 +29,7 @@ class ContractorDL:
             header = con_lis[0]
             writer.writerow(header)
             for dic in con_lis:
-                writer.writerow([dic["id"],dic["Name"],dic["Contact-name"],dic["Phone"],dic["Working-hours"],dic["Location"],dic["Rating(0-10)"]])
+                writer.writerow([dic["id"],dic["Name"],dic["Contact-name"],dic["Profession"],dic["Phone"],dic["Working-hours"],dic["Location"],dic["Rating(0-10)"]])
         
             
 

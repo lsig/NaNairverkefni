@@ -2,12 +2,14 @@
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT, CONTRACTTEMPLATE
 from time import sleep
 import os
+from logic_layer.LLAPI import LLAPI
 
 
 class ContractCreate:
     def __init__(self, id) -> None:
+        self.llapi = LLAPI()
         self.id = id
-        self.contractlist = []
+        self.contractlist = {}
         self.screen = f'''
  Location | Name | {self.id} 
 {STAR*14}
@@ -31,7 +33,7 @@ class ContractCreate:
             #check validity
             #while self.input_is_valid(user_input) == False:
                 #user_input = input(f"{i+1}: {CONTRACTTEMPLATE[i]}")
-            self.contractlist.append(user_input)
+            self.contractlist[CONTRACTTEMPLATE[i]] = user_input
         print(DASH*25)
         
         self.confirmcontract()
@@ -55,6 +57,7 @@ class ContractCreate:
         confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
             if confirm.upper() == 'C':  # TODO
+                self.llapi.add_job(self.contractlist,self.id)
                 #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
                 return
         

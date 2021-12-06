@@ -9,7 +9,7 @@ class BossPropertyCreate:
     def __init__(self, id) -> None:
         self.llapi = LLAPI()
         self.id = id
-        self.propertylist = []
+        self.propertylist = {}
         self.screen = f'''
  Location | Name | {self.id} 
 {STAR*14}
@@ -35,7 +35,7 @@ class BossPropertyCreate:
             #check validity
             #while self.input_is_valid(user_input) == False:
                 #user_input = input(f"{i+1}: {PROPERTYTEMPLATE[i]}")
-            self.propertylist.append(user_input)
+            self.propertylist[PROPERTYTEMPLATE[i]] = user_input
         print(DASH*25)
         
         self.confirmproperty()
@@ -44,6 +44,7 @@ class BossPropertyCreate:
     def printpropertyinfo(self, number = None):
 
         propertystring = ''
+        self.propertylist = {}
         for i in range( len(PROPERTYTEMPLATE)):
             if number != None and i == number - 1:
                 propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} ____\n"

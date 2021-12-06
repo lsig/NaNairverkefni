@@ -1,10 +1,10 @@
-#viðhaldsgluggi
+#viðhaldsgluggi, hjá starfsmönnum og yfirmönnum
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
-from ui_layer.boss_contractcreate import ContractCreate
+from ui_layer.contractlist import ContractList
 from time import sleep
 import os
 
-class BossMaintenanceMenu:
+class EmployeeMaintenanceMenu:
     def __init__(self, id) -> None:
         self.id = id
         self.screen = f''' 
@@ -12,9 +12,8 @@ class BossMaintenanceMenu:
 {STAR*14}
     | VIÐHALD |
       {DASH*15}
-      1. Skrá nýja verkbeiðni
-      2. Verkbeiðnalisti
-      3. Verkskýrslulisti ???
+      1. Verkbeiðnalisti
+      2. Verkskýrslulisti
       {DASH*15}
       B. Til baka
 {STAR*14}
@@ -27,13 +26,10 @@ class BossMaintenanceMenu:
             user_input = input()
 
             if user_input == '1':
-                contrcreate = ContractCreate(self.id)
-                contrcreate.display()
+                contrcreate = ContractList(self.id)
+                contrcreate.display_list()
 
             elif user_input == '2':
-                pass
-
-            elif user_input == '3':
                 pass
 
             elif user_input.upper() == 'B':
