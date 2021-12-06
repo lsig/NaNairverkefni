@@ -48,6 +48,9 @@ class LLAPI:
     def filter_employee_id(self, id, emp_lis):
         return self.empll.find_emp_id(id, emp_lis)
 
+    def login_information(self):
+        return self.empll.login_info()
+
     
     
 
