@@ -1,4 +1,4 @@
-id,Name,Social Security,Address,Phone ,GSM,Email,Destination,Manager
+id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
 1,Jan Jacobsen,0,Vei 230 12; Longyearbyen; Svalbard,4792097700,3547771337,jan.jacobsen@nanair.is,Longyearbyen,1
 2,Jacob Yxa,0,Vei 224 3B; Longyearbyen; Svalbard,4792097701,3547771338,jacob.yxa@nanair.is,Longyearbyen,0
 3,Nanna Daema,0,Ivan Starostin st. 109; Barantsburg; Svalbard,4792097702,3547771339,nanna.daema@nanair.is,Longyearbyen,0
@@ -7,4 +7,4 @@ id,Name,Social Security,Address,Phone ,GSM,Email,Destination,Manager
 6,Nauja Lynge,0,Qunguleq 3759; 3905; Nuuk; Greenland,299312164,3547771363,nauja.lynge@nanair.is,Kulsuk,0
 7,Annette Djurhuus,0,Tjarnardeild 8; 100; Tórshavn; Faroe Islands,298772000,3547771381,annette.djurhuus@nanair.is,Tórshavn,1
 8,Áki Knudsen,0,Traðartún 3; 108; Argir; Faroe Islands,298617210,3547771381,aki.knudsen@nanair.is,Tórshavn,0
-9,André Hjaltalin,0,Í Lágni 19; 100; Tórshavn; Faroe Islands,298661441,3547771382,Andre.hjaltalin@nanair.is,Tórshavn,0
+9,André Hjaltalin,0,Í Lágni 19; 100; Tórshavn; Faroe Islands,298661441,3547771382,Andre.hjaltalin@nanair.is,Tórshavn,010,John,1234567890,Home,1111111,5555555,John@nan.is,Kulusuk,0

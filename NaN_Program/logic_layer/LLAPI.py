@@ -29,6 +29,9 @@ class LLAPI:
 
     def add_job(self,job_lis,id):
         self.jLL.add_job(job_lis,id)
+    
+    def edit_prop(self, propdict):
+        self.propLL.edit_info(propdict)
 
     
 

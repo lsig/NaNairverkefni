@@ -3,12 +3,13 @@ import os
 from data_files.const import CLEAR, STAR, DASH, SLEEPTIME
 from ui_layer.propertylist import PropertyList
 from ui_layer.contractorlist import ContractorList
+from ui_layer.emp_maintenancemenu import EmployeeMaintenanceMenu
 from time import sleep
 
 class EmployeeMenu: 
     def __init__(self, id):
         self.id = id
-        self.id = '1' #spyrja maxim
+        self.id = '1' #spyrja maxim˙
         self.options = f''' 
 
  Location | Name | {self.id} 
@@ -34,7 +35,8 @@ class EmployeeMenu:
                 prop_menu.display_list()
 
             elif user_choice == '2':
-                maintenance_menu = ''
+                maintenance_menu = EmployeeMaintenanceMenu(self.id)
+                maintenance_menu.display()
 
             elif user_choice == '3':
                 contractor_menu = ContractorList(self.id)
