@@ -87,20 +87,11 @@ class EmployeeLL:
         return True
 
 
-
-
     def list_all_employees(self):
-        ret_list = []
-        emp_list = self.empll.get_all_employee()
-        print(emp_list)
-        # for dictionary in emp_list:
-        #     temp_list = []
-        #     for key in dictionary.keys():
-        #         temp_list.append(key)
-        #     for key, value in dictionary.items():
-        #         temp_list.append(value)
-        # ret_list.append(temp_list)
-        # return ret_list
+        return self.dlapi.get_all_emp()
+
+
+
 
 
 
