@@ -20,12 +20,12 @@ class EmployeeLL:
 
 #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
     def add_employee(self,emp_dic):
-        #if self.is_valid(cont_dic):
-        emp_dic = self.replace_loc_num_with_name(emp_dic)
-        emp = Employee(self.assign_id_job(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],emp_dic["Email"],emp_dic["Destination"],"0")
-        self.dlapi.add_emp(emp)
-        return True
-        #return False
+        if self.validation(emp_dic):
+            emp_dic = self.replace_loc_num_with_name(emp_dic)
+            emp = Employee(self.assign_id_job(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],emp_dic["Email"],emp_dic["Destination"],"0")
+            self.dlapi.add_emp(emp)
+            return True
+        return False
 
 
     def edit_employee(self, edit_emp_dic):
@@ -56,6 +56,10 @@ class EmployeeLL:
                     return dic 
             return None
         return False
+
+    def login_info(self, emali):
+        all_emp_lis = self.dlapi.get_all_emp()
+
 
 
     def validation(self, emp_dic):
@@ -107,7 +111,7 @@ class EmployeeLL:
 
 if __name__ == "__main__":
     e = EmployeeLL()
-    #e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1"})
+    e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1"})
     #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
     #e.edit_employee({"id": "10", "Name": "Bob", "Social Security": "9876543212", "Address": "Home", "Phone": "9999999", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1", "Manager": "0"})
 
