@@ -15,6 +15,8 @@ class EmployeeMenu:
       2. Viðhald
       3. Verktakar
       {DASH*15}
+      L. Log out
+      Q. Quit 
 {STAR*14}
         '''
 
@@ -26,10 +28,19 @@ class EmployeeMenu:
             
             if user_choice == '1':
                 prop_menu = ''
+
             elif user_choice == '2':
                 maintnence_menu = ''
+
             elif user_choice == '3':
                 contract_menu = ''
+            
+            elif user_choice.upper() == 'L':
+                return
+
+            elif user_choice.upper() == 'Q':
+                return 'Q'
+
             else:
                 print('Invalid choice, try again!')
                 sleep(SLEEPTIME)
