@@ -1,5 +1,5 @@
 class Employee:
-    def __init__(self, name, id, datecreated, description, location, property, propertynumber, priority, status)
+    def __init__(self, name, id, datecreated, description, location, property, propertynumber, priority, status):
         self.name = name
         self.id = id
         self.datecreated = datecreated

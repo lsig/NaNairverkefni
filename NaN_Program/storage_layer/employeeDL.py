@@ -19,9 +19,9 @@ class EmployeeDL:
 
     def add_employee(self,emp):
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["id","Name","Social Security","Address","Phone ","GSM","Email","Destination","Manager"]
+            fieldnames = ["id","Name","Social Security","Address","Phone","GSM","Email","Destination","Manager"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writerow({'id': emp.id, "Name": emp.name, "Social Security": emp.social, "Address": emp.addr, "Phone ": emp.phone, "GSM": emp.gsm,"Email":emp.email, "Destination":emp.dest,"Manager":emp.manager})
+            writer.writerow({'id': emp.id, "Name": emp.name, "Social Security": emp.social, "Address": emp.addr, "Phone": emp.phone, "GSM": emp.gsm,"Email":emp.email, "Destination":emp.dest,"Manager":emp.manager})
 
     def change_emp_info(self,emp_lis):
         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
@@ -29,7 +29,7 @@ class EmployeeDL:
             header = emp_lis[0]
             writer.writerow(header)
             for dic in emp_lis:
-                writer.writerow([dic["id"],dic["Name"],dic["Social Security"],dic["Address"],dic["Phone "],dic["GSM"],dic["Email"],dic["Destination"],dic["Manager"]])
+                writer.writerow([dic["id"],dic["Name"],dic["Social Security"],dic["Address"],dic["Phone"],dic["GSM"],dic["Email"],dic["Destination"],dic["Manager"]])
         
             
 
