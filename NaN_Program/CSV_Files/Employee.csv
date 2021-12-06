@@ -7,4 +7,6 @@ id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
 6,Nauja Lynge,0,Qunguleq 3759; 3905; Nuuk; Greenland,299312164,3547771363,nauja.lynge@nanair.is,Kulsuk,0
 7,Annette Djurhuus,0,Tjarnardeild 8; 100; Tórshavn; Faroe Islands,298772000,3547771381,annette.djurhuus@nanair.is,Tórshavn,1
 8,Áki Knudsen,0,Traðartún 3; 108; Argir; Faroe Islands,298617210,3547771381,aki.knudsen@nanair.is,Tórshavn,0
-9,André Hjaltalin,0,Í Lágni 19; 100; Tórshavn; Faroe Islands,298661441,3547771382,Andre.hjaltalin@nanair.is,Tórshavn,010,John,1234567890,Home,1111111,5555555,John@nan.is,Kulusuk,0
+9,André Hjaltalin,0,Í Lágni 19; 100; Tórshavn; Faroe Islands,298661441,3547771382,Andre.hjaltalin@nanair.is,Tórshavn,010
+10,Bob,9876543212,Home,9999999,5555555,John@nan.is,Kulsuk,0
+11,John,1234567890,Home,1111111,5555555,John@nan.is,Kulsuk,0

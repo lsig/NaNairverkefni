@@ -1,3 +1,2 @@
 id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority,Suggested-contractor,Status
-1,2021-12-05,Jan Jacobsen,1,window clean,clean the windows!,Longyearbyen,Vei 217,F959594,1,ASAP,Bob the builder,0
-
+1,2021-12-05,Jan Jacobsen,1,big window clean,clean the windows!,Longyearbyen,Vei 217,F959594,1,ASAP,1,0

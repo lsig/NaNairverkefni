@@ -19,11 +19,11 @@ class ReportDL():
 
     def add_report(self,rep):
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["Report-id","Request-id","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Contractor-name","Contractor-id","Contractor-rating","Date","Status"]
+            fieldnames = ["Report-id","Request-id","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Contractor-name","Contractor-id","Contractor-rating","Date","Commission","Status"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({"Report-id":rep.report_id,"Request-id":rep.request_id,"Employee":rep.emp,"Employee-id":rep.emp_id,"Title":rep.title,"Description":rep.descript,"Location":rep.loc,
             "Property":rep.prop,"Property-number":rep.prop_nr,"property-id":rep.prop_id,
-            "Contractor-name":rep.contract_name,"Contractor-id":rep.contract_id,"Contractor-rating":rep.contract_rating,"Date":rep.date,"Status":rep.status})
+            "Contractor-name":rep.contract_name,"Contractor-id":rep.contract_id,"Contractor-rating":rep.contract_rating,"Date":rep.date,"Commission":rep.comm,"Status":rep.status})
 
     
     def change_report_info(self,rep_lis):
@@ -33,7 +33,7 @@ class ReportDL():
             writer.writerow(header)
             for dic in rep_lis:
                 writer.writerow([dic["Report-id"],dic["Request-id"],dic["Employee"],dic["Employee-id"],
-                dic["Title"],dic["Description"],dic["Location"],dic["Property"],dic["Property-name"],dic["Property-id"],dic["Contractor-name"],dic["Contractor-id"],dic["Contractor-rating"],dic["Date"],dic["Status"]])
+                dic["Title"],dic["Description"],dic["Location"],dic["Property"],dic["Property-name"],dic["Property-id"],dic["Contractor-name"],dic["Contractor-id"],dic["Contractor-rating"],dic["Date"],dic["Commission"],dic["Status"]])
 
 
 if __name__ == "__main__":

@@ -2,13 +2,15 @@
 #þarf að importa klösum eins og employee
 
 from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME, CONTACTTEMPLATE
+from logic_layer.LLAPI import LLAPI
 from time import sleep
 import os
 
 class BossEmployeeCreate:
     def __init__(self, id) -> None:
+        self.llapi = LLAPI()
         self.id = id
-        self.contactlist = []
+        self.contactdict = {}
         self.screen = f'''
  Location | Name | {self.id} 
 {STAR*14}
@@ -26,12 +28,11 @@ class BossEmployeeCreate:
 
         for i in range( len(CONTACTTEMPLATE)): 
             user_input = input(f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
+            
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
-            #check validity
-            #while self.input_is_valid(user_input) == False:
-                #user_input = input(f"{i+1}: {CONTACTTEMPLATE[i]}")
-            self.contactlist.append(user_input)
+
+            self.contactdict[CONTACTTEMPLATE[i]] = user_input
         print(DASH*25)
         
         self.confirmcontact()
@@ -39,11 +40,14 @@ class BossEmployeeCreate:
         
     def printcontactinfo(self, number = None):
         propertystring = ''
+
         for i in range( len(CONTACTTEMPLATE)):
+
             if number != None and i == number - 1:
                 propertystring += f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} ____\n"
+
             else:
-                propertystring += f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} {self.contactlist[i]}\n"
+                propertystring += f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} {self.contactdict[CONTACTTEMPLATE[i]]}\n"
         propertystring += DASH*25
         
         print(propertystring)
@@ -51,15 +55,24 @@ class BossEmployeeCreate:
 
     def confirmcontact(self):
 
-        confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
+            confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
+
             if confirm.upper() == 'C':  # TODO
-                #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
-                return
+                valid, key = self.llapi.add_emp(self.contactdict)
+
+                if valid:
+                    print("Employee successfully added!")
+                    sleep(SLEEPTIME)
+                    return
+
+                else:
+                    print(f"Invalid {key}!")
+                    sleep(SLEEPTIME)
+                    self.editcontactinfo( CONTACTTEMPLATE.index(key) )
         
             elif confirm.upper() == 'E':
                 self.editcontactinfo()
-                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             elif confirm.upper() == 'Q': # eigum við að setja QUIT hér inn?
                 return
@@ -68,14 +81,17 @@ class BossEmployeeCreate:
                 print(INVALID)
                 sleep(SLEEPTIME)
                 self.reset_screen()
-                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
     
-    def editcontactinfo(self):
-        user_row = int(input("Row to change: "))
+    def editcontactinfo(self, row = None):
+        if row == None:
+            user_row = int(input("Row to change: ")) #validate
+
+        else:
+            user_row = row + 1
         self.reset_screen(user_row)
 
         user_input = input(f"{CONTACTTEMPLATE[user_row - 1]}: ")
-        self.contactlist[user_row - 1] = user_input
+        self.contactdict[CONTACTTEMPLATE[user_row - 1]] = user_input
 
         self.reset_screen()
     
@@ -85,11 +101,3 @@ class BossEmployeeCreate:
         self.printcontactinfo(user_row)
 
 
-
-        
-
-
-
-
-    
- 
