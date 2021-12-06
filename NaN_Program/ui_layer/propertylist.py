@@ -31,17 +31,18 @@ id | Destination | Address | Size | Rooms | Property number | Extras
     def display_list(self):
         returnvalue = ''
         while returnvalue != 'B':
+
             #Header á ensku í bili!!!
             #self.propertylist = self.llapi.all_prop_lis()
-            firstrow = self.slide * self.rows 
+            self.firstrow = self.slide * self.rows 
             os.system(CLEAR)
             print(self.screen)
             for i in range(self.rows): #til að displaya self.rows verktaka í röð.
-                propertyinfostr = f'{firstrow + i + 1}. - '
+                propertyinfostr = f'{self.firstrow + i + 1}. - '
                 try:
-                    for key in self.propertylist[firstrow + i]:
+                    for key in self.propertylist[self.firstrow + i]:
                     
-                        propertyinfostr += f"{self.propertylist[firstrow + i][key] :<10}" # afh 10?
+                        propertyinfostr += f"{self.propertylist[self.firstrow + i][key] :<10}" # afh 10?
                         
                 except IndexError:
                     pass
@@ -80,10 +81,15 @@ id | Destination | Address | Size | Rooms | Property number | Extras
             # self.propertylist = self.llapi.filter_property_id(user_input, self.propertylist) 
             # user_input = ""
             # self.rows = len(self.propertylist)
-            propertyinfo = self.llapi.filter_property_id(user_input, self.propertylist) 
-            seeproperty = SeeProperty(self.id, propertyinfo)
-            seeproperty.display()
-
+            self.lastrow = (self.slide + 1) * self.rows
+            
+            if self.firstrow <= int(user_input) < self.lastrow and len(self.propertylist) >= int(user_input) :
+                propertyinfo = self.llapi.filter_property_id(user_input, self.propertylist) 
+                seeproperty = SeeProperty(self.id, propertyinfo)
+                seeproperty.display()
+            else: 
+                print("Invalid row, try again!")
+                sleep(SLEEPTIME)
 
         else:
             print(INVALID)
