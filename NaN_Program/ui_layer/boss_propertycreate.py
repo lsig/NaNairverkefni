@@ -7,7 +7,7 @@ from logic_layer.LLAPI import LLAPI
 
 class BossPropertyCreate:
     def __init__(self, id) -> None:
-        self.llapi = LLAPI(id)
+        self.llapi = LLAPI()
         self.id = id
         self.propertylist = {}
         self.screen = f'''

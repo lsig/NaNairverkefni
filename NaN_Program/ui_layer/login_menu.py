@@ -10,7 +10,7 @@ STAR = '*' # not the same star as in the constants
 
 class LoginMenu:
     def __init__(self) -> None:
-        # self.llapi = LLAPI(id) # kemur error ef id er tómt
+        self.llapi = LLAPI() 
         self.loginscreen = f"""
 NaN Air Properties
 {STAR*18}

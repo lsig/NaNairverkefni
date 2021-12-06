@@ -1,14 +1,16 @@
 from storage_layer.DLAPI import DlAPI
 from models.job import Job
 from datetime import datetime
-
+#change job will require self.boss fetching!!!!!!!!!!!!!!!!!!!!! note to self
 class JobLL:
-    def __init__(self,id):
+    def __init__(self):
         self.dlapi = DlAPI()
-        self.boss_loc = self.get_emp_location(id)
+        self.boss_loc = ""
     
-    def add_job(self,job_dic):
+    def add_job(self,job_dic,id):
+        self.boss_loc = self.get_emp_location(id)
         if self.is_valid(job_dic):
+            
             auto_id = self.assign_id_job()
             cur_date = datetime.date(datetime.now())
             emp_name = self.find_employee_name(job_dic["Employee-id"])
@@ -38,7 +40,9 @@ class JobLL:
         for dic in emp_lis:
             if int(id) == int(dic["id"]):
                 boss_location = dic["Destination"]
-        return boss_location
+                return boss_location
+        none_val = "None"
+        return none_val
         
         #big validation check
     def is_valid(self,job_dic) -> bool:

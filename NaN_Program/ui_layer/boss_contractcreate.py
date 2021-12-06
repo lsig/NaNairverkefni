@@ -7,7 +7,7 @@ from logic_layer.LLAPI import LLAPI
 
 class ContractCreate:
     def __init__(self, id) -> None:
-        self.llapi = LLAPI(id)
+        self.llapi = LLAPI()
         self.id = id
         self.contractlist = {}
         self.screen = f'''
@@ -57,7 +57,7 @@ class ContractCreate:
         confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
             if confirm.upper() == 'C':  # TODO
-                self.llapi.add_job(self.contractlist)
+                self.llapi.add_job(self.contractlist,self.id)
                 #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
                 return
         
