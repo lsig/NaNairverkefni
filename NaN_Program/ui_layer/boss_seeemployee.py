@@ -9,7 +9,7 @@ import os
 
 class SeeEmployee:
     def __init__(self, id, employeedict) -> None:
-        self.llapi = LLAPI
+        self.llapi = LLAPI()
         self.id = id
         self.employee = employeedict
         self.screen = f''' 

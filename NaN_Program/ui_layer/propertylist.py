@@ -5,6 +5,7 @@ from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
+SEARCHFILTERS = ['Destination', 'Type', 'Rooms', 'Property-number']
 
 
 class PropertyList: 
@@ -72,9 +73,8 @@ id | Destination | Address | Size | Rooms | Property number | Extras
         elif user_input.upper() == '/ROW':
             self.rows = int(input("Rows: "))
         
-        elif user_input.upper() == 'L': #TODO
-            #seeproperty = SeeProperty(self.id) 
-            pass 
+        elif user_input.upper() == 'L':
+            self.find_property()
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
             self.lastrow = (self.slide + 1) * self.rows
@@ -90,3 +90,14 @@ id | Destination | Address | Size | Rooms | Property number | Extras
         else:
             print(INVALID)
             sleep(SLEEPTIME)
+        
+
+    def find_property(self):
+        for index, filter in enumerate(SEARCHFILTERS):
+            print(f"{index + 1}: {filter}")
+        userint = int(input(" "))                       #TODO Validate
+        key = SEARCHFILTERS[userint - 1]
+        userstring = input(f"Search {key.lower()}: ")   #TODO Validate
+        
+        self.propertylist = self.llapi.search_property(userstring, self.propertylist, key)
+
