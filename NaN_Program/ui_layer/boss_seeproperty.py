@@ -20,6 +20,7 @@ class SeeProperty:
        - {self.property['Address']}
      {DASH*15}
      E. Edit
+     R. Property reports
      B. Til baka
 '''
 
@@ -86,7 +87,6 @@ class SeeProperty:
             print("Changes saved :)")
             sleep(SLEEPTIME)
             return 'C'
-            
 
         elif is_user_happy.upper() == 'B':
             return 'B'
