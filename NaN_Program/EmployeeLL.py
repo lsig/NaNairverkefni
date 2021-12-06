@@ -66,15 +66,17 @@ class EmployeeLL:
     def validation(self, emp_dic):
         dic = {"Name":str, "Social Security":int, "Address":"both", "Phone":int,"GSM":int, "Email":"both", "Destination":int}
         for key in dic.keys():
+            #get_validation
             if dic[key] == str and dic[key] != "both":
                 if key.lower() == "extras": #replace empty string with none for extras
                     if emp_dic[key] == "":
                         emp_dic[key] = "None"
-                get_validation = emp_dic[key].replace(" ", "").isalpha()
+                get_validation = emp_dic[key].replace(" ", "").isalpha() #Name,
             elif dic[key] == int and dic[key] != "both":
                 emp_dic[key] = emp_dic[key].replace("+","")
-                get_validation = emp_dic[key].replace("-","").isdigit()
-                get_validation = True
+                emp_dic[key] = emp_dic[key].replace(" ","")
+                get_validation = emp_dic[key].replace("-","").isdigit() #social security, Phone, GSM
+
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if emp_dic[key] == "":
@@ -85,10 +87,11 @@ class EmployeeLL:
                     return False, key
 
             if key.lower() == "phone" and get_validation:
-                if 7 > len(emp_dic[key]) > 15:
+                if 7 > len(emp_dic[key]) or len(emp_dic[key]) > 15:
                     return False, key
+        
             if key.lower() == "social security" and get_validation:
-                if 8 > len(emp_dic[key]) > 12:
+                if 8 > len(emp_dic[key]) or len(emp_dic[key]) > 12:
                     return False, key
             if get_validation == False:
 

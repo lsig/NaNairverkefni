@@ -67,7 +67,7 @@ class BossEmployeeCreate:
                     return
 
                 else:
-                    print(f"Invalid {key}")
+                    print(f"Invalid {key}!")
                     sleep(SLEEPTIME)
                     self.editcontactinfo( CONTACTTEMPLATE.index(key) )
         
