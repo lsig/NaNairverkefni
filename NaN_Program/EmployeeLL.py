@@ -22,8 +22,9 @@ class EmployeeLL:
     def add_employee(self,emp_dic):
         valid, key = self.validation(emp_dic)
         if valid:
+            email = self.email_generate(emp_dic["Name"])
             emp_dic = self.replace_loc_num_with_name(emp_dic)
-            emp = Employee(self.assign_id_job(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],emp_dic["Email"],emp_dic["Destination"],"0")
+            emp = Employee(self.assign_id_job(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],email,emp_dic["Destination"],"0")
             self.dlapi.add_emp(emp)
             return True, key
         return False, key
@@ -58,13 +59,29 @@ class EmployeeLL:
             return None
         return False
 
-    def login_info(self, emali):
+    def login_info(self, email):
         all_emp_lis = self.dlapi.get_all_emp()
+        email = email + "@nanair.is"
+        email = email.lower()
+        for key in all_emp_lis:
+            if key["Email"].lower() == email:
+                dic_return = {"id": key["id"], "manager": key["Manager"]}
+                return dic_return
+
+
+    def email_generate(self, name):
+        email = name + "@nanair.is"
+        all_emp_lis = self.dlapi.get_all_emp()
+        for key in all_emp_lis:
+            if key["Email"].lower() == email:
+                email = name + self.assign_id_job() + "@nanair.is"
+        return email
+
 
 
 
     def validation(self, emp_dic):
-        dic = {"Name":str, "Social Security":int, "Address":"both", "Phone":int,"GSM":int, "Email":"both", "Destination":int}
+        dic = {"Name":str, "Social Security":int, "Address":"both", "Phone":int,"GSM":int, "Destination":int}
         for key in dic.keys():
             #get_validation
             if dic[key] == str and dic[key] != "both":
@@ -118,4 +135,5 @@ if __name__ == "__main__":
     e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1"})
     #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
     #e.edit_employee({"id": "10", "Name": "Bob", "Social Security": "9876543212", "Address": "Home", "Phone": "9999999", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1", "Manager": "0"})
+    print(e.email_generate("Kalli"))
 

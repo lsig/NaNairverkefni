@@ -11,7 +11,7 @@ SLEEPTIME = 1 #var 1.5
 INVALID = 'Invalid option, try again!'
 QUIT = 'Q'
 
-CONTACTTEMPLATE = ['Name', 'Social Security', 'Address', 'Phone', 'GSM', 'Email', 'Destination'] #listi fyrir starfsmenn
+CONTACTTEMPLATE = ['Name', 'Social Security', 'Address', 'Phone', 'GSM', 'Destination'] #listi fyrir starfsmenn
 CONTRACTTEMPLATE = ["Employee-id","Title","Description","Property-id","Priority","Suggested-contractor"] #listi fyrir verkbeiðnir
 PROPERTYTEMPLATE = ['Destination', 'Address', 'Size', 'Rooms', 'Type', 'Property-number', 'Extras'] # listi fyrir fasteignir
 CONTRACTORTEMPLATE = ["Name","Contact-name","Profession","Phone","Working-hours","Location"] #listi fyrir verktaka

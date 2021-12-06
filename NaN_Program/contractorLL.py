@@ -19,7 +19,7 @@ class ContractorLL:
         new_id = int(all_cont_lis[len(all_cont_lis)-1]["id"])+1
         return new_id
 
-    def is_valid(self,cont_dic) -> bool:
+    def is_valid(self,cont_dic) -> bool: # þarf að bæta við því ef location sé til
         dic = {"Name":str, "Contact-name":str,"Profession":str, "Phone":int, "Working-hours":int,"Location":str}
         for key in dic.keys():
             if dic[key] == str:
