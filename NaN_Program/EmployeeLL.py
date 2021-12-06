@@ -10,10 +10,6 @@ class EmployeeLL:
         #badb
 
 
-
-
-
-
     def assign_id_job(self):
         all_emp_lis = self.dlapi.get_all_emp()
         if all_emp_lis == []:
@@ -36,23 +32,20 @@ class EmployeeLL:
             all_list_emp = self.dlapi.get_all_emp()
             dic = self.find_emp_id(edit_emp_dic["id"], all_list_emp)
 
-            all_list_emp = self.find_id_location_emp(dic, all_list_emp)
+            emp_loc_in_list = self.find_id_location_emp(dic, all_list_emp)
             all_list_emp[emp_loc_in_list] = edit_emp_dic
-
-
-    def edit_info(self,edit_con_dic):
-        if self.is_valid(edit_con_dic):
-            all_lis_cont= self.dlapi.get_all_cont()
-            dic = self.find_con_id(edit_con_dic["id"],all_lis_cont)
- 
-            con_loc_in_lis = self.find_id_location_con(dic,all_lis_cont)
-            all_lis_cont[con_loc_in_lis]= edit_con_dic
-            self.dlapi.change_cont(all_lis_cont)
+            self.dlapi.change_emp_info(all_list_emp)
             return True
         return False
 
 
-    def find_con_id(self, id, all_emp_lis):
+    def find_id_location_emp(self, dic, all_list_emp):
+        for i in range(len(all_list_emp)):
+            if dic == all_list_emp[i]:
+                return i
+
+
+    def find_emp_id(self, id, all_emp_lis):
         if id.isdigit():
             for dic in all_emp_lis:
                 if int(dic["id"]) == int(id):
