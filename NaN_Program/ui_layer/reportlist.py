@@ -1,4 +1,4 @@
-from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
+from data_files.const import CLEAR, DASH, INVALID, PROPERTYTEMPLATE, SLEEPTIME, STAR 
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
@@ -6,24 +6,28 @@ MAXROWS = 10
 
 
 class ReportList: 
-    def __init__(self, id) -> None:
+    def __init__(self, id, propertydict = None) -> None:
+        self.propertydict = propertydict
         self.llapi = LLAPI(id)
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
         self.reportlist = self.llapi.get_report_info() #TODO
         self.reportlist_backup = self.reportlist # er þetta ekki eih svona shallow copy, ss að ef self.reportlist breytist þá breytist self.reportlist_backup, því hann er instance.
+        if self.propertydict == None:
+            menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'
+        else:
+            menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.propertydict["Address"]}'
         self.screen = f''' 
  Location | Name | {self.id} 
 {STAR*14}
-    | VIÐHALD |
-     - Verkskýrslulisti
+{menutravel}
      {DASH*15}
      L. Leita
      B. Til baka
      /row. Breytir lengd raðar
 
-Report-id | Request-id | Employee | Employee-id | Title | Description |Contractor-name | Contractor-id | Contractor-rating | Status
+Report-id | Request-id | Employee | Employee-id | Title | Description |Contractor-name | Contractor-id | Contractor-rating | Status - #TODO
 {DASH*35}'''
     
     def display_list(self):

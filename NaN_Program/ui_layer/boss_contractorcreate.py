@@ -8,7 +8,7 @@ class BossContractorCreate:
     def __init__(self, id) -> None:
         self.llapi = LLAPI()
         self.id = id
-        self.contractorlist = {}
+        self.contractordict = {}
         self.screen = f'''
  Location | Name | {self.id} 
 {STAR*14}
@@ -23,15 +23,15 @@ class BossContractorCreate:
     def display_contractormenu(self):
         os.system(CLEAR)
         print(self.screen)
-        self.contractorlist = {}
+
         for i in range( len(CONTRACTORTEMPLATE)): 
-            user_input = input(f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
+            user_input = input(f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<16} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
             #check validity
             #while self.input_is_valid(user_input) == False:
                 #user_input = input(f"{i+1}: {CONTRACTORTEMPLATE[i]}")
-            self.contractorlist[CONTRACTORTEMPLATE[i]] = user_input
+            self.contractordict[CONTRACTORTEMPLATE[i]] = user_input
         print(DASH*25)
         
         self.confirmcontractor()
@@ -41,9 +41,9 @@ class BossContractorCreate:
         propertystring = ''
         for i in range( len(CONTRACTORTEMPLATE)):
             if number != None and i == number - 1:
-                propertystring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<25} ____\n"
+                propertystring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<16} ____\n"
             else:
-                propertystring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<25} {self.contractorlist[i]}\n"
+                propertystring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<16} {self.contractordict[CONTRACTORTEMPLATE[i]]}\n"
         propertystring += DASH*25
         
         print(propertystring)
@@ -51,15 +51,20 @@ class BossContractorCreate:
 
     def confirmcontractor(self):
 
-        confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
-            if confirm.upper() == 'C':  # TODO, tengja við LL
-                self.llapi.add_cont(self.contractorlist)
+            confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
+
+            if confirm.upper() == 'C':
+                valid = self.llapi.add_cont(self.contractordict)
+                if valid:
+                    print("Contractor succesfully added!")
+                else:
+                    print("Wrong information!")
+                sleep(SLEEPTIME)
                 return
         
             elif confirm.upper() == 'E':
                 self.editcontractorinfo()
-                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             elif confirm.upper() == 'Q': # QUIT??
                 return
@@ -68,14 +73,13 @@ class BossContractorCreate:
                 print(INVALID)
                 sleep(SLEEPTIME)
                 self.reset_screen()
-                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
     
     def editcontractorinfo(self):
         user_row = int(input("Row to change: "))
         self.reset_screen(user_row)
 
         user_input = input(f"{CONTRACTORTEMPLATE[user_row - 1]}: ")
-        self.contractorlist[user_row - 1] = user_input
+        self.contractordict[CONTRACTORTEMPLATE[user_row - 1]] = user_input
 
         self.reset_screen()
     

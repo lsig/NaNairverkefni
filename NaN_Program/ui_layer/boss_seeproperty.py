@@ -1,6 +1,7 @@
 #velja ákveðinn starfsmann
 from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, PROPERTYTEMPLATE
 from logic_layer.LLAPI import LLAPI
+from ui_layer.reportlist import ReportList
 
 from time import sleep
 import os
@@ -61,6 +62,10 @@ class SeeProperty:
         if user_input.upper() == 'B':
             return 
         
+        elif user_input.upper() == 'R':
+            propreport = ReportList(self.id, self.property['id'])
+            propreport.display_list()
+
         elif user_input.upper() == 'E':
             while True:
                 self.change_row()
