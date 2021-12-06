@@ -82,7 +82,7 @@ class SeeProperty:
         is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
             
         if is_user_happy.upper() == 'C':
-            #self.llapi ble
+            self.llapi.edit_prop(self.property)
             print("Changes saved :)")
             sleep(SLEEPTIME)
             return 'C'
