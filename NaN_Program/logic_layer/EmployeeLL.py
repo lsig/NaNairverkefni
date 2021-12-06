@@ -1,5 +1,5 @@
 from storage_layer.DLAPI import DlAPI
-from models.Employee import Employee
+from models.employee import Employee
 
 class EmployeeLL:
     def __init__(self):
