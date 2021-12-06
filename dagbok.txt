@@ -6,10 +6,10 @@ Stofnuðum git repo og fórum yfir málin. Docs fyrir töflur og myndir, almenna
 Ætlum að reyna deila út verkefnum og klára notendahópagreiningu og notendatilvik í dag og á morgun.
 
 Uppgjör:
-Byrjuðum á kröfulista, notkunartilvikum og notendahópagreiningu.
-Kláruðum að gera notendahópagreiningu og komumst áfram í
-Stöðuritinu og notendatilvikunum. Dagurinn byrjaði hægt 
-menn mis þreyttir en síðan kom smá kraftur í þetta, þegar
+Byrjuðum á kröfulista, notkunartilvikum og notendahópagreiningu. Kristó Fannar fór í kröfulista og notkunartilvik, á meðan Logi byrjaði í notendahópagreiningu og fór síðan í notkunartilvikin með Kristófer eftir að notendahópagreiningin kláraðist.
+Kristófer Orri og Maxim ákváðu að kíkja saman í stöðuritin, þar sem Maxim hafði ekki tekið greiningu og hönnun og kannaðist því ekki við stöðuritin. Markús ætlaði að skoða gömul klasarit frá því fyrr á önninni og Marteinn ákvað einnig að skoða gömul verkefni hjá sér til að kynna sér hvernig ætti að huga að því að tækla verkefnið sem best.
+
+Dagurinn byrjaði hægt, menn mis þreyttir en síðan kom smá kraftur í þetta, þegar
 það leið á kvöldið. 
 Plönuðum hitting upp í skóla á morgundaginn.
 
@@ -21,32 +21,32 @@ Fórum að skipta verkefnum á milli á þann hátt að styrkleikar allra myndu 
 Markmið er að reyna að vera komnir eitthvað áfram í öllu sem verður inni í hönnunarskýrslunni.
 Miðum við að klára skýrslu á morgun!
 
-Uppgjör: Við kláruðum kröfulistann og fórum að vinna í stöðuritunum og klasaritinum,
-Dining byrjuðum við á use cases og erum komnir vel áfram í skýrslunni. Allt gengur sem skyldi
-og allir vel peppaðir fyrir verkefninu. Turboinn vel ferskur eftir pfizerinn og menn almennt í 
+Uppgjör: Kristófer fannar kláraði kröfulistann, Maxim og Kristó Orri unnu í stöðuritunum og Marteinn & Markús tækluðu klasaritin,
+Við erum komnir vel áfram í skýrslunni. Allt gengur sem skyldi
+og allir vel peppaðir fyrir verkefninu. Turboinn (Marteinn) vel ferskur eftir pfizerinn og menn almennt í 
 góðu skapi. 
 
 
 Dagur 3, 24.11.21
 Morgunfundur:
 Tókum hitting upp í skóla. Stöðurit, klassarit og notkunartilvik eru komin langa leið. 
-Stöðurit verður líklegast klárað í dag. Kristófer Orri og Maxim eru að vinna í stöðuriti, 
+Stöðurit verður líklegast klárað í dag, Kristófer Orri og Maxim eru að vinna í því. 
 Kristófer Fannar og Logi í notkunartilvikum og Markús og Marteinn í klassariti.
 
 Uppgjör: 
-Við kláruðum notendatilvikin, klasaritin og stöðuritin. Allir vel ferksir, turboinn vel þunnur af einhverjum ástæðum, kallinn átti erfiðan þriðjudag (cough cough, Man U vann og hann missti sig aðeins). Maxim betur þekktur sem folinn mætti kampa kátur enda á hann kærustu sem gaf honum þetta nickname. Markús er í smitgát og vann klasaritið heima og Kristó O betur þekktur sem kisuklórarinn var einnig vel ferskur. 
+Við kláruðum notendatilvikin, klasaritin og stöðuritin. Allir vel ferksir, turboinn vel lítill í sér af einhverjum ástæðum, kallinn átti erfiðan þriðjudag (cough cough, Man U vann og hann missti sig aðeins). Maxim betur þekktur sem folinn mætti kampa kátur enda á hann kærustu sem gaf honum þetta nickname. Markús er í smitgát og vann klasaritið heima og Kristó O betur þekktur sem kisuklórarinn var einnig vel ferskur. 
 
 
 Dagur 4, 25.11.21
 Morgunfundur:
 Markmið dagsins er að skipuleggja útlitshönnun (wireframing) og flæði forritsins, sem og að
 koma hönnunarskýrslunni á sem lengstan veg. Við ætlum einnig að slípa klasa- og stöðuritin og
-viljum, ef vel gengur, skila uppkasti að hönnunarskýrslunni í dag.
+viljum, ef vel gengur, skila uppkasti að hönnunarskýrslunni í dag. 
 
-Uppgjör: Myndir voru skissaðar sem sýna útlit á frumstigi og flæði forritsins var skilgreint.
+Uppgjör: Allir nema Markús (smitgát) mættu, fundu lausa stofu og skissuðu upp wireframes. Myndir voru skissaðar sem sýna útlit á frumstigi og flæði forritsins var skilgreint. 
 Fyrsta útlitshönnunin en nú komin. Unnið var í skýrslunni og er hún komin langt á veg en þó
 er hún enn ókláruð. Nytsemis- og notendaupplifunarkröfur á eftir að semja og verður það
-gert á morgun.
+gert á morgun. Kristófer Fannar fór í það að gera user flow ready fyrir prent, Maxim og Kristó Orri gerðu stöðuritið klárt fyrir skýrslu, Markús pældi í klasaritinu og Marteinn fór í það að hefja fyrstu vinnu í forritinu sjálfu. IT HAS BEGUn. 
 
 
 Dagur 5, 26.11.21
@@ -54,6 +54,7 @@ Morgunfundur:
 Óbeinn fundur tekinn þar sem í raun var eina verkefni dagsins að gera allt klárt fyrir skil á hönnunarskýrslu. Það þarf að kíkja á kröfurnar betur ásamt að fínpússa klasarit og stöðurit.
 
 Uppgjör:
+Kristófer Fannar downloadaði docsskjalinu þar sem allar myndir, töflur og helsti texti var geymdur og setti það saman í flott wordskjal, (hann tók áfanga í word sko og var endalaust að flexa það).
 Skýrsla tilbúin og búið að skila, allir sáttir og tilbúnir í næstu viku!
 
 
@@ -66,15 +67,15 @@ Morgunfundur:
 Smá misræmi í mönnum þar sem nokkrir misstu af fyrirlestrinum og byrjum því ekki nógu snemma. Þurfum að tala við TA þar sem þrískiptingin á klösunum okkar er ekki, tja þrískipt. Tökum hörku í kvöld og komum okkur á góðan stað!
 
 Uppgjör: 
-komnir með öll helstu file og foldera, samanber klasaritið okkar og best practice sem við sáum úr fyrirlestrinum í morgun. Skiptum okkur niður í hlutverk og settum grunn í einhver python files. Byrjum á fullu á morgun!
+komnir með öll helstu file og foldera, samanber klasaritið og stöðuritið okkar og best practice sem við sáum úr fyrirlestrinum í morgun. Skiptum okkur niður í hlutverk (Kristófer Fannar og Logi: UIlayer, Kristófer Orri og Markús: Logic Layer, Marteinn og Maxim: Data layer) og settum grunn í einhver python files. Byrjum á fullu á morgun!
 
 
 Dagur 2 30.11.21 
 Morgunfundur:
-Menn voru vel þreyttir en ferskir þar sem flestir vöknuðu við a paycheck og desemberuppbót, fundur tekinn um eitt leytið og menn héldur áfram að vinna í sitthvorum hópum.
+Menn voru vel þreyttir en ferskir þar sem flestir vöknuðu við a paycheck og desemberuppbót, fundur tekinn um eitt leytið og menn héldur áfram að vinna í sitthvorum hópum. Maxim og Marteinn yfirburða bestu forritararnir og voru því vel staðsettir í þyngsta hluta forritsins. 
 
 Uppgjör:
-Það var haldið áfram að setja upp forritð og búa til beinagrindina, strákarnir í storage layerinu stóðu sig vel
+Það var haldið áfram að setja upp forritð og búa til beinagrindina, strákarnir í storage layerinu stóðu sig vel. Logi og Kristó gerðu login menu og main menu fyrir yfirmenn og starfsmenn sér.
 
 
 Dagur 3 1.12.21 
@@ -82,15 +83,15 @@ Morgunfundur:
 Menn vel þreyttir í dag, einhver þreyta í liðinu þessa vikuna, kannski útaf lengd dagsins en hver dagur verður bara styttri og styttri. Fundur tekinn um hálf þrjú leytið og ákeðið að halda áfram á sömu braut.
 
 Uppgjör:
-Við komumst áfram í forritinu og storage layer er næstum tilbúið sem mun gera forritun í logic og UI auðveldari.
+Við komumst áfram í forritinu og storage layer fer að líta helvíti vel út sem mun gera forritun í logic og UI auðveldari. Markús og Kristó Orri í smá vandræðum með Logic Layer, enda er það brú á milli UI og DL og einnig mjög erfitt að sjá fyrir sér, sem getur verið erfitt að byrja á.
 
 
 Dagur 4 2.12.21
 Morgunfundur:
-Allir farnir að vakna seinna og seinna, sem gæti orðið vesen. Erum samt ekkert stressaðir þar sem verkefnið gengur ágætlega vel. Ætlum að reyna að klára flest allt í data layer og UI svo það sé hægt að fara í logic layer, sem tengir síðan allt saman.
+Allir farnir að vakna seinna og seinna, sem gæti orðið vesen. Erum samt ekkert stressaðir þar sem verkefnið gengur ágætlega vel og við vinnum meira fram eftir. Ætlum að reyna að klára flest allt í data layer og UI svo það sé hægt að fara í logic layer, sem tengir síðan allt saman. 
 
 Uppgjör:
-Data layer kláraðist (yeesss!!) og öll feature í ui eru tilbúin, þarf að klára að sauma seinustu spor saman í ui svo hann geti talist fullkláraður.
+Data layer kláraðist (yeesss!!) og öll helstu grunnfeature í ui eru tilbúin, þarf að klára að sauma seinustu spor saman í ui svo hann geti talist fullkláraður.
 
 
 Dagur 5 3.12.21 
@@ -98,6 +99,24 @@ Morgunfundur:
 seinasti dagur í næst seinustu vikunni og ætlum við allir að mæta upp í skóla í dag til að grinda seinasta í UI og tengja saman LL við allt hitt, (erum fjórir mættir so far). Maxim eldaði world record breakfast (að hans sögn), en tók víst enga mynd svo það er ekki hægt að staðfesta með vissu hve mikinn ofurkóðakraft hann mun hafa í dag til að koma okkur áfram. Sjáum til.
 
 Uppgjör:
+Tókum powerdag og náðum að tengja saman það fyrsta í ui, ll og dl, (byrjuðum loksins á Logic layer eftir að Data layer meistararnir (sem standa sig gríðarlega vel) gátu farið að kíkja á það með Kristó Orra og Markúsi). Ætlum að reyna að vera eitthvað duglegir yfir helgina til þess að lenda ekki í veseni seint í næstu viku. Næsta session verður spennandi!
+
+
+Helgin 4. - 5.12.21
+Smá innskot til að gefa okkar mönnum Maxim og Marteini appreciation fyrir að hafa staðið sig frábærlega og ákveðið að mæta upp í skóla á LAUGARDEGI (Þeir unnu ). Þeir eru einfaldlega ruglaðir og greinilega mjög metnaðarsamir í verkefninu og ætla sér að skila frá sér frábærum hugbúnaði. Maxim og Kristó Fannar voru síðan eitthvað að pulla og pusha sín á milli á sunnudeginum og hefur heyrst að seinasta pushið hafi verið eftir klukkan 3 um nótt. 
+
+
+
+
+
+
+### Vika 3
+Dagur 1 6.12.21
+Morgunfundur:
+Settum markmið að vera mættir upp í skóla í kringum 10 til þess að byrja vikuna með alvöru stæl, það gekk svosem ekki hræðilega. Maxim var mættur 10 mín í 10 og Kristófer Orri eitthvað stuttu eftir. Næst mættu Kristófer Fannar kl ca 10 mín í 11 og Logi rétt yfir 11. Markús kom svo rétt fyrir hádegi og Marteinn fékk loksins bíl og kom í kringum hádegið líka. Ætlum að vinna vel saman í dag, og passa upp á að hópurinn vinni vel sem ein heild. Sjáum hvernig það mun ganga.
+
+Uppgjör:
+Flest öll vinna í UI búin, nú er bara að tengja saman UI við logic layer og data layer. Lentum í ótrúlega leiðinlegu buggi með að breyta upplýsingum um ákveðna fasteign, en eftir yfir klst af ítarlegri leit fundu Marteinn og Maxim pödduna og drápu hana! Maxim og Kristó Orri eru búnir að vera duglegir í employeeLL.py og Marteinn & Markús stóðu sig vel í reportLL.py. Logi tengdi allt saman við starfsmannaaðganginn sem starfsmaðurinn á að geta haft aðgang að og Kristó Fannar fór í að tengja saman lausa spotta í ui og logic layer ásamt því að setja villumeldingar þegar notandi stimplar inn nýjan starfsmann/fasteign/verktaka.
 
 
 
