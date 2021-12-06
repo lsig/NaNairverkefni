@@ -28,6 +28,13 @@ class PropertyLL:
         loc_names_lis = self.dlapi.get_loc_info()
         dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
         return dic
+
+    def replace_loc_name_with_num(self,dic_edit):
+        loc_info = self.dlapi.get_loc_info()
+        for dic in loc_info:
+            if dic_edit["Destination"].lower() == dic["Name"].lower():
+                dic_edit["Destination"] = dic["id"]
+                return dic_edit
     
     def is_valid(self,prop_dic) -> bool:
         dic = {"Destination":int, "Address":"both", "Size":int, "Rooms":int,"Type":str,"Property-number":"both","Extras":str}
@@ -63,12 +70,13 @@ class PropertyLL:
         if id.isdigit():
             for dic in all_prop_lis:
                 if int(dic["id"]) == int(id):
-                    dic = [dic]
+                    dic = dic
                     return dic 
             return None #[{"Text":"No employee with this id"}]
         return False
 
     def edit_info(self,edit_prop_dic):
+        edit_prop_dic = self.replace_loc_name_with_num(edit_prop_dic)
         if self.is_valid(edit_prop_dic):
             edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
             all_lis_prop = self.dlapi.get_property_info()
@@ -83,6 +91,7 @@ class PropertyLL:
         for i in range(len(all_lis_prop)):
             if dic == all_lis_prop[i]:
                 return i
+
 
     def find_prop_by_str(self,user_string,prop_lis,key):
         ret_lis=[]
@@ -99,6 +108,8 @@ if __name__ == "__main__":
     #d = g.get_all_prop()
     #d = g.find_prop_id("2",g.get_all_prop())
     #print(d[0]["id"])
-    #g.edit_info({"id":"33","Destination":"1", "Address":"Heima 2", "Size":"10", "Rooms":"15","Type":"Best","Property-number":"poom street 2","Extras":"Windows"})
+    g.edit_info({"id":"31","Destination":"Kulsuk", "Address":"lol", "Size":"2", "Rooms":"3","Type":"biiiig","Property-number":"poom street 2","Extras":"Windows"})
     #print(g.find_prop_by_str("ud",g.get_all_prop(),"Extras"))
     #print(g.get_all_prop)
+    {"Name":"John"}
+ 
