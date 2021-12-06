@@ -7,12 +7,13 @@ class PropertyLL:
         self.dlapi = DlAPI()
 
     def add_property(self,prop_dic):
-        if self.is_valid(prop_dic):
+        valid, key = self.is_valid(prop_dic)
+        if valid:
             prop_dic = self.replace_loc_num_with_name(prop_dic)
             prop = Property(self.assign_id_prop(),prop_dic["Destination"],prop_dic["Address"],prop_dic["Size"],prop_dic["Rooms"],prop_dic["Type"],prop_dic["Property-number"],prop_dic["Extras"])
             self.dlapi.add_property(prop)
-            return True
-        return False
+            return True, key
+        return False, key
 
     def assign_id_prop(self):
         all_prop_lis = self.dlapi.get_property_info()
@@ -49,15 +50,15 @@ class PropertyLL:
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if prop_dic[key] == "":
-                    return False
+                    return False, key
             #check if Destination is within bounds
             if key.lower() == "destination" and get_validation:
                 if  int(prop_dic[key]) <= 0 or int(prop_dic[key]) > self.get_destination_count():
-                    return False
+                    return False, key
             if get_validation == False:
 
-                    return False
-        return True
+                    return False, key
+        return True, key
 
         
     

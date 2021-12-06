@@ -1,8 +1,9 @@
 import csv
+from os import sep
 # from maintenance import Maintenance
 class MaintenanceDL():
     def __init__(self):
-        self.csv = "CSV_Files\Regular_maintenance.csv"
+        self.csv = f"CSV_Files{sep}Regular_maintenance.csv"
 
 
     def get_all_maintenance_jobs(self):

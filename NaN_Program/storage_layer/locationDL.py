@@ -1,8 +1,9 @@
 import csv
+from os import sep
 # from location import Location
 class LocationDL():
     def __init__(self):
-        self.csv = "CSV_Files\Destination.csv"
+        self.csv = f"CSV_Files{sep}Destination.csv"
 
 
     def get_all_loc(self):

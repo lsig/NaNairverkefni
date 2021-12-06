@@ -2,10 +2,15 @@ id,Name,Contact-name,Profession,Phone,Working-hours,Location,Rating(0-10)
 1,Bob the builder,John Mcdiddy,builder,3548988054,00,Longyearbyen,10
 2,John nohands,Elton john,builder,3549990000,00,Tórshavn,8
 3,siggi,Johnny beep,builder,6666669,00,Kulusuk,6
-4,John is grate,Elton john,bulider,35499900,00,Tórshavn,
+4,John is not grate,Elton john,bulider,35499900,00,Tórshavn,
 5,arnar,siggi,smiður,1234357,00,kulusuk,
 6,John nohands,Elton john,bulider,35499900,00,Tórshavn,
 7,John nohands,Elton john,bulider,35499900,00,Tórshavn,
 8,John nohands,Elton john,bulider,35499900,00,Tórshavn,
 9,John nohands,Elton john,bulider,35499900,00,Tórshavn,
 10,geiri,siggi,bukduer,12456789,00,kulusuk,
+11,Kristó,jo,fas,7896765,9 - 5,kulsuk,
+12,kristo,joi,forr,7896567,9 - 5,kulsuk,
+13,Kristo,joi,forrit,7896765,9 -5,kulsuk,
+14,Kristo,joi,forrit,7896765,9 - 5,Kulsuk,
+15,kristo,ksi,for,7895732,9-5,lsa,

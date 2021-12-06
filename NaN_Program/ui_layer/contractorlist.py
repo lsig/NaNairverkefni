@@ -1,5 +1,6 @@
 #verktakalisti
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
+from logic_layer.LLAPI import LLAPI
 from time import sleep
 import os
 
@@ -9,6 +10,7 @@ MAXROWS = 10
 
 class ContractorList: 
     def __init__(self, id) -> None:
+        self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id

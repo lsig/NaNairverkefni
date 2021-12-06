@@ -28,10 +28,10 @@ class ContractorLL:
             # to check if the phone number is a valid length    
             if key.lower() == "phone" and get_validation:
                 if len(cont_lis[counter]) < 7 or len(cont_lis[counter]) > 15:
-                    return False
+                    return False, key
             if get_validation == False:
 
-                    return False
+                    return False, key
             counter += 1
         return True
 

@@ -55,13 +55,15 @@ class BossContractorCreate:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             if confirm.upper() == 'C':
-                valid = self.llapi.add_cont(self.contractordict)
+                valid, key = self.llapi.add_cont(self.contractordict)
                 if valid:
                     print("Contractor succesfully added!")
+                    sleep(SLEEPTIME)
+                    return
                 else:
-                    print("Wrong information!")
-                sleep(SLEEPTIME)
-                return
+                    print(f"Wrong {key}")
+                    sleep(SLEEPTIME)
+                    self.editcontractorinfo( CONTRACTORTEMPLATE.index(key) )
         
             elif confirm.upper() == 'E':
                 self.editcontractorinfo()
@@ -74,8 +76,11 @@ class BossContractorCreate:
                 sleep(SLEEPTIME)
                 self.reset_screen()
     
-    def editcontractorinfo(self):
-        user_row = int(input("Row to change: "))
+    def editcontractorinfo(self, rowchange = None):
+        if rowchange == None:
+            user_row = int(input("Row to change: "))
+        else:
+            user_row = rowchange + 1
         self.reset_screen(user_row)
 
         user_input = input(f"{CONTRACTORTEMPLATE[user_row - 1]}: ")
