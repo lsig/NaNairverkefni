@@ -58,9 +58,14 @@ class EmployeeLL:
             return None
         return False
 
-    def login_info(self, emali):
+    def login_info(self, email):
         all_emp_lis = self.dlapi.get_all_emp()
-
+        email = email + "@nanair.is"
+        email = email.lower()
+        for key in all_emp_lis:
+            if key["Email"].lower() == email:
+                dic_return = {"id": key["id"], "manager": key["Manager"]}
+                return dic_return
 
 
     def validation(self, emp_dic):
