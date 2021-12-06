@@ -49,3 +49,6 @@ if __name__ == "__main__":
 
 #     def create_employee(self, emp):
 #         return self.empLL.create_employee(emp)
+
+if __name__ == "__main__":
+    e = EmployeeLL()
