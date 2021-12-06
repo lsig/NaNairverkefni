@@ -1,8 +1,9 @@
 import csv
+from os import sep
 # from report import Report
 class ReportDL():
     def __init__(self):
-        self.csv = "CSV_Files\Reports.csv"
+        self.csv = f"CSV_Files{sep}Reports.csv"
 
 
     def get_all_reports(self):

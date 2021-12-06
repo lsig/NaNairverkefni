@@ -60,9 +60,15 @@ class BossPropertyCreate:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             if confirm.upper() == 'C':  # TODO
-                self.llapi.add_prop(self.propertylist)
-                #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
-                return
+                valid, key = self.llapi.add_prop(self.propertylist)
+                if valid: 
+                    print("Property succesfully added!")
+                    sleep(SLEEPTIME)
+                    return
+                else:
+                    print(f"Wrong {key}")
+                    sleep(SLEEPTIME)
+                    self.editpropertyinfo( PROPERTYTEMPLATE.index(key) )
         
             elif confirm.upper() == 'E': # TODO
                 self.editpropertyinfo()
@@ -75,9 +81,11 @@ class BossPropertyCreate:
                 sleep(SLEEPTIME)
                 self.reset_screen()
     
-    def editpropertyinfo(self):
-
-        user_row = int(input("Row to change: ")) # þarf að vera tala á milli 1 og len(PROPERTYTEMPLATE) + 1
+    def editpropertyinfo(self, row = None):
+        if row == None:
+            user_row = int(input("Row to change: ")) # þarf að vera tala á milli 1 og len(PROPERTYTEMPLATE) + 1
+        else:
+            user_row = row + 1 
         self.reset_screen(user_row)
 
         user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ")

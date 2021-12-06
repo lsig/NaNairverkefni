@@ -1,9 +1,10 @@
 import csv
+from os import sep
 # from employee import Employee
 
 class EmployeeDL:
     def __init__(self):
-        self.csv = "CSV_Files/Employee.csv"
+        self.csv = f"CSV_Files{sep}Employee.csv"
 
     def get_all_employee(self):
         ret_lis = []

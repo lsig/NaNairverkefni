@@ -4,6 +4,7 @@ if os.name == 'nt': #til að cleara terminal, hér er os-ið hjá notandanum win
 else: # hér hlýtur os.name == 'posix', og os-ið hjá notandanum er mac eða linux.
     CLEAR = 'clear'
 
+SLASH = os.sep
 STAR = '* '
 DASH = '-'
 SLEEPTIME = 1 #var 1.5

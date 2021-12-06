@@ -7,11 +7,12 @@ class ContractorLL:
         self.dlapi = DlAPI()
 
     def add_contractor(self,cont_dic):
-        if self.is_valid(cont_dic):
+        valid, key = self.is_valid(cont_dic)
+        if valid:
             cont = Contractor(self.assign_id_cont(),cont_dic["Name"],cont_dic["Contact-name"],cont_dic["Profession"],cont_dic["Phone"],cont_dic["Working-hours"],cont_dic["Location"],None)
             self.dlapi.add_cont(cont)
-            return True
-        return False
+            return True, key
+        return False, key
 
     def assign_id_cont(self):
         all_cont_lis = self.dlapi.get_all_cont()
@@ -28,11 +29,11 @@ class ContractorLL:
             # to check if the phone number is a valid length    
             if key.lower() == "phone" and get_validation:
                 if len(cont_dic[key]) < 7 or len(cont_dic[key]) > 15:
-                    return False
+                    return False, key
             if get_validation == False:
 
-                    return False
-        return True
+                    return False, key
+        return True, key
 
     
     def find_con_id(self,id,all_cont_lis):
