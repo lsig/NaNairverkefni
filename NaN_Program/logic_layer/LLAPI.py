@@ -40,7 +40,7 @@ class LLAPI:
         return self.empll.list_all_employees()
 
     def add_emp(self, emp_lis):
-        self.empll.add_employee(emp_lis)
+        return self.empll.add_employee(emp_lis)
 
     def edit_emp(self, emp_dic):
         self.empll.edit_employee(emp_dic)

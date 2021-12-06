@@ -20,12 +20,13 @@ class EmployeeLL:
 
 #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
     def add_employee(self,emp_dic):
-        if self.validation(emp_dic):
+        valid, key = self.validation(emp_dic)
+        if valid:
             emp_dic = self.replace_loc_num_with_name(emp_dic)
             emp = Employee(self.assign_id_job(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],emp_dic["Email"],emp_dic["Destination"],"0")
             self.dlapi.add_emp(emp)
-            return True
-        return False
+            return True, key
+        return False, key
 
 
     def edit_employee(self, edit_emp_dic):
@@ -77,22 +78,22 @@ class EmployeeLL:
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if emp_dic[key] == "":
-                    return False
+                    return False, key
             #check if Destination is within bounds
             if key.lower() == "destination" and get_validation:
                 if  int(emp_dic[key]) <= 0 or int(emp_dic[key]) > self.get_destination_count():
-                    return False
+                    return False, key
 
             if key.lower() == "phone" and get_validation:
                 if 7 > len(emp_dic[key]) > 15:
-                    return False
+                    return False, key
             if key.lower() == "social security" and get_validation:
                 if 8 > len(emp_dic[key]) > 12:
-                    return False
+                    return False, key
             if get_validation == False:
 
-                    return False
-        return True
+                    return False, key
+        return True, key
 
 
     def get_destination_count(self):
