@@ -130,7 +130,7 @@ class JobLL:
         if id.isdigit():
             for dic in all_job_lis:
                 if int(dic["id"]) == int(id):
-                    dic = [dic]
+                    dic = dic
                     return dic 
             return None #[{"Text":"No employee with this id"}]
         return False
@@ -145,10 +145,10 @@ class JobLL:
 if __name__ == "__main__":
     g = JobLL()
     #print(g.find_employee_name("5"))
-    #g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
+    #g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"1","Suggested-contractor":"1"},"1")
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))
     #print(g.find_jobs_by_str("o",g.get_all_jobs(),"Title"))
     #print(g.get_con_name_and_location("1")["Name"])
-    g.edit_info({"id":"1","Date-created":"2021-12-05","Employee":"Jan Jacobsen","Employee-id":"1","Title":"window clean","Description":"clean the windows!","Location":"Longyearbyen","Property":"Vei 217","Property-number":"F959594","Property-id":"1","Priority":"1","Suggested-contractor":"1","Status":"0"},"1")
+    g.edit_info({"id":"1","Date-created":"2021-12-05","Employee":"Jan Jacobsen","Employee-id":"1","Title":"big window clean","Description":"clean the windows!","Location":"Longyearbyen","Property":"Vei 217","Property-number":"F959594","Property-id":"1","Priority":"1","Suggested-contractor":"1","Status":"0"},"1")
