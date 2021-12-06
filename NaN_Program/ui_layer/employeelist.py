@@ -1,5 +1,6 @@
 #starfsmannalisti
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
+from logic_layer.LLAPI import LLAPI
 from time import sleep
 import os
 MAXROWS = 10
@@ -7,6 +8,7 @@ MAXROWS = 10
 
 class EmployeeList: 
     def __init__(self, id) -> None:
+        self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
@@ -27,6 +29,7 @@ Nafn | Sími | Netfang | Kennitala
 {DASH*35}'''
     
     def display_list(self):
+        self.firstrow = self.slide * self.rows 
         returnvalue = ''
         while returnvalue != 'B':
 
@@ -72,9 +75,16 @@ Nafn | Sími | Netfang | Kennitala
             pass 
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
-            self.employeelist = self.llapi.filter_employee_id(user_input, self.employeelist) 
-            user_input = ""
-            self.rows = len(self.employeelist)
+            self.lastrow = (self.slide + 1) * self.rows
+            
+            if self.firstrow <= int(user_input) < self.lastrow and len(self.employeelist) >= int(user_input):
+                self.employeelist = self.llapi.filter_employee_id(user_input, self.employeelist) #todo
+                user_input = ""
+                self.rows = len(self.employeelist)
+            
+            else: 
+                print("Invalid row, try again!")
+                sleep(SLEEPTIME)
 
         else:
             print(INVALID)

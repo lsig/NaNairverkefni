@@ -44,12 +44,11 @@ class BossPropertyCreate:
     def printpropertyinfo(self, number = None):
 
         propertystring = ''
-        self.propertylist = {}
         for i in range( len(PROPERTYTEMPLATE)):
             if number != None and i == number - 1:
                 propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} ____\n"
             else:
-                propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} {self.propertylist[i]}\n"
+                propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} {self.propertylist[PROPERTYTEMPLATE[i]]}\n"
         propertystring += DASH*25
         
         print(propertystring)
@@ -83,7 +82,7 @@ class BossPropertyCreate:
         self.reset_screen(user_row)
 
         user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ")
-        self.propertylist[user_row - 1] = user_input
+        self.propertylist[PROPERTYTEMPLATE[user_row - 1]] = user_input
 
         self.reset_screen()
     
