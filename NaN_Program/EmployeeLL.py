@@ -21,6 +21,7 @@ class EmployeeLL:
 #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
     def add_employee(self,emp_dic):
         #if self.is_valid(cont_dic):
+        emp_dic = self.replace_loc_num_with_name(emp_dic)
         emp = Employee(self.assign_id_job(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],emp_dic["Email"],emp_dic["Destination"],"0")
         self.dlapi.add_emp(emp)
         return True
@@ -29,6 +30,7 @@ class EmployeeLL:
 
     def edit_employee(self, edit_emp_dic):
         if self.validation(edit_emp_dic):
+            edit_emp_dic = self.replace_loc_num_with_name(edit_emp_dic)
             all_list_emp = self.dlapi.get_all_emp()
             dic = self.find_emp_id(edit_emp_dic["id"], all_list_emp)
 
@@ -37,6 +39,8 @@ class EmployeeLL:
             self.dlapi.change_emp_info(all_list_emp)
             return True
         return False
+
+
 
 
     def find_id_location_emp(self, dic, all_list_emp):
@@ -55,7 +59,7 @@ class EmployeeLL:
 
 
     def validation(self, emp_dic):
-        dic = {"Name":str, "Social security":int, "Address":"both", "Phone":int,"GSM":int, "Email":"both", "Destination":int}
+        dic = {"Name":str, "Social Security":int, "Address":"both", "Phone":int,"GSM":int, "Email":"both", "Destination":int}
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 if key.lower() == "extras": #replace empty string with none for extras
@@ -65,7 +69,7 @@ class EmployeeLL:
             elif dic[key] == int and dic[key] != "both":
                 emp_dic[key] = emp_dic[key].replace("+","")
                 get_validation = emp_dic[key].replace("-","").isdigit()
-        
+                get_validation = True
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if emp_dic[key] == "":
@@ -87,30 +91,23 @@ class EmployeeLL:
         return True
 
 
+    def get_destination_count(self):
+        all_desti_lis = self.dlapi.get_loc_info()
+        desti_count = int(all_desti_lis[len(all_desti_lis)-1]["id"])
+        return desti_count
+
+
     def list_all_employees(self):
         return self.dlapi.get_all_emp()
 
-
-
-
-
-
-
-
-# from logic_layer.EmployeeLL import EmployeeLL
-
-# class LLAPI:
-
-#     def __init__(self):
-#         self.empLL = EmployeeLL()
-
-#     def all_employees(self):
-#         return self.empLL.all_employees()
-
-#     def create_employee(self, emp):
-#         return self.empLL.create_employee(emp)
+    def replace_loc_num_with_name(self,dic):
+        loc_names_lis = self.dlapi.get_loc_info()
+        dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
+        return dic
 
 if __name__ == "__main__":
     e = EmployeeLL()
-    e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "Kulusuk"})
-    #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
+    #e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1"})
+    #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
+    #e.edit_employee({"id": "10", "Name": "Bob", "Social Security": "9876543212", "Address": "Home", "Phone": "9999999", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1", "Manager": "0"})
+

@@ -3,12 +3,15 @@ from os import name
 from contractorLL import ContractorLL
 from propertyLL import PropertyLL
 from jobLL import JobLL
+from employeeLL import EmployeeLL
+
 class LLAPI:
     def __init__(self):
         self.id = id
         self.contLL = ContractorLL()
         self.propLL = PropertyLL()
         self.jLL = JobLL()
+        self.empll = EmployeeLL()
 
 
     def add_cont(self,con_lis):
@@ -33,6 +36,19 @@ class LLAPI:
     def edit_prop(self, propdict):
         self.propLL.edit_info(propdict)
 
+    def get_emp_info(self):
+        return self.empll.list_all_employees()
+
+    def add_emp(self, emp_lis):
+        self.empll.add_employee(emp_lis)
+
+    def edit_emp(self, emp_dic):
+        self.empll.edit_employee(emp_dic)
+
+    def filter_employee_id(self, id, emp_lis):
+        return self.empll.find_emp_id(id, emp_lis)
+
+    
     
 
         
