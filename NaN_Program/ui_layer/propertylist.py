@@ -77,10 +77,6 @@ id | Destination | Address | Size | Rooms | Property number | Extras
             pass 
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
-            # self.propertylist = self.propertylist_backup
-            # self.propertylist = self.llapi.filter_property_id(user_input, self.propertylist) 
-            # user_input = ""
-            # self.rows = len(self.propertylist)
             self.lastrow = (self.slide + 1) * self.rows
             
             if self.firstrow <= int(user_input) < self.lastrow and len(self.propertylist) >= int(user_input) :
