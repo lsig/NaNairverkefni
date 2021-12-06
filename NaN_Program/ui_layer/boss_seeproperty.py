@@ -12,7 +12,7 @@ class SeeProperty:
     def __init__(self, id, propertyinfo) -> None:
         self.llapi = LLAPI()
         self.id = id
-        self.property = propertyinfo[0]
+        self.property = propertyinfo
         self.screen = f''' 
  Location | Name | {self.id} 
 {STAR*14}
