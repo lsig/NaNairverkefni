@@ -1,9 +1,7 @@
 from storage_layer.DLAPI import DlAPI
 from models.employee import Employee
-<<<<<<< HEAD
-=======
 from storage_layer.employeeDL import EmployeeDL
->>>>>>> e7726cba9fb94e408f526e1fede29b3bd57d6876
+
 
 class EmployeeLL:
     def __init__(self):
@@ -13,10 +11,31 @@ class EmployeeLL:
     def createemployee(self,emp_lis):
         emp = Employee(emp_lis[0], emp_lis[1], emp_lis[2], emp_lis[3], emp_lis[4], emp_lis[5], emp_lis[6], emp_lis[7], emp_lis[8])
         self.dlapi.create_emp(emp)
+
+
+    def add_employee(self):
+        pass
+
+
+    def assign_id_job(self):
+        all_emp_lis = self.dlapi.get_all_emp()
+        if all_emp_lis == []:
+            new_id = 1
+        else:
+            new_id = int(all_emp_lis[len(all_emp_lis)-1]["id"])+1
+        return str(new_id)
+
     
+    def add_contractor(self,cont_dic):
+        #if self.is_valid(cont_dic):
+        cont = Employee(self.assign_id_cont(),cont_dic["Name"],cont_dic["Contact-name"],cont_dic["Profession"],cont_dic["Phone"],cont_dic["Working-hours"],cont_dic["Location"],None)
+        self.dlapi.add_cont(cont)
+        return True
+        #return False
 
     def editemployee():
         pass
+
 
     def validation():
         pass
@@ -52,3 +71,6 @@ if __name__ == "__main__":
 
 #     def create_employee(self, emp):
 #         return self.empLL.create_employee(emp)
+
+if __name__ == "__main__":
+    e = EmployeeLL()

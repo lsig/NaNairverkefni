@@ -115,12 +115,40 @@ class JobLL:
         return con_info 
         
 
+    def edit_info(self,edit_job_dic,id): #virkar ekki find id location virkar ekki
+        self.boss_loc = self.get_emp_location(id)
+        if self.is_valid(edit_job_dic):
+            all_lis_job = self.dlapi.get_jobs()
+            dic = self.find_job_id(edit_job_dic["id"],all_lis_job)
+            job_loc_in_lis = self.find_id_location_job(dic,all_lis_job)
+            all_lis_job[job_loc_in_lis]= edit_job_dic
+            self.dlapi.change_job(all_lis_job)
+            return True
+        return False
+
+    def find_job_id(self,id,all_job_lis):
+        if id.isdigit():
+            for dic in all_job_lis:
+                if int(dic["id"]) == int(id):
+                    dic = [dic]
+                    return dic 
+            return None #[{"Text":"No employee with this id"}]
+        return False
+
+
+    def find_id_location_job(self,dic,all_lis_job):
+        for i in range(len(all_lis_job)):
+            if dic == all_lis_job[i]:
+                return i
+
+
 if __name__ == "__main__":
-    g = JobLL("1")
+    g = JobLL()
     #print(g.find_employee_name("5"))
     #g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))
     #print(g.find_jobs_by_str("o",g.get_all_jobs(),"Title"))
-    print(g.get_con_name_and_location("1")["Name"])
+    #print(g.get_con_name_and_location("1")["Name"])
+    g.edit_info({"id":"1","Date-created":"2021-12-05","Employee":"Jan Jacobsen","Employee-id":"1","Title":"window clean","Description":"clean the windows!","Location":"Longyearbyen","Property":"Vei 217","Property-number":"F959594","Property-id":"1","Priority":"1","Suggested-contractor":"1","Status":"0"},"1")

@@ -1,6 +1,7 @@
 #viðhaldsgluggi, hjá starfsmönnum og yfirmönnum
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 from ui_layer.contractlist import ContractList
+from ui_layer.reportlist import ReportList
 from time import sleep
 import os
 
@@ -30,7 +31,8 @@ class EmployeeMaintenanceMenu:
                 contrcreate.display_list()
 
             elif user_input == '2':
-                pass
+                reportlist = ReportList(self.id)
+                reportlist.display_list()
 
             elif user_input.upper() == 'B':
                 return
