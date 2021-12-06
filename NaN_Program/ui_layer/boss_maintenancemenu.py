@@ -16,7 +16,7 @@ class BossMaintenanceMenu:
       {DASH*15}
       1. Skrá nýja verkbeiðni
       2. Verkbeiðnalisti
-      3. Verkskýrslulisti ???
+      3. Verkskýrslulisti
       {DASH*15}
       B. Til baka
 {STAR*14}

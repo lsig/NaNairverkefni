@@ -56,8 +56,9 @@ class BossPropertyCreate:
     #1:Kulsuk, 2:Þórshöfn, 3: longyearbyen
     def confirmproperty(self):
 
-        confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
+            confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
+
             if confirm.upper() == 'C':  # TODO
                 self.llapi.add_prop(self.propertylist)
                 #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
@@ -65,7 +66,6 @@ class BossPropertyCreate:
         
             elif confirm.upper() == 'E': # TODO
                 self.editpropertyinfo()
-                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             elif confirm.upper() == 'Q': # eigum við að setja QUIT hér inn?
                 return
@@ -74,7 +74,6 @@ class BossPropertyCreate:
                 print(INVALID)
                 sleep(SLEEPTIME)
                 self.reset_screen()
-                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
     
     def editpropertyinfo(self):
 
