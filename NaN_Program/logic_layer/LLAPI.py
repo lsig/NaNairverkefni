@@ -3,7 +3,7 @@ from os import name
 from contractorLL import ContractorLL
 from propertyLL import PropertyLL
 from jobLL import JobLL
-from employeeLL import EmployeeLL
+from EmployeeLL import EmployeeLL
 
 class LLAPI:
     def __init__(self):
