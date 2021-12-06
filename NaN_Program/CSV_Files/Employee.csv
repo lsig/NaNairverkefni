@@ -10,11 +10,3 @@ id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
 9,André Hjaltalin,0,Í Lágni 19; 100; Tórshavn; Faroe Islands,298661441,3547771382,Andre.hjaltalin@nanair.is,Tórshavn,010
 10,Bob,9876543212,Home,9999999,5555555,John@nan.is,Kulsuk,0
 11,John,1234567890,Home,1111111,5555555,John@nan.is,Kulsuk,0
-<<<<<<< HEAD
-12,Kristófer Fannar Björnsson,050302-3180,Grundartangi 18,7896765,7896765,kristofbjo@gmail.com,Kulsuk,0
-=======
-12,John,1234567890,Home,1111111,5555555,John@nan.is,Kulsuk,0
-13,John,1234567890,Home,1111111,5555555,John@nan.is,Kulsuk,0
-14,John,1234567890,Home,1111111,5555555,John@nan.is,Kulsuk,0
-15,John,1234567890,Home,1111111,5555555,John@nan.is,Kulsuk,0
->>>>>>> 1a6fe08de53a91360c0066741b85906da5f4dd5c
