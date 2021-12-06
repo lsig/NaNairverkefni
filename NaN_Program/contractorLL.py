@@ -61,6 +61,7 @@ class ContractorLL:
         if self.is_valid(edit_con_dic):
             all_lis_cont= self.dlapi.get_all_cont()
             dic = self.find_con_id(edit_con_dic["id"],all_lis_cont)
+            # print(dic)
  
             con_loc_in_lis = self.find_id_location_con(dic,all_lis_cont)
             all_lis_cont[con_loc_in_lis]= edit_con_dic
@@ -93,7 +94,7 @@ if __name__ == "__main__":
     # if "sig" in "siggi":
     #     print("12")
     # bool_2=g.edit_info({"4",,,,,"00",,None})
-    bool_2=g.edit_info( {"id":"4","Name":"John is grate", "Contact-name":"Elton john","Profession":"bulider", "Phone":"35499900", "Working-hours":"00","Location":"Tórshavn","Rating(0-10)":None})
+    bool_2=g.edit_info( {"id":"4","Name":"John is not grate", "Contact-name":"Elton john","Profession":"bulider", "Phone":"35499900", "Working-hours":"00","Location":"Tórshavn","Rating(0-10)":None})
 
     
 
