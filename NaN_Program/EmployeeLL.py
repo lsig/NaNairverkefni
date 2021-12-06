@@ -8,9 +8,6 @@ class EmployeeLL:
         self.dlapi = DlAPI()
         self.empll = EmployeeDL()
 
-    def createemployee(self,emp_lis):
-        emp = Employee(emp_lis[0], emp_lis[1], emp_lis[2], emp_lis[3], emp_lis[4], emp_lis[5], emp_lis[6], emp_lis[7], emp_lis[8])
-        self.dlapi.create_emp(emp)
 
 
     def add_employee(self):
@@ -25,11 +22,11 @@ class EmployeeLL:
             new_id = int(all_emp_lis[len(all_emp_lis)-1]["id"])+1
         return str(new_id)
 
-    
-    def add_contractor(self,cont_dic):
+#id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
+    def add_employee(self,cont_dic):
         #if self.is_valid(cont_dic):
-        cont = Employee(self.assign_id_cont(),cont_dic["Name"],cont_dic["Contact-name"],cont_dic["Profession"],cont_dic["Phone"],cont_dic["Working-hours"],cont_dic["Location"],None)
-        self.dlapi.add_cont(cont)
+        emp = Employee(self.assign_id_job(),cont_dic["Name"],cont_dic["Social Security"],cont_dic["Address"],cont_dic["Phone"],cont_dic["GSM"],cont_dic["Email"],cont_dic["Destination"],"0")
+        self.dlapi.add_emp(emp)
         return True
         #return False
 
@@ -54,9 +51,7 @@ class EmployeeLL:
         # return ret_list
 
 
-if __name__ == "__main__":
-    emp = EmployeeLL()
-    emp.create_emp(emp)
+
 
 
 # from logic_layer.EmployeeLL import EmployeeLL
@@ -74,3 +69,5 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     e = EmployeeLL()
+    e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "Kulusuk"})
+    #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
