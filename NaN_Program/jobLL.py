@@ -72,7 +72,6 @@ class JobLL:
                     return False
             #check if Destination is within bounds
             if get_validation == False:
-
                     return False
         return True
 

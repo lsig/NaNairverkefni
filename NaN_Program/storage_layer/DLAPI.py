@@ -77,7 +77,7 @@ class DlAPI:
         return self.maintenjobDL.get_all_maintenance_jobs()
 
     def add_maintenance_job(self,main_job):
-        self.maintenjobDL.add_maintenance_job()
+        self.maintenjobDL.add_maintenance_job(main_job)
 
     def change_maintenance_job(self,all_main_jobs_lis):
         self.maintenjobDL.change_maintenance_job_info(all_main_jobs_lis)

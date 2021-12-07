@@ -37,7 +37,7 @@ class ReportsLL:
         # Ef skýrsla er ekki samþykkt, þarf starfsmaður að geta breytt upplýsingum í skýrslunni.
         if self.report_validation(edit_rep_dic):
             all_rep_lis = self.dlapi.get_all_report()
-            dic = self.find_rep_id(edit_rep_dic["id"], all_rep_lis)
+            dic = self.find_rep_id(edit_rep_dic["Report-id"], all_rep_lis)
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
             all_rep_lis[rep_loc_in_list] = edit_rep_dic
             self.dlapi.change_report(all_rep_lis)
@@ -47,7 +47,6 @@ class ReportsLL:
         # NOTETOSELF: Skýrslur merktar "pending", "accepted", eða "rejected"
         # yfirmaður getur merkt skýrslu accepted eða rejected, en starfsmaður getur merkt skýrslu pending.
         # # # 
-
 
     def get_all_rep(self):
         all_reports = self.dlapi.get_all_report()
@@ -60,7 +59,7 @@ class ReportsLL:
     def get_report_name_and_location(self,id):
         rep_lis = self.dlapi.get_all_report()
         for dic in rep_lis:
-            if int(id) == int(dic["id"]):
+            if int(id) == int(dic["Report-id"]):
                 rep_info = {"Name":dic["Name"],"Location":dic["Location"]}
                 return rep_info        
         rep_info = {"Name":"null","Location":"null"}
@@ -74,12 +73,64 @@ class ReportsLL:
     def find_rep_id(self, all_rep_lis):
         if id.isdigit():
             for dic in all_rep_lis:
-                if int(dic["id"]) == int(id):
+                if int(dic["Report-id"]) == int(id):
                     return dic
             return None
         return False
 
+<<<<<<< HEAD
+    def find_id_location_con(self, dic, all_con_lis):
+        for i in range(len(all_con_lis)):
+            if dic == all_con_lis[i]:
+                return i
 
+
+    def confirm_report(self, id):
+        all_con_lis = self.dlapi.get_all_cont()
+        for dic in all_con_lis:
+            if dic["Report-id"] == id:
+                dic = dic["Status"] = "2"
+            
+            con_loc_in_list = self.find_id_location_con(dic, all_con_lis)
+            all_con_lis[con_loc_in_list] = dic
+            self.dlapi.change_report(all_con_lis)
+            
+
+
+    def ready_report(self):
+        pass
+
+        # for dic in all_con_lis:
+        #     if dic["id"] == id:
+        #         rep_from_con = self.list_all_rep_from_con(id)
+        #         avr_con_grade = self.calculate_average_con_grade(rep_from_con, all_con_lis)
+
+
+
+
+
+    def calculate_average_con_grade(self):
+        list_of_ratings = self.list_all_rep_from_con()
+        if list_of_ratings is not None:
+            average = sum(list_of_ratings)/len(list_of_ratings)
+            return average        
+    
+
+    def list_all_rep_from_con(self, id):
+        all_con_lis = self.dlapi.get_all_cont()
+        ret_lis = []    
+        if id.isdigit():
+            for dic in all_con_lis:
+                if int(dic["id"]) == int(id):
+                    ret_lis.append(dic["Contractor-rating"])
+        if len(ret_lis) != 0:
+            return ret_lis
+        else:
+            return None
+
+
+=======
+>>>>>>> c649217a30c6327a41fd34d9dfa5a4c78de526d4
     def report_validation(self, rep_dic, cont_dic):
         # a dictionairy for title, description, contractor-name and contractor-id.
         dic = {"Title":str, "Description":"both", "Contractor-id":int, "Commission": int}
@@ -104,7 +155,6 @@ class ReportsLL:
             prev = rep_dic[key]
             return True
 
-        
 if __name__ == "__main__":
     r = ReportsLL()
     print("maxim er king")

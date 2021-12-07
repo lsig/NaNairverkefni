@@ -34,7 +34,6 @@ class ContractorLL:
 
                     return False, key
         return True, key
-
     
     def find_con_id(self,id,all_cont_lis):
         if id.isdigit():
@@ -52,7 +51,6 @@ class ContractorLL:
                     ret_lis.append(dic)
             return ret_lis
         return False
-
 
     def lis_all_cont(self): # þarf að breyta 
         return self.dlapi.get_all_cont()

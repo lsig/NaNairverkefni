@@ -25,19 +25,25 @@ Q. Quit
     def start(self):
         while True:
             os.system(CLEAR)
-            staffid = input(self.loginscreen)
-            valid = True # = self.llapi.valid_id(staffid)
-            if staffid.upper() == 'Q':    
+            print(self.loginscreen)
+            id_input = input()
+
+            if id_input == '': #remove for launch
+                id_input = 'jan.jacobsen'
+
+            staffid = self.llapi.login_information(id_input)
+
+            if id_input.upper() == 'Q':    
                 return
 
-            if valid: 
-                #print(f"\nWelcome, {staffid}") 
-                #sleep(SLEEPTIME)
-                if staffid.upper() == 'Y0301' or staffid.upper() != 'S': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
-                    bossmenu = BossMenu(staffid)
+            if staffid is not None: 
+                print(f"\nWelcome, {staffid['Name']}") 
+                sleep(SLEEPTIME)
+                if staffid['Manager'] == '1': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
+                    bossmenu = BossMenu(staffid, 'Manager')
                     returnvalue = bossmenu.print_menu()
 
-                elif staffid.upper() == 'S': #TODO, (employee id hér)
+                else:
                     empmenu = EmployeeMenu(staffid)
                     returnvalue = empmenu.print_menu()
                 
@@ -46,4 +52,4 @@ Q. Quit
 
             else:
                 print("Invalid ID, try again.")
-                sleep(SLEEPTIME-1)
+                sleep(SLEEPTIME+0.5)
