@@ -5,12 +5,13 @@ import os
 from logic_layer.LLAPI import LLAPI
 
 class BossContractorCreate:
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
+        self.position = position
         self.id = id
         self.contractordict = {}
         self.screen = f'''
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VERKTAKAR |
      - Skrá nýja verktaka
@@ -68,7 +69,7 @@ class BossContractorCreate:
             elif confirm.upper() == 'E':
                 self.editcontractorinfo()
 
-            elif confirm.upper() == 'Q': # QUIT??
+            elif confirm.upper() == 'Q':
                 return
 
             else:
