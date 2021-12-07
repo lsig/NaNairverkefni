@@ -10,7 +10,6 @@ class EmployeeMenu:
     def __init__(self, id, position):
         self.id = id
         self.position = position
-        self.id = '1' #spyrja maxim˙
         self.options = f''' 
 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
@@ -33,7 +32,7 @@ class EmployeeMenu:
             
             if user_choice == '1':
                 prop_menu = PropertyList(self.id, self.position)
-                prop_menu.display_list()
+                prop_menu.run_screen()
 
             elif user_choice == '2':
                 maintenance_menu = EmployeeMaintenanceMenu(self.id, self.position)
