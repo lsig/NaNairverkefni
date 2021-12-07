@@ -17,6 +17,12 @@ class LLAPI:
     def add_cont(self,con_lis):
         return self.contLL.add_contractor(con_lis)
 
+    def list_all_contractors(self):
+        return self.contLL.lis_all_cont()
+    
+    def search_contractor(self, userstring, con_list, key):
+        return self.contLL.find_con_by_str(userstring, con_list, key)
+
     def add_prop(self,prop_lis):
         return self.propLL.add_property(prop_lis)
 

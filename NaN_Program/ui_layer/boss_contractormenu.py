@@ -34,7 +34,7 @@ class BossContractorMenu:
 
             elif user_choice == '2':
                 contractorlist = ContractorList(self.id, self.position)
-                contractorlist.display_list()
+                contractorlist.run_screen()
 
             elif user_choice.upper() == 'B':
                 return
