@@ -1,11 +1,12 @@
 #starfsmannalisti
-from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR
+from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR, 
 from ui_layer.boss_seeemployee import SeeEmployee
 from logic_layer.LLAPI import LLAPI
 from time import sleep
 import os
 MAXROWS = 10
 EMPPRINT = [4, 20, 0, 25, 15, 15, 30, 20, 0]
+SEARCHFILTERS = ['Name','Email','Destination', 'Social security']
 
 class EmployeeList: 
     def __init__(self, id, position) -> None:
@@ -15,6 +16,7 @@ class EmployeeList:
         self.id = id
         self.position = position
         self.employeelist = self.llapi.get_emp_info()
+        self.employeelist_backup = self.llapi.get_emp_info()
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -101,3 +103,79 @@ class EmployeeList:
         else:
             print(INVALID)
             sleep(SLEEPTIME)
+
+    def find_property(self):
+        for index, filter in enumerate(SEARCHFILTERS):
+            print(f"{index + 1}: {filter}")
+        if self.employeelist != self.employeelist_backup:
+            print('R: Reset')
+        userint = self.validate('userint')
+
+        if userint == 'B':
+            return 'B'
+        elif userint == 'R':
+            self.employeelist = self.employeelist_backup
+            return
+        key = SEARCHFILTERS[userint - 1]
+        userstring = input(f"Search in {key.lower()}: ")
+
+        filteredlist = self.llapi.search_employee(userstring, self.employeelist, key)
+
+        if filteredlist == False:
+            print(f"The filter {key.lower()}: {userstring} did not match any result.")
+            sleep(SLEEPTIME*3)
+        else:
+            self.propertylist = filteredlist
+        
+
+    def print_header(self):
+        for index, k in enumerate(self.propertylist[0].keys()):
+            if k == 'id':
+                extra = '  '
+            else:
+                extra = ''
+            print(f"{'| ' + k + extra:<{PROPPRINT[index]}}",end='')
+        print(f"\n{DASH* sum(PROPPRINT) }")
+    
+
+    def print_footer(self):
+        dashlen = 21
+        print(f"{DASH * sum(PROPPRINT)}\n")
+        if self.slide > 0:
+            print("p. Previous - ", end='')
+            dashlen += 14
+        if (self.slide + 1) * self.rows < len(self.propertylist):
+            print("n. Next - ", end='')
+            dashlen += 10
+        print(f"#. to Select Property\n{DASH*dashlen}")
+        
+
+
+    def validate(self, userint = None, userrows = None):
+        if userint is not None:
+            while True:
+                userint = input(" ")
+                if userint.upper() == 'B':
+                    return 'B'
+                elif userint.upper() == 'R':
+                    return 'R'
+                elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
+                    return int(userint)
+                
+                print(INVALID)
+                sleep(SLEEPTIME)
+                self.display_list()
+                self.prompt_user('L')
+        
+        if userrows is not None:
+            while True:
+                userrows = input("Rows: ")
+                if userrows.isdigit() == True and (1 <= int(userrows)):
+                    if int(userrows) > MAXROWS:
+                        print(f"Keep the row length under {MAXROWS}")
+                    else:
+                        return int(userrows)
+                else:
+                    print(INVALID)
+                sleep(SLEEPTIME*2)
+                self.display_list()
