@@ -90,6 +90,7 @@ class PropertyList:
                 propertyinfo = self.llapi.filter_property_id(user_input, self.propertylist) 
                 seeproperty = SeeProperty(self.id, propertyinfo)
                 seeproperty.display()
+                self.propertylist = self.llapi.get_prop_info()
             else: 
                 print(INVALID)
                 sleep(SLEEPTIME)
@@ -112,7 +113,7 @@ class PropertyList:
             self.propertylist = self.propertylist_backup
             return
         key = SEARCHFILTERS[userint - 1]
-        userstring = input(f"Search in {key.lower()}: ")   #TODO Validate
+        userstring = input(f"Search in {key.lower()}: ")
 
         filteredlist = self.llapi.search_property(userstring, self.propertylist, key)
 
