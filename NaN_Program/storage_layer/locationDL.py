@@ -35,6 +35,6 @@ class LocationDL():
 
 if __name__ == "__main__":
     g = LocationDL()
-    t = Location("Reykjavík","iceland","NAN","00","00","Arnar Singh","1")
+    #t = Location("Reykjavík","iceland","NAN","00","00","Arnar Singh","1")
     # g.add_loc(t)
-    g.change_loc_info(g.get_all_loc())
+    #g.change_loc_info(g.get_all_loc())

@@ -31,8 +31,20 @@ class LocationLL:
         return str(new_id)
 
     def is_valid(self,loc_dic):
-        dic = {"Name":str, "Country":"both", "Airport":int, "Phone":int,"Working-hours":str,"Manager":"both","Extras":str}
+        dic = {"Name":str, "Country":str, "Airport":str, "Phone":int,"Working-hours":int,"Manager":str}
+        for key in dic.keys():
+            if dic[key] == str:
+                get_validation = loc_dic[key].replace(" ", "").isalpha()
+            else:
+                get_validation = loc_dic[key].replace("-","").isdigit()
+            # to check if the phone number is a valid length    
+            if key.lower() == "phone" and get_validation:
+                if len(loc_dic[key]) < 7 or len(loc_dic[key]) > 15:
+                    return False, key
+            if get_validation == False:
 
+                    return False, key
+        return True, key
 
 if __name__ == "__main__":
     g = LocationLL()

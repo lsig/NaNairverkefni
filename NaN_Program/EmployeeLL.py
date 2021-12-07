@@ -112,7 +112,7 @@ class EmployeeLL:
                 for row in self.get_destination_name():
                     if emp_dic["Destination"].lower() == row.lower():
                         loc_correct = True
-                if loc_correct == False:
+                if loc_correct == False and "Country" in emp_dic == False:
                     return False, key
             if key.lower() == "phone" and get_validation:
                 if 7 > len(emp_dic[key]) or len(emp_dic[key]) > 15:
