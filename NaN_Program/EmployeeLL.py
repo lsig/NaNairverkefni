@@ -141,6 +141,22 @@ class EmployeeLL:
             return False
         return ret_lis
 
+    def find_employee_name(self,id):
+        employee_names = self.dlapi.get_all_emp()
+        for dic in employee_names:
+            if int(id) == int(dic["id"]):
+                emp_name = dic["Name"]
+        return emp_name
+
+    def get_emp_location(self,id):
+        emp_lis = self.dlapi.get_all_emp()
+        for dic in emp_lis:
+            if int(id) == int(dic["id"]):
+                boss_location = dic["Destination"]
+                return boss_location
+        none_val = "None"
+        return none_val
+
 
 
 if __name__ == "__main__":
