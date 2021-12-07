@@ -71,7 +71,7 @@ class EmployeeLL:
         email = email.lower()
         for key in all_emp_lis:
             if key["Email"].lower() == email:
-                dic_return = {"id": key["id"], "manager": key["Manager"]}
+                dic_return = key
                 return dic_return
 
 
@@ -149,7 +149,8 @@ if __name__ == "__main__":
     #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
     #e.edit_employee({"id": "10", "Name": "Bob", "Social Security": "9876543212", "Address": "Home", "Phone": "9999999", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1", "Manager": "0"})
     #print(e.email_generate("Kalli"))
-    f = {"key":"lala","lo":"sda"}
-    print("ky" in f)
+    #f = {"key":"lala","lo":"sda"}
+    #print("ky" in f)
+    print(e.login_info("nanna.daema"))
 
 
