@@ -59,6 +59,7 @@ class BossEmployeeCreate:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             if confirm.upper() == 'C':  # TODO
+                self.contactdict["Manager"] = "0" #Not boss
                 valid, key = self.llapi.add_emp(self.contactdict)
 
                 if valid:

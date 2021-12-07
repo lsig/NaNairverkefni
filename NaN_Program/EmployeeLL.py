@@ -10,7 +10,7 @@ class EmployeeLL:
         #badb
 
 
-    def assign_id_job(self):
+    def assign_id_emp(self):
         all_emp_lis = self.dlapi.get_all_emp()
         if all_emp_lis == []:
             new_id = 1
@@ -24,7 +24,7 @@ class EmployeeLL:
         if valid:
             email = self.email_generate(emp_dic["Name"])
             emp_dic["Destination"] = emp_dic["Destination"].capitalize()
-            emp = Employee(self.assign_id_job(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],email,emp_dic["Destination"],"0")
+            emp = Employee(self.assign_id_emp(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],email,emp_dic["Destination"],emp_dic["Manager"])
             self.dlapi.add_emp(emp)
             return True, key
         return False, key
@@ -81,7 +81,7 @@ class EmployeeLL:
         all_emp_lis = self.dlapi.get_all_emp()
         for key in all_emp_lis:
             if key["Email"].lower() == email:
-                email = name + self.assign_id_job() + "@nanair.is"
+                email = name + self.assign_id_emp() + "@nanair.is"
         return email
 
 

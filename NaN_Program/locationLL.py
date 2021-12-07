@@ -1,14 +1,24 @@
 from storage_layer.DLAPI import DlAPI
 from models.location import Location
+from EmployeeLL import EmployeeLL
+
 
 
 class LocationLL:
     def __init__(self):
         self.dlapi = DlAPI()
+        self.empLL = EmployeeLL()
+        
 
     def add_location(self,loc_dic):
         #loc_dic["Destination"] = loc_dic["Destination"].capitalize()
-        loc = Location(self.assign_id_loc(),loc_dic["Name"],loc_dic["Country"],loc_dic["Airport"],loc_dic["Phone"],loc_dic["Working-hours"],loc_dic["Manager"],)
+        boss_id = self.empLL.assign_id_emp()
+        loc = Location(self.assign_id_loc(),loc_dic["Name"],loc_dic["Country"],loc_dic["Airport"],loc_dic["Phone"],loc_dic["Working-hours"],loc_dic["Manager"],boss_id)
+        loc_dic["Destination"] = loc_dic["Name"]
+        loc_dic["Phone"] = loc_dic["Phone-man"]
+        loc_dic["Name"] = loc_dic["Manager"]
+        loc_dic["Manager"] = "1"
+        self.empLL.add_employee(loc_dic)
         self.dlapi.add_loc(loc)
 
 
@@ -26,7 +36,7 @@ class LocationLL:
 
 if __name__ == "__main__":
     g = LocationLL()
-    #g.add_location({"Name":"Nuuk","Country":"Greenland","Airport":"Nan","Phone":"3548988054","Working-hours":"00","Manager":"lala"})
+    #g.add_location({"Name":"Nuuk","Country":"Greenland","Airport":"Nan","Phone":"3548988054","Working-hours":"00","Manager":"lala","Manager-id":"5"})
     #d = g.get_all_prop()
     #d = g.find_prop_id("2",g.get_all_prop())
     #print(d[0]["id"])
@@ -36,3 +46,4 @@ if __name__ == "__main__":
     #{"Name":"John"}
     #d=g.get_destination_name()
     #print(d[0].capitalize())
+    g.add_location({"Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Phone-man":"123456789","Address":"Cool Street","GSM":"123456788","Social Security":"98876532"})
