@@ -48,7 +48,6 @@ class ReportsLL:
         # yfirmaður getur merkt skýrslu accepted eða rejected, en starfsmaður getur merkt skýrslu pending.
         # # # 
 
-
     def get_all_rep(self):
         all_reports = self.dlapi.get_all_report()
         counter = 0
@@ -79,56 +78,6 @@ class ReportsLL:
             return None
         return False
 
-    def find_id_location_con(self, dic, all_con_lis):
-        for i in range(len(all_con_lis)):
-            if dic == all_con_lis[i]:
-                return i
-
-
-    def confirm_report(self, id):
-        all_con_lis = self.dlapi.get_all_cont()
-        for dic in all_con_lis:
-            if dic["id"] == id:
-                dic = dic["Status"] = "2"
-            
-            con_loc_in_list = self.find_id_location_con(dic, all_con_lis)
-            all_con_lis[con_loc_in_list] = dic
-            self.dlapi.change_report(all_con_lis)
-            
-
-
-    def ready_report(self):
-        pass
-
-        # for dic in all_con_lis:
-        #     if dic["id"] == id:
-        #         rep_from_con = self.list_all_rep_from_con(id)
-        #         avr_con_grade = self.calculate_average_con_grade(rep_from_con, all_con_lis)
-
-
-
-
-
-    def calculate_average_con_grade(self):
-        list_of_ratings = self.list_all_rep_from_con()
-        if list_of_ratings is not None:
-            average = sum(list_of_ratings)/len(list_of_ratings)
-            return average        
-    
-
-    def list_all_rep_from_con(self, id):
-        all_con_lis = self.dlapi.get_all_cont()
-        ret_lis = []    
-        if id.isdigit():
-            for dic in all_con_lis:
-                if int(dic["id"]) == int(id):
-                    ret_lis.append(dic["Contractor-rating"])
-        if len(ret_lis) != 0:
-            return ret_lis
-        else:
-            return None
-
-
     def report_validation(self, rep_dic, cont_dic):
         # a dictionairy for title, description, contractor-name and contractor-id.
         dic = {"Title":str, "Description":"both", "Contractor-id":int, "Commission": int}
@@ -153,12 +102,10 @@ class ReportsLL:
             prev = rep_dic[key]
             return True
 
-        
 if __name__ == "__main__":
     r = ReportsLL()
     print("maxim er king")
-    #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
-    r.confirm_report("Yxa")
+    r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
 ## id = 1
 # Date-created = 2021-12-06
 # Employee = Jacob Yxa
@@ -168,10 +115,7 @@ if __name__ == "__main__":
 # Location = Longyearbyen  
 # Property = Vei 217
 # Property-number = F959594
-# Property-id = 1 
-# 
-# list all report, 
-
+# Property-id = 1
 # Priority = ASAP
 # Suggested-contractor = 1
 # Status = 0
