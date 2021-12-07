@@ -9,19 +9,24 @@ class ReportsLL:
     def __init__(self):
         self.dlapi = DlAPI()
 
-    def add_report(self, rep_dic,job_dic):
-        if self.is_valid(rep_dic):
+    def add_report(self, rep_dic, job_dic):
+        cont_dic = self.dlapi.get_all_cont()
+        if self.report_validation(rep_dic, cont_dic):
             current_date = datetime.date(datetime.now())
-            rep_dic = self.replace_loc_num_with_name(rep_dic)
-            rep = Report(self.new_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],rep_dic["Title"],rep_dic["Description"],rep_dic["Contractor-name"], rep_dic["Contractor-id"], None, current_date, rep_dic["Commission"], "0")
+            #rep_dic = self.replace_loc_num_with_name(rep_dic)
+            rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],rep_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], rep_dic["Contractor-name"], rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"], "0")
+            # Status, Property, Property-number, Property-id, Contractor-Rating, Location
             self.dlapi.add_report(rep)
             return True
         return False
 
     def generate_id(self):
         all_rep_lis = self.dlapi.get_all_report()
-        new_id = int(all_rep_lis[len(all_rep_lis)-1]["id"])+1
-        return new_id
+        if all_rep_lis == []:
+            new_id = 1
+        else:
+            new_id = int(all_rep_lis[len(all_rep_lis)-1]["id"])+1
+        return str(new_id)
 
     def list_all_reports(self):
         all_rep = self.dlapi.get_all_report()
@@ -31,11 +36,49 @@ class ReportsLL:
         # NOTETOSELF:yfirmaður þarf að geta samþykkt viðhaldsskýrslur, og starfsmenn þurfa að geta séð hvaða skýrslur, sem þeir eiga, eru samþykktar og hverjar ekki.
         # Ef skýrsla er ekki samþykkt, þarf starfsmaður að geta breytt upplýsingum í skýrslunni.
         if self.report_validation(edit_rep_dic):
-            all_list_rep = self.dlapi.get_all_report()
+            all_rep_lis = self.dlapi.get_all_report()
+            dic = self.find_rep_id(edit_rep_dic["id"], all_rep_lis)
+            rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
+            all_rep_lis[rep_loc_in_list] = edit_rep_dic
+            self.dlapi.change_report(all_rep_lis)
+            return True
+        return None
 
         # NOTETOSELF: Skýrslur merktar "pending", "accepted", eða "rejected"
         # yfirmaður getur merkt skýrslu accepted eða rejected, en starfsmaður getur merkt skýrslu pending.
         # # # 
+
+
+    def get_all_rep(self):
+        all_reports = self.dlapi.get_all_report()
+        counter = 0
+        for i in all_reports:
+            all_reports[counter]["Suggested-contractor"] = self.get_report_name_and_location(i["Suggested-contractor"])["Name"]
+            counter += 1
+        return all_reports
+
+    def get_report_name_and_location(self,id):
+        rep_lis = self.dlapi.get_all_report()
+        for dic in rep_lis:
+            if int(id) == int(dic["id"]):
+                rep_info = {"Name":dic["Name"],"Location":dic["Location"]}
+                return rep_info        
+        rep_info = {"Name":"null","Location":"null"}
+        return rep_info 
+
+    def find_id_location_rep(self, dic, all_rep_lis):
+        for i in range(len(all_rep_lis)):
+            if dic == all_rep_lis[i]:
+                return i
+            
+    def find_rep_id(self, all_rep_lis):
+        if id.isdigit():
+            for dic in all_rep_lis:
+                if int(dic["id"]) == int(id):
+                    return dic
+            return None
+        return False
+
 
     def report_validation(self, rep_dic, cont_dic):
         # a dictionairy for title, description, contractor-name and contractor-id.
@@ -64,7 +107,19 @@ class ReportsLL:
         
 if __name__ == "__main__":
     r = ReportsLL()
-    r.add_report
-
-        
-         
+    print("maxim er king")
+    r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
+## id = 1
+# Date-created = 2021-12-06
+# Employee = Jacob Yxa
+# Employee-id = 2
+# Title = Maxim
+# Description = something
+# Location = Longyearbyen  
+# Property = Vei 217
+# Property-number = F959594
+# Property-id = 1
+# Priority = ASAP
+# Suggested-contractor = 1
+# Status = 0
+#Report-id,Request-id,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Contractor-name,Contractor-id,Contractor-Rating,Date,Commission,"Status

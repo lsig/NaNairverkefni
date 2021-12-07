@@ -22,7 +22,7 @@ class ReportDL():
             fieldnames = ["Report-id","Request-id","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Contractor-name","Contractor-id","Contractor-rating","Date","Commission","Status"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({"Report-id":rep.report_id,"Request-id":rep.request_id,"Employee":rep.emp,"Employee-id":rep.emp_id,"Title":rep.title,"Description":rep.descript,"Location":rep.loc,
-            "Property":rep.prop,"Property-number":rep.prop_nr,"property-id":rep.prop_id,
+            "Property":rep.prop,"Property-number":rep.prop_nr,"Property-id":rep.prop_id,
             "Contractor-name":rep.contract_name,"Contractor-id":rep.contract_id,"Contractor-rating":rep.contract_rating,"Date":rep.date,"Commission":rep.comm,"Status":rep.status})
 
     
