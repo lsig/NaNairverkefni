@@ -1,4 +1,4 @@
-id,Name,Country,Airport,Phone,Working-hours,Manager
-1,Kulusuk,Greenland,NaN,00,00,00,Minik Wallace
-2,Tórshavn,Faroe Islands,NaN,00,00,00,Annette Djurhuus
-3,Longyearbyen,Svalbard,NaN,00,00,00,Jan Jacobsen
+id,Name,Country,Airport,Phone,Working-hours,Manager,Manager-id
+1,Kulusuk,Greenland,NaN,00,00,00,Minik Wallace,4
+2,Tórshavn,Faroe Islands,NaN,00,00,00,Annette Djurhuus,7
+3,Longyearbyen,Svalbard,NaN,00,00,00,Jan Jacobsen,1
