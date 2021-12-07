@@ -6,12 +6,13 @@ from logic_layer.LLAPI import LLAPI
 
 
 class BossPropertyCreate:
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
+        self.position = position
         self.id = id
         self.propertylist = {}
         self.screen = f'''
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
     | FASTEIGNIR |
      - Skrá nýja fasteign

@@ -6,10 +6,11 @@ import os
 from time import sleep
 
 class PropertyMenu:
-    def __init__(self, id) -> None:
-        self.id  = id
+    def __init__(self, id, position) -> None:
+        self.id = id
+        self.position = position
         self.screen =  f''' 
-| {self.id['Destination']} | {self.id['Name']} |
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | FASTEIGNIR |
       {DASH*15}
@@ -27,11 +28,11 @@ class PropertyMenu:
             user_input = input()
 
             if user_input == '1':
-                bosspropcreate = BossPropertyCreate(self.id)
+                bosspropcreate = BossPropertyCreate(self.id, self.position)
                 bosspropcreate.display()
 
             elif user_input == '2':
-                proplist = PropertyList(self.id)
+                proplist = PropertyList(self.id, self.position)
                 proplist.run_screen()
 
             elif user_input.upper() == 'B':

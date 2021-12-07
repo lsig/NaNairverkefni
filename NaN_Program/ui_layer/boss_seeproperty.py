@@ -9,12 +9,13 @@ import os
 
 
 class SeeProperty:
-    def __init__(self, id, propertyinfo) -> None:
+    def __init__(self, id, propertyinfo, position) -> None:
+        self.position = position
         self.llapi = LLAPI()
         self.id = id
         self.property = propertyinfo
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
     | FASTEIGNIR |
      - Fasteignalisti
@@ -54,7 +55,7 @@ class SeeProperty:
             return 'C'
         
         elif user_input.upper() == 'R':
-            propreport = ReportList(self.id, self.property['id'])
+            propreport = ReportList(self.id, self.property['id'], self.position)
             propreport.display_list()
 
         elif user_input.upper() == 'E':
