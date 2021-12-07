@@ -60,6 +60,9 @@ class LLAPI:
     def login_information(self,email):
         return self.empll.login_info(email)
     
+    def search_employee(self, string, employeelist, key):
+        return self.empll.find_emp_by_str(string, employeelist,key)
+    
     def search_property(self, string, propertylist, key):
         return self.propLL.find_prop_by_str(string, propertylist, key)
 

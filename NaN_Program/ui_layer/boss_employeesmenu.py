@@ -35,7 +35,7 @@ class BossEmployeesMenu:
 
             elif user_choice == '2':
                 emplist = EmployeeList(self.id, self.position) #This is the ui class
-                emplist.display_list()
+                emplist.run_screen()
 
             elif user_choice.upper() == 'B':
                 return
