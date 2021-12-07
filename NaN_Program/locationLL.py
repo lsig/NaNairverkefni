@@ -20,10 +20,13 @@ class LocationLL:
             new_id = int(all_loc_lis[len(all_loc_lis)-1]["id"])+1
         return str(new_id)
 
+    def is_valid(self,loc_dic):
+        pass
+
 
 if __name__ == "__main__":
     g = LocationLL()
-    g.add_location({"Name":"Nuuk","Country":"Greenland","Airport":"Nan","Phone":"3548988054","Working-hours":"00","Manager":"lala"})
+    #g.add_location({"Name":"Nuuk","Country":"Greenland","Airport":"Nan","Phone":"3548988054","Working-hours":"00","Manager":"lala"})
     #d = g.get_all_prop()
     #d = g.find_prop_id("2",g.get_all_prop())
     #print(d[0]["id"])
