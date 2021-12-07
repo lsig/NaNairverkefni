@@ -93,6 +93,7 @@ class BossPropertyCreate:
 
         self.reset_screen()
     
+    
     def reset_screen(self, user_row = None):
 
         os.system(CLEAR)

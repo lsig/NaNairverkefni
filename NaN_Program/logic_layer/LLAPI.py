@@ -37,7 +37,7 @@ class LLAPI:
        return self.jLL.get_all_jobs()
     
     def edit_prop(self, propdict):
-        self.propLL.edit_info(propdict)
+        return self.propLL.edit_info(propdict)
 
     def get_emp_info(self):
         return self.empll.list_all_employees()
