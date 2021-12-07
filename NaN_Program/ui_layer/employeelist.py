@@ -8,14 +8,15 @@ MAXROWS = 10
 EMPPRINT = [4, 20, 0, 25, 15, 15, 30, 20, 0]
 
 class EmployeeList: 
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
+        self.position = position
         self.employeelist = self.llapi.get_emp_info()
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | STARFSMENN |
      - Starfsmannalisti
@@ -90,7 +91,7 @@ class EmployeeList:
             
             if self.firstrow <= int(user_input) < self.lastrow and len(self.employeelist) >= int(user_input):
                 employeeinfo = self.llapi.filter_employee_id(user_input, self.employeelist) 
-                seeemp = SeeEmployee(self.id, employeeinfo)
+                seeemp = SeeEmployee(self.id, employeeinfo, self.position)
                 seeemp.display()
             
             else: 

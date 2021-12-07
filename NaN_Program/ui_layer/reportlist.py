@@ -6,12 +6,13 @@ MAXROWS = 10
 
 
 class ReportList: 
-    def __init__(self, id, propertydict = None) -> None:
+    def __init__(self, id, propertydict = None, position) -> None:
         self.propertydict = propertydict
         self.llapi = LLAPI(id)
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
+        self.position = position
         self.reportlist = self.llapi.get_report_info() #TODO
         self.reportlist_backup = self.reportlist # er þetta ekki eih svona shallow copy, ss að ef self.reportlist breytist þá breytist self.reportlist_backup, því hann er instance.
         if self.propertydict == None:
@@ -19,7 +20,7 @@ class ReportList:
         else:
             menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.propertydict["Address"]}'
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
 {menutravel}
      {DASH*15}
