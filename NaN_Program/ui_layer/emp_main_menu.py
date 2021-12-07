@@ -7,12 +7,13 @@ from ui_layer.emp_maintenancemenu import EmployeeMaintenanceMenu
 from time import sleep
 
 class EmployeeMenu: 
-    def __init__(self, id):
+    def __init__(self, id, position):
         self.id = id
+        self.position = position
         self.id = '1' #spyrja maxim˙
         self.options = f''' 
 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
       {DASH*15}
       1. Fasteignir 
@@ -31,15 +32,15 @@ class EmployeeMenu:
             user_choice = input()
             
             if user_choice == '1':
-                prop_menu = PropertyList(self.id)
+                prop_menu = PropertyList(self.id, self.position)
                 prop_menu.display_list()
 
             elif user_choice == '2':
-                maintenance_menu = EmployeeMaintenanceMenu(self.id)
+                maintenance_menu = EmployeeMaintenanceMenu(self.id, self.position)
                 maintenance_menu.display()
 
             elif user_choice == '3':
-                contractor_menu = ContractorList(self.id)
+                contractor_menu = ContractorList(self.id, self.position)
                 contractor_menu.display_list()
             
             elif user_choice.upper() == 'L':

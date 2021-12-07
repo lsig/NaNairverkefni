@@ -12,15 +12,16 @@ PROPPRINT = [4, 15, 20, 8, 8, 15, 19, 15]
 
 
 class PropertyList: 
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
         self.rows = ROWS
         self.slide = 0
         self.id = id
+        self.position = position
         self.propertylist = self.llapi.get_prop_info()
         self.propertylist_backup = self.llapi.get_prop_info()
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | FASTEIGNIR |
      - Fasteignalisti
@@ -88,7 +89,7 @@ class PropertyList:
             
             if user_input in self.printedids:
                 propertyinfo = self.llapi.filter_property_id(user_input, self.propertylist) 
-                seeproperty = SeeProperty(self.id, propertyinfo)
+                seeproperty = SeeProperty(self.id, propertyinfo, self.position)
                 seeproperty.display()
                 self.propertylist = self.llapi.get_prop_info()
             else: 

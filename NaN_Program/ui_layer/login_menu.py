@@ -44,7 +44,7 @@ Q. Quit
                     returnvalue = bossmenu.print_menu()
 
                 else:
-                    empmenu = EmployeeMenu(staffid)
+                    empmenu = EmployeeMenu(staffid, 'Employee')
                     returnvalue = empmenu.print_menu()
                 
                 if returnvalue == QUIT:

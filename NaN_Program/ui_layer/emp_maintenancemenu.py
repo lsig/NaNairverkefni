@@ -6,10 +6,11 @@ from time import sleep
 import os
 
 class EmployeeMaintenanceMenu:
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.id = id
+        self.position = position
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VIÐHALD |
       {DASH*15}
@@ -27,11 +28,11 @@ class EmployeeMaintenanceMenu:
             user_input = input()
 
             if user_input == '1':
-                contrcreate = ContractList(self.id)
+                contrcreate = ContractList(self.id, self.position)
                 contrcreate.display_list()
 
             elif user_input == '2':
-                reportlist = ReportList(self.id)
+                reportlist = ReportList(self.id, self.position)
                 reportlist.display_list()
 
             elif user_input.upper() == 'B':

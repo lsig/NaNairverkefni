@@ -9,11 +9,12 @@ MAXROWS = 10
 
 
 class ContractorList: 
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
+        self.position = position
         self.contractorlist = [['Jói','1303576040','8776545','joi@nanair.is'],
             ['Spói','1403579040','8876545','spoi@nanair.is'],
             ['Gói','0903576030','','Gói@nanair.is'],
@@ -22,7 +23,7 @@ class ContractorList:
             ['Maxim', 'idk'],
             ['Markús', 'newphone']]
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VERKTAKAR |
      - Verktakalisti
@@ -84,7 +85,7 @@ Nafn | Sími | Netfang | Kennitala
             self.lastrow = (self.slide + 1) * self.rows
             
             if self.firstrow <= int(user_input) < self.lastrow and len(self.contractorlist) >= int(user_input) :
-                seecontractor = SeeContractor(self.id) 
+                seecontractor = SeeContractor(self.id, self.position) 
                 seecontractor.display()
             else: 
                 print("Invalid row, try again!")
