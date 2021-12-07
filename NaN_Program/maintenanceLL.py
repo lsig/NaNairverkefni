@@ -31,7 +31,7 @@ class MaintenanceLL:
             return str(new_id)
         return str(1)
 
-    def is_valid(self,main_dic):
+    def is_valid(self,today,main_dic):
         dic = {"Date-to(dd-mm-yyyy)":int,"Frequency":int,"Employee-id":int,"Title":str,"Description":"both","Property-id":int,"Priority":int,"Suggested-contractor":str}
         for key in dic.keys():
             if dic[key] == str:
@@ -43,6 +43,11 @@ class MaintenanceLL:
             if key == "Date-to(dd-mm-yyyy)" and get_validation:
                 if len(main_dic[key]) != 10:
                     return False, key
+                date_time = self.check_date(main_dic[key].split())
+                if date_time:
+                    pass
+                else:
+                    return False,key
             if key == "Frequency":
                 if int(main_dic[key]) == 1 or int(main_dic[key]) == 2:
                     pass
@@ -53,17 +58,22 @@ class MaintenanceLL:
             if get_validation == False:
 
                     return False, key
-        return True, key
+        if main_dic["Frequency"] == "1":
+            freq = 7
+        else:
+            freq = 30
+        if today >= date_time:
+            if (date_time-today).days() <= freq:
+                return False,"Date-to(dd-mm-yyyy)","Frequency"
+        return True 
 
 
     def check_date(self,date):
-        date = date.split("-")
         if date[0] == 2 and date[1] == 2 and date[2] == 4:
             if date[0] > 0 and date[0] < 32 and date[1] > 0 and date[1] < 13:
                 date_time=datetime(int(date[2]),int(date[1]),int(date[0])).date()
                 if date_time > datetime.date(datetime.now()):
-                    return True
-
+                    return date_time
         return False
 
 
@@ -76,7 +86,7 @@ if __name__ == "__main__":
     print(len(date))
     # print(date)
     x=datetime(int(date[2]),int(date[1]),int(date[0])).date()
-    print(x1,x)
+    print(x1>x)
     # print(x)
     print((x1- x).days)
     # print(x.strftime("%B"))
@@ -84,5 +94,5 @@ if __name__ == "__main__":
     dic_fromat = {"Date-to(dd-mm-yyyy)":"20-12-2020","Frequency(number of days)":"7","Employee-id":"2","Title":"hani","Description":"hehe","Property-id":"3","Priority":"1","Suggested-contractor":" "}
     # g = MaintenanceLL()
     # g.add_maintenance(dic_fromat,1)
-    if ["1"]:
+    if x:
         print("yeah")
