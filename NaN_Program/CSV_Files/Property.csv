@@ -1,18 +1,18 @@
 id,Destination,Address,Size,Rooms,Type,Property-number,Extras
 1,Longyearbyen,Vei 217,150,4,single-family,F959594,windows
-2,Kulsuk,iGloo-Ville,35,1,igloo,64-3900,snowhouse
-3,Kulsuk,iGloo-Ville,35,1,igloo,64-3901,snowhouse
-4,Kulsuk,iGloo-Ville,35,1,igloo,64-3902,snowhouse
-5,Kulsuk,iGloo-Ville,35,1,igloo,64-3903,snowhouse
-6,Kulsuk,iGloo-Ville,35,1,igloo,64-3904,snowhouse
-7,Kulsuk,iGloo-Ville,35,1,igloo,64-3905,snowhouse
-8,Kulsuk,iGloo-Ville,35,1,igloo,64-3906,snowhouse
-9,Kulsuk,iGloo-Ville,35,1,igloo,64-3907,snowhouse
-10,Kulsuk,iGloo-Ville,35,1,igloo,64-3908,snowhouse
-11,Kulsuk,iGloo-Ville,35,1,igloo,64-3909,snowhouse
-12,Kulsuk,iGloo-Ville,35,1,igloo,64-3910,snowhouse
-13,Kulsuk,Suloraq 42,69,2,aparment,64-3875-6,windows
-14,Kulsuk,Igimaq 7,10,1,igloo,64-3831,snowhouse
+2,Kulusuk,iGloo-Ville,35,1,igloo,64-3900,snowhouse
+3,Kulusuk,iGloo-Ville,35,1,igloo,64-3901,snowhouse
+4,Kulusuk,iGloo-Ville,35,1,igloo,64-3902,snowhouse
+5,Kulusuk,iGloo-Ville,35,1,igloo,64-3903,snowhouse
+6,Kulusuk,iGloo-Ville,35,1,igloo,64-3904,snowhouse
+7,Kulusuk,iGloo-Ville,35,1,igloo,64-3905,snowhouse
+8,Kulusuk,iGloo-Ville,35,10,igloo,64-3906,snowhouse
+9,Kulusuk,iGloo-Ville,35,1,igloo,64-3907,snowhouse
+10,Kulusuk,iGloo-Ville,35,1,igloo,64-3908,snowhouse
+11,Kulusuk,iGloo-Ville,35,1,igloo,64-3909,snowhouse
+12,Kulusuk,iGloo-Ville,35,1,igloo,64-3910,snowhouse
+13,Kulusuk,Suloraq 42,69,2,aparment,64-3875-6,windows
+14,Kulusuk,Igimaq 7,10,1,igloo,64-3831,snowhouse
 15,Kulsuk,Nuussuaq 4,400,8,villa,64-3812,None
 16,Tórshavn,Skákið 15,33,1,townhouse,ix-9331,windows
 17,Tórshavn,Skákið 15,33,1,townhouse,ix-9332,windows
@@ -29,3 +29,4 @@ id,Destination,Address,Size,Rooms,Type,Property-number,Extras
 28,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9500,mud-house
 29,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9501,mud-house
 30,Tórshavn,Nýggivegur 1,15,1,mud-house,ix-9502,mud-house
+

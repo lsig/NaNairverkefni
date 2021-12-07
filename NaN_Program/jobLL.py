@@ -14,8 +14,8 @@ class JobLL:
             auto_id = self.assign_id_job()
             cur_date = datetime.date(datetime.now())
             emp_name = self.find_employee_name(job_dic["Employee-id"])
-            con_name = self.get_con_name_and_location(job_dic["Suggested-contractor"])["Name"]
-            job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],con_name,"0")
+            #con_name = self.get_con_name_and_location(job_dic["Suggested-contractor"])["Name"]
+            job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],job_dic["Suggested-contractor"],"0")
             self.dlapi.add_job(job)
             return True
         return False
@@ -102,6 +102,10 @@ class JobLL:
     
     def get_all_jobs(self):
         all_jobs = self.dlapi.get_jobs()
+        counter = 0
+        for row in all_jobs:#changes contractor id into name
+            all_jobs[counter]["Suggested-contractor"] = self.get_con_name_and_location(row["Suggested-contractor"])["Name"]
+            counter += 1
         return all_jobs
     
 
@@ -151,4 +155,5 @@ if __name__ == "__main__":
     #print(g.prop_address_from_id("1"))
     #print(g.find_jobs_by_str("o",g.get_all_jobs(),"Title"))
     #print(g.get_con_name_and_location("1")["Name"])
-    g.edit_info({"id":"1","Date-created":"2021-12-05","Employee":"Jan Jacobsen","Employee-id":"1","Title":"big window clean","Description":"clean the windows!","Location":"Longyearbyen","Property":"Vei 217","Property-number":"F959594","Property-id":"1","Priority":"1","Suggested-contractor":"1","Status":"0"},"1")
+    #g.edit_info({"id":"1","Date-created":"2021-12-05","Employee":"Jan Jacobsen","Employee-id":"1","Title":"small window clean","Description":"cleandd the windows!","Location":"Longyearbyen","Property":"Vei 217","Property-number":"F959594","Property-id":"1","Priority":"1","Suggested-contractor":"1","Status":"0"},"1")
+    print(g.get_all_jobs())

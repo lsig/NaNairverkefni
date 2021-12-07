@@ -34,17 +34,17 @@ class PropertyLL:
             desti_names.append(row["Name"])
         return desti_names
 
-    def replace_loc_num_with_name(self,dic):
-        loc_names_lis = self.dlapi.get_loc_info()
-        dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
-        return dic
+    # def replace_loc_num_with_name(self,dic):
+    #     loc_names_lis = self.dlapi.get_loc_info()
+    #     dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
+    #     return dic
 
-    def replace_loc_name_with_num(self,dic_edit):
-        loc_info = self.dlapi.get_loc_info()
-        for dic in loc_info:
-            if dic_edit["Destination"].lower() == dic["Name"].lower():
-                dic_edit["Destination"] = dic["id"]
-                return dic_edit
+    # def replace_loc_name_with_num(self,dic_edit):
+    #     loc_info = self.dlapi.get_loc_info()
+    #     for dic in loc_info:
+    #         if dic_edit["Destination"].lower() == dic["Name"].lower():
+    #             dic_edit["Destination"] = dic["id"]
+    #             return dic_edit
     
     def is_valid(self,prop_dic) -> bool:
         dic = {"Destination":"unique", "Address":"both", "Size":int, "Rooms":int,"Type":str,"Property-number":"both","Extras":str}
@@ -116,7 +116,7 @@ class PropertyLL:
             if user_string.lower() in dic[key].lower():
                 ret_lis.append(dic)
         if ret_lis == []:
-            return False
+            return False #skoða þetta svo filter drepur ekki forritið
         return ret_lis
         #return False
 
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     #d = g.find_prop_id("2",g.get_all_prop())
     #print(d[0]["id"])
     #g.edit_info({"id":"31","Destination":"Kulsuk", "Address":"lol", "Size":"2", "Rooms":"3","Type":"biiiig","Property-number":"poom street 2","Extras":"Windows"})
-    #print(g.find_prop_by_str("window",g.get_all_prop(),"Extras"))
+    print(g.find_prop_by_str("windowss",g.get_all_prop(),"Extras"))
     #print(g.get_all_prop)
     #{"Name":"John"}
     #d=g.get_destination_name()

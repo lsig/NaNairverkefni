@@ -32,6 +32,9 @@ class LLAPI:
 
     def add_job(self,job_lis,id):
         self.jLL.add_job(job_lis,id)
+
+    def get_job(self):
+       return self.jLL.get_all_jobs()
     
     def edit_prop(self, propdict):
         self.propLL.edit_info(propdict)
@@ -50,6 +53,9 @@ class LLAPI:
 
     def login_information(self):
         return self.empll.login_info()
+    
+    def search_property(self, string, propertylist, key):
+        return self.propLL.find_prop_by_str(string, propertylist, key)
 
     
     

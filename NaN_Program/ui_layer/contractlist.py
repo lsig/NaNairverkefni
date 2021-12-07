@@ -8,11 +8,11 @@ MAXROWS = 10
 
 class ContractList: 
     def __init__(self, id) -> None:
-        self.llapi = LLAPI(id)
+        self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
-        self.contractlist = self.llapi.get_contract_info() #TODO
+        self.contractlist = self.llapi.get_job() 
         self.contractlist_backup = self.contractlist # er þetta ekki eih svona shallow copy, ss að ef self.contractlist breytist þá breytist self.contractlist_backup, því hann er instance.
         self.screen = f''' 
  Location | Name | {self.id} 

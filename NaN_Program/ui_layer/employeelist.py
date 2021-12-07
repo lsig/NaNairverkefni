@@ -86,7 +86,7 @@ class EmployeeList:
             pass 
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
-            self.lastrow = (self.slide + 1) * self.rows
+            self.lastrow = (self.slide + 1) * self.rows + 1
             
             if self.firstrow <= int(user_input) < self.lastrow and len(self.employeelist) >= int(user_input):
                 employeeinfo = self.llapi.filter_employee_id(user_input, self.employeelist) 
