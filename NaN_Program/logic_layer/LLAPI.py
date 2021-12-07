@@ -51,8 +51,8 @@ class LLAPI:
     def filter_employee_id(self, id, emp_lis):
         return self.empll.find_emp_id(id, emp_lis)
 
-    def login_information(self):
-        return self.empll.login_info()
+    def login_information(self,email):
+        return self.empll.login_info(email)
     
     def search_property(self, string, propertylist, key):
         return self.propLL.find_prop_by_str(string, propertylist, key)

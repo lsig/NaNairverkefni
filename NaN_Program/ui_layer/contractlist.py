@@ -7,15 +7,16 @@ MAXROWS = 10
 
 
 class ContractList: 
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
+        self.position = position
         self.contractlist = self.llapi.get_job() 
         self.contractlist_backup = self.contractlist # er þetta ekki eih svona shallow copy, ss að ef self.contractlist breytist þá breytist self.contractlist_backup, því hann er instance.
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VIÐHALD |
      - Verkbeiðnalisti
