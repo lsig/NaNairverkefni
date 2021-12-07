@@ -1,17 +1,19 @@
 #starfsmannalisti
-from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR, 
+from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
 from ui_layer.boss_seeemployee import SeeEmployee
 from logic_layer.LLAPI import LLAPI
 from time import sleep
 import os
-MAXROWS = 10
+MAXROWS = 50
+ROWS = 10
 EMPPRINT = [4, 20, 0, 25, 15, 15, 30, 20, 0]
 SEARCHFILTERS = ['Name','Email','Destination', 'Social security']
+
 
 class EmployeeList: 
     def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
-        self.rows = MAXROWS
+        self.rows = ROWS
         self.slide = 0
         self.id = id
         self.position = position
@@ -28,10 +30,13 @@ class EmployeeList:
      /row. Breytir lengd raðar
 
 '''
-    
-    def display_list(self):
+    def run_screen(self):
         returnvalue = ''
         while returnvalue != 'B':
+            self.display_list()
+            returnvalue = self.prompt_user()
+    
+    def display_list(self):
             self.firstrow = self.slide * self.rows 
 
             os.system(CLEAR)
@@ -61,16 +66,14 @@ class EmployeeList:
                     pass
                 print()
             
-            print(f"{DASH * sum(EMPPRINT)}\n")
-            if self.slide > 0:
-                print("p. Previous - ", end='')
-            if (self.slide + 1) * self.rows < len(self.employeelist):
-                print("n. Next - ", end='')
-
-            returnvalue = self.prompt_user()
+            self.print_footer()
     
-    def prompt_user(self):
-        user_input = input(f"#. to Select Employee\n")
+    def prompt_user(self, oldinput = None):
+        if oldinput == None:
+            user_input = input()
+        else:
+            user_input = oldinput
+            print()
 
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
@@ -82,11 +85,10 @@ class EmployeeList:
             return 'B'
 
         elif user_input.upper() == '/ROW':
-            self.rows = int(input("Rows: ")) #validate
+            self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            #seeemployee = SeeEmployee(self.id) 
-            pass 
+            self.find_employee()
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
             self.lastrow = (self.slide + 1) * self.rows + 1
@@ -104,7 +106,7 @@ class EmployeeList:
             print(INVALID)
             sleep(SLEEPTIME)
 
-    def find_property(self):
+    def find_employee(self):
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.employeelist != self.employeelist_backup:
@@ -125,29 +127,29 @@ class EmployeeList:
             print(f"The filter {key.lower()}: {userstring} did not match any result.")
             sleep(SLEEPTIME*3)
         else:
-            self.propertylist = filteredlist
+            self.employeelist = filteredlist
         
 
     def print_header(self):
-        for index, k in enumerate(self.propertylist[0].keys()):
+        for index, k in enumerate(self.employeelist[0].keys()):
             if k == 'id':
                 extra = '  '
             else:
                 extra = ''
-            print(f"{'| ' + k + extra:<{PROPPRINT[index]}}",end='')
-        print(f"\n{DASH* sum(PROPPRINT) }")
+            print(f"{'| ' + k + extra:<{EMPPRINT[index]}}",end='')
+        print(f"\n{DASH* sum(EMPPRINT) }")
     
 
     def print_footer(self):
         dashlen = 21
-        print(f"{DASH * sum(PROPPRINT)}\n")
+        print(f"{DASH * sum(EMPPRINT)}\n")
         if self.slide > 0:
             print("p. Previous - ", end='')
             dashlen += 14
-        if (self.slide + 1) * self.rows < len(self.propertylist):
+        if (self.slide + 1) * self.rows < len(self.employeelist):
             print("n. Next - ", end='')
             dashlen += 10
-        print(f"#. to Select Property\n{DASH*dashlen}")
+        print(f"#. to Select Employee\n{DASH*dashlen}")
         
 
 
