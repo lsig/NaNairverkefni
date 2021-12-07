@@ -6,7 +6,7 @@ MAXROWS = 10
 
 
 class ReportList: 
-    def __init__(self, id, propertydict = None, position) -> None:
+    def __init__(self, id, position, propertydict = None) -> None:
         self.propertydict = propertydict
         self.llapi = LLAPI(id)
         self.rows = MAXROWS

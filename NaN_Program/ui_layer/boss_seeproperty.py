@@ -55,7 +55,7 @@ class SeeProperty:
             return 'C'
         
         elif user_input.upper() == 'R':
-            propreport = ReportList(self.id, self.property['id'], self.position)
+            propreport = ReportList(self.id, self.position, self.property['id'])
             propreport.display_list()
 
         elif user_input.upper() == 'E':
