@@ -16,11 +16,8 @@ NaN Air Properties
 {STAR*18}
 {STAR} Enter ID:{' '*6 + STAR}
 {STAR*18}
-
- - 's' fyrir starfsmenn, annars yfirmenn.
 Q. Quit
-{DASH * 14}
-"""
+{DASH * 18}"""
 
     def start(self):
         while True:
@@ -37,7 +34,7 @@ Q. Quit
                 return
 
             if staffid is not None: 
-                print(f"\nWelcome, {staffid['Name']}") 
+                print(f"Welcome, {staffid['Name']}") 
                 sleep(SLEEPTIME)
                 if staffid['Manager'] == '1': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
                     bossmenu = BossMenu(staffid, 'Manager')

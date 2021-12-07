@@ -7,11 +7,12 @@ import os
 
 
 class SeeContractor:
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
+        self.position = position
         self.id = id
         self.contractor = "Jói Spói"
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VERKTAKAR |
      - Verktakalisti
