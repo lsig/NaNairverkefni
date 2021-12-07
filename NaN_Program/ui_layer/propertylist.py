@@ -113,7 +113,7 @@ class PropertyList:
 
         if userint == 'B':
             return 'B'
-        elif userint == 'R':
+        elif userint == 'R' and self.propertylist != self.propertylist_backup:
             self.propertylist = self.propertylist_backup
             return
         key = SEARCHFILTERS[userint - 1]

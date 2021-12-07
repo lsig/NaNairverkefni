@@ -42,15 +42,16 @@ class ContractorLL:
                     return dic 
             return None
         return False
-
-    def find_name_con(self,name,cont_lis):
+    
+    def find_con_by_str(self, user_string, con_lis, key):
         ret_lis=[]
-        if name.replace(" ","").isalpha():
-            for dic in cont_lis:
-                if name.lower() in dic["Name"].lower():
-                    ret_lis.append(dic)
-            return ret_lis
-        return False
+        #if user_string.replace(" ",""):
+        for dic in con_lis:
+            if user_string.lower() in dic[key].lower():
+                ret_lis.append(dic)
+        if ret_lis == []:
+            return False #skoða þetta svo filter drepur ekki forritið
+        return ret_lis
 
     def lis_all_cont(self): # þarf að breyta 
         return self.dlapi.get_all_cont()

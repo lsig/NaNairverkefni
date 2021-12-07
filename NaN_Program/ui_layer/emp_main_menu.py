@@ -40,7 +40,7 @@ class EmployeeMenu:
 
             elif user_choice == '3':
                 contractor_menu = ContractorList(self.id, self.position)
-                contractor_menu.display_list()
+                contractor_menu.run_screen()
             
             elif user_choice.upper() == 'L':
                 return
