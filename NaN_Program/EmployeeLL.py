@@ -131,10 +131,23 @@ class EmployeeLL:
         return self.dlapi.get_all_emp()
 
 
+
+    def find_emp_by_str(self, user_str, emp_lis, key):
+        ret_lis = []
+        for dic in emp_lis:
+            if user_str.lower() in dic[key].lower():
+                ret_lis.append(dic)
+        if ret_lis == []:
+            return False
+        return ret_lis
+
+
+
 if __name__ == "__main__":
     e = EmployeeLL()
-    e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1"})
+    #e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1"})
     #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
     #e.edit_employee({"id": "10", "Name": "Bob", "Social Security": "9876543212", "Address": "Home", "Phone": "9999999", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1", "Manager": "0"})
-    print(e.email_generate("Kalli"))
+    #print(e.email_generate("Kalli"))
+
 
