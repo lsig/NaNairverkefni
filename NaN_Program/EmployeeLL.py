@@ -76,7 +76,7 @@ class EmployeeLL:
 
 
     def email_generate(self, name):
-        name = name.replace(" ","")
+        name = name.replace(" ",".")
         email = name + "@nanair.is"
         all_emp_lis = self.dlapi.get_all_emp()
         for key in all_emp_lis:
