@@ -9,7 +9,7 @@ class PropertyMenu:
     def __init__(self, id) -> None:
         self.id  = id
         self.screen =  f''' 
- Location | Name | {self.id}
+| {self.id['Destination']} | {self.id['Name']} |
 {STAR*14}
     | FASTEIGNIR |
       {DASH*15}
