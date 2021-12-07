@@ -7,10 +7,11 @@ from time import sleep
 import os
 
 class BossMaintenanceMenu:
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
+        self.position = position
         self.id = id
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VIÐHALD |
       {DASH*15}
@@ -29,15 +30,15 @@ class BossMaintenanceMenu:
             user_input = input()
 
             if user_input == '1':
-                contrcreate = ContractCreate(self.id)
+                contrcreate = ContractCreate(self.id, self.position)
                 contrcreate.display()
 
             elif user_input == '2':
-                contrlist = ContractList(self.id)
+                contrlist = ContractList(self.id, self.position)
                 contrlist.display_list()
 
             elif user_input == '3':
-                reportlist = ReportList(self.id)
+                reportlist = ReportList(self.id, self.position)
                 reportlist.display_list()
                 
 

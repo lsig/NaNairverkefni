@@ -7,12 +7,13 @@ from time import sleep
 import os
 
 class BossEmployeeCreate:
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
+        self.position = position
         self.llapi = LLAPI()
         self.id = id
         self.contactdict = {}
         self.screen = f'''
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | STARFSMENN |
      - Skrá nýja starfsmann
