@@ -1,27 +1,25 @@
-#velja ákveðinn starfsmann
-from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, PROPERTYTEMPLATE
+#Sjá ákveðinn starfsmanna
+from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, CONTACTTEMPLATE
 from logic_layer.LLAPI import LLAPI
-from ui_layer.reportlist import ReportList
 
 from time import sleep
 import os
 
 
 
-class SeeProperty:
-    def __init__(self, id, propertyinfo) -> None:
-        self.llapi = LLAPI()
+class SeeEmployee:
+    def __init__(self, id, employeedict) -> None:
+        self.llapi = LLAPI
         self.id = id
-        self.property = propertyinfo
+        self.employee = employeedict
         self.screen = f''' 
  Location | Name | {self.id} 
 {STAR*14}
-    | FASTEIGNIR |
-     - Fasteignalisti
-       - {self.property['Address']}
+    | STARFSMENN |
+     - Starfsmannalisti
+       - {employeedict['Name']}
      {DASH*15}
      E. Edit
-     R. Property reports
      B. Til baka
 '''
 
@@ -33,28 +31,19 @@ class SeeProperty:
             if returnvalue == 'C':
                 return
 
-    
-    def printpropertyinfo(self, number = None):
 
-        propertystring = f"{'| ' + self.property['Address'] + ' | ':^35}\n{DASH*35}\n"
+    def printemployeeinfo(self, number = None):
 
-        for i in range(len(PROPERTYTEMPLATE)):
+        employeestring = f"{'| ' + self.employee['Address'] + ' | ':^35}\n{DASH*35}\n"
+
+        for i in range(len(CONTACTTEMPLATE)):
             if number != None and i == number - 1:
-                propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} ____\n"
+                employeestring += f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} ____\n"
             else:
-                propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} {self.property[PROPERTYTEMPLATE[i]]}\n"
-        propertystring += DASH*35
+                employeestring += f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} {self.employee[CONTACTTEMPLATE[i]]}\n"
+        employeestring += DASH*35
         
-        print(propertystring)
-    
-    def change_row(self):
-        user_row = int(input("Row to change: "))
-        self.reset_screen(user_row)
-
-        user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ") #validate
-        self.property[PROPERTYTEMPLATE[user_row - 1]] = user_input 
-
-        self.reset_screen()
+        print(employeestring)
     
     def prompt_user(self):
         user_input = input()
@@ -62,10 +51,6 @@ class SeeProperty:
         if user_input.upper() == 'B':
             return 'C'
         
-        elif user_input.upper() == 'R':
-            propreport = ReportList(self.id, self.property['id'])
-            propreport.display_list()
-
         elif user_input.upper() == 'E':
             while True:
                 self.change_row()
@@ -77,18 +62,27 @@ class SeeProperty:
             print(INVALID)
             sleep(SLEEPTIME)
     
+    def change_row(self):
+        user_row = int(input("Row to change: "))
+        self.reset_screen(user_row)
+
+        user_input = input(f"{CONTACTTEMPLATE[user_row - 1]}: ") #TODO validate allsstaðar
+        self.employee[CONTACTTEMPLATE[user_row - 1]] = user_input
+
+        self.reset_screen()
+
 
     def reset_screen(self, user_row = None):
         os.system(CLEAR)
         print(self.screen)
-        self.printpropertyinfo(user_row)
+        self.printemployeeinfo(user_row)
     
     def confirm_edit(self):
         self.reset_screen()
         is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
             
         if is_user_happy.upper() == 'C':
-            self.llapi.edit_prop(self.property)
+            self.llapi.edit_emp(self.employee)
             print("Changes saved :)")
             sleep(SLEEPTIME)
             return 'C'

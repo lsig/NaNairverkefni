@@ -9,7 +9,8 @@ class PropertyLL:
     def add_property(self,prop_dic):
         valid, key = self.is_valid(prop_dic)
         if valid:
-            prop_dic = self.replace_loc_num_with_name(prop_dic)
+            #prop_dic = self.replace_loc_num_with_name(prop_dic)
+            prop_dic["Destination"] = prop_dic["Destination"].capitalize()
             prop = Property(self.assign_id_prop(),prop_dic["Destination"],prop_dic["Address"],prop_dic["Size"],prop_dic["Rooms"],prop_dic["Type"],prop_dic["Property-number"],prop_dic["Extras"])
             self.dlapi.add_property(prop)
             return True, key
@@ -25,6 +26,14 @@ class PropertyLL:
         desti_count = int(all_desti_lis[len(all_desti_lis)-1]["id"])
         return desti_count
 
+        
+    def get_destination_name(self):
+        desti_names = []
+        all_desti_lis = self.dlapi.get_loc_info()
+        for row in all_desti_lis:    
+            desti_names.append(row["Name"])
+        return desti_names
+
     def replace_loc_num_with_name(self,dic):
         loc_names_lis = self.dlapi.get_loc_info()
         dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
@@ -38,7 +47,9 @@ class PropertyLL:
                 return dic_edit
     
     def is_valid(self,prop_dic) -> bool:
-        dic = {"Destination":int, "Address":"both", "Size":int, "Rooms":int,"Type":str,"Property-number":"both","Extras":str}
+        dic = {"Destination":"unique", "Address":"both", "Size":int, "Rooms":int,"Type":str,"Property-number":"both","Extras":str}
+        get_validation = True
+        loc_correct = False
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 if key.lower() == "extras": #replace empty string with none for extras
@@ -53,8 +64,12 @@ class PropertyLL:
                     return False, key
             #check if Destination is within bounds
             if key.lower() == "destination" and get_validation:
-                if  int(prop_dic[key]) <= 0 or int(prop_dic[key]) > self.get_destination_count():
-                    return False, key
+                for row in self.get_destination_name():
+                    if prop_dic["Destination"].lower() == row.lower():
+                        loc_correct = True
+                if loc_correct == False:
+                    return False, key    
+                        
             if get_validation == False:
 
                     return False, key
@@ -77,9 +92,9 @@ class PropertyLL:
         return False
 
     def edit_info(self,edit_prop_dic):
-        edit_prop_dic = self.replace_loc_name_with_num(edit_prop_dic)
+        #edit_prop_dic = self.replace_loc_name_with_num(edit_prop_dic)
         if self.is_valid(edit_prop_dic):
-            edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
+            #edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
             all_lis_prop = self.dlapi.get_property_info()
             dic = self.find_prop_id(edit_prop_dic["id"],all_lis_prop)
             prop_loc_in_lis = self.find_id_location_prop(dic,all_lis_prop)
@@ -115,4 +130,6 @@ if __name__ == "__main__":
     #print(g.find_prop_by_str("window",g.get_all_prop(),"Extras"))
     #print(g.get_all_prop)
     #{"Name":"John"}
+    #d=g.get_destination_name()
+    #print(d[0].capitalize())
  
