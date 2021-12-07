@@ -32,7 +32,7 @@ class PropertyMenu:
 
             elif user_input == '2':
                 proplist = PropertyList(self.id)
-                proplist.display_list()
+                proplist.run_screen()
 
             elif user_input.upper() == 'B':
                 return

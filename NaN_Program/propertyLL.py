@@ -93,15 +93,16 @@ class PropertyLL:
 
     def edit_info(self,edit_prop_dic):
         #edit_prop_dic = self.replace_loc_name_with_num(edit_prop_dic)
-        if self.is_valid(edit_prop_dic):
+        valid, key = self.is_valid(edit_prop_dic)
+        if valid:
             #edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
             all_lis_prop = self.dlapi.get_property_info()
             dic = self.find_prop_id(edit_prop_dic["id"],all_lis_prop)
             prop_loc_in_lis = self.find_id_location_prop(dic,all_lis_prop)
             all_lis_prop[prop_loc_in_lis]= edit_prop_dic
             self.dlapi.change_property_info(all_lis_prop)
-            return True
-        return False
+            return True, key
+        return False, key
     
     def find_id_location_prop(self,dic,all_lis_prop):
         for i in range(len(all_lis_prop)):

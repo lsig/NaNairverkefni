@@ -26,8 +26,7 @@ class SeeProperty:
 '''
 
     def display(self):
-        returnvalue = ''
-        while returnvalue != 'B' or returnvalue != 'C':
+        while True:
             self.reset_screen()
             returnvalue = self.prompt_user()
             if returnvalue == 'C':
@@ -47,14 +46,6 @@ class SeeProperty:
         
         print(propertystring)
     
-    def change_row(self):
-        user_row = int(input("Row to change: "))
-        self.reset_screen(user_row)
-
-        user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ") #validate
-        self.property[PROPERTYTEMPLATE[user_row - 1]] = user_input 
-
-        self.reset_screen()
     
     def prompt_user(self):
         user_input = input()
@@ -78,24 +69,44 @@ class SeeProperty:
             sleep(SLEEPTIME)
     
 
-    def reset_screen(self, user_row = None):
-        os.system(CLEAR)
-        print(self.screen)
-        self.printpropertyinfo(user_row)
-    
+    def change_row(self, row = None):
+        if row == None:
+            user_row = int(input("Row to change: "))
+        else:
+            user_row = row + 1
+        self.reset_screen(user_row)
+
+        user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ") #validate
+        self.property[PROPERTYTEMPLATE[user_row - 1]] = user_input 
+
+        self.reset_screen()
+
+
     def confirm_edit(self):
         self.reset_screen()
         is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
             
         if is_user_happy.upper() == 'C':
-            self.llapi.edit_prop(self.property)
-            print("Changes saved :)")
-            sleep(SLEEPTIME)
-            return 'C'
+            valid, key = self.llapi.edit_prop(self.property)
+            if valid:
+                print("Changes saved!")
+                sleep(SLEEPTIME)
+                return 'C'
+            else:
+                print(f"Invalid {key}!")
+                sleep(SLEEPTIME)
+                self.change_row( PROPERTYTEMPLATE.index(key) )
 
-        elif is_user_happy.upper() == 'B':
-            return 'B'
+        elif is_user_happy.upper() == 'B' or is_user_happy.upper() == 'B':
+            return is_user_happy.upper()
         
         elif is_user_happy.upper() != 'E':
             print(INVALID)
             sleep(SLEEPTIME)
+
+
+    def reset_screen(self, user_row = None):
+        os.system(CLEAR)
+        print(self.screen)
+        self.printpropertyinfo(user_row)
+    

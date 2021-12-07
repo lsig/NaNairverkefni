@@ -19,9 +19,9 @@ class LocationDL():
 
     def add_loc(self,loc):
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["Name","Country","Airport","phone","working-hours","Manager","Manager_id"]
+            fieldnames = ["Name","Country","Airport","Phone","Working-hours","Manager","Manager-id"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writerow({'Name': loc.name, "Country": loc.country, "Airport": loc.airport, "phone": loc.phone, "working-hours": loc.work_time, "Manager": loc.manager,"Manager_id":loc.manager_id})
+            writer.writerow({'Name': loc.name, "Country": loc.country, "Airport": loc.airport, "Phone": loc.phone, "Working-hours": loc.work_time, "Manager": loc.manager,"Manager-id":loc.manager_id})
 
     
     def change_loc_info(self,loc_lis):
@@ -30,7 +30,7 @@ class LocationDL():
             header = loc_lis[0]
             writer.writerow(header)
             for dic in loc_lis:
-                writer.writerow([dic["Name"],dic["Country"],dic["Airport"],dic["phone"],dic["working-hours"],dic["Manager"],dic["Manager_id"]])
+                writer.writerow([dic["Name"],dic["Country"],dic["Airport"],dic["Phone"],dic["Working-hours"],dic["Manager"],dic["Manager-id"]])
 
 
 if __name__ == "__main__":
