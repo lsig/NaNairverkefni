@@ -118,6 +118,14 @@ Settum markmið að vera mættir upp í skóla í kringum 10 til þess að byrja
 Uppgjör:
 Flest öll vinna í UI búin, nú er bara að tengja saman UI við logic layer og data layer. Lentum í ótrúlega leiðinlegu buggi með að breyta upplýsingum um ákveðna fasteign, en eftir yfir klst af ítarlegri leit fundu Marteinn og Maxim pödduna og drápu hana! Maxim og Kristó Orri eru búnir að vera duglegir í employeeLL.py og Marteinn & Markús stóðu sig vel í reportLL.py. Logi tengdi allt saman við starfsmannaaðganginn sem starfsmaðurinn á að geta haft aðgang að og Kristó Fannar fór í að tengja saman lausa spotta í ui og logic layer ásamt því að setja villumeldingar þegar notandi stimplar inn nýjan starfsmann/fasteign/verktaka. Eins og Maxim orðaði það kl 21:02, eftir 11 klukkustundir upp í skóla við tölvuna; "Þetta er allt að smella saman!"
 
+Dagur 2 7.12.21
+Morgunfundur:
+Í dag ætluðum við að mæta klukkan 11 en eins og vanalega mættum við vel ferskir í kringum 12 leytið. Ég (Logi) og Kristó settum okkur það markmið að tengja UI og LL saman og reyna klára mestmegnis af UI layerinu. Maxim setti sér það markmið að klára locationLL enda með Bigdick energy. Marteinn setti sér það markmið að vinna í maintenenceLL og hjálpa til. Markús og Kristó settu sér það markmið að komast langt í ReportLL. 
+
+Uppgjör:
+Strákarnir stöðu sig vel, Maxim kláraði location LL og hjálpaði strákunum með reportLL, Markús og Kristó komust langt með reportLL, Marteinn komst vel á leið í MaintennceLL og hjálpaði strákunum í reportLL. Ég og Kristó kláruðum nánast allt UI layerið en alltaf hægt að bæta það aðeins, Maxim og Marteinn voru til halds ef við lentum í einhverjum vandræðum. Um kvöldmatarleytið var mórallinn á gólfinu en ákvað ekki Maxim, kóngurinn sem hann er, að splæsa á okkur sushi á Tokyo sushi enda Tokyo sushi baróninn. Unnum vel í dag alveg frá 12 til 23:30. Solid vakt, mic drop. 
+
+
 
 
 

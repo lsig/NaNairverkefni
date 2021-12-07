@@ -20,6 +20,9 @@ class PropertyList:
         self.position = position
         self.propertylist = self.llapi.get_prop_info()
         self.propertylist_backup = self.llapi.get_prop_info()
+        if self.position == 'Employee':
+            self.propertylist = self.llapi.search_property(self.id['Destination'], self.propertylist,'Destination' )
+            self.propertylist_backup = self.llapi.search_property(self.id['Destination'], self.propertylist,'Destination' )
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -110,7 +113,7 @@ class PropertyList:
 
         if userint == 'B':
             return 'B'
-        elif userint == 'R':
+        elif userint == 'R' and self.propertylist != self.propertylist_backup:
             self.propertylist = self.propertylist_backup
             return
         key = SEARCHFILTERS[userint - 1]

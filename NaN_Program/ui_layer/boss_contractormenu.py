@@ -7,10 +7,11 @@ from time import sleep
 
 
 class BossContractorMenu:
-    def __init__(self, id):
+    def __init__(self, id, position):
+        self.position = position
         self.id = id
         self.options = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VERKTAKAR |
       {DASH*15}
@@ -28,12 +29,12 @@ class BossContractorMenu:
             user_choice = input()
 
             if user_choice == '1':
-                createcontractor = BossContractorCreate(self.id)
+                createcontractor = BossContractorCreate(self.id, self.position)
                 createcontractor.display_contractormenu()
 
             elif user_choice == '2':
-                contractorlist = ContractorList(self.id) #TODO
-                contractorlist.display_list()
+                contractorlist = ContractorList(self.id, self.position)
+                contractorlist.run_screen()
 
             elif user_choice.upper() == 'B':
                 return

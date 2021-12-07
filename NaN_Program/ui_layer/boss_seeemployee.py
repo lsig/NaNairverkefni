@@ -8,12 +8,13 @@ import os
 
 
 class SeeEmployee:
-    def __init__(self, id, employeedict) -> None:
+    def __init__(self, id, employeedict, position) -> None:
         self.llapi = LLAPI()
+        self.position = position
         self.id = id
         self.employee = employeedict
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | STARFSMENN |
      - Starfsmannalisti
