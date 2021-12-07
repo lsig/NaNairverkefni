@@ -18,7 +18,7 @@ class PropertyList:
         self.slide = 0
         self.id = id
         self.propertylist = self.llapi.get_prop_info()
-        self.propertylist_backup = self.propertylist
+        self.propertylist_backup = self.llapi.get_prop_info()
         self.screen = f''' 
  Location | Name | {self.id} 
 {STAR*14}
@@ -102,7 +102,15 @@ class PropertyList:
     def find_property(self):
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
+        if self.propertylist != self.propertylist_backup:
+            print('R: Reset')
         userint = self.validate('userint')
+
+        if userint == 'B':
+            return 'B'
+        elif userint == 'R':
+            self.propertylist = self.propertylist_backup
+            return
         key = SEARCHFILTERS[userint - 1]
         userstring = input(f"Search in {key.lower()}: ")   #TODO Validate
 
@@ -113,7 +121,7 @@ class PropertyList:
             sleep(SLEEPTIME*3)
         else:
             self.propertylist = filteredlist
-    
+        
 
     def print_header(self):
         for index, k in enumerate(self.propertylist[0].keys()):
@@ -142,7 +150,11 @@ class PropertyList:
         if userint is not None:
             while True:
                 userint = input(" ")
-                if userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
+                if userint.upper() == 'B':
+                    return 'B'
+                elif userint.upper() == 'R':
+                    return 'R'
+                elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
                     return int(userint)
                 
                 print(INVALID)
