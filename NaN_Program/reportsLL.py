@@ -37,7 +37,7 @@ class ReportsLL:
         # Ef skýrsla er ekki samþykkt, þarf starfsmaður að geta breytt upplýsingum í skýrslunni.
         if self.report_validation(edit_rep_dic):
             all_rep_lis = self.dlapi.get_all_report()
-            dic = self.find_rep_id(edit_rep_dic["id"], all_rep_lis)
+            dic = self.find_rep_id(edit_rep_dic["Report-id"], all_rep_lis)
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
             all_rep_lis[rep_loc_in_list] = edit_rep_dic
             self.dlapi.change_report(all_rep_lis)
@@ -60,7 +60,7 @@ class ReportsLL:
     def get_report_name_and_location(self,id):
         rep_lis = self.dlapi.get_all_report()
         for dic in rep_lis:
-            if int(id) == int(dic["id"]):
+            if int(id) == int(dic["Report-id"]):
                 rep_info = {"Name":dic["Name"],"Location":dic["Location"]}
                 return rep_info        
         rep_info = {"Name":"null","Location":"null"}
@@ -74,7 +74,7 @@ class ReportsLL:
     def find_rep_id(self, all_rep_lis):
         if id.isdigit():
             for dic in all_rep_lis:
-                if int(dic["id"]) == int(id):
+                if int(dic["Report-id"]) == int(id):
                     return dic
             return None
         return False
@@ -88,7 +88,7 @@ class ReportsLL:
     def confirm_report(self, id):
         all_con_lis = self.dlapi.get_all_cont()
         for dic in all_con_lis:
-            if dic["id"] == id:
+            if dic["Report-id"] == id:
                 dic = dic["Status"] = "2"
             
             con_loc_in_list = self.find_id_location_con(dic, all_con_lis)
