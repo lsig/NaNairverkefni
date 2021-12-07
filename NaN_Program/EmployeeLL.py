@@ -112,7 +112,7 @@ class EmployeeLL:
                 for row in self.get_destination_name():
                     if emp_dic["Destination"].lower() == row.lower():
                         loc_correct = True
-                if loc_correct == False and "Country" in emp_dic == False:
+                if loc_correct == False and ("Country" in emp_dic) == False:
                     return False, key
             if key.lower() == "phone" and get_validation:
                 if 7 > len(emp_dic[key]) or len(emp_dic[key]) > 15:
@@ -149,5 +149,7 @@ if __name__ == "__main__":
     #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
     #e.edit_employee({"id": "10", "Name": "Bob", "Social Security": "9876543212", "Address": "Home", "Phone": "9999999", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1", "Manager": "0"})
     #print(e.email_generate("Kalli"))
+    f = {"key":"lala","lo":"sda"}
+    print("ky" in f)
 
 
