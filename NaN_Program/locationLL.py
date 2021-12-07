@@ -8,7 +8,7 @@ class LocationLL:
 
     def add_location(self,loc_dic):
         #loc_dic["Destination"] = loc_dic["Destination"].capitalize()
-        loc = Location(self.assign_id_loc(),loc_dic["Name"],loc_dic["Country"],loc_dic["Airport"],loc_dic["Phone"],loc_dic["Working-hours"],loc_dic["Manager"])
+        loc = Location(self.assign_id_loc(),loc_dic["Name"],loc_dic["Country"],loc_dic["Airport"],loc_dic["Phone"],loc_dic["Working-hours"],loc_dic["Manager"],)
         self.dlapi.add_loc(loc)
 
 
@@ -21,7 +21,7 @@ class LocationLL:
         return str(new_id)
 
     def is_valid(self,loc_dic):
-        pass
+        dic = {"Name":str, "Country":"both", "Airport":int, "Phone":int,"Working-hours":str,"Manager":"both","Extras":str}
 
 
 if __name__ == "__main__":

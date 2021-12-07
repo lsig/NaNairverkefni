@@ -20,8 +20,12 @@ id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
 7,Annette Djurhuus,0,Tjarnardeild 8; 100; Tórshavn; Faroe Islands,298772000,3547771381,annette.djurhuus@nanair.is,Tórshavn,1
 8,Áki Knudsen,0,Traðartún 3; 108; Argir; Faroe Islands,298617210,3547771381,aki.knudsen@nanair.is,Tórshavn,0
 <<<<<<< HEAD
+<<<<<<< HEAD
 9,André Hjaltalin,0,Í Lágni 19; 100; Tórshavn; Faroe Islands,298661441,3547771382,Andre.hjaltalin@nanair.is,Tórshavn,010
 =======
 9,André Hjaltalin,0,Í Lágni 19; 100; Tórshavn; Faroe Islands,298661441,3547771382,Andre.hjaltalin@nanair.is,Tórshavn,010
 >>>>>>> a2946d5f55362af8c8e40b191924420ed420d8cb
 >>>>>>> d4b9458d860d095d4838fd7f4e99d8fcf39d3bb7
+=======
+9,André Hjaltalin,0,Í Lágni 19; 100; Tórshavn; Faroe Islands,298661441,3547771382,Andre.hjaltalin@nanair.is,Tórshavn,0
+>>>>>>> f5dc8e2cb441a80fb69840bca73a2cb767d94908
