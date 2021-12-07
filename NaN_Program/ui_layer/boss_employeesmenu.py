@@ -8,10 +8,11 @@ from time import sleep
 
 
 class BossEmployeesMenu: 
-    def __init__(self, id):
+    def __init__(self, id, position):
+        self.position = position
         self.id = id
         self.options = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | STARFSMENN |
       {DASH*15}
@@ -29,11 +30,11 @@ class BossEmployeesMenu:
             user_choice = input()
 
             if user_choice == '1':
-                createemployee = BossEmployeeCreate(self.id)
+                createemployee = BossEmployeeCreate(self.id, self.position)
                 createemployee.display_menu()
 
             elif user_choice == '2':
-                emplist = EmployeeList(self.id) #This is the ui class
+                emplist = EmployeeList(self.id, self.position) #This is the ui class
                 emplist.display_list()
 
             elif user_choice.upper() == 'B':
