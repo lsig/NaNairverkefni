@@ -115,9 +115,13 @@ class ReportsLL:
 
         if dic["Status"] == "2" and rep_dic["Status"] == "0":
             # Reopen job and change status, request-id
+            dic["Status"] = "0"
+            rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
+            all_rep_lis[rep_loc_in_list] = dic
+            self.dlapi.change_report(all_rep_lis)
             all_job_lis = self.jobll.get_all_jobs()
             job = self.find_rep_id(rep_dic["Request-id"], all_job_lis,"id")
-            job = job["Status"] = "0"
+            job["Status"] = "0"
             self.jobll.edit_info(job,rep_dic["Request-id"])  
 
 
@@ -190,7 +194,7 @@ if __name__ == "__main__":
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor": "1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
     #r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-Rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "1"})
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
-    r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "2"})
+    r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "0"})
     #1,1,Jacob Yxa,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,kris,1,3,2021-12-07,5000,0
  
 ## id = 1
