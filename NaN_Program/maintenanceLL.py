@@ -14,6 +14,7 @@ class MaintenanceLL:
         self.dlapi = DlAPI()
         self.empLL = EmployeeLL()
         self.propLL = PropertyLL()
+        self.jobLL = JobLL()
         
 
 
@@ -163,20 +164,25 @@ class MaintenanceLL:
     def get_all_main_jobs(self):
         return self.dlapi.get_maintenance_jobs()
 
-    def add_to_job(self):
+    def add_to_job(self,boss_id):
         all_jobs_lis = self.dlapi.get_jobs()
         all_main_job_lis = self.get_all_main_jobs()
         self.update_status(all_main_job_lis)
         for main_dic in all_main_job_lis:
-            if main_dic["Frequency"] == "1":
-                freq = 7
-            else:
-                freq= 30
-            date_lis = main_dic["Date-from"].split("-")
-            ref_date=(datetime(int(date_lis[0]),int(date_lis[1]),int(date_lis[2]))+ timedelta(days=freq)).date()
-            today = datetime.date(datetime.now())
-            if (ref_date-today).days <= 2:
-                print(today,ref_date,(today-ref_date).days)
+            if main_dic["Status"] == "0":
+                if main_dic["Frequency:Week(1) or Month(2)"] == "1":
+                    freq = 7
+                else:
+                    freq= 30
+                date_lis = main_dic["Date-from"].split("-")
+                # print(date_lis)
+                ref_date=(datetime(int(date_lis[0]),int(date_lis[1]),int(date_lis[2]))+ timedelta(days=freq)).date()
+                today = datetime.date(datetime.now())
+                if (ref_date-today).days <= 2:
+                    print(today,ref_date,(today-ref_date).days)
+                    main_dic["Date-created"] = ref_date
+                    print(self.jobLL.add_job(main_dic,boss_id))
+                    
             
         
 
@@ -199,7 +205,8 @@ class MaintenanceLL:
         
 
 if __name__ == "__main__":
-    # x1 = datetime.date(datetime.now())
+    x1 = datetime.date(datetime.now())
+    print(x1)
     # date = "20-12-2000".split("-")
     # print(len(date))
     # # print(date)
@@ -212,7 +219,7 @@ if __name__ == "__main__":
     dic_fromat = {"Date-to(dd-mm-yyyy)":"20-12-2022","Frequency:Week(1) or Month(2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP,Now,Emergency)":"Asap","Suggested-contractors(id)":"3  ,5"}
     g = MaintenanceLL()
     # # print(dic_fromat[])
-    # print(g.add_maintenance(dic_fromat,4))
+    print(g.add_maintenance(dic_fromat,4))
     # t =",S, i,                                        i"
     # a = " ".join(t.strip(",").split()).split(",")
     # print(a)
@@ -222,7 +229,7 @@ if __name__ == "__main__":
     # print(lis[len(lis)-1])
     # if x:
     #     print("yeah")
-    # g.add_to_job()
+    g.add_to_job(4)
     
     # print(g.get_all_main_jobs())
     # g.update_main_job(DlAPI.get_maintenance_jobs())

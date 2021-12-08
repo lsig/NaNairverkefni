@@ -55,23 +55,23 @@ class JobLL:
                 get_validation = job_dic[key].replace("-","").isdigit()
                 if key == "Employee-id":
                     if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]):
-                        return False
+                        return False,key
                 if key == "Property-id":
                     if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
-                        return False
+                        return False,key
                 if key == "Priority":
                     if int(job_dic[key]) <= 0 or int(job_dic[key]) > 3:
-                        return False
+                        return False,key
                 if key == "Suggested-contractors":
                     if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
-                        return False
+                        return False,key
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if job_dic[key] == "":
-                    return False
+                    return False,key
             #check if Destination is within bounds
             if get_validation == False:
-                    return False
+                    return False,key
         return True
 
 
