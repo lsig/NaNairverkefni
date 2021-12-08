@@ -19,23 +19,25 @@ class MaintenanceDL():
 
     def add_maintenance_job(self,main_job):
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["id","Date-from","Date-to","Frequency","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Priority","Suggested-contractor","Status"]
+            fieldnames = ["id","Date-from","Date-to","Frequency","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Priority","Suggested-contractors_names","Suggested-contractors_id","Status"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({"id":main_job.id,"Date-from":main_job.date_from,"Date-to":main_job.date_to,
             "Frequency":main_job.freq,"Employee":main_job.emp,"Employee-id":main_job.emp_id,"Title":main_job.title
             ,"Description":main_job.description,"Location":main_job.loc,"Property":main_job.property,"Property-number":main_job.property_num,
-            "Property-id":main_job.property_id,"Priority":main_job.priority,"Suggested-contractor":main_job.suggested_cont})
+            "Property-id":main_job.property_id,"Priority":main_job.priority,"Suggested-contractors_names":main_job.suggested_cont_names,"Suggested-contractors_id":main_job.suggested_cont_id,"Status":main_job.status})
 
     
-    def change_maintenance_job_info(self,rep_lis):
-         with open("test.csv", 'w+', newline='',encoding='utf-8') as f:
+    def change_maintenance_job_info(self,main_job_lis):
+         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
-            header = rep_lis[0]
+            header = main_job_lis[0]
+            print(header)
             writer.writerow(header)
-            for dic in rep_lis:
+            for dic in main_job_lis:
                 writer.writerow([dic["id"],dic["Date-to"],dic["Date-from"],dic["Frequency"],dic["Employee"],dic["Employee-id"],dic["Title"],
                 dic["Description"],dic["Location"],dic["Property"],dic["Property-number"]
-                ,dic["Property-id"],dic["Priority"],dic["Suggested-contractor"],dic["Status"]])
+                ,dic["Property-id"],dic["Priority"],dic["Suggested-contractors-names"],dic["Suggested-contractors-id"],dic["Status"]]) #dic["Status"]
+
 
 
 if __name__ == "__main__":
