@@ -4,6 +4,7 @@ from contractorLL import ContractorLL
 from propertyLL import PropertyLL
 from jobLL import JobLL
 from EmployeeLL import EmployeeLL
+from locationLL import LocationLL
 
 class LLAPI:
     def __init__(self):
@@ -12,8 +13,9 @@ class LLAPI:
         self.propLL = PropertyLL()
         self.jLL = JobLL()
         self.empll = EmployeeLL()
+        self.locLL = LocationLL()
 
-
+    #ContractorLL
     def add_cont(self,con_lis):
         return self.contLL.add_contractor(con_lis)
 
@@ -23,6 +25,8 @@ class LLAPI:
     def search_contractor(self, userstring, con_list, key):
         return self.contLL.find_con_by_str(userstring, con_list, key)
 
+
+    #PropertyLL
     def add_prop(self,prop_lis):
         return self.propLL.add_property(prop_lis)
 
@@ -32,19 +36,25 @@ class LLAPI:
     def all_prop_lis(self):
         return self.propLL.get_all_prop_lis()
 
-
     def filter_property_id(self,id,prop_lis):
         return self.propLL.find_prop_id(id,prop_lis)
+    
+    def edit_prop(self, propdict):
+        return self.propLL.edit_info(propdict)
+    
+    def search_property(self, string, propertylist, key):
+        return self.propLL.find_prop_by_str(string, propertylist, key)
 
+
+    #JobLL
     def add_job(self,job_lis,id):
         self.jLL.add_job(job_lis,id)
 
     def get_job(self):
        return self.jLL.get_all_jobs()
     
-    def edit_prop(self, propdict):
-        return self.propLL.edit_info(propdict)
 
+    #EmployeeLL
     def get_emp_info(self):
         return self.empll.list_all_employees()
 
@@ -63,8 +73,9 @@ class LLAPI:
     def search_employee(self, string, employeelist, key):
         return self.empll.find_emp_by_str(string, employeelist,key)
     
-    def search_property(self, string, propertylist, key):
-        return self.propLL.find_prop_by_str(string, propertylist, key)
+    
+    #LocationLL
+    
 
     
     
