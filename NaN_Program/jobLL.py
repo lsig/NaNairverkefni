@@ -47,31 +47,37 @@ class JobLL:
         
         #big validation check
     def is_valid(self,job_dic) -> bool:
+        priority_check = False
         dic = {"Employee-id":int, "Title":"both", "Description":"both", "Property-id":int,"Priority":int,"Suggested-contractors-id":int}
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 get_validation = job_dic[key].replace(" ", "").isalpha()
             elif dic[key] == int and dic[key] != "both":
+                if job_dic[key] == "":
+                    return False,key
                 get_validation = job_dic[key].replace("-","").isdigit()
                 if key == "Employee-id":
                     if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]):
-                        return False
+                            return False,key
                 if key == "Property-id":
                     if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
-                        return False
+                        return False,key
                 if key == "Priority":
-                    if int(job_dic[key]) <= 0 or int(job_dic[key]) > 3:
-                        return False
+                    for row in self.priority_word_check():
+                        if job_dic["Priority"].lower() == row.lower():
+                            priority_check = True
+                    if priority_check == False:
+                        return False, key
                 if key == "Suggested-contractors":
                     if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
-                        return False
+                        return False,key
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if job_dic[key] == "":
-                    return False
+                    return False,key
             #check if Destination is within bounds
             if get_validation == False:
-                    return False
+                    return False,key
         return True
 
 
@@ -82,10 +88,10 @@ class JobLL:
                 prop_info = [dic["Address"],dic["Property-number"],dic["Destination"]]
         return prop_info
 
-    def priority_word(self,prior):
+    def priority_word_check(self):
         priority = ["ASAP","Now","Emergancy"]
-        ret_val = priority[int(prior)-1]
-        return ret_val
+        return priority
+   
 
     def find_jobs_by_str(self,user_string,job_lis,key):
         ret_lis=[]
