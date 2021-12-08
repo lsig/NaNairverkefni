@@ -79,7 +79,7 @@ class JobLL:
             #check if Destination is within bounds
             if get_validation == False:
                     return False,key
-        return True
+        return True, None
 
 
     def prop_address_from_id(self,id):
