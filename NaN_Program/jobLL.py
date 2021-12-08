@@ -62,8 +62,6 @@ class JobLL:
                 if key == "Priority":
                     if int(job_dic[key]) <= 0 or int(job_dic[key]) > 3:
                         return False
-                    else:
-                        job_dic[key] = self.priority_word(job_dic[key])
                 if key == "Suggested-contractors":
                     if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
                         return False
