@@ -4,7 +4,7 @@ from logic_layer.LLAPI import LLAPI
 
 from time import sleep
 import os
-
+DESTINATIONTEMPLATE = DESTINATIONTEMPLATE[0:6]
 
 
 class SeeDestination:
@@ -16,8 +16,8 @@ class SeeDestination:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
-    | FASTEIGNIR |
-     - Fasteignalisti
+    | ÁFANGASTAÐUR |
+     - Áfangalisti
        - {self.destination['Name']}
      {DASH*15}
      E. Edit

@@ -17,6 +17,7 @@ PROPERTYTEMPLATE = ['Destination', 'Address', 'Size', 'Rooms', 'Type', 'Property
 CONTRACTORTEMPLATE = ["Name","Contact-name","Profession","Phone","Working-hours","Location"] #listi fyrir verktaka
 DESTINATIONTEMPLATE = ['Name', 'Country' ,'Airport', 'Phone', 'Working-hours', 'Manager', 'Social Security', 'Address', 'Phone-manager', 'GSM']
 
+
 # CONTRACTORTEMPLATE = ['Nafn verktaka', 'Nafn tengiliðs','Nafn sérhæfingu', 'Sími', 'Opnunartími','Áfangastaður'] #listi fyrir verktaka
 #PROPERTYTEMPLATE = ['Áfangastaður', 'Heimilisfang', 'Stærð', 'Herbergi', 'Tegund', 'Númer fasteignar', 'Auka'] # listi fyrir fasteignir
 #CONTRACTTEMPLATE = ['Stofnun verkbeiðnar','Starfsmaður', 'Starfsmanna ID', 'Titill', 'Lýsing', 'Áfangastaður', 'Fasteign', 'Númer fasteignar', 'Fasteignar ID', 'Forgangur','Staða'] #listi fyrir verkbeiðnir
