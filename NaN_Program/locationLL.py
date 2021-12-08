@@ -61,7 +61,16 @@ class LocationLL:
         if ret_lis == []:
             return False #skoða þetta svo filter drepur ekki forritið
         return ret_lis
-
+    
+    
+    def find_loc_id(self,id,all_loc_lis):
+        if id.isdigit():
+            for dic in all_loc_lis:
+                if int(dic["id"]) == int(id):
+                    dic = dic
+                    return dic 
+            return None #[{"Text":"No employee with this id"}]
+        return False
 
 
 if __name__ == "__main__":
@@ -76,4 +85,5 @@ if __name__ == "__main__":
     #{"Name":"John"}
     #d=g.get_destination_name()
     #print(d[0].capitalize())
-    g.add_location({"Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Phone-manager":"123456789","Address":"Cool Street","GSM":"123456788","Social Security":"98876532"})
+    #g.add_location({"Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Phone-manager":"123456789","Address":"Cool Street","GSM":"123456788","Social Security":"98876532"})
+    print(g.find_dest_by_str("Green",g.list_all_loc(),"Country"))

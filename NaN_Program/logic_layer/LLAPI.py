@@ -80,7 +80,8 @@ class LLAPI:
     def get_dest_info(self):
         return self.locLL.list_all_loc()
 
-    
+    def filter_loc_id(self,id,loc_lis):
+        return self.locLL.find_loc_id(id,loc_lis)
 
     
     
