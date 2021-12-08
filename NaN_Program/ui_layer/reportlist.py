@@ -65,7 +65,7 @@ Report-id | Request-id | Employee | Employee-id | Title | Description |Contract
             self.print_footer()
     
     def prompt_user(self,oldinput = None):
-        if oldinput = None:
+        if oldinput == None:
             user_input = input()
         else:
             user_input = oldinput
@@ -89,7 +89,7 @@ Report-id | Request-id | Employee | Employee-id | Title | Description |Contract
             self.lastrow = (self.slide + 1) * self.rows + 1
             
             if user_input in self.printedids:
-                reportinfo = self.llapi.filter_report_id(user_input, self.propertylist_backup) #as lists are mutable, we want to put the original list into filter_property_id as otherwise we would risk altering the filtered list.
+                reportinfo = self.llapi.filter_rep_id(user_input, self.propertylist_backup) #as lists are mutable, we want to put the original list into filter_property_id as otherwise we would risk altering the filtered list.
                 seereport= SeeReport(self.id, reportinfo, self.position)
                 seereport.display()
             else: 
