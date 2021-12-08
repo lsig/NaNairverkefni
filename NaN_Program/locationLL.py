@@ -33,6 +33,9 @@ class LocationLL:
 
     def is_valid(self,loc_dic):
         dic = {"Name":str, "Country":str, "Airport":str, "Phone":int,"Working-hours":int,"Manager":str,"Phone-manager":int,"GSM":int}
+        if ("Phone-manager" in loc_dic) == False:#passar það að þessi key eru til
+            loc_dic["Phone-manager"] = "1234567"
+            loc_dic["GSM"] = "1234567"
         for key in dic.keys():
             if dic[key] == str:
                 get_validation = loc_dic[key].replace(" ", "").isalpha()
@@ -42,8 +45,12 @@ class LocationLL:
             if key.lower() == "phone" and get_validation or key.lower() == "phone-manager" and get_validation or key.lower() == "gsm" and get_validation:
                 if len(loc_dic[key]) < 7 or len(loc_dic[key]) > 15:
                     return False, key
+            if ("Phone-manager" in loc_dic):
+                if key.lower() == "phone-manager" and get_validation or key.lower() == "gsm" and get_validation:
+                    if len(loc_dic[key]) < 7 or len(loc_dic[key]) > 15:
+                        return False, key
             if get_validation == False:
-
+                
                     return False, key
         return True, key
 
@@ -73,6 +80,25 @@ class LocationLL:
         return False
 
 
+    def edit_info(self,edit_loc_dic):
+        valid, key = self.is_valid(edit_loc_dic)
+        if valid:
+            #edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
+            all_lis_loc = self.dlapi.get_property_info()
+            dic = self.find_loc_id(edit_loc_dic["id"],all_lis_loc)
+            prop_loc_in_lis = self.find_id_location_loc(dic,all_lis_loc)
+            all_lis_loc[prop_loc_in_lis]= edit_loc_dic
+            self.dlapi.change_loc_info(all_lis_loc)
+            return True, key
+        return False, key
+
+    
+    def find_id_location_loc(self,dic,all_lis_prop):
+        for i in range(len(all_lis_prop)):
+            if dic == all_lis_prop[i]:
+                return i
+
+
 if __name__ == "__main__":
     g = LocationLL()
     #g.add_location({"Name":"Nuuk","Country":"Greenland","Airport":"Nan","Phone":"3548988054","Working-hours":"00","Manager":"lala","Manager-id":"5"})
@@ -86,4 +112,5 @@ if __name__ == "__main__":
     #d=g.get_destination_name()
     #print(d[0].capitalize())
     #g.add_location({"Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Phone-manager":"123456789","Address":"Cool Street","GSM":"123456788","Social Security":"98876532"})
-    print(g.find_dest_by_str("Green",g.list_all_loc(),"Country"))
+    #print(g.find_dest_by_str("Green",g.list_all_loc(),"Country"))
+    g.edit_info({"id":"4","Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Manager-id":"10"})
