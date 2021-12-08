@@ -1,4 +1,5 @@
 #Employee Main Menu 
+from ui_layer.boss_destinationmenu import BossDestinationMenu
 from ui_layer.boss_propertymenu import PropertyMenu
 from ui_layer.boss_employeesmenu import BossEmployeesMenu
 from ui_layer.boss_contractormenu import BossContractorMenu
@@ -19,6 +20,7 @@ class BossMenu:
       2. Starfsmenn
       3. Viðhald
       4. Verktakar
+      5. Áfangastaðir
       {DASH*15}
       L. Log out
       {QUIT}. Quit 
@@ -46,6 +48,10 @@ class BossMenu:
             elif user_choice == '4':
                 contrmenu = BossContractorMenu(self.id, self.position)      # boss_contractormenu.py
                 contrmenu.display()
+            
+            elif user_choice == '5':
+                destmenu = BossDestinationMenu(self.id, self.position)
+                destmenu.display()
 
             elif user_choice.upper() == 'L':
                 return 

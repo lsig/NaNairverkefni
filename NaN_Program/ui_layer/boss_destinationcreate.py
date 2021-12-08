@@ -1,17 +1,17 @@
 #skrá nýjan starfsmann
-#þarf að importa klösum eins og employee
+#þarf að importa klösum eins og destination
 
-from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME, CONTACTTEMPLATE
+from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME, DESTINATIONTEMPLATE
 from logic_layer.LLAPI import LLAPI
 from time import sleep
 import os
 
-class BossEmployeeCreate:
+class BossDestinationCreate:
     def __init__(self, id, position) -> None:
         self.position = position
         self.llapi = LLAPI()
         self.id = id
-        self.contactdict = {}
+        self.destinationdict = {}
         self.screen = f'''
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -27,54 +27,54 @@ class BossEmployeeCreate:
         os.system(CLEAR)
         print(self.screen)
 
-        for i in range( len(CONTACTTEMPLATE)): 
-            user_input = input(f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the contact
+        for i in range( len(DESTINATIONTEMPLATE)): 
+            user_input = input(f"{i+1}. {DESTINATIONTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the destination
             
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
 
-            self.contactdict[CONTACTTEMPLATE[i]] = user_input
+            self.destinationdict[DESTINATIONTEMPLATE[i]] = user_input
         print(DASH*25)
         
-        self.confirmcontact()
+        self.confirmdestination()
 
         
-    def printcontactinfo(self, number = None):
-        contactstring = ''
+    def printdestinationinfo(self, number = None):
+        destinationstring = ''
 
-        for i in range( len(CONTACTTEMPLATE)):
+        for i in range( len(DESTINATIONTEMPLATE)):
 
             if number != None and i == number - 1:
-                contactstring += f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} ____\n"
+                destinationstring += f"{i+1}. {DESTINATIONTEMPLATE[i] + ':':<17} ____\n"
 
             else:
-                contactstring += f"{i+1}. {CONTACTTEMPLATE[i] + ':':<17} {self.contactdict[CONTACTTEMPLATE[i]]}\n"
-        contactstring += DASH*25
+                destinationstring += f"{i+1}. {DESTINATIONTEMPLATE[i] + ':':<17} {self.destinationdict[DESTINATIONTEMPLATE[i]]}\n"
+        destinationstring += DASH*25
         
-        print(contactstring)
+        print(destinationstring)
     
 
-    def confirmcontact(self):
+    def confirmdestination(self):
 
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             if confirm.upper() == 'C':  # TODO
-                self.contactdict["Manager"] = "0" #Not boss
-                valid, key = self.llapi.add_emp(self.contactdict)
+                self.destinationdict["Manager"] = "0" #Not boss
+                valid, key = self.llapi.add_emp(self.destinationdict)
 
                 if valid:
-                    print("Employee successfully added!")
+                    print("Destination successfully added!")
                     sleep(SLEEPTIME)
                     return
 
                 else:
                     print(f"Invalid {key}!")
                     sleep(SLEEPTIME)
-                    self.editcontactinfo( CONTACTTEMPLATE.index(key) )
+                    self.editdestinationinfo( DESTINATIONTEMPLATE.index(key) )
         
             elif confirm.upper() == 'E':
-                self.editcontactinfo()
+                self.editdestinationinfo()
 
             elif confirm.upper() == 'Q': # eigum við að setja QUIT hér inn?
                 return
@@ -84,7 +84,7 @@ class BossEmployeeCreate:
                 sleep(SLEEPTIME)
                 self.reset_screen()
     
-    def editcontactinfo(self, row = None):
+    def editdestinationinfo(self, row = None):
         if row == None:
             user_row = int(input("Row to change: ")) #validate
 
@@ -92,14 +92,14 @@ class BossEmployeeCreate:
             user_row = row + 1
         self.reset_screen(user_row)
 
-        user_input = input(f"{CONTACTTEMPLATE[user_row - 1]}: ")
-        self.contactdict[CONTACTTEMPLATE[user_row - 1]] = user_input
+        user_input = input(f"{DESTINATIONTEMPLATE[user_row - 1]}: ")
+        self.destinationdict[DESTINATIONTEMPLATE[user_row - 1]] = user_input
 
         self.reset_screen()
     
     def reset_screen(self, user_row = None):
         os.system(CLEAR)
         print(self.screen)
-        self.printcontactinfo(user_row)
+        self.printdestinationinfo(user_row)
 
 
