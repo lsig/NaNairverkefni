@@ -78,59 +78,6 @@ class ReportsLL:
             return None
         return False
 
-<<<<<<< HEAD
-    def find_id_location_con(self, dic, all_con_lis):
-        for i in range(len(all_con_lis)):
-            if dic == all_con_lis[i]:
-                return i
-
-
-    def confirm_report(self, id):
-        all_con_lis = self.dlapi.get_all_cont()
-        for dic in all_con_lis:
-            if dic["Report-id"] == id:
-                dic = dic["Status"] = "2"
-            
-            con_loc_in_list = self.find_id_location_con(dic, all_con_lis)
-            all_con_lis[con_loc_in_list] = dic
-            self.dlapi.change_report(all_con_lis)
-            
-
-
-    def ready_report(self):
-        pass
-
-        # for dic in all_con_lis:
-        #     if dic["id"] == id:
-        #         rep_from_con = self.list_all_rep_from_con(id)
-        #         avr_con_grade = self.calculate_average_con_grade(rep_from_con, all_con_lis)
-
-
-
-
-
-    def calculate_average_con_grade(self):
-        list_of_ratings = self.list_all_rep_from_con()
-        if list_of_ratings is not None:
-            average = sum(list_of_ratings)/len(list_of_ratings)
-            return average        
-    
-
-    def list_all_rep_from_con(self, id):
-        all_con_lis = self.dlapi.get_all_cont()
-        ret_lis = []    
-        if id.isdigit():
-            for dic in all_con_lis:
-                if int(dic["id"]) == int(id):
-                    ret_lis.append(dic["Contractor-rating"])
-        if len(ret_lis) != 0:
-            return ret_lis
-        else:
-            return None
-
-
-=======
->>>>>>> c649217a30c6327a41fd34d9dfa5a4c78de526d4
     def report_validation(self, rep_dic, cont_dic):
         # a dictionairy for title, description, contractor-name and contractor-id.
         dic = {"Title":str, "Description":"both", "Contractor-id":int, "Commission": int}
