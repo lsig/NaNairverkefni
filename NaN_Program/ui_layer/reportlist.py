@@ -11,7 +11,7 @@ SEARCHFILTERS = ['Title', 'Description', 'Employee', 'Contractor-rating']
 class ReportList: 
     def __init__(self, id, position, reportdict = None) -> None:
         self.reportdict = reportdict
-        self.llapi = LLAPI(id)
+        self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id

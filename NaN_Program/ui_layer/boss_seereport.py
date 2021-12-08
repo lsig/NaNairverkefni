@@ -1,7 +1,7 @@
 #velja ákveðinn starfsmann
 from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, REPORTTEMPLATE
 from logic_layer.LLAPI import LLAPI
-from ui_layer.reportlist import ReportList
+
 
 from time import sleep
 import os
