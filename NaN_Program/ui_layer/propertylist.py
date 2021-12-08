@@ -156,7 +156,7 @@ class PropertyList:
                 userint = input(" ")
                 if userint.upper() == 'B':
                     return 'B'
-                elif userint.upper() == 'R':
+                elif userint.upper() == 'R' and self.propertylist != self.propertylist_backup:
                     return 'R'
                 elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
                     return int(userint)
