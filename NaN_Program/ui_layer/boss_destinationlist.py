@@ -9,7 +9,7 @@ MAXROWS = 50
 ROWS = 10
 DESTPRINTER = [(4,'id'), (20,'SS'), (20,'Name'), (25, 'address') , (15, 'phone'), (15, 'GSM'), (25, 'email'), (20, 'destination'), (0,'other')]
 DESTPRINT = [element[0] for element in DESTPRINTER]
-SEARCHFILTERS = ['Name','Email','Destination', 'Social Security']
+SEARCHFILTERS = ['Name','Country','Manager', 'Phone']
 
 
 class DestinationList: 
@@ -24,8 +24,8 @@ class DestinationList:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | STARFSMENN |
-     - Starfsmannalisti
+    | ÁFANGASTAÐIR |
+     - Áfangastaðalisti
      {DASH*15}
      L. Leita
      B. Til baka
@@ -48,7 +48,7 @@ class DestinationList:
                     extra = '  '
                 else:
                     extra = ''
-                if k != 'Manager':# and k != 'Social Security':
+                if k != 'Phone':# and k != 'Social Security':
                     print(f"{'| ' + k + extra:<{DESTPRINT[index]}}",end='')
             print(f"\n{DASH* sum(DESTPRINT) }")
 
