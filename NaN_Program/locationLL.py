@@ -12,14 +12,15 @@ class LocationLL:
 
     def add_location(self,loc_dic):
         #loc_dic["Destination"] = loc_dic["Destination"].capitalize()
-        boss_id = self.empLL.assign_id_emp()
-        loc = Location(self.assign_id_loc(),loc_dic["Name"],loc_dic["Country"],loc_dic["Airport"],loc_dic["Phone"],loc_dic["Working-hours"],loc_dic["Manager"],boss_id)
-        loc_dic["Destination"] = loc_dic["Name"]
-        loc_dic["Phone"] = loc_dic["Phone-man"]
-        loc_dic["Name"] = loc_dic["Manager"]
-        loc_dic["Manager"] = "1"
-        self.empLL.add_employee(loc_dic)
-        self.dlapi.add_loc(loc)
+        if self.is_valid(loc_dic): #þarf að bæta fancy bounce í ui :)  
+            boss_id = self.empLL.assign_id_emp()
+            loc = Location(self.assign_id_loc(),loc_dic["Name"],loc_dic["Country"],loc_dic["Airport"],loc_dic["Phone"],loc_dic["Working-hours"],loc_dic["Manager"],boss_id)
+            loc_dic["Destination"] = loc_dic["Name"]
+            loc_dic["Phone"] = loc_dic["Phone-manager"]
+            loc_dic["Name"] = loc_dic["Manager"]
+            loc_dic["Manager"] = "1"
+            self.empLL.add_employee(loc_dic)
+            self.dlapi.add_loc(loc)
 
 
     def assign_id_loc(self):
@@ -31,20 +32,25 @@ class LocationLL:
         return str(new_id)
 
     def is_valid(self,loc_dic):
-        dic = {"Name":str, "Country":str, "Airport":str, "Phone":int,"Working-hours":int,"Manager":str}
+        dic = {"Name":str, "Country":str, "Airport":str, "Phone":int,"Working-hours":int,"Manager":str,"Phone-manager":int,"GSM":int}
         for key in dic.keys():
             if dic[key] == str:
                 get_validation = loc_dic[key].replace(" ", "").isalpha()
             else:
                 get_validation = loc_dic[key].replace("-","").isdigit()
             # to check if the phone number is a valid length    
-            if key.lower() == "phone" and get_validation:
+            if key.lower() == "phone" and get_validation or key.lower() == "phone-manager" and get_validation or key.lower() == "gsm" and get_validation:
                 if len(loc_dic[key]) < 7 or len(loc_dic[key]) > 15:
                     return False, key
             if get_validation == False:
 
                     return False, key
         return True, key
+
+    
+    def list_all_loc(self):
+        all_loc = self.dlapi.get_loc_info()
+        return all_loc
 
 if __name__ == "__main__":
     g = LocationLL()
@@ -58,4 +64,4 @@ if __name__ == "__main__":
     #{"Name":"John"}
     #d=g.get_destination_name()
     #print(d[0].capitalize())
-    g.add_location({"Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Phone-man":"123456789","Address":"Cool Street","GSM":"123456788","Social Security":"98876532"})
+    g.add_location({"Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Phone-manager":"123456789","Address":"Cool Street","GSM":"123456788","Social Security":"98876532"})

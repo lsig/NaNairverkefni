@@ -1,28 +1,27 @@
 #verktakalisti
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
-from logic_layer.LLAPI import LLAPI
+from ui_layer.boss_seecontractor import SeeContractor
 from time import sleep
 import os
+from logic_layer.LLAPI import LLAPI
+MAXROWS = 50
+ROWS = 10
+SEARCHFILTERS = ['Name', 'Profession', 'Location', 'Rating(0-10)']
 
-from ui_layer.boss_seecontractor import SeeContractor
-MAXROWS = 10
+CONTRPRINT = [4, 20, 20, 12, 12, 17, 19, 15]
 
 
 class ContractorList: 
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
-        self.rows = MAXROWS
+        self.rows = ROWS
         self.slide = 0
         self.id = id
-        self.contractorlist = [['Jói','1303576040','8776545','joi@nanair.is'],
-            ['Spói','1403579040','8876545','spoi@nanair.is'],
-            ['Gói','0903576030','','Gói@nanair.is'],
-            ['Karl'],
-            ['Siggi', '58-12345'],
-            ['Maxim', 'idk'],
-            ['Markús', 'newphone']]
+        self.position = position
+        self.contractorlist = self.llapi.list_all_contractors()
+        self.contractorlist_backup = self.llapi.list_all_contractors() #vantar fyrir employee
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VERKTAKAR |
      - Verktakalisti
@@ -31,38 +30,46 @@ class ContractorList:
      B. Til baka
      /row. Breytir lengd raðar
 
-Nafn | Sími | Netfang | Kennitala
-{DASH*35}'''
-    
-    def display_list(self):
+'''
+
+    def run_screen(self):
         returnvalue = ''
         while returnvalue != 'B':
-            
-            self.firstrow = self.slide * self.rows 
-            os.system(CLEAR)
-            print(self.screen)
-
-            for i in range(self.rows): #til að displaya self.rows verktaka í röð.
-                contractorinfostr = f'{self.firstrow + i + 1}. - '
-                try:
-                    for k in range(len(self.contractorlist[self.firstrow + i])):
-                        contractorinfostr += f"{self.contractorlist[self.firstrow + i][k] :<10}" # afh 10?
-                        
-                except IndexError:
-                    pass
-                print(contractorinfostr)
-            
-            print(f"{DASH*35}\n")
-            if self.slide > 0:
-                print("p. Previous - ", end='')
-            if (self.slide + 1) * self.rows < len(self.contractorlist):
-                print("n. Next - ", end='')
-        
+            self.display_list()
             returnvalue = self.prompt_user()
     
+    def display_list(self):
+        self.firstrow = self.slide * self.rows 
 
-    def prompt_user(self):
-        user_input = input(f"#. to Select Contractor\n")
+        os.system(CLEAR)
+        print(self.screen)
+        self.print_header()
+
+        self.printedids = [self.contractorlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.contractorlist) > self.firstrow + i]
+
+        for i in range(self.rows): #til að displaya self.rows verktaka í röð.
+            try:
+                contractorinfost = f'{self.printedids[i] + ".":<{CONTRPRINT[0]}}- ' #id with some extra text.
+                for index, k in enumerate(self.contractorlist[self.firstrow + i]):
+
+                    if k != 'id': #We dont want to print the id again.
+                        contractorinfost += f"{'| ' + self.contractorlist[self.firstrow + i][k] :<{CONTRPRINT[index]}}"
+                print(contractorinfost, end='') #here we print a contractor's information.
+                    
+            except IndexError: #if the contractor id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
+                pass
+            print()
+        
+        self.print_footer()
+
+    
+
+    def prompt_user(self, oldinput = None):
+        if oldinput == None:
+            user_input = input()
+        else:
+            user_input = oldinput
+            print()
 
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
@@ -74,26 +81,104 @@ Nafn | Sími | Netfang | Kennitala
             return 'B'
 
         elif user_input.upper() == '/ROW':
-            self.rows = int(input("Rows: ")) #TODO validate
+            self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            #seecontractor = SeeContractor(self.id) 
-            pass 
+            self.find_contractor()
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn verktaka
-            self.lastrow = (self.slide + 1) * self.rows
+            self.lastrow = (self.slide + 1) * self.rows + 1
             
-            if self.firstrow <= int(user_input) < self.lastrow and len(self.contractorlist) >= int(user_input) :
-                seecontractor = SeeContractor(self.id) 
+            if user_input in self.printedids:
+                contractorinfo = self.llapi.filter_property_id(user_input, self.contractorlist) 
+                seecontractor = SeeContractor(self.id, contractorinfo, self.position) 
                 seecontractor.display()
+                self.propertylist = self.llapi.get_prop_info()
             else: 
-                print("Invalid row, try again!")
+                print(INVALID)
                 sleep(SLEEPTIME)
 
         else:
             print(INVALID)
             sleep(SLEEPTIME)
 
+
+    def find_contractor(self):
+        for index, filter in enumerate(SEARCHFILTERS):
+            print(f"{index + 1}: {filter}")
+        if self.contractorlist != self.contractorlist_backup:
+            print('R: Reset')
+        userint = self.validate('userint')
+
+        if userint == 'B':
+            return 'B'
+        
+        elif userint == 'R' and self.contractorlist != self.contractorlist_backup:
+            self.contractorlist = self.contractorlist_backup
+            return
+
+        key = SEARCHFILTERS[userint - 1]
+        userstring = input(f"Search in {key.lower()}: ")
+
+        filteredlist = self.llapi.search_contractor(userstring, self.contractorlist, key)
+
+        if filteredlist == False:
+            print(f"The filter {key.lower()}: {userstring} did not match any result.")
+            sleep(SLEEPTIME*3)
+        else:
+            self.contractorlist = filteredlist
+
+
+    def print_header(self):
+        for index, k in enumerate(self.contractorlist[0].keys()):
+            if k == 'id':
+                extra = '  '
+            else:
+                extra = ''
+            print(f"{'| ' + k + extra:<{CONTRPRINT[index]}}",end='')
+        print(f"\n{DASH* sum(CONTRPRINT) }")
+    
+    
+    def print_footer(self):
+        dashlen = 21
+        print(f"{DASH * sum(CONTRPRINT)}\n")
+        if self.slide > 0:
+            print("p. Previous - ", end='')
+            dashlen += 14
+        if (self.slide + 1) * self.rows < len(self.contractorlist):
+            print("n. Next - ", end='')
+            dashlen += 10
+        print(f"#. to Select Property\n{DASH*dashlen}")
+    
+
+    def validate(self, userint = None, userrows = None):
+        if userint is not None:
+            while True:
+                userint = input(" ")
+                if userint.upper() == 'B':
+                    return 'B'
+                elif userint.upper() == 'R':
+                    return 'R'
+                elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
+                    return int(userint)
+                
+                print(INVALID)
+                sleep(SLEEPTIME)
+                self.display_list()
+                self.prompt_user('L')
+        
+        if userrows is not None:
+            while True:
+                userrows = input("Rows: ")
+                if userrows.isdigit() == True and (1 <= int(userrows)):
+                    if int(userrows) > MAXROWS:
+                        print(f"Keep the row length under {MAXROWS}")
+                    else:
+                        return int(userrows)
+                else:
+                    print(INVALID)
+                sleep(SLEEPTIME*2)
+                self.display_list()
 
 
 

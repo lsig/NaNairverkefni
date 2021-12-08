@@ -16,29 +16,32 @@ NaN Air Properties
 {STAR*18}
 {STAR} Enter ID:{' '*6 + STAR}
 {STAR*18}
-
- - 's' fyrir starfsmenn, annars yfirmenn.
 Q. Quit
-{DASH * 14}
-"""
+{DASH * 18}"""
 
     def start(self):
         while True:
             os.system(CLEAR)
-            staffid = input(self.loginscreen)
-            valid = True # = self.llapi.valid_id(staffid)
-            if staffid.upper() == 'Q':    
+            print(self.loginscreen)
+            id_input = input()
+
+            if id_input == '': #remove for launch
+                id_input = 'jan.jacobsen'
+
+            staffid = self.llapi.login_information(id_input)
+
+            if id_input.upper() == 'Q':    
                 return
 
-            if valid: 
-                #print(f"\nWelcome, {staffid}") 
-                #sleep(SLEEPTIME)
-                if staffid.upper() == 'Y0301' or staffid.upper() != 'S': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
-                    bossmenu = BossMenu(staffid)
+            if staffid is not None: 
+                print(f"Welcome, {staffid['Name']}") 
+                sleep(SLEEPTIME)
+                if staffid['Manager'] == '1': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
+                    bossmenu = BossMenu(staffid, 'Manager')
                     returnvalue = bossmenu.print_menu()
 
-                elif staffid.upper() == 'S': #TODO, (employee id hér)
-                    empmenu = EmployeeMenu(staffid)
+                else:
+                    empmenu = EmployeeMenu(staffid, 'Employee')
                     returnvalue = empmenu.print_menu()
                 
                 if returnvalue == QUIT:
@@ -46,4 +49,4 @@ Q. Quit
 
             else:
                 print("Invalid ID, try again.")
-                sleep(SLEEPTIME-1)
+                sleep(SLEEPTIME+0.5)

@@ -9,12 +9,13 @@ import os
 
 
 class SeeProperty:
-    def __init__(self, id, propertyinfo) -> None:
+    def __init__(self, id, propertyinfo, position) -> None:
+        self.position = position
         self.llapi = LLAPI()
         self.id = id
         self.property = propertyinfo
         self.screen = f''' 
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
     | FASTEIGNIR |
      - Fasteignalisti
@@ -54,7 +55,7 @@ class SeeProperty:
             return 'C'
         
         elif user_input.upper() == 'R':
-            propreport = ReportList(self.id, self.property['id'])
+            propreport = ReportList(self.id, self.position, self.property['id'])
             propreport.display_list()
 
         elif user_input.upper() == 'E':
@@ -71,8 +72,8 @@ class SeeProperty:
     def change_row(self, row = None):
 
         if row == None:
-            validrow = ''
-            while validrow is not None:
+            user_row = None
+            while user_row is None:
                 self.reset_screen()
                 user_input = input("Row to change: ")
                 user_row = self.validate(user_input)
@@ -81,16 +82,17 @@ class SeeProperty:
         self.reset_screen(user_row)
 
         user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ")
+        old_input = self.property[PROPERTYTEMPLATE[user_row - 1]]
         self.property[PROPERTYTEMPLATE[user_row - 1]] = user_input 
 
-        returnvalue = self.confirm_edit()
+        returnvalue = self.confirm_edit(old_input, user_row)
         if returnvalue == 'B' or returnvalue == 'C':
             return returnvalue
         elif returnvalue is not None: #here we know that the returnvalue is neither a 'B' or a 'C', therefore the self.confirm_edit(self) has denied the submission and returnes the invalid key.
             row = PROPERTYTEMPLATE.index(returnvalue)
 
 
-    def confirm_edit(self):
+    def confirm_edit(self, old_input, user_row):
         while True:
             self.reset_screen()
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
@@ -106,7 +108,8 @@ class SeeProperty:
                     sleep(SLEEPTIME)
                     return key
 
-            elif is_user_happy.upper() == 'B' or is_user_happy.upper() == 'B':
+            elif is_user_happy.upper() == 'B':
+                self.property[PROPERTYTEMPLATE[user_row - 1]] = old_input
                 return is_user_happy.upper()
             
             elif is_user_happy.upper() == 'E':
@@ -120,7 +123,10 @@ class SeeProperty:
     def validate(self, rowinput):
         try:
             rowint = int(rowinput)
-            return rowint
+            if 1 <= rowint <= len(PROPERTYTEMPLATE):
+                return rowint
+            else:
+                raise ValueError
         except ValueError:
             print(INVALID)
             sleep(SLEEPTIME)

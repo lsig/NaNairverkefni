@@ -8,11 +8,11 @@ from time import sleep
 from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME
 
 class BossMenu: 
-    def __init__(self, id):
+    def __init__(self, id, position):
+        self.position = position
         self.id = id
-        self.id = "1" #add for testing!!
         self.options = f''' 
- Location | Name | {self.id}
+{self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
       {DASH*15}
       1. Fasteignir 
@@ -32,19 +32,19 @@ class BossMenu:
             user_choice = input()
 
             if user_choice == '1':
-                propmenu = PropertyMenu(self.id)          # boss_propertymenu.py
+                propmenu = PropertyMenu(self.id, self.position)          # boss_propertymenu.py
                 propmenu.display()
 
             elif user_choice == '2':
-                empsmenu = BossEmployeesMenu(self.id)          # boss_employeemenu.py
+                empsmenu = BossEmployeesMenu(self.id, self.position)          # boss_employeemenu.py
                 empsmenu.display()
 
             elif user_choice == '3':
-                maintmenu = BossMaintenanceMenu(self.id)    # boss_maintenancemenu.py
+                maintmenu = BossMaintenanceMenu(self.id, self.position)    # boss_maintenancemenu.py
                 maintmenu.display()
 
             elif user_choice == '4':
-                contrmenu = BossContractorMenu(self.id)      # boss_contractormenu.py
+                contrmenu = BossContractorMenu(self.id, self.position)      # boss_contractormenu.py
                 contrmenu.display()
 
             elif user_choice.upper() == 'L':

@@ -6,12 +6,13 @@ from logic_layer.LLAPI import LLAPI
 
 
 class BossPropertyCreate:
-    def __init__(self, id) -> None:
+    def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
+        self.position = position
         self.id = id
         self.propertylist = {}
         self.screen = f'''
- Location | Name | {self.id} 
+{self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
     | FASTEIGNIR |
      - Skrá nýja fasteign
@@ -83,7 +84,11 @@ class BossPropertyCreate:
     
     def editpropertyinfo(self, row = None):
         if row == None:
-            user_row = int(input("Row to change: ")) # þarf að vera tala á milli 1 og len(PROPERTYTEMPLATE) + 1
+            user_row = None
+            while user_row is None:
+                self.reset_screen()
+                user_input = input("Row to change: ")
+                user_row = self.validate(user_input)
         else:
             user_row = row + 1 
         self.reset_screen(user_row)
@@ -93,10 +98,22 @@ class BossPropertyCreate:
 
         self.reset_screen()
     
+
+    def validate(self, rowinput):
+        try:
+            rowint = int(rowinput)
+            if 1 <= rowint <= len(PROPERTYTEMPLATE):
+                return rowint
+            else:
+                raise ValueError
+        except ValueError:
+            print(INVALID)
+            sleep(SLEEPTIME)
+            return None
+    
     
     def reset_screen(self, user_row = None):
 
         os.system(CLEAR)
         print(self.screen)
         self.printpropertyinfo(user_row)
-

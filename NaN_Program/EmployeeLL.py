@@ -20,13 +20,18 @@ class EmployeeLL:
 
 #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
     def add_employee(self,emp_dic):
-        valid, key = self.validation(emp_dic)
-        if valid:
+        loc_add = False
+        valid = False
+        if ("Country" in emp_dic) == False:
+            valid, key = self.validation(emp_dic)
+        else:
+            loc_add = True
+        if valid or loc_add == True:
             email = self.email_generate(emp_dic["Name"])
             emp_dic["Destination"] = emp_dic["Destination"].capitalize()
             emp = Employee(self.assign_id_emp(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],email,emp_dic["Destination"],emp_dic["Manager"])
             self.dlapi.add_emp(emp)
-            return True, key
+            return True, None #spurja afhverju key?
         return False, key
 
 
@@ -71,12 +76,12 @@ class EmployeeLL:
         email = email.lower()
         for key in all_emp_lis:
             if key["Email"].lower() == email:
-                dic_return = {"id": key["id"], "manager": key["Manager"]}
+                dic_return = key
                 return dic_return
 
 
     def email_generate(self, name):
-        name = name.replace(" ","")
+        name = name.replace(" ",".")
         email = name + "@nanair.is"
         all_emp_lis = self.dlapi.get_all_emp()
         for key in all_emp_lis:
@@ -141,6 +146,22 @@ class EmployeeLL:
             return False
         return ret_lis
 
+    def find_employee_name(self,id):
+        employee_names = self.dlapi.get_all_emp()
+        for dic in employee_names:
+            if int(id) == int(dic["id"]):
+                emp_name = dic["Name"]
+        return emp_name
+
+    def get_emp_location(self,id):
+        emp_lis = self.dlapi.get_all_emp()
+        for dic in emp_lis:
+            if int(id) == int(dic["id"]):
+                boss_location = dic["Destination"]
+                return boss_location
+        none_val = "None"
+        return none_val
+
 
 
 if __name__ == "__main__":
@@ -149,7 +170,8 @@ if __name__ == "__main__":
     #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
     #e.edit_employee({"id": "10", "Name": "Bob", "Social Security": "9876543212", "Address": "Home", "Phone": "9999999", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1", "Manager": "0"})
     #print(e.email_generate("Kalli"))
-    f = {"key":"lala","lo":"sda"}
-    print("ky" in f)
+    #f = {"key":"lala","lo":"sda"}
+    #print("ky" in f)
+    print(e.login_info("nanna.daema"))
 
 
