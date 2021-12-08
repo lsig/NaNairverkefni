@@ -24,4 +24,4 @@ DESTINATIONTEMPLATE = ['Name', 'Country' ,'Airport', 'Phone', 'Working-hours', '
 # CONTACTTEMPLATE = ['Nafn', 'Kennitala', 'Heimilisfang', 'Heimasími', 'GSM símanúmer', 'Netfang', 'Áfangastaður', 'Yfirmaður'] #listi fyrir starfsmenn
 
 if __name__ == '__main__':
-    print( len(max(DESTINATIONTEMPLATE)) )
+    pass

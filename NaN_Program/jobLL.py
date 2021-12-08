@@ -11,15 +11,16 @@ class JobLL:
     
     def add_job(self,job_dic,id):
         self.boss_loc = self.empLL.get_emp_location(id)
-        if self.is_valid(job_dic):
+        valid, key = self.is_valid(job_dic)
+        if valid:
             auto_id = self.assign_id_job()
             cur_date = datetime.date(datetime.now())
             emp_name = self.empLL.find_employee_name(job_dic["Employee-id"])
             con_name = self.get_con_name_and_location(job_dic["Suggested-contractors-id"])["Name"]
             job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],job_dic["Suggested-contractors-id"],con_name,"0")
             self.dlapi.add_job(job)
-            return True
-        return False
+            return True, None
+        return False, key
 
     def assign_id_job(self):
         all_job_lis = self.dlapi.get_jobs()

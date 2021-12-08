@@ -48,7 +48,7 @@ class LLAPI:
 
     #JobLL
     def add_job(self,job_lis,id):
-        self.jLL.add_job(job_lis,id)
+        return self.jLL.add_job(job_lis,id)
 
     def get_job(self):
        return self.jLL.get_all_jobs()
