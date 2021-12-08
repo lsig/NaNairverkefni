@@ -93,12 +93,10 @@ class DestinationList:
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
             self.lastrow = (self.slide + 1) * self.rows + 1
             
-            if self.firstrow <= int(user_input) < self.lastrow and len(self.destinationlist) >= int(user_input):
-                destinationinfo = self.llapi.filter_loc_id(user_input, self.destinationlist) 
-                seeemp = SeeDestination(self.id, destinationinfo, self.position)
+            if user_input in self.printedids: #if the user input is the same as an id that is currently printed on the list
+                destinationinfo = self.llapi.filter_loc_id(user_input, self.destinationlist_backup)  #as lists are mutable, we want to put the original list into filter_property_id as otherwise we would risk altering the filtered list.
+                seeemp = SeeDestination(self.id, destinationinfo, self.position) 
                 seeemp.display()
-                pass
-            
             else: 
                 print("Invalid row, try again!")
                 sleep(SLEEPTIME)
@@ -116,7 +114,7 @@ class DestinationList:
 
         if userint == 'B':
             return 'B'
-        elif userint == 'R':
+        elif userint == 'R' and self.destinationlist != self.destinationlist_backup:
             self.destinationlist = self.destinationlist_backup
             return
         key = SEARCHFILTERS[userint - 1]
