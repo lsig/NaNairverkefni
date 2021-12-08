@@ -30,7 +30,7 @@ class LocationDL():
             header = loc_lis[0]
             writer.writerow(header)
             for dic in loc_lis:
-                writer.writerow(dic["id"],[dic["Name"],dic["Country"],dic["Airport"],dic["Phone"],dic["Working-hours"],dic["Manager"],dic["Manager-id"]])
+                writer.writerow([dic["id"],dic["Name"],dic["Country"],dic["Airport"],dic["Phone"],dic["Working-hours"],dic["Manager"],dic["Manager-id"]])
 
 
 if __name__ == "__main__":

@@ -84,7 +84,7 @@ class LocationLL:
         valid, key = self.is_valid(edit_loc_dic)
         if valid:
             #edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
-            all_lis_loc = self.dlapi.get_property_info()
+            all_lis_loc = self.dlapi.get_loc_info()
             dic = self.find_loc_id(edit_loc_dic["id"],all_lis_loc)
             loc_loc_in_lis = self.find_id_location_loc(dic,all_lis_loc)
             all_lis_loc[loc_loc_in_lis]= edit_loc_dic
@@ -113,4 +113,4 @@ if __name__ == "__main__":
     #print(d[0].capitalize())
     #g.add_location({"Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Phone-manager":"123456789","Address":"Cool Street","GSM":"123456788","Social Security":"98876532"})
     #print(g.find_dest_by_str("Green",g.list_all_loc(),"Country"))
-    g.edit_info({"id":"4","Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Manager-id":"10"})
+    #g.edit_info({"id":"4","Name":"Longboi","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Manager-id":"10"})
