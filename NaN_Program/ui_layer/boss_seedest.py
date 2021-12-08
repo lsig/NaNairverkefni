@@ -93,7 +93,7 @@ class SeeDestination:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_dest(self.destination)
+                valid, key = self.llapi.edit_loc(self.destination)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)
