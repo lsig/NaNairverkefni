@@ -82,11 +82,16 @@ class ReportsLL:
             return None
         return False
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 889c68f2af10e703bb22a1ecfa39ff8690661cb6
     def find_id_location_con(self, dic, all_con_lis):
         for i in range(len(all_con_lis)):
             if dic == all_con_lis[i]:
                 return i
 
+<<<<<<< HEAD
     def find_status_location(self, dic, all_rep_lis):
         for i in range(len(all_rep_lis)):
             if dic == all_rep_lis[i]:
@@ -140,6 +145,24 @@ class ReportsLL:
 
 
         # all_con_lis = self.dlapi.get_all_cont()
+=======
+
+    def confirm_report(self, id):
+        all_con_lis = self.dlapi.get_all_cont()
+        for dic in all_con_lis:
+            if dic["Report-id"] == id:
+                dic = dic["Status"] = "2"
+            
+            con_loc_in_list = self.find_id_location_con(dic, all_con_lis)
+            all_con_lis[con_loc_in_list] = dic
+            self.dlapi.change_report(all_con_lis)
+            
+
+
+    def ready_report(self):
+        pass
+
+>>>>>>> 889c68f2af10e703bb22a1ecfa39ff8690661cb6
         # for dic in all_con_lis:
         #     if dic["id"] == id:
         #         rep_from_con = self.list_all_rep_from_con(id)
@@ -148,6 +171,7 @@ class ReportsLL:
 
 
 
+<<<<<<< HEAD
     # def calculate_average_con_grade(self):
     #     list_of_ratings = self.list_all_rep_from_con()
     #     if list_of_ratings is not None:
@@ -161,6 +185,22 @@ class ReportsLL:
         if id.isdigit():
             for dic in all_con_lis:
                 if int(dic["Report-id"]) == int(id):
+=======
+
+    def calculate_average_con_grade(self):
+        list_of_ratings = self.list_all_rep_from_con()
+        if list_of_ratings is not None:
+            average = sum(list_of_ratings)/len(list_of_ratings)
+            return average        
+    
+
+    def list_all_rep_from_con(self, id):
+        all_con_lis = self.dlapi.get_all_cont()
+        ret_lis = []    
+        if id.isdigit():
+            for dic in all_con_lis:
+                if int(dic["id"]) == int(id):
+>>>>>>> 889c68f2af10e703bb22a1ecfa39ff8690661cb6
                     ret_lis.append(dic["Contractor-rating"])
         if len(ret_lis) != 0:
             return ret_lis
@@ -168,6 +208,11 @@ class ReportsLL:
             return None
 
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 756c5612df4432698efdb017978df2b06babd250
+>>>>>>> 889c68f2af10e703bb22a1ecfa39ff8690661cb6
     def report_validation(self, rep_dic, cont_dic):
         # a dictionairy for title, description, contractor-name and contractor-id.
         dic = {"Title":str, "Description":"both", "Contractor-id":int, "Commission": int}
