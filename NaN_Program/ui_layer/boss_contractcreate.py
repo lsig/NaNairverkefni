@@ -19,7 +19,7 @@ class ContractCreate:
       {DASH*15}
     {QUIT}. Hætta við
 
-    | VERKBEIÐNI |
+{'| VERKBEIÐNI |':^25}
 {DASH * 25}'''
 
     def display(self):
@@ -31,9 +31,6 @@ class ContractCreate:
             user_input = input(f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
-            #check validity
-            #while self.input_is_valid(user_input) == False:
-                #user_input = input(f"{i+1}: {CONTRACTTEMPLATE[i]}")
             self.contractlist[CONTRACTTEMPLATE[i]] = user_input
         print(DASH*25)
         
@@ -57,21 +54,21 @@ class ContractCreate:
 
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
-            if confirm.upper() == 'C':  # TODO
-                valid, key = self.llapi.add_job(self.contractlist,self.id)
+            if confirm.upper() == 'C':
+                valid, key = self.llapi.add_job(self.contractlist, self.id['id']) #here we tell the LLAPI to add the job, it tells us if the procedure was succesful.
                 if valid:
                     print('Contract succesfully added!')
                     sleep(SLEEPTIME)
                     return
                 else:
-                    print(f'Wrong {key}')
+                    print(f'Wrong {key}') 
                     sleep(SLEEPTIME)
-                    self.editcontractinfo(DESTINATIONTEMPLATE.index(key))
+                    self.editcontractinfo( CONTRACTTEMPLATE.index(key) )
         
             elif confirm.upper() == 'E': # TODO
                 self.editcontractinfo()
 
-            elif confirm.upper() == 'Q': # eigum við að setja QUIT hér inn?
+            elif confirm.upper() == 'Q':
                 return
 
             else:
@@ -89,8 +86,8 @@ class ContractCreate:
         else:
             user_row = row + 1
         self.reset_screen(user_row)
-        user_input = input(f"{DESTINATIONTEMPLATE[user_row - 1]}: ")
-        self.contractlist[DESTINATIONTEMPLATE[user_row - 1]] = user_input
+        user_input = input(f"{CONTRACTTEMPLATE[user_row - 1]}: ")
+        self.contractlist[CONTRACTTEMPLATE[user_row - 1]] = user_input
 
         self.reset_screen()
     
@@ -103,7 +100,7 @@ class ContractCreate:
     def validate(self, rowinput):
         try:
             rowint = int(rowinput)
-            if 1 <= rowint <= len(DESTINATIONTEMPLATE):
+            if 1 <= rowint <= len(CONTRACTTEMPLATE):
                 return rowint
             else:
                 raise ValueError
