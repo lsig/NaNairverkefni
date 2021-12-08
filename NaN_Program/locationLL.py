@@ -53,7 +53,7 @@ class LocationLL:
         return all_loc
 
 
-    def find_prop_by_str(self,user_string,loc_lis,key):
+    def find_dest_by_str(self,user_string,loc_lis,key):
         ret_lis=[]
         for dic in loc_lis:
             if user_string.lower() in dic[key].lower():
