@@ -130,7 +130,7 @@ class ReportsLL:
 
 
 =======
->>>>>>> c649217a30c6327a41fd34d9dfa5a4c78de526d4
+>>>>>>> 756c5612df4432698efdb017978df2b06babd250
     def report_validation(self, rep_dic, cont_dic):
         # a dictionairy for title, description, contractor-name and contractor-id.
         dic = {"Title":str, "Description":"both", "Contractor-id":int, "Commission": int}
