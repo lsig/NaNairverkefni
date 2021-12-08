@@ -15,12 +15,12 @@ class BossDestinationCreate:
         self.screen = f'''
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | STARFSMENN |
-     - Skrá nýja starfsmann
+    | ÁFANGASTAÐIR |
+     - Skrá nýjan áfangastað
       {DASH*15}
     {QUIT}. Hætta við
 
-    | STARFSMAÐUR |
+    | ÁFANGASTAÐUR |
 {DASH * 25}'''
 
     def display_menu(self):
@@ -28,7 +28,7 @@ class BossDestinationCreate:
         print(self.screen)
 
         for i in range( len(DESTINATIONTEMPLATE)): 
-            user_input = input(f"{i+1}. {DESTINATIONTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the destination
+            user_input = input(f"{str(i+1) + '. ' + str(DESTINATIONTEMPLATE[i]) + ': ':<21}") #The user puts in info for every section of the destination
             
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
