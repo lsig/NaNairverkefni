@@ -198,6 +198,15 @@ class ReportsLL:
             return False #skoða þetta svo filter drepur ekki forritið
         return ret_lis
 
+    def find_rep_id(self,id,all_rep_lis):
+        if id.isdigit():
+            for dic in all_rep_lis:
+                if int(dic["id"]) == int(id):
+                    dic = dic
+                    return dic 
+            return None #[{"Text":"No employee with this id"}]
+        return False
+
 
 
 if __name__ == "__main__":
