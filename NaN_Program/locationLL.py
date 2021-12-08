@@ -86,8 +86,8 @@ class LocationLL:
             #edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
             all_lis_loc = self.dlapi.get_property_info()
             dic = self.find_loc_id(edit_loc_dic["id"],all_lis_loc)
-            prop_loc_in_lis = self.find_id_location_loc(dic,all_lis_loc)
-            all_lis_loc[prop_loc_in_lis]= edit_loc_dic
+            loc_loc_in_lis = self.find_id_location_loc(dic,all_lis_loc)
+            all_lis_loc[loc_loc_in_lis]= edit_loc_dic
             self.dlapi.change_loc_info(all_lis_loc)
             return True, key
         return False, key
