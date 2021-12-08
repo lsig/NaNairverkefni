@@ -96,6 +96,7 @@ class ReportsLL:
                 return i
 
 
+
     def confirm_and_ready_report_and_grade_contractor(self, rep_dic):
         all_rep_lis = self.dlapi.get_all_report()
         dic = self.find_rep_id(rep_dic["Repord-id"], all_rep_lis)
