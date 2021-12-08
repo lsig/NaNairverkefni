@@ -14,7 +14,7 @@ class ReportList:
         self.id = id
         self.position = position
         self.reportlist = self.llapi.get_report_info() #TODO
-        self.reportlist_backup = self.reportlist # er þetta ekki eih svona shallow copy, ss að ef self.reportlist breytist þá breytist self.reportlist_backup, því hann er instance.
+        self.reportlist_backup = self.llapi.get_report_info()
         if self.propertydict == None:
             menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'
         else:
