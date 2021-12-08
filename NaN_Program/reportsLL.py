@@ -78,6 +78,7 @@ class ReportsLL:
             return None
         return False
 
+<<<<<<< HEAD
     def find_id_location_con(self, dic, all_con_lis):
         for i in range(len(all_con_lis)):
             if dic == all_con_lis[i]:
@@ -128,6 +129,8 @@ class ReportsLL:
             return None
 
 
+=======
+>>>>>>> 756c5612df4432698efdb017978df2b06babd250
     def report_validation(self, rep_dic, cont_dic):
         # a dictionairy for title, description, contractor-name and contractor-id.
         dic = {"Title":str, "Description":"both", "Contractor-id":int, "Commission": int}
