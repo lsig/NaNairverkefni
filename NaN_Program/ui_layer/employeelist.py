@@ -42,25 +42,17 @@ class EmployeeList:
 
             os.system(CLEAR)
             print(self.screen)
-            for index, k in enumerate(self.employeelist[0].keys()):
-                if k == 'id':
-                    extra = '  '
-                else:
-                    extra = ''
-                if k != 'Manager':# and k != 'Social Security':
-                    print(f"{'| ' + k + extra:<{EMPPRINT[index]}}",end='')
-            print(f"\n{DASH* sum(EMPPRINT) }")
+            self.print_header()
+
+            self.printedids = [self.employeelist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.employeelist) > self.firstrow + i]
 
             for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
                 try:
-                    employeeinfostr = f'{self.employeelist[self.firstrow + i]["id"] + ".":<{EMPPRINT[0]}}- ' #id with some extra text.
+                    employeeinfostr = f'{self.printedids[i] + ".":<{EMPPRINT[0]}}- ' #id with some extra text.
                     for index, k in enumerate(self.employeelist[self.firstrow + i]):
-                        if k == 'Address': #the address in the csv file stores town and country, seperated by semicommas (;), we only want the house address.
-                            infotoprint = self.employeelist[self.firstrow + i][k].split(';')[0]
-                            employeeinfostr += f"{'| ' + infotoprint[0:22] :<{EMPPRINT[index]}}"
-
-                        elif k != 'id' and k != 'Manager':# and k != 'Social Security': #We dont want to print the id again, and we dont want to print the manager status and social security number at all.
-                            employeeinfostr += f"{'| ' + self.employeelist[self.firstrow + i][k][0:22] :<{EMPPRINT[index]}}"
+                        
+                        if k != 'id': #the address in the csv file stores town and country, seperated by semicommas (;), we only want the house address.
+                            employeeinfostr += f"{'| ' + self.employeelist[self.firstrow + i][k] :<{EMPPRINT[index]}}"
                     print(employeeinfostr, end='') #here we print an employee's information.
                         
                 except IndexError: #if the employee id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
