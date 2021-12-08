@@ -44,7 +44,7 @@ class ContractCreate:
             if number != None and i == number - 1:
                 contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ____\n"
             else:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} {self.contractlist[i]}\n"
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} {self.contractlist[CONTRACTTEMPLATE[i]]}\n"
         contractstring += DASH*25
         
         print(contractstring)
