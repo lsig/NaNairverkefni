@@ -53,10 +53,6 @@ class SeeReport:
 
         if user_input.upper() == 'B':
             return 'C'
-        
-        elif user_input.upper() == 'R':
-            propreport = ReportList(self.id, self.position, self.report['id'])
-            propreport.display_list()
 
         elif user_input.upper() == 'E':
             while True:
