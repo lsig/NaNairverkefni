@@ -33,7 +33,7 @@ class ReportDL():
             writer.writerow(header)
             for dic in rep_lis:
                 writer.writerow([dic["Report-id"],dic["Request-id"],dic["Employee"],dic["Employee-id"],
-                dic["Title"],dic["Description"],dic["Location"],dic["Property"],dic["Property-name"],dic["Property-id"],dic["Contractor-name"],dic["Contractor-id"],dic["Contractor-rating"],dic["Date"],dic["Commission"],dic["Status"]])
+                dic["Title"],dic["Description"],dic["Location"],dic["Property"],dic["Property-number"],dic["Property-id"],dic["Contractor-name"],dic["Contractor-id"],dic["Contractor-rating"],dic["Date"],dic["Commission"],dic["Status"]])
 
 
 if __name__ == "__main__":

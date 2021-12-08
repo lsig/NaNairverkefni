@@ -7,9 +7,9 @@ from time import sleep
 import os
 MAXROWS = 50
 ROWS = 10
-DESTPRINTER = [(4,'id'), (20,'SS'), (20,'Name'), (25, 'address') , (15, 'phone'), (15, 'GSM'), (25, 'email'), (20, 'destination'), (0,'other')]
+DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (15, 'Airport'), (15, 'Phone'), (15, 'Workinghours'), (20, 'Managar'), (15,'Managerid')]
 DESTPRINT = [element[0] for element in DESTPRINTER]
-SEARCHFILTERS = ['Name','Email','Destination', 'Social Security']
+SEARCHFILTERS = ['Name','Country','Manager', 'Phone']
 
 
 class DestinationList: 
@@ -24,8 +24,8 @@ class DestinationList:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | STARFSMENN |
-     - Starfsmannalisti
+    | ÁFANGASTAÐIR |
+     - Áfangastaðalisti
      {DASH*15}
      L. Leita
      B. Til baka
@@ -48,20 +48,18 @@ class DestinationList:
                     extra = '  '
                 else:
                     extra = ''
-                if k != 'Manager':# and k != 'Social Security':
-                    print(f"{'| ' + k + extra:<{DESTPRINT[index]}}",end='')
+                print(f"{'| ' + k + extra:<{DESTPRINT[index]}}",end='')
             print(f"\n{DASH* sum(DESTPRINT) }")
+
+            self.printedids = [self.destinationlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.destinationlist) > self.firstrow + i]
 
             for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
                 try:
-                    destinationinfostr = f'{self.destinationlist[self.firstrow + i]["id"] + ".":<{DESTPRINT[0]}}- ' #id with some extra text.
+                    destinationinfostr = f'{self.printedids[i] + ".":<{DESTPRINT[0]}}- ' #id with some extra text.
                     for index, k in enumerate(self.destinationlist[self.firstrow + i]):
-                        if k == 'Address': #the address in the csv file stores town and country, seperated by semicommas (;), we only want the house address.
-                            infotoprint = self.destinationlist[self.firstrow + i][k].split(';')[0]
-                            destinationinfostr += f"{'| ' + infotoprint[0:22] :<{DESTPRINT[index]}}"
-
-                        elif k != 'id' and k != 'Manager':# and k != 'Social Security': #We dont want to print the id again, and we dont want to print the manager status and social security number at all.
+                        if k != 'id':
                             destinationinfostr += f"{'| ' + self.destinationlist[self.firstrow + i][k][0:22] :<{DESTPRINT[index]}}"
+
                     print(destinationinfostr, end='') #here we print an destination's information.
                         
                 except IndexError: #if the destination id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
@@ -96,7 +94,7 @@ class DestinationList:
             self.lastrow = (self.slide + 1) * self.rows + 1
             
             if self.firstrow <= int(user_input) < self.lastrow and len(self.destinationlist) >= int(user_input):
-                destinationinfo = self.llapi.filter_destination_id(user_input, self.destinationlist) 
+                destinationinfo = self.llapi.filter_loc_id(user_input, self.destinationlist) 
                 seeemp = SeeDestination(self.id, destinationinfo, self.position)
                 seeemp.display()
                 pass

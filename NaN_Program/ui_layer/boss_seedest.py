@@ -4,7 +4,7 @@ from logic_layer.LLAPI import LLAPI
 
 from time import sleep
 import os
-
+DESTINATIONTEMPLATE = DESTINATIONTEMPLATE[0:6]
 
 
 class SeeDestination:
@@ -16,9 +16,9 @@ class SeeDestination:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
-    | FASTEIGNIR |
-     - Fasteignalisti
-       - {self.destination['Address']}
+    | ÁFANGASTAÐUR |
+     - Áfangalisti
+       - {self.destination['Name']}
      {DASH*15}
      E. Edit
      R. Destination reports
@@ -35,7 +35,7 @@ class SeeDestination:
     
     def printdestinationinfo(self, number = None):
 
-        destinationstring = f"{'| ' + self.destination['Address'] + ' | ':^35}\n{DASH*35}\n"
+        destinationstring = f"{'| ' + self.destination['Name'] + ' | ':^35}\n{DASH*35}\n"
 
         for i in range(len(DESTINATIONTEMPLATE)):
             if number != None and i == number - 1:
@@ -93,7 +93,7 @@ class SeeDestination:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_dest(self.destination)
+                valid, key = self.llapi.edit_loc(self.destination)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)
