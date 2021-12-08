@@ -19,8 +19,8 @@ class ContractCreate:
       {DASH*15}
     {QUIT}. Hætta við
 
-{'| VERKBEIÐNI |':^25}
-{DASH * 25}'''
+{'| VERKBEIÐNI |':^35}
+{DASH * 35}'''
 
     def display(self):
 
@@ -28,11 +28,11 @@ class ContractCreate:
         print(self.screen)
 
         for i in range( len(CONTRACTTEMPLATE)): 
-            user_input = input(f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the property
+            user_input = input(f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<30} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
             self.contractlist[CONTRACTTEMPLATE[i]] = user_input
-        print(DASH*25)
+        print(DASH*35)
         
         self.confirmcontract()
 
@@ -42,10 +42,10 @@ class ContractCreate:
         contractstring = ''
         for i in range( len(CONTRACTTEMPLATE)):
             if number != None and i == number - 1:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ____\n"
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<30} ____\n"
             else:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} {self.contractlist[CONTRACTTEMPLATE[i]]}\n"
-        contractstring += DASH*25
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<30} {self.contractlist[CONTRACTTEMPLATE[i]]}\n"
+        contractstring += DASH*35
         
         print(contractstring)
     
