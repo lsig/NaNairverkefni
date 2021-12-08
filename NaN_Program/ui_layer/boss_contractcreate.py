@@ -1,5 +1,5 @@
 #skrá nýja verkbeiðni
-from data_files.const import CLEAR, DESTINATIONTEMPLATE, INVALID, STAR, DASH, SLEEPTIME, QUIT, CONTRACTTEMPLATE
+from data_files.const import CLEAR, CONTRACTTEMPLATE, INVALID, REGCONTRACTTEMPLATE, STAR, DASH, SLEEPTIME, QUIT
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
@@ -19,32 +19,49 @@ class ContractCreate:
       {DASH*15}
     {QUIT}. Hætta við
 
-{'| VERKBEIÐNI |':^35}
-{DASH * 35}'''
+'''
 
     def display(self):
+        self.mainttype, self.template = self.regular_or_single()
 
         os.system(CLEAR)
         print(self.screen)
 
-        for i in range( len(CONTRACTTEMPLATE)): 
-            user_input = input(f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<30} ") #The user puts in info for every section of the property
+        print(f"{'| ' + self.mainttype + ' |':^35}\n{DASH * 35}")
+
+        for i in range( len(self.template)): 
+            user_input = input(f"{i+1}. {self.template[i] + ':':<30} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
-            self.contractlist[CONTRACTTEMPLATE[i]] = user_input
+            self.contractlist[self.template[i]] = user_input
         print(DASH*35)
         
         self.confirmcontract()
+
+    def regular_or_single(self):
+        while True:
+            os.system(CLEAR)
+            print(self.screen)
+            mainttype = input("1. Regluleg verkbeiðni\n2. Stök verkbeiðni\n") #1. maintenance job, 2. regular job
+            if mainttype == '1':
+                return 'REGLULEG VERKBEIÐNI', REGCONTRACTTEMPLATE
+
+            elif mainttype == '2':
+                return 'STÖK VERKBEIÐNI', CONTRACTTEMPLATE
+
+            print(INVALID)
+            sleep(SLEEPTIME)
+
 
         
     def printcontractinfo(self, number = None):
 
         contractstring = ''
-        for i in range( len(CONTRACTTEMPLATE)):
+        for i in range( len(self.template)):
             if number != None and i == number - 1:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<30} ____\n"
+                contractstring += f"{i+1}. {self.template[i] + ':':<30} ____\n"
             else:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<30} {self.contractlist[CONTRACTTEMPLATE[i]]}\n"
+                contractstring += f"{i+1}. {self.template[i] + ':':<30} {self.contractlist[self.template[i]]}\n"
         contractstring += DASH*35
         
         print(contractstring)
@@ -63,7 +80,7 @@ class ContractCreate:
                 else:
                     print(f'Wrong {key}') 
                     sleep(SLEEPTIME)
-                    self.editcontractinfo( CONTRACTTEMPLATE.index(key) )
+                    self.editcontractinfo( self.template.index(key) )
         
             elif confirm.upper() == 'E': # TODO
                 self.editcontractinfo()
@@ -86,8 +103,8 @@ class ContractCreate:
         else:
             user_row = row + 1
         self.reset_screen(user_row)
-        user_input = input(f"{CONTRACTTEMPLATE[user_row - 1]}: ")
-        self.contractlist[CONTRACTTEMPLATE[user_row - 1]] = user_input
+        user_input = input(f"{self.template[user_row - 1]}: ")
+        self.contractlist[self.template[user_row - 1]] = user_input
 
         self.reset_screen()
     
@@ -100,7 +117,7 @@ class ContractCreate:
     def validate(self, rowinput):
         try:
             rowint = int(rowinput)
-            if 1 <= rowint <= len(CONTRACTTEMPLATE):
+            if 1 <= rowint <= len(self.template):
                 return rowint
             else:
                 raise ValueError

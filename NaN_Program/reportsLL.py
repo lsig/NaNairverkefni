@@ -54,10 +54,10 @@ class ReportsLL:
 
     def get_all_rep(self): # klárt
         all_reports = self.dlapi.get_all_report()
-        counter = 0
-        for i in all_reports:
-            all_reports[counter]["Suggested-contractor"] = self.get_report_name_and_location(i["Suggested-contractor"])["Name"]
-            counter += 1
+        # counter = 0
+        # for i in all_reports:
+        #     all_reports[counter]["Suggested-contractor"] = self.get_report_name_and_location(i["Suggested-contractor"])["Name"]
+        #     counter += 1
         return all_reports
 
     def get_report_name_and_location(self,id): #klárt
@@ -188,14 +188,36 @@ class ReportsLL:
             prev = rep_dic[key]
             return True
 
+
+    def find_rep_by_str(self,user_string,rep_lis,key):
+        ret_lis=[]
+        for dic in rep_lis:
+            if user_string.lower() in dic[key].lower():
+                ret_lis.append(dic)
+        if ret_lis == []:
+            return False #skoða þetta svo filter drepur ekki forritið
+        return ret_lis
+
+    def find_rep_id(self,id,all_rep_lis):
+        if id.isdigit():
+            for dic in all_rep_lis:
+                if int(dic["id"]) == int(id):
+                    dic = dic
+                    return dic 
+            return None #[{"Text":"No employee with this id"}]
+        return False
+
+
+
 if __name__ == "__main__":
     r = ReportsLL()
     print("maxim er king")
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor": "1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
     #r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-Rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "1"})
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
-    r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "0"})
+    #r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "0"})
     #1,1,Jacob Yxa,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,kris,1,3,2021-12-07,5000,0
+    print(r.get_all_rep())
  
 ## id = 1
 # Date-created = 2021-12-06
