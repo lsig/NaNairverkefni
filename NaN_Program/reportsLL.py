@@ -188,6 +188,18 @@ class ReportsLL:
             prev = rep_dic[key]
             return True
 
+
+    def find_rep_by_str(self,user_string,rep_lis,key):
+        ret_lis=[]
+        for dic in rep_lis:
+            if user_string.lower() in dic[key].lower():
+                ret_lis.append(dic)
+        if ret_lis == []:
+            return False #skoða þetta svo filter drepur ekki forritið
+        return ret_lis
+
+
+
 if __name__ == "__main__":
     r = ReportsLL()
     print("maxim er king")
