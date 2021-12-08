@@ -5,6 +5,7 @@ from propertyLL import PropertyLL
 from jobLL import JobLL
 from EmployeeLL import EmployeeLL
 from locationLL import LocationLL
+from reportsLL import ReportsLL
 
 class LLAPI:
     def __init__(self):
@@ -14,6 +15,7 @@ class LLAPI:
         self.jLL = JobLL()
         self.empll = EmployeeLL()
         self.locLL = LocationLL()
+        self.repLL = ReportsLL()
 
     #ContractorLL
     def add_cont(self,con_lis):
@@ -86,6 +88,12 @@ class LLAPI:
     def edit_loc(self,loc_dic):
         self.locLL.edit_info(loc_dic)
 
+    #ReportLL
+    def get_report_info(self):
+        return self.repLL.get_all_rep()
+    
+    def search_report(self,string, reportlist, key):
+        return self.repLL.find_rep_by_str(string, reportlist, key)
     
     
 
