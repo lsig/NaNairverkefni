@@ -52,6 +52,18 @@ class LocationLL:
         all_loc = self.dlapi.get_loc_info()
         return all_loc
 
+
+    def find_prop_by_str(self,user_string,loc_lis,key):
+        ret_lis=[]
+        for dic in loc_lis:
+            if user_string.lower() in dic[key].lower():
+                ret_lis.append(dic)
+        if ret_lis == []:
+            return False #skoða þetta svo filter drepur ekki forritið
+        return ret_lis
+
+
+
 if __name__ == "__main__":
     g = LocationLL()
     #g.add_location({"Name":"Nuuk","Country":"Greenland","Airport":"Nan","Phone":"3548988054","Working-hours":"00","Manager":"lala","Manager-id":"5"})
