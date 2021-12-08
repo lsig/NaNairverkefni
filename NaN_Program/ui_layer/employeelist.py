@@ -152,7 +152,7 @@ class EmployeeList:
                 userint = input(" ")
                 if userint.upper() == 'B':
                     return 'B'
-                elif userint.upper() == 'R':
+                elif userint.upper() == 'R' and self.employeelist != self.employeelist_backup:
                     return 'R'
                 elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
                     return int(userint)
