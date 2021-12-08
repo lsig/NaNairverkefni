@@ -20,13 +20,18 @@ class EmployeeLL:
 
 #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
     def add_employee(self,emp_dic):
-        valid, key = self.validation(emp_dic)
-        if valid:
+        loc_add = False
+        valid = False
+        if ("Country" in emp_dic) == False:
+            valid, key = self.validation(emp_dic)
+        else:
+            loc_add = True
+        if valid or loc_add == True:
             email = self.email_generate(emp_dic["Name"])
             emp_dic["Destination"] = emp_dic["Destination"].capitalize()
             emp = Employee(self.assign_id_emp(),emp_dic["Name"],emp_dic["Social Security"],emp_dic["Address"],emp_dic["Phone"],emp_dic["GSM"],email,emp_dic["Destination"],emp_dic["Manager"])
             self.dlapi.add_emp(emp)
-            return True, key
+            return True, None #spurja afhverju key?
         return False, key
 
 
@@ -76,7 +81,7 @@ class EmployeeLL:
 
 
     def email_generate(self, name):
-        name = name.replace(" ","")
+        name = name.replace(" ",".")
         email = name + "@nanair.is"
         all_emp_lis = self.dlapi.get_all_emp()
         for key in all_emp_lis:

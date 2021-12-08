@@ -1,25 +1,25 @@
 #starfsmannalisti
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
-from ui_layer.boss_seeemployee import SeeEmployee
+#from ui_layer.boss_seedestination import SeeDestination
 from logic_layer.LLAPI import LLAPI
 from time import sleep
 import os
 MAXROWS = 50
 ROWS = 10
-EMPPRINTER = [(4,'id'), (20,'SS'), (20,'Name'), (25, 'address') , (15, 'phone'), (15, 'GSM'), (25, 'email'), (20, 'destination'), (0,'other')]
-EMPPRINT = [element[0] for element in EMPPRINTER]
+DESTPRINTER = [(4,'id'), (20,'SS'), (20,'Name'), (25, 'address') , (15, 'phone'), (15, 'GSM'), (25, 'email'), (20, 'destination'), (0,'other')]
+DESTPRINT = [element[0] for element in DESTPRINTER]
 SEARCHFILTERS = ['Name','Email','Destination', 'Social Security']
 
 
-class EmployeeList: 
+class DestinationList: 
     def __init__(self, id, position) -> None:
         self.llapi = LLAPI()
         self.rows = ROWS
         self.slide = 0
         self.id = id
         self.position = position
-        self.employeelist = self.llapi.get_emp_info()
-        self.employeelist_backup = self.llapi.get_emp_info()
+        self.destinationlist = self.llapi.get_emp_info()
+        self.destinationlist_backup = self.llapi.get_emp_info()
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -42,28 +42,28 @@ class EmployeeList:
 
             os.system(CLEAR)
             print(self.screen)
-            for index, k in enumerate(self.employeelist[0].keys()):
+            for index, k in enumerate(self.destinationlist[0].keys()):
                 if k == 'id':
                     extra = '  '
                 else:
                     extra = ''
                 if k != 'Manager':# and k != 'Social Security':
-                    print(f"{'| ' + k + extra:<{EMPPRINT[index]}}",end='')
-            print(f"\n{DASH* sum(EMPPRINT) }")
+                    print(f"{'| ' + k + extra:<{DESTPRINT[index]}}",end='')
+            print(f"\n{DASH* sum(DESTPRINT) }")
 
             for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
                 try:
-                    employeeinfostr = f'{self.employeelist[self.firstrow + i]["id"] + ".":<{EMPPRINT[0]}}- ' #id with some extra text.
-                    for index, k in enumerate(self.employeelist[self.firstrow + i]):
+                    destinationinfostr = f'{self.destinationlist[self.firstrow + i]["id"] + ".":<{DESTPRINT[0]}}- ' #id with some extra text.
+                    for index, k in enumerate(self.destinationlist[self.firstrow + i]):
                         if k == 'Address': #the address in the csv file stores town and country, seperated by semicommas (;), we only want the house address.
-                            infotoprint = self.employeelist[self.firstrow + i][k].split(';')[0]
-                            employeeinfostr += f"{'| ' + infotoprint[0:22] :<{EMPPRINT[index]}}"
+                            infotoprint = self.destinationlist[self.firstrow + i][k].split(';')[0]
+                            destinationinfostr += f"{'| ' + infotoprint[0:22] :<{DESTPRINT[index]}}"
 
                         elif k != 'id' and k != 'Manager':# and k != 'Social Security': #We dont want to print the id again, and we dont want to print the manager status and social security number at all.
-                            employeeinfostr += f"{'| ' + self.employeelist[self.firstrow + i][k][0:22] :<{EMPPRINT[index]}}"
-                    print(employeeinfostr, end='') #here we print an employee's information.
+                            destinationinfostr += f"{'| ' + self.destinationlist[self.firstrow + i][k][0:22] :<{DESTPRINT[index]}}"
+                    print(destinationinfostr, end='') #here we print an destination's information.
                         
-                except IndexError: #if the employee id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
+                except IndexError: #if the destination id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
                     pass
                 print()
             
@@ -79,7 +79,7 @@ class EmployeeList:
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
 
-        elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.employeelist):
+        elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.destinationlist):
             self.slide += 1
 
         elif user_input.upper() == 'B':
@@ -89,15 +89,16 @@ class EmployeeList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            self.find_employee()
+            self.find_destination()
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
             self.lastrow = (self.slide + 1) * self.rows + 1
             
-            if self.firstrow <= int(user_input) < self.lastrow and len(self.employeelist) >= int(user_input):
-                employeeinfo = self.llapi.filter_employee_id(user_input, self.employeelist) 
-                seeemp = SeeEmployee(self.id, employeeinfo, self.position)
-                seeemp.display()
+            if self.firstrow <= int(user_input) < self.lastrow and len(self.destinationlist) >= int(user_input):
+                #destinationinfo = self.llapi.filter_destination_id(user_input, self.destinationlist) 
+                #seeemp = SeeDestination(self.id, destinationinfo, self.position)
+                #seeemp.display()
+                pass
             
             else: 
                 print("Invalid row, try again!")
@@ -107,50 +108,50 @@ class EmployeeList:
             print(INVALID)
             sleep(SLEEPTIME)
 
-    def find_employee(self):
+    def find_destination(self):
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
-        if self.employeelist != self.employeelist_backup:
+        if self.destinationlist != self.destinationlist_backup:
             print('R: Reset')
         userint = self.validate('userint')
 
         if userint == 'B':
             return 'B'
         elif userint == 'R':
-            self.employeelist = self.employeelist_backup
+            self.destinationlist = self.destinationlist_backup
             return
         key = SEARCHFILTERS[userint - 1]
         userstring = input(f"Search in {key.lower()}: ")
 
-        filteredlist = self.llapi.search_employee(userstring, self.employeelist, key)
+        #filteredlist = self.llapi.search_destination(userstring, self.destinationlist, key)
 
-        if filteredlist == False:
-            print(f"The filter {key.lower()}: {userstring} did not match any result.")
-            sleep(SLEEPTIME*3)
-        else:
-            self.employeelist = filteredlist
+        # if filteredlist == False:
+        #     print(f"The filter {key.lower()}: {userstring} did not match any result.")
+        #     sleep(SLEEPTIME*3)
+        # else:
+        #     self.destinationlist = filteredlist
         
 
     def print_header(self):
-        for index, k in enumerate(self.employeelist[0].keys()):
+        for index, k in enumerate(self.destinationlist[0].keys()):
             if k == 'id':
                 extra = '   '
             else:
                 extra = ''
-            print(f"{'| ' + k + extra:<{EMPPRINT[index]}}",end='')
-        print(f"\n{DASH* sum(EMPPRINT) }")
+            print(f"{'| ' + k + extra:<{DESTPRINT[index]}}",end='')
+        print(f"\n{DASH* sum(DESTPRINT) }")
     
 
     def print_footer(self):
         dashlen = 21
-        print(f"{DASH * sum(EMPPRINT)}\n")
+        print(f"{DASH * sum(DESTPRINT)}\n")
         if self.slide > 0:
             print("p. Previous - ", end='')
             dashlen += 14
-        if (self.slide + 1) * self.rows < len(self.employeelist):
+        if (self.slide + 1) * self.rows < len(self.destinationlist):
             print("n. Next - ", end='')
             dashlen += 10
-        print(f"#. to Select Employee\n{DASH*dashlen}")
+        print(f"#. to Select Destination\n{DASH*dashlen}")
         
 
 

@@ -30,8 +30,7 @@ class ContractorList:
      B. Til baka
      /row. Breytir lengd raðar
 
-Nafn | Sími | Netfang | Kennitala
-{DASH*35}'''
+'''
 
     def run_screen(self):
         returnvalue = ''
