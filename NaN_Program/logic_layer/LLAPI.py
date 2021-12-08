@@ -76,6 +76,9 @@ class LLAPI:
     #LocationLL
     def search_destination(self,string, destinationlist, key):
         return self.locLL.find_dest_by_str(self,string, destinationlist, key)
+    
+    def get_dest_info(self):
+        return self.locLL.list_all_loc()
 
     
 

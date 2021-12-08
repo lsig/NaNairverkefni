@@ -2,6 +2,7 @@
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
 #from ui_layer.boss_seedestination import SeeDestination
 from logic_layer.LLAPI import LLAPI
+from ui_layer.boss_seedest import SeeDestination
 from time import sleep
 import os
 MAXROWS = 50
@@ -18,8 +19,8 @@ class DestinationList:
         self.slide = 0
         self.id = id
         self.position = position
-        self.destinationlist = self.llapi.get_emp_info()
-        self.destinationlist_backup = self.llapi.get_emp_info()
+        self.destinationlist = self.llapi.get_dest_info()
+        self.destinationlist_backup = self.llapi.get_dest_info()
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -95,9 +96,9 @@ class DestinationList:
             self.lastrow = (self.slide + 1) * self.rows + 1
             
             if self.firstrow <= int(user_input) < self.lastrow and len(self.destinationlist) >= int(user_input):
-                #destinationinfo = self.llapi.filter_destination_id(user_input, self.destinationlist) 
-                #seeemp = SeeDestination(self.id, destinationinfo, self.position)
-                #seeemp.display()
+                destinationinfo = self.llapi.filter_destination_id(user_input, self.destinationlist) 
+                seeemp = SeeDestination(self.id, destinationinfo, self.position)
+                seeemp.display()
                 pass
             
             else: 
@@ -123,13 +124,13 @@ class DestinationList:
         key = SEARCHFILTERS[userint - 1]
         userstring = input(f"Search in {key.lower()}: ")
 
-        #filteredlist = self.llapi.search_destination(userstring, self.destinationlist, key)
+        filteredlist = self.llapi.search_destination(userstring, self.destinationlist, key)
 
-        # if filteredlist == False:
-        #     print(f"The filter {key.lower()}: {userstring} did not match any result.")
-        #     sleep(SLEEPTIME*3)
-        # else:
-        #     self.destinationlist = filteredlist
+        if filteredlist == False:
+             print(f"The filter {key.lower()}: {userstring} did not match any result.")
+             sleep(SLEEPTIME*3)
+        else:
+             self.destinationlist = filteredlist
         
 
     def print_header(self):
