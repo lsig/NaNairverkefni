@@ -91,7 +91,9 @@ class LLAPI:
     #ReportLL
     def get_report_info(self):
         return self.repLL.get_all_rep()
-        
+    
+    def search_report(self,string, reportlist, key):
+        return self.repLL.find_rep_by_str(string, reportlist, key)
     
     
 
