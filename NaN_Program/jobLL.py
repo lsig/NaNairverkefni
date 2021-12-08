@@ -12,12 +12,11 @@ class JobLL:
     def add_job(self,job_dic,id):
         self.boss_loc = self.empLL.get_emp_location(id)
         if self.is_valid(job_dic):
-            
             auto_id = self.assign_id_job()
             cur_date = datetime.date(datetime.now())
             emp_name = self.empLL.find_employee_name(job_dic["Employee-id"])
-            #con_name = self.get_con_name_and_location(job_dic["Suggested-contractors"])["Name"]
-            job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],job_dic["Suggested-contractors"],"0")
+            con_name = self.get_con_name_and_location(job_dic["Suggested-contractors"])["Name"]
+            job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],job_dic["Suggested-contractors-id"],con_name,"0")
             self.dlapi.add_job(job)
             return True
         return False
@@ -48,7 +47,7 @@ class JobLL:
         
         #big validation check
     def is_valid(self,job_dic) -> bool:
-        dic = {"Employee-id":int, "Title":"both", "Description":"both", "Property-id":int,"Priority":int,"Suggested-contractors":int}
+        dic = {"Employee-id":int, "Title":"both", "Description":"both", "Property-id":int,"Priority":int,"Suggested-contractors-id":int}
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 get_validation = job_dic[key].replace(" ", "").isalpha()
@@ -103,14 +102,14 @@ class JobLL:
     
     def get_all_jobs(self):
         all_jobs = self.dlapi.get_jobs()
-        counter = 0
-        for row in all_jobs:#changes contractor id into name
-            all_jobs[counter]["Suggested-contractors"] = self.get_con_name_and_location(row["Suggested-contractors"])["Name"]
-            counter += 1
+        #counter = 0
+        #for row in all_jobs:#changes contractor id into name
+        #    all_jobs[counter]["Suggested-contractors"] = self.get_con_name_and_location(row["Suggested-contractors"])["Name"]
+        #    counter += 1
         return all_jobs
     
 
-    def get_con_name_and_location(self,id):
+    def get_con_name_and_location(self,id):#fer líklegast í contractorLL
         con_list = self.dlapi.get_all_cont()
         for dic in con_list:
             if int(id) == int(dic["id"]):
@@ -150,7 +149,7 @@ class JobLL:
 if __name__ == "__main__":
     g = JobLL()
     #print(g.find_employee_name("5"))
-    #g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"1","Suggested-contractors":"1"},"1")
+    g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"1","Suggested-contractors-id":"1","Suggested-contractors":"1"},"1")
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))
@@ -158,3 +157,4 @@ if __name__ == "__main__":
     #print(g.get_con_name_and_location("1")["Name"])
     #g.edit_info({"id":"1","Date-created":"2021-12-05","Employee":"Jan Jacobsen","Employee-id":"1","Title":"small window clean","Description":"cleandd the windows!","Location":"Longyearbyen","Property":"Vei 217","Property-number":"F959594","Property-id":"1","Priority":"1","Suggested-contractors":"1","Status":"0"},"1")
     #print(g.get_all_jobs())
+    

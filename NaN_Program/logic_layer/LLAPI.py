@@ -72,10 +72,19 @@ class LLAPI:
     
     def search_employee(self, string, employeelist, key):
         return self.empll.find_emp_by_str(string, employeelist,key)
-    
-    
+
     #LocationLL
+    def search_destination(self,string, destinationlist, key):
+        return self.locLL.find_dest_by_str(string, destinationlist, key)
     
+    def get_dest_info(self):
+        return self.locLL.list_all_loc()
+
+    def filter_loc_id(self,id,loc_lis):
+        return self.locLL.find_loc_id(id,loc_lis)
+
+    def edit_loc(self,loc_dic):
+        self.locLL.edit_info(loc_dic)
 
     
     
