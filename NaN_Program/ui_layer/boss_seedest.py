@@ -18,7 +18,7 @@ class SeeDestination:
 {STAR*14}
     | FASTEIGNIR |
      - Fasteignalisti
-       - {self.destination['Address']}
+       - {self.destination['Name']}
      {DASH*15}
      E. Edit
      R. Destination reports
@@ -35,7 +35,7 @@ class SeeDestination:
     
     def printdestinationinfo(self, number = None):
 
-        destinationstring = f"{'| ' + self.destination['Address'] + ' | ':^35}\n{DASH*35}\n"
+        destinationstring = f"{'| ' + self.destination['Name'] + ' | ':^35}\n{DASH*35}\n"
 
         for i in range(len(DESTINATIONTEMPLATE)):
             if number != None and i == number - 1:

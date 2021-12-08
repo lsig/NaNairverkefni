@@ -96,7 +96,7 @@ class DestinationList:
             self.lastrow = (self.slide + 1) * self.rows + 1
             
             if self.firstrow <= int(user_input) < self.lastrow and len(self.destinationlist) >= int(user_input):
-                destinationinfo = self.llapi.filter_destination_id(user_input, self.destinationlist) 
+                destinationinfo = self.llapi.filter_loc_id(user_input, self.destinationlist) 
                 seeemp = SeeDestination(self.id, destinationinfo, self.position)
                 seeemp.display()
                 pass
