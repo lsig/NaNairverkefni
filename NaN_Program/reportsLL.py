@@ -54,10 +54,10 @@ class ReportsLL:
 
     def get_all_rep(self): # klárt
         all_reports = self.dlapi.get_all_report()
-        counter = 0
-        for i in all_reports:
-            all_reports[counter]["Suggested-contractor"] = self.get_report_name_and_location(i["Suggested-contractor"])["Name"]
-            counter += 1
+        # counter = 0
+        # for i in all_reports:
+        #     all_reports[counter]["Suggested-contractor"] = self.get_report_name_and_location(i["Suggested-contractor"])["Name"]
+        #     counter += 1
         return all_reports
 
     def get_report_name_and_location(self,id): #klárt
