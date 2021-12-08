@@ -11,6 +11,7 @@ class JobLL:
     
     def add_job(self,job_dic,id):
         self.boss_loc = self.empLL.get_emp_location(id)
+        self.id = id
         valid, key = self.is_valid(job_dic)
         if valid:
             auto_id = self.assign_id_job()
@@ -53,22 +54,23 @@ class JobLL:
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 get_validation = job_dic[key].replace(" ", "").isalpha()
+                if key == "Priority":
+                    for row in self.priority_word_check():
+                        if job_dic["Priority"].lower() == row.lower():
+                            priority_check = True
+                            job_dic["Priority"] = row
+                    if priority_check == False:
+                        return False, key
             elif dic[key] == int and dic[key] != "both":
                 if job_dic[key] == "":
                     return False,key
                 get_validation = job_dic[key].replace("-","").isdigit()
                 if key == "Employee-id":
-                    if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]):
+                    if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]) or self.id == job_dic["Employee-id"]:
                             return False,key
                 if key == "Property-id":
                     if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
                         return False,key
-                if key == "Priority":
-                    for row in self.priority_word_check():
-                        if job_dic["Priority"].lower() == row.lower():
-                            priority_check = True
-                    if priority_check == False:
-                        return False, key
                 if key == "Suggested-contractors":
                     if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
                         return False,key
