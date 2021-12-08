@@ -74,10 +74,10 @@ class ReportsLL:
             if dic == all_rep_lis[i]:
                 return i
             
-    def find_rep_id(self, id, all_rep_lis): # klárt
+    def find_rep_id(self, id, all_rep_lis, key): # klárt
         if id.isdigit():
             for dic in all_rep_lis:
-                if int(dic["Report-id"]) == int(id):
+                if int(dic[key]) == int(id):
                     dic = dic
                     return dic
             return None
@@ -90,18 +90,17 @@ class ReportsLL:
 
     def confirm_and_ready_report_and_grade_contractor(self, rep_dic): # klárað
         all_rep_lis = self.dlapi.get_all_report()
-        dic = self.find_rep_id(rep_dic["Report-id"], all_rep_lis)
+        dic = self.find_rep_id(rep_dic["Report-id"], all_rep_lis, "Report-id")
         #rep_dic = self.find_status_location(["Status"], all_rep_lis)
         if dic["Status"] == "0" and rep_dic["Status"] == "1":
             dic["Status"] = "1"
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
             all_rep_lis[rep_loc_in_list] = dic
             self.dlapi.change_report(all_rep_lis)
-
-            #all_job_lis = self.jobll.get_all_jobs()
-            #job = self.find_rep_id(rep_dic["Request-id"], all_job_lis)
-            #job = job["Status"] = "1"
-            #self.jobll.edit_info(job)           
+            all_job_lis = self.jobll.get_all_jobs()
+            job = self.find_rep_id(rep_dic["Request-id"], all_job_lis,"id")
+            job["Status"] = "1"
+            self.jobll.edit_info(job,rep_dic["Request-id"])           
 
 
         if dic["Status"] == "1" and rep_dic["Status"] == "2":
@@ -184,13 +183,10 @@ class ReportsLL:
 if __name__ == "__main__":
     r = ReportsLL()
     print("maxim er king")
-<<<<<<< HEAD
-    r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor": "1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
+    #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor": "1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
     #r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-Rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "1"})
-=======
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
     r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "1"})
->>>>>>> f1d0fb202ae07556f8ae32a6a4fcd6876447dc94
     #1,1,Jacob Yxa,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,kris,1,3,2021-12-07,5000,0
  
 ## id = 1
