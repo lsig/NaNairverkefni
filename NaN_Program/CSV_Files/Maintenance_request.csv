@@ -1,6 +1,15 @@
-id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority,Suggested-contractors-id,Suggested-contractors,Status
-1,2021-12-08,Jacob arons,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,1,1,Bob the builder,0
-2,2021-12-08,Jacob arons,2,dsfsg,dfgds,Longyearbyen,Vei 217,F959594,1,asa,1,Bob the builder,0
-3,2021-12-08,Jacob arons,2,sadda,dsds,Longyearbyen,Vei 217,F959594,1,asa,1,Bob the builder,0
-4,2021-12-08,Jacob arons,2,jhfs,dfgf,Longyearbyen,Vei 217,F959594,1,sa,1,Bob the builder,0
-5,2021-12-08,Jacob arons,2,ads,fadsf,Longyearbyen,Vei 217,F959594,1,asap,2,John nohands,0
+id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority,Suggested-contractors-id,Suggested-contractors,Status,Type
+1,2021-12-08,Jacob arons,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,1,1,Bob the builder,0,Regular job
+2,2021-12-08,Jacob arons,2,dsfsg,dfgds,Longyearbyen,Vei 217,F959594,1,asa,1,Bob the builder,0,Regular job
+3,2021-12-08,Jacob arons,2,sadda,dsds,Longyearbyen,Vei 217,F959594,1,asa,1,Bob the builder,0,Regular job
+4,2021-12-08,Jacob arons,2,jhfs,dfgf,Longyearbyen,Vei 217,F959594,1,sa,1,Bob the builder,0,Regular job
+5,2021-12-08,Jacob arons,2,ads,fadsf,Longyearbyen,Vei 217,F959594,1,asap,2,John nohands,0,Regular job
+6,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
+7,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
+8,2021-12-08,Jacob arons,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,ASAP,1,Bob the builder,0,Regular job
+9,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
+10,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
+11,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
+12,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
+13,2021-12-10,Aqqaluk Lynge,5,hani,hehe,,iGloo-Ville,64-3900,2,Asap,5,arnar,0,Maintenace job
+14,2021-12-09,Aqqaluk Lynge,5,hani,hehe,,iGloo-Ville,64-3900,2,Asap,5,arnar,0,Maintenace job
