@@ -12,7 +12,7 @@ INVALID = 'Invalid option, try again!'
 QUIT = 'Q'
 
 CONTACTTEMPLATE = ['Name', 'Social Security', 'Address', 'Phone', 'GSM', 'Destination'] #listi fyrir starfsmenn
-CONTRACTTEMPLATE = ["Employee-id","Title","Description","Property-id","Priority","Suggested-contractors"] #listi fyrir verkbeiðnir
+CONTRACTTEMPLATE = ["Employee-id","Title","Description","Property-id","Priority","Suggested-contractors-id"] #listi fyrir verkbeiðnir
 PROPERTYTEMPLATE = ['Destination', 'Address', 'Size', 'Rooms', 'Type', 'Property-number', 'Extras'] # listi fyrir fasteignir
 CONTRACTORTEMPLATE = ["Name","Contact-name","Profession","Phone","Working-hours","Location"] #listi fyrir verktaka
 DESTINATIONTEMPLATE = ['Name', 'Country' ,'Airport', 'Phone', 'Working-hours', 'Manager', 'Social Security', 'Address', 'Phone-manager', 'GSM']
