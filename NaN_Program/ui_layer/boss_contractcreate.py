@@ -1,5 +1,5 @@
 #skrá nýja verkbeiðni
-from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME, QUIT, CONTRACTTEMPLATE
+from data_files.const import CLEAR, DESTINATIONTEMPLATE, INVALID, STAR, DASH, SLEEPTIME, QUIT, CONTRACTTEMPLATE
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
@@ -55,16 +55,21 @@ class ContractCreate:
 
     def confirmcontract(self):
 
-        confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
         while True:
+            confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
             if confirm.upper() == 'C':  # TODO
-                self.llapi.add_job(self.contractlist,self.id)
-                #Property(dest_info, address_info, size_info, room_info, type_info, prop_number, extras_info)
-                return
+                valid, key = self.llapi.add_job(self.contractlist,self.id)
+                if valid:
+                    print('Contract succesfully added!')
+                    sleep(SLEEPTIME)
+                    return
+                else:
+                    print(f'Wrong {key}')
+                    sleep(SLEEPTIME)
+                    self.editcontractinfo(DESTINATIONTEMPLATE.index(key))
         
             elif confirm.upper() == 'E': # TODO
                 self.editcontractinfo()
-                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             elif confirm.upper() == 'Q': # eigum við að setja QUIT hér inn?
                 return
@@ -73,15 +78,19 @@ class ContractCreate:
                 print(INVALID)
                 sleep(SLEEPTIME)
                 self.reset_screen()
-                confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
     
-    def editcontractinfo(self):
-
-        user_row = int(input("Row to change: ")) # þarf að vera tala á milli 1 og len(CONTRACTTEMPLATE) + 1
+    def editcontractinfo(self, row = None):
+        if row == None:
+            user_row = None
+            while user_row is None:
+                self.reset_screen()
+                user_input = input('Row to change: ')
+                user_row = self.validate(user_input)
+        else:
+            user_row = row + 1
         self.reset_screen(user_row)
-
-        user_input = input(f"{CONTRACTTEMPLATE[user_row - 1]}: ")
-        self.contractlist[user_row - 1] = user_input
+        user_input = input(f"{DESTINATIONTEMPLATE[user_row - 1]}: ")
+        self.contractlist[DESTINATIONTEMPLATE[user_row - 1]] = user_input
 
         self.reset_screen()
     
@@ -91,5 +100,15 @@ class ContractCreate:
         print(self.screen)
         self.printcontractinfo(user_row)
 
-
+    def validate(self, rowinput):
+        try:
+            rowint = int(rowinput)
+            if 1 <= rowint <= len(DESTINATIONTEMPLATE):
+                return rowint
+            else:
+                raise ValueError
+        except ValueError:
+            print(INVALID)
+            sleep(SLEEPTIME)
+            return None
 
