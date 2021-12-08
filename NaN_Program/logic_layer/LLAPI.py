@@ -83,6 +83,9 @@ class LLAPI:
     def filter_loc_id(self,id,loc_lis):
         return self.locLL.find_loc_id(id,loc_lis)
 
+    def edit_loc(self,loc_dic):
+        self.locLL.edit_info(loc_dic)
+
     
     
 
