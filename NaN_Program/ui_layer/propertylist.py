@@ -88,12 +88,12 @@ class PropertyList:
             self.find_property()
         
         elif user_input.isdigit():
-            self.lastrow = (self.slide + 1) * self.rows + 1
             
             if user_input in self.printedids:
-                propertyinfo = self.llapi.filter_property_id(user_input, self.propertylist_backup) #as lists are mutable, we want to put the original list into filter_property_id as otherwise we would risk altering the filtered list.
+                propertyinfo = self.llapi.filter_property_id(user_input, self.propertylist) #as lists are mutable, we want to put the original list into filter_property_id as otherwise we would risk altering the filtered list.
                 seeproperty = SeeProperty(self.id, propertyinfo, self.position)
                 seeproperty.display()
+                self.propertylist = self.llapi.get_prop_info()
             else: 
                 print(INVALID)
                 sleep(SLEEPTIME)
