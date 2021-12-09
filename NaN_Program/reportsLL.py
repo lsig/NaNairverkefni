@@ -60,6 +60,29 @@ class ReportsLL:
         #     all_reports[counter]["Suggested-contractor"] = self.get_report_name_and_location(i["Suggested-contractor"])["Name"]
         #     counter += 1
         return all_reports
+    
+
+    def sort_all_reports(self):
+        all_reports = self.get_all_rep()
+        finished_reports = []
+        pending_reports = []
+        other_reports = []
+        for report in all_reports:
+            if report['Status'] == '2':
+                finished_reports.append(report)
+
+            elif report['Status'] == '1':
+                pending_reports.append(report)
+            
+            else:
+                other_reports.append(report)
+        
+        return [pending_reports, finished_reports, other_reports]
+    
+            
+
+
+
 
     def get_report_name_and_location(self,id): #klárt líklegast useless nýtist ekki
         rep_lis = self.dlapi.get_all_report()
