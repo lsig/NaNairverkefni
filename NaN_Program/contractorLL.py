@@ -56,7 +56,19 @@ class ContractorLL:
         return ret_lis
 
     def lis_all_cont(self): # þarf að breyta 
+
+
         return self.dlapi.get_all_cont()
+
+    def update_cont_rating(self):
+        all_cont_lis = self.dlapi.get_all_cont()
+        all_rep_lis = self.dlapi.get_all_report()
+        for cont_dic in all_cont_lis:
+            counter = 0
+            for rep_dic in all_rep_lis:
+                if cont_dic["id"] == rep_dic["Contractor-id"]:
+                    counter += 1
+
 
     def edit_info(self,edit_con_dic):
         if self.is_valid(edit_con_dic):
