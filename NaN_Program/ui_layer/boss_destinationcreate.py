@@ -59,8 +59,7 @@ class BossDestinationCreate:
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
-            if confirm.upper() == 'C':  # TODO
-                self.destinationdict["Manager"] = "0" #Not boss
+            if confirm.upper() == 'C':  
                 valid, key = self.llapi.add_loc(self.destinationdict)
 
                 if valid:
