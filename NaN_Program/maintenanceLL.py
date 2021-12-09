@@ -168,8 +168,7 @@ class MaintenanceLL:
     def get_all_main_jobs(self):
         return self.dlapi.get_maintenance_jobs()
 
-    def add_to_job(self,boss_id):
-        self.boss_id = boss_id
+    def add_to_job(self):
         all_main_job_lis = self.get_all_main_jobs()
         self.update_status(all_main_job_lis)
         counter = 0
@@ -188,7 +187,7 @@ class MaintenanceLL:
                     main_dic["Date-from"] = ref_date
                     all_main_job_lis[counter] = main_dic
                     main_dic["Date-created"] = ref_date
-                    self.jobLL.add_job(main_dic,self.boss_id,True)
+                    self.jobLL.add_job(main_dic,None,True)
             counter += 1
         self.update_main_job(all_main_job_lis)
 

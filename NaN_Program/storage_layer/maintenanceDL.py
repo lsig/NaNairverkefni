@@ -19,12 +19,12 @@ class MaintenanceDL():
 
     def add_maintenance_job(self,main_job):
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["id","Date-from","Date-to","Frequency:Week(1) or Month(2)","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Priority","Suggested-contractors","Suggested-contractors-id","Status"]
+            fieldnames = ["id","Date-from","Date-to","Frequency:Week(1) or Month(2)","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Priority","Suggested-contractor","Suggested-contractor-id","Status"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({"id":main_job.id,"Date-from":main_job.date_from,"Date-to":main_job.date_to,
             "Frequency:Week(1) or Month(2)":main_job.freq,"Employee":main_job.emp,"Employee-id":main_job.emp_id,"Title":main_job.title
             ,"Description":main_job.description,"Location":main_job.loc,"Property":main_job.property,"Property-number":main_job.property_num,
-            "Property-id":main_job.property_id,"Priority":main_job.priority,"Suggested-contractors":main_job.suggested_cont_names,"Suggested-contractors-id":main_job.suggested_cont_id,"Status":main_job.status})
+            "Property-id":main_job.property_id,"Priority":main_job.priority,"Suggested-contractor":main_job.suggested_cont_names,"Suggested-contractor-id":main_job.suggested_cont_id,"Status":main_job.status})
 
     
     def change_maintenance_job_info(self,main_job_lis):
@@ -35,7 +35,7 @@ class MaintenanceDL():
             for dic in main_job_lis:
                 writer.writerow([dic["id"],dic["Date-from"],dic["Date-to"],dic["Frequency:Week(1) or Month(2)"],dic["Employee"],dic["Employee-id"],dic["Title"],
                 dic["Description"],dic["Location"],dic["Property"],dic["Property-number"]
-                ,dic["Property-id"],dic["Priority"],dic["Suggested-contractors"],dic["Suggested-contractors-id"],dic["Status"]]) #dic["Status"]
+                ,dic["Property-id"],dic["Priority"],dic["Suggested-contractor"],dic["Suggested-contractor-id"],dic["Status"]]) #dic["Status"]
 
 
 
