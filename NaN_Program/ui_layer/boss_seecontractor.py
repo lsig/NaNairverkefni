@@ -13,14 +13,16 @@ class SeeContractor:
         self.position = position
         self.id = id
         self.contractor = contractorinfo
+        editornot = ''
+        if position == 'Manager':
+            editornot = f"\n     E. Edit"
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
     | VERKTAKAR |
      - Verktakalisti
        - {self.contractor['Name']}
-     {DASH*15}
-     E. Edit
+     {DASH*15}{editornot}
      B. Til baka
 '''
 
@@ -51,11 +53,11 @@ class SeeContractor:
         if user_input.upper() == 'B':
             return 'C'
         
-        # elif user_input.upper() == 'R':
-        #     propreport = ReportList(self.id, self.position, self.contractor['id'])
-        #     propreport.display_list()
+      #  elif user_input.upper() == 'R':
+      #      propreport = ReportList(self.id, self.position, self.contractor['id'])
+      #       propreport.display_list()
 
-        elif user_input.upper() == 'E':
+        elif user_input.upper() == 'E' and self.position == 'Manager':
             while True:
                 returnvalue = self.change_row()
                 if returnvalue == 'C' or returnvalue == 'B':
