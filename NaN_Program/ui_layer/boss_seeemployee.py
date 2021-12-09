@@ -53,7 +53,7 @@ class SeeEmployee:
             return 'C'
 
         elif user_input.upper() == 'R':
-            empreport = ReportList(self.id, self.position, self.employee['Name'],'property',self.employee)
+            empreport = ReportList(self.id, self.position, self.employee['Name'],'employee',self.employee)
             empreport.run_screen()
         
         elif user_input.upper() == 'E':

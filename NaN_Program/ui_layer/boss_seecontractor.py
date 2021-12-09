@@ -54,7 +54,7 @@ class SeeContractor:
             return 'C'
         
         elif user_input.upper() == 'R':
-            contractorreport = ReportList(self.id, self.position, self.contractor['Name'],'property',self.contractor)
+            contractorreport = ReportList(self.id, self.position, self.contractor['Name'],'contractor',self.contractor)
             contractorreport.display_list()
 
         elif user_input.upper() == 'E' and self.position == 'Manager':
