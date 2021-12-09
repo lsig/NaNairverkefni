@@ -201,7 +201,7 @@ class ReportsLL:
     def find_rep_id(self,id,all_rep_lis):
         if id.isdigit():
             for dic in all_rep_lis:
-                if int(dic["id"]) == int(id):
+                if int(dic["Report-id"]) == int(id):
                     dic = dic
                     return dic 
             return None #[{"Text":"No employee with this id"}]

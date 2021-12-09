@@ -100,7 +100,8 @@ class LLAPI:
     
     def filter_rep_id(self,id,rep_lis):
         return self.repLL.find_rep_id(id,rep_lis)
-    
+    def edit_rep(self,rep_dict):
+        return self.repLL.edit_report_info(rep_dict)
 
     #JobLL
     def add_job(self,job_lis,id):

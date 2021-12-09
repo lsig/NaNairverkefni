@@ -22,7 +22,7 @@ class SeeReport:
 {STAR*14}
     | VERKSKÝRSLUR |
      - Verkskýrslulisti
-       - {self.report['Name']}
+       - {self.report['Title']}
      {DASH*15}{editornot}
      R. Report reports
      B. Til baka
@@ -38,7 +38,7 @@ class SeeReport:
     
     def printreportinfo(self, number = None):
 
-        reportstring = f"{'| ' + self.report['Address'] + ' | ':^35}\n{DASH*35}\n"
+        reportstring = f"{'| ' + self.report['Location'] + ' | ':^35}\n{DASH*35}\n"
 
         for i in range(len(REPORTTEMPLATE)):
             if number != None and i == number - 1:
