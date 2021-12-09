@@ -21,6 +21,9 @@ class ReportList:
         self.header = header
         self.position = position
         self.reportlist_backup = self.llapi.get_sorted_reports()[self.jobsection]
+        if jobsection == 'Property':
+            self.reportlist_backup = self.llapi.get_property_reports(reportdict)
+
         self.reportlist = self.reportlist_backup
         if self.reportdict == None:
             menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'

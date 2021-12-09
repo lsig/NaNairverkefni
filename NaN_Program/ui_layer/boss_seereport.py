@@ -37,14 +37,14 @@ class SeeReport:
     
     def printreportinfo(self, number = None):
 
-        reportstring = f"{'| ' + self.report['Location'] + ' | ':^35}\n{DASH*35}\n"
+        reportstring = f"{'| ' + self.report['Location'] + ' | ':^50}\n{DASH*50}\n"
 
         for i in range(len(REPORTTEMPLATE)):
             if number != None and i == number - 1:
-                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<17} ____\n"
+                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<25} ____\n"
             else:
-                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<17} {self.report[REPORTTEMPLATE[i]]}\n"
-        reportstring += DASH*35
+                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<25} {self.report[REPORTTEMPLATE[i]]}\n"
+        reportstring += DASH*50
         
         print(reportstring)
     

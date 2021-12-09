@@ -79,6 +79,14 @@ class ReportsLL:
         
         return [pending_reports, finished_reports, other_reports]
     
+    def get_property_reports(self, propertyid):
+        propertyreports = []
+        all_reports = self.get_all_rep()
+        for report in all_reports:
+            if report['Property-id'] == propertyid:
+                propertyreports.append(report)
+        
+        return propertyreports
             
 
 
