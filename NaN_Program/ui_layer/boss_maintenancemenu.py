@@ -11,16 +11,16 @@ class BossMaintenanceMenu:
         self.position = position
         self.id = id
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | VIÐHALD |
-      {DASH*15}
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+            | VIÐHALD |
+      {DASH*24}
       1. Skrá nýja verkbeiðni
       2. Verkbeiðnalisti
       3. Verkskýrslulisti
-      {DASH*15}
+      {DASH*24}
       B. Til baka
-{STAR*14}
+{STAR*20}
         '''
 
     def display(self):
