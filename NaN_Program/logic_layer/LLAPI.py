@@ -102,7 +102,8 @@ class LLAPI:
         return self.repLL.find_rep_by_str(string, reportlist, key)
     
     def filter_rep_id(self,id,rep_lis):
-        return self.repLL.find_rep_id(id,rep_lis)
+        return self.repLL.find_rep_id(id, rep_lis)
+        
     def edit_rep(self,rep_dict):
         return self.repLL.edit_report_info(rep_dict)
     

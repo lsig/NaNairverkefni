@@ -6,6 +6,8 @@ from ui_layer.reportlist import ReportList
 from time import sleep
 import os
 
+from ui_layer.whichreportmenu import WhichReportMenu
+
 class BossMaintenanceMenu:
     def __init__(self, id, position) -> None:
         self.position = position
@@ -38,8 +40,8 @@ class BossMaintenanceMenu:
                 contrlist.init_request()
 
             elif user_input == '3':
-                reportlist = ReportList(self.id, self.position)
-                reportlist.run_screen()
+                reportlist = WhichReportMenu(self.id, self.position)
+                reportlist.init_request()
                 
 
             elif user_input.upper() == 'B':
