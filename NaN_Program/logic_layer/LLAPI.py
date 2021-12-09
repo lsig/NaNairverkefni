@@ -122,6 +122,9 @@ class LLAPI:
     
     def filter_job_id(self, idstring, job_list):
         return self.jLL.find_job_id(idstring, job_list)
+    
+    def search_job(self,string, joblist, key):
+        return self.jLL.find_jobs_by_str(string, joblist, key)
 
     
     #MaintenanceLL
