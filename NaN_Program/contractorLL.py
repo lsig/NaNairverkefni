@@ -77,7 +77,7 @@ class ContractorLL:
                     nominator += int(rep_dic["Contractor-rating"])
             if denominator != 0:
                 rating = nominator/denominator
-                all_cont_lis[counter]["Rating(0-10)"] = int(rating)
+                all_cont_lis[counter]["Rating(0-10)"] = str(int(rating))
             counter += 1
         self.dlapi.change_cont(all_cont_lis)
         return all_cont_lis
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     # bool_2=g.edit_info({"4",,,,,"00",,None})
     #bool_2=g.edit_info( {"id":"4","Name":"John is not grate", "Contact-name":"Elton john","Profession":"bulider", "Phone":"35499900", "Working-hours":"00","Location":"Tórshavn","Rating(0-10)":None})
     # print(g.update_rating())
-    g.lis_all_cont()
+    print(g.lis_all_cont())
     
 
     # def print_lis(lis):
