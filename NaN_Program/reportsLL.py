@@ -185,6 +185,12 @@ class ReportsLL:
             if dic[key] == "both":
                 if rep_dic[key] == "":
                     return False, key
+
+            if key == "Contractor-id" and get_validation:
+                all_cont_lis = self.dlapi.get_all_cont()
+                
+
+
             if get_validation == False:
                     return False, key
             prev = rep_dic[key]
@@ -208,6 +214,8 @@ class ReportsLL:
                     return dic 
             return None #[{"Text":"No employee with this id"}]
         return False
+
+    def get_cont_name(self,cont_id):
 
 
 
