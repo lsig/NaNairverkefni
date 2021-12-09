@@ -38,7 +38,8 @@ class ContractorLL:
                         lower = int(cont_dic[key][0:2])
                         higher = int(cont_dic[key][3:5])
                         if int(cont_dic[key][0:2]) <= 24 and cont_dic[key][2] == '-' and int(cont_dic[key][3:5]) <= 24 and lower < higher:
-                            return False,key
+                            return True,key
+                return False,key
 
             if get_validation == False:
 
