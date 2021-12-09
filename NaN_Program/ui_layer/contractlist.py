@@ -42,19 +42,6 @@ class ContractList:
             while returnvalue != 'B': 
                 self.display_list()
                 returnvalue = self.prompt_user()
-            
-        
-    def sort_by_priority(self, oldlist):
-        new_list = []
-        for priority in PRIORITYFILTER:
-            for job in oldlist:
-                if job['Priority(ASAP; Now; Emergency)'].lower() == priority:
-                    new_list.append(job)
-        for job in oldlist:
-            if job not in new_list:
-                new_list.append(job)
-
-        return new_list
     
 
     def display_list(self):
@@ -115,10 +102,8 @@ class ContractList:
         if self.reqsection == 'Back':
             return 'Back'
 
-        self.contractlist = self.llapi.get_job()[self.reqsection]
-        self.contractlist_backup = self.llapi.get_job()[self.reqsection]
-        self.contractlist = self.sort_by_priority(self.contractlist)
-        self.contractlist_backup = self.sort_by_priority(self.contractlist_backup)
+        self.contractlist = self.llapi.get_sorted_jobs()[self.reqsection]
+        self.contractlist_backup = self.llapi.get_sorted_jobs()[self.reqsection]
 
 
     # def print_section(self, header, section):
