@@ -113,6 +113,12 @@ class LLAPI:
     def get_property_reports(self, reportdict):
         return self.repLL.get_property_reports(reportdict)
 
+    def get_emp_reports(self, reportdict):
+        return self.repLL.get_emp_reports(reportdict)
+
+    def get_contractor_reports(self, reportdict):
+        return self.repLL.get_contractor_reports(reportdict)
+
     #JobLL
     def add_job(self,job_lis,id):
         return self.jLL.add_job(job_lis,id)
