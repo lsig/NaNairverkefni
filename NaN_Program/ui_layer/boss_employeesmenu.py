@@ -13,14 +13,14 @@ class BossEmployeesMenu:
         self.id = id
         self.options = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | STARFSMENN |
-      {DASH*15}
+{STAR*20}
+         | STARFSMENN |
+      {DASH*24}
       1. Skrá nýjan starfsmann
       2. Starfsmannalisti
-      {DASH*15}
+      {DASH*24}
       B. Til baka
-{STAR*14}
+{STAR*20}
         '''
     
     def display(self):
