@@ -32,6 +32,9 @@ class LLAPI:
     
     def filter_contr_id(self, input, contr_list):
         return self.contLL.find_con_id(input, contr_list)
+    
+    def edit_contractor(self, contrdict):
+        return self.contLL.edit_info(contrdict)
 
 
     #PropertyLL

@@ -97,7 +97,7 @@ class SeeContractor:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_prop(self.contractor)
+                valid, key = self.llapi.edit_contractor(self.contractor)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)

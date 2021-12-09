@@ -18,9 +18,7 @@ class ContractList:
         self.slide = 0
         self.id = id
         self.position = position
-        self.contractlist = self.llapi.get_job()
-        self.contractlist_backup = self.llapi.get_job()
-        self.jobscount = self.llapi.count_jobs()
+    
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -34,35 +32,77 @@ class ContractList:
 '''
 
     def run_screen(self):
-        returnvalue = ''
-        while returnvalue != 'B':
-            self.display_list()
-            returnvalue = self.prompt_user()
+        returnall  = ''
+        while returnall != 'Back':
+            returnvalue = ''
+            returnall = self.init_request()
+
+            while returnvalue != 'B': 
+                self.display_list()
+                returnvalue = self.prompt_user()
     
+
     def display_list(self):
+
         self.firstrow = self.slide * self.rows 
 
         os.system(CLEAR)
         print(self.screen)
+        print(JOBHEADER[self.reqsection])
+
         self.print_header()
 
-        self.rowssofar = 0
 
-        self.printedids = []
+        self.printedids = [self.contractlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.contractlist) > self.firstrow + i]
 
-        for index, joblist in enumerate(self.contractlist): #til að displaya self.rows verktaka í röð.
-            self.rowssofar += self.print_section(JOBHEADER[index], joblist)
+        for i in range(self.rows): #to display self.rows contracts each time.
+            try:
+                contractinfost = f'{self.printedids[i] + ".":<{JOBDICT["id"]}}- ' #id with some extra string.
+                for key in self.contractlist[self.firstrow + i]:
+
+                    if key != 'id': #We dont want to print the id again.
+                        contractinfost += f"{'| ' + self.contractlist[self.firstrow + i][key] :<{JOBDICT[key]}}"
+                print(contractinfost, end='') #here we print the contract's information.
+                    
+            except IndexError: #if the contract id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
+                pass
+            print()
 
         
-        print(f"{DASH*35}\n")
+        print(f"{DASH* sum(JOBDICT.values())}\n")
         if self.slide > 0:
             print("p. Previous - ", end='')
-        if (self.slide + 1) * self.rows < self.jobscount:
+        if (self.slide + 1) * self.rows < len(self.contractlist):
             print("n. Next - ", end='')
+    
+
+    def which_request(self):
+        while True:
+            os.system(CLEAR)
+            print(self.screen)
+            mainttype = input("1. Ready jobs\n2. Unready jobs\n3. Finished jobs\n") #1. maintenance job, 2. regular job
+            if mainttype == '1' or mainttype == '2' or mainttype == '3':
+                return int(mainttype) - 1
+            elif mainttype == 'B':
+                return 'Back'
+
+            print(INVALID)
+            sleep(SLEEPTIME)
+        
+
+    def init_request(self):
+    
+        self.reqsection = self.which_request()
+        if self.reqsection == 'Back':
+            return 'Back'
+
+        self.contractlist = self.llapi.get_job()[self.reqsection]
+        self.contractlist_backup = self.llapi.get_job()[self.reqsection]
 
 
     def print_section(self, header, section):
-        print(f"\n  - {header}")
+        print(f"\n{DASH* sum(JOBDICT.values()) }")
+        print(f"  - {header}")
         rows = 0
         for job in section:
             if self.rowssofar + rows < self.rows:
@@ -70,11 +110,12 @@ class ContractList:
                 for key, value in job.items():
                     if key == 'id':
                         self.printedids.append(value)
-                        print( f"{key + '.' :<{value}}", end='- ')
+                        print( f"{value + '.' :<{JOBDICT[key]}}", end='- ')
 
                     elif key in JOBDICT.keys():
-                        print( f"{'| ' + key :<{value}}", end='')
+                        print( f"{'| ' + value :<{JOBDICT[key]}}", end='')
                 rows += 1
+                print()
             else:
                 return rows
             
@@ -90,7 +131,7 @@ class ContractList:
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
 
-        elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < self.jobscount:
+        elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.contractlist):
             self.slide += 1
         
         elif user_input.upper() == 'B':
@@ -109,7 +150,7 @@ class ContractList:
                 self.contractlist = self.contractlist_backup
                 self.contractlist = self.llapi.filter_contract_id(user_input, self.contractlist)  #TODO 
                 user_input = ""
-                self.rows = self.jobscount
+                self.rows = len(self.contractlist)
 
         else:
             print(INVALID)
@@ -118,9 +159,13 @@ class ContractList:
 
     def print_header(self):
         for key, value in JOBDICT.items():
-            if value == 'id':
+            if key == 'id':
                 extra = '  '
+                keyprint = key
             else:
                 extra = ''
-            print(f"{'| ' + key + extra:<{value}}",end='')
-        print(f"\n{DASH* sum(JOBDICT.values()) }")
+                keyprint = key
+            if key == 'Priority(ASAP; Now; Emergency)':
+                keyprint = 'Priority'
+
+            print(f"{'| ' + keyprint:<{value}}",end=extra)

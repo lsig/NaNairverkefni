@@ -20,7 +20,7 @@ DESTINATIONTEMPLATE = ['Name', 'Country' ,'Airport', 'Phone', 'Working-hours', '
 REPORTTEMPLATE = ['Report-id', 'Request-id', 'Employee', 'Employee-id', 'Title', 'Description', 'Location', 'Property', 'Property-number', 'Property-id', 'Contractor-name', 'Contractor-id', 'Contractor-rating', 'Date', 'Commission', 'Status']
 
 JOBDICT_OG = {'id': None , 'Date-created': None, 'Employee': None, 'Employee-id': None, 'Title': None, 'Description': None, 'Location': None, 'Property': None, 'Property-number': None, 'Property-number': None, 'Property-id': None, 'Priority(ASAP; Now; Emergency)': None, 'Suggested-contractors(id)': None, 'Suggested-contractors': None, 'Status': None, 'Type': None}
-JOBDICT = {'id': 4, 'Date-created': 15, 'Employee': 20, 'Title': 15, 'Location': 20, 'Property': 15, 'Priority(ASAP; Now; Emergency)': 15, 'Suggested-contractors': 30, 'Type': 15}
+JOBDICT = {'id': 5, 'Date-created': 15, 'Employee': 20, 'Title': 15, 'Location': 20, 'Property': 20, 'Priority(ASAP; Now; Emergency)': 12, 'Suggested-contractors': 30, 'Type': 20}
 
 
 
