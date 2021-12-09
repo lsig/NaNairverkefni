@@ -94,6 +94,8 @@ class PropertyList:
                 seeproperty = SeeProperty(self.id, propertyinfo, self.position)
                 seeproperty.display()
                 self.propertylist = self.llapi.get_prop_info()
+                if self.position == 'Employee':
+                    self.propertylist = self.llapi.search_property(self.id['Destination'], self.propertylist,'Destination' )
             else: 
                 print(INVALID)
                 sleep(SLEEPTIME)
