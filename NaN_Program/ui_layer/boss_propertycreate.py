@@ -10,7 +10,7 @@ class BossPropertyCreate:
         self.llapi = LLAPI()
         self.position = position
         self.id = id
-        self.propertylist = {}
+        self.propertydict = {}
         self.screen = f'''
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
@@ -36,7 +36,7 @@ class BossPropertyCreate:
             #check validity
             #while self.input_is_valid(user_input) == False:
                 #user_input = input(f"{i+1}: {PROPERTYTEMPLATE[i]}")
-            self.propertylist[PROPERTYTEMPLATE[i]] = user_input
+            self.propertydict[PROPERTYTEMPLATE[i]] = user_input
         print(DASH*25)
         
         self.confirmproperty()
@@ -49,7 +49,7 @@ class BossPropertyCreate:
             if number != None and i == number - 1:
                 propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} ____\n"
             else:
-                propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} {self.propertylist[PROPERTYTEMPLATE[i]]}\n"
+                propertystring += f"{i+1}. {PROPERTYTEMPLATE[i] + ':':<17} {self.propertydict[PROPERTYTEMPLATE[i]]}\n"
         propertystring += DASH*25
         
         print(propertystring)
@@ -61,7 +61,7 @@ class BossPropertyCreate:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             if confirm.upper() == 'C':  # TODO
-                valid, key = self.llapi.add_prop(self.propertylist)
+                valid, key = self.llapi.add_prop(self.propertydict)
                 if valid: 
                     print("Property succesfully added!")
                     sleep(SLEEPTIME)
@@ -94,7 +94,7 @@ class BossPropertyCreate:
         self.reset_screen(user_row)
 
         user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ")
-        self.propertylist[PROPERTYTEMPLATE[user_row - 1]] = user_input
+        self.propertydict[PROPERTYTEMPLATE[user_row - 1]] = user_input
 
         self.reset_screen()
     

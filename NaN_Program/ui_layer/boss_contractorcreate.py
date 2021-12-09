@@ -39,15 +39,15 @@ class BossContractorCreate:
 
         
     def printcontractorinfo(self, number = None):
-        propertystring = ''
+        contractorstring = ''
         for i in range( len(CONTRACTORTEMPLATE)):
             if number != None and i == number - 1:
-                propertystring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<16} ____\n"
+                contractorstring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<16} ____\n"
             else:
-                propertystring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<16} {self.contractordict[CONTRACTORTEMPLATE[i]]}\n"
-        propertystring += DASH*25
+                contractorstring += f"{i+1}. {CONTRACTORTEMPLATE[i] + ':':<16} {self.contractordict[CONTRACTORTEMPLATE[i]]}\n"
+        contractorstring += DASH*25
         
-        print(propertystring)
+        print(contractorstring)
     
 
     def confirmcontractor(self):
