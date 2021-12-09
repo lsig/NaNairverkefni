@@ -14,14 +14,16 @@ class SeeReport:
         self.llapi = LLAPI()
         self.id = id
         self.report = reportinfo
+        editornot = ''
+        if self.position == 'Manager':
+            editornot = f"\n     E. Edit"
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
     | VERKSKÝRSLUR |
      - Verkskýrslulisti
        - {self.report['Name']}
-     {DASH*15}
-     E. Edit
+     {DASH*15}{editornot}
      R. Report reports
      B. Til baka
 '''
@@ -54,7 +56,7 @@ class SeeReport:
         if user_input.upper() == 'B':
             return 'C'
 
-        elif user_input.upper() == 'E':
+        elif user_input.upper() == 'E' and self.position == 'Manager':
             while True:
                 returnvalue = self.change_row()
                 if returnvalue == 'C' or returnvalue == 'B':
@@ -94,7 +96,7 @@ class SeeReport:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_prop(self.report)
+                valid, key = self.llapi.edit_rep(self.report)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)
