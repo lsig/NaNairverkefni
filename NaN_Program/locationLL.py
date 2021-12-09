@@ -38,6 +38,8 @@ class LocationLL:
             loc_dic["GSM"] = "1234567"
         for key in dic.keys():
             if dic[key] == str:
+                if loc_dic[key] > 30:
+                    return False, key
                 get_validation = loc_dic[key].replace(" ", "").isalpha()
             else:
                 get_validation = loc_dic[key].replace("-","").isdigit()
