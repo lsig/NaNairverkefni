@@ -22,7 +22,7 @@ class JobDL:
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["id","Date-created","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Priority(ASAP,Now,Emergency)","Suggested-contractor(id)","Suggested-contractors","Status","Type"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writerow({'id': jobinfo.id, "Date-created": jobinfo.date_cr, "Employee": jobinfo.empl, "Employee-id": jobinfo.empl_id,"Title":jobinfo.titl, "Description": jobinfo.desc, "Location": jobinfo.loc,"Property":jobinfo.prop, "Property-number":jobinfo.prop_num,"Property-id":jobinfo.prop_id,"Priority":jobinfo.prior,"Suggested-contractor(id)":jobinfo.sug_con_id,"Suggested-contractors":jobinfo.sug_con,"Status":jobinfo.stat,"Type":jobinfo.type})
+            writer.writerow({'id': jobinfo.id, "Date-created": jobinfo.date_cr, "Employee": jobinfo.empl, "Employee-id": jobinfo.empl_id,"Title":jobinfo.titl, "Description": jobinfo.desc, "Location": jobinfo.loc,"Property":jobinfo.prop, "Property-number":jobinfo.prop_num,"Property-id":jobinfo.prop_id,"Priority(ASAP,Now,Emergency)":jobinfo.prior,"Suggested-contractor(id)":jobinfo.sug_con_id,"Suggested-contractors":jobinfo.sug_con,"Status":jobinfo.stat,"Type":jobinfo.type})
 
 
     def change_job_info(self,job_lis):
@@ -31,7 +31,7 @@ class JobDL:
             header = job_lis[0]
             writer.writerow(header)
             for dic in job_lis:
-                writer.writerow([dic["id"],dic["Date-created"],dic["Employee"],dic["Employee-id"],dic["Title"],dic["Description"],dic["Location"],dic["Property"],dic["Property-number"],dic["Property-id"],dic["Priority"],dic["Suggested-contractors-id"],dic["Suggested-contractors"],dic["Status"],dic["Type"]])
+                writer.writerow([dic["id"],dic["Date-created"],dic["Employee"],dic["Employee-id"],dic["Title"],dic["Description"],dic["Location"],dic["Property"],dic["Property-number"],dic["Property-id"],dic["Priority(ASAP,Now,Emergency)"],dic["Suggested-contractor(id)"],dic["Suggested-contractors"],dic["Status"],dic["Type"]])
         
             
 

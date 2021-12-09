@@ -19,7 +19,7 @@ class JobLL:
                 cur_date = datetime.date(datetime.now())
                 type = "Regular job"
                 emp_name = self.empLL.find_employee_name(job_dic["Employee-id"])
-                con_name = self.get_con_name_and_location(job_dic["Suggested-contractors-id"])["Name"]
+                con_name = self.get_con_name_and_location(job_dic["Suggested-contractor(id)"])["Name"]
             else:
                 return False,key
 
