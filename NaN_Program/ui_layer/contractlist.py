@@ -109,7 +109,7 @@ class ContractList:
             return 'B'
 
         elif user_input.upper() == '/ROW':
-            self.rows = int(input("Rows: ")) #TODO validate 
+            self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
             self.find_job()

@@ -39,19 +39,20 @@ class WhichContractMenu:
             if mainttype == '1' or mainttype == '2' or mainttype == '3':
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
-                return 'Back'
+                return
 
             print(INVALID)
             sleep(SLEEPTIME)
         
 
     def init_request(self):
+        while True:
     
-        self.reqsection = self.which_request()
-        if self.reqsection == 'Back':
-            return 'Back'
+            self.reqsection = self.which_request()
+            if self.reqsection == 'Back':
+                return 'Back'
 
-        self.contractlist = self.llapi.get_sorted_jobs()[self.reqsection]
-        self.contractlist_backup = self.llapi.get_sorted_jobs()[self.reqsection]
-        contrlist = ContractList(self.id, self.position, JOBHEADER[int(self.reqsection) - 1], self.contractlist)
-        contrlist.run_screen()
+            self.contractlist = self.llapi.get_sorted_jobs()[self.reqsection]
+            self.contractlist_backup = self.llapi.get_sorted_jobs()[self.reqsection]
+            contrlist = ContractList(self.id, self.position, JOBHEADER[int(self.reqsection) - 1], self.contractlist)
+            contrlist.run_screen()
