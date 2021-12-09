@@ -110,8 +110,8 @@ class LLAPI:
     def get_sorted_reports(self):
         return self.repLL.sort_all_reports()
 
-    def get_property_reports(self):
-        return self.repLL.get_property_reports()
+    def get_property_reports(self, reportdict):
+        return self.repLL.get_property_reports(reportdict)
 
     #JobLL
     def add_job(self,job_lis,id):

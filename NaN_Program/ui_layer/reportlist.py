@@ -20,9 +20,14 @@ class ReportList:
         self.id = id
         self.header = header
         self.position = position
-        self.reportlist_backup = self.llapi.get_sorted_reports()[self.jobsection]
-        if jobsection == 'Property':
-            self.reportlist_backup = self.llapi.get_property_reports(reportdict)
+        
+        if jobsection == 'property':
+            self.reportlist_backup = self.llapi.get_property_reports(reportdict['id'])
+        elif jobsection == 'Employee':
+            pass
+        else:
+            self.reportlist_backup = self.llapi.get_sorted_reports()[self.jobsection]
+
 
         self.reportlist = self.reportlist_backup
         if self.reportdict == None:
