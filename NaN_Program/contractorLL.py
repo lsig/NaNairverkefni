@@ -6,10 +6,10 @@ class ContractorLL:
     def __init__(self):
         self.dlapi = DlAPI()
 
-    def add_contractor(self,cont_dic):
+    def add_contractor(self,cont_dic,boss_loc):
         valid, key = self.is_valid(cont_dic)
         if valid:
-            cont = Contractor(self.assign_id_cont(),cont_dic["Name"],cont_dic["Contact-name"],cont_dic["Profession"],cont_dic["Phone"],cont_dic["Working-hours"],cont_dic["Location"],None)
+            cont = Contractor(self.assign_id_cont(),cont_dic["Name"],cont_dic["Contact-name"],cont_dic["Profession"],cont_dic["Phone"],cont_dic["Working-hours"],boss_loc,None)
             self.dlapi.add_cont(cont)
             return True, key
         return False, key
@@ -20,9 +20,11 @@ class ContractorLL:
         return new_id
 
     def is_valid(self,cont_dic) -> bool: # þarf að bæta við því ef location sé til
-        dic = {"Name":str, "Contact-name":str,"Profession":str, "Phone":int, "Working-hours":int,"Location":str}
+        dic = {"Name":str, "Contact-name":str,"Profession":str, "Phone":int, "Working-hours":int}
         for key in dic.keys():
             if dic[key] == str:
+                if len(cont_dic[key]) > 30:
+                    return False, key
                 get_validation = cont_dic[key].replace(" ", "").isalpha()
             else:
                 get_validation = cont_dic[key].replace("-","").isdigit()
@@ -30,6 +32,10 @@ class ContractorLL:
             if key.lower() == "phone" and get_validation:
                 if len(cont_dic[key]) < 7 or len(cont_dic[key]) > 15:
                     return False, key
+            if key.lower() == "working-hours":
+                if len(cont_dic[key]) > 5:
+                    return False,key
+
             if get_validation == False:
 
                     return False, key

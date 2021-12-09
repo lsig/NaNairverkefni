@@ -21,8 +21,8 @@ class LLAPI:
 
 
     #ContractorLL
-    def add_cont(self,con_lis):
-        return self.contLL.add_contractor(con_lis)
+    def add_cont(self,con_lis,loc):
+        return self.contLL.add_contractor(con_lis,loc)
 
     def list_all_contractors(self):
         return self.contLL.lis_all_cont()
@@ -100,7 +100,8 @@ class LLAPI:
     
     def filter_rep_id(self,id,rep_lis):
         return self.repLL.find_rep_id(id,rep_lis)
-    
+    def edit_rep(self,rep_dict):
+        return self.repLL.edit_report_info(rep_dict)
 
     #JobLL
     def add_job(self,job_lis,id):

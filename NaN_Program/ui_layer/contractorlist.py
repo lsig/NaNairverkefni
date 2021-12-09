@@ -20,6 +20,9 @@ class ContractorList:
         self.position = position
         self.contractorlist = self.llapi.list_all_contractors()
         self.contractorlist_backup = self.llapi.list_all_contractors() #vantar fyrir employee
+        if self.position == 'Employee':
+            self.contractorlist = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
+            self.contractorlist_backup = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -92,7 +95,9 @@ class ContractorList:
                 contractorinfo = self.llapi.filter_contr_id(user_input, self.contractorlist)
                 seecontractor = SeeContractor(self.id, contractorinfo, self.position) 
                 seecontractor.display()
-                self.contractorlist = self.llapi.list_all_contractors() #we want to update the list that we display, now that we may have changed info for the selected property.
+                self.contractorlist = self.llapi.list_all_contractors() #we want to update the list that we display, now that we may have changed info for the selected contractor.
+                if self.position == 'Employee':
+                    self.contractorlist = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
             else: 
                 print(INVALID)
                 sleep(SLEEPTIME)
@@ -147,7 +152,7 @@ class ContractorList:
         if (self.slide + 1) * self.rows < len(self.contractorlist):
             print("n. Next - ", end='')
             dashlen += 10
-        print(f"#. to Select Property\n{DASH*dashlen}")
+        print(f"#. to Select Contractor\n{DASH*dashlen}")
     
 
     def validate(self, userint = None, userrows = None):
