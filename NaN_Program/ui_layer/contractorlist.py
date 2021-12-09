@@ -21,8 +21,8 @@ class ContractorList:
         self.contractorlist = self.llapi.list_all_contractors()
         self.contractorlist_backup = self.llapi.list_all_contractors() #vantar fyrir employee
         if self.position == 'Employee':
-            self.contractorlistlist = self.llapi.search_contractor(self.id['Location'], self.contractorlist,'Location' )
-            self.contractorlist_backup = self.llapi.search_contractor(self.id['Location'], self.contractorlist,'Location' )
+            self.contractorlist = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
+            self.contractorlist_backup = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -97,7 +97,7 @@ class ContractorList:
                 seecontractor.display()
                 self.contractorlist = self.llapi.list_all_contractors() #we want to update the list that we display, now that we may have changed info for the selected contractor.
                 if self.position == 'Employee':
-                    self.contractorlistlist = self.llapi.search_contractor(self.id['Location'], self.contractorlist,'Location' )
+                    self.contractorlist = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
             else: 
                 print(INVALID)
                 sleep(SLEEPTIME)
