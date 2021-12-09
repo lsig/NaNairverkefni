@@ -112,6 +112,9 @@ class LLAPI:
     
     def count_jobs(self):
         return self.jLL.total_jobs_count()
+    
+    def filter_job_id(self, idstring, job_list):
+        return self.jLL.find_job_id(idstring, job_list)
 
     
     #MaintenanceLL
