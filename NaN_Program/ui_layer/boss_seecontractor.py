@@ -69,27 +69,28 @@ class SeeContractor:
 
     
     def change_row(self, row = None):
+        while True:
 
-        if row == None:
-            user_row = None
-            while user_row is None:
-                self.reset_screen()
-                user_input = input("Row to change: ")
-                user_row = self.validate(user_input)
-        else:
-            user_row = row + 1
-        self.reset_screen(user_row)
+            if row == None:
+                user_row = None
+                while user_row is None:
+                    self.reset_screen()
+                    user_input = input("Row to change: ")
+                    user_row = self.validate(user_input)
+            else:
+                user_row = row + 1
+            self.reset_screen(user_row)
 
-        user_input = input(f"{CONTRACTORTEMPLATE[user_row - 1]}: ")
-        old_input = self.contractor[CONTRACTORTEMPLATE[user_row - 1]]
-        self.contractor[CONTRACTORTEMPLATE[user_row - 1]] = user_input 
+            user_input = input(f"{CONTRACTORTEMPLATE[user_row - 1]}: ")
+            old_input = self.contractor[CONTRACTORTEMPLATE[user_row - 1]]
+            self.contractor[CONTRACTORTEMPLATE[user_row - 1]] = user_input 
 
-        returnvalue = self.confirm_edit(old_input, user_row)
-        if returnvalue == 'B' or returnvalue == 'C':
-            return returnvalue
-        elif returnvalue is not None: #here we know that the returnvalue is neither a 'B' or a 'C', therefore the self.confirm_edit(self) has denied the submission and returnes the invalid key.
-            row = CONTRACTORTEMPLATE.index(returnvalue)
-    
+            returnvalue = self.confirm_edit(old_input, user_row)
+            if returnvalue == 'B' or returnvalue == 'C':
+                return returnvalue
+            elif returnvalue is not None: #here we know that the returnvalue is neither a 'B' or a 'C', therefore the self.confirm_edit(self) has denied the submission and returnes the invalid key.
+                row = CONTRACTORTEMPLATE.index(returnvalue)
+        
 
     def confirm_edit(self, old_input, user_row):
         while True:
@@ -97,7 +98,7 @@ class SeeContractor:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_prop(self.contractor)
+                valid, key = self.llapi.edit_contractor(self.contractor)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)
