@@ -6,18 +6,15 @@ from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
-<<<<<<< HEAD
 
 JOBHEADER = ['READY JOBS', 'JOBS IN PROGRESS', 'FINISHED JOBS']
 PRIORITYFILTER = ['emergency', 'now', 'asap']
 SEARCHFILTERS = ['Priority', 'Title', 'Property', 'Employee']
-=======
 CONTRACTPRINTER = [ (5, "id"), (12, 'Date-created'), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'property-number'), (0, 'Property-id'), (15, "Priority"), (0, "Suggested-contractors(id)"), (30, "Suggested-contractors"), (0, 'Status'), (0, 'Type') ]
 CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 
 PRIORITYFILTER = ['emergency', 'now', 'asap']
 SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee']
->>>>>>> fa10211d44439a63cc57278d7bdcdaee15c91d64
 
 
 class ContractList: 
@@ -84,7 +81,6 @@ class ContractList:
         
         self.print_footer()
 
-<<<<<<< HEAD
 
     def which_request(self):
         while True:
@@ -95,10 +91,8 @@ class ContractList:
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
                 return 'Back'
-=======
         
 
->>>>>>> fa10211d44439a63cc57278d7bdcdaee15c91d64
 
 
     
@@ -115,7 +109,7 @@ class ContractList:
             return 'B'
 
         elif user_input.upper() == '/ROW':
-            self.rows = int(input("Rows: ")) #TODO validate 
+            self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
             self.find_job()
