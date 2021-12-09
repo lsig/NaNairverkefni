@@ -13,18 +13,18 @@ class BossMenu:
         self.position = position
         self.id = id
         self.options = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-      {DASH*15}
-      1. Fasteignir 
-      2. Starfsmenn
-      3. Viðhald
-      4. Verktakar
-      5. Áfangastaðir
-      {DASH*15}
-      L. Log out
-      {QUIT}. Quit 
-{STAR*14}
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+        {DASH*15}
+        1. Fasteignir 
+        2. Starfsmenn
+        3. Viðhald
+        4. Verktakar
+        5. Áfangastaðir
+        {DASH*15}
+        L. Log out
+        {QUIT}. Quit 
+{STAR*20}
         '''
 
     def print_menu(self):
