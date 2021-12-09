@@ -28,7 +28,6 @@ class ContractCreate:
         print(self.screen)
 
         print(f"{'| ' + self.mainttype + ' |':^35}\n{DASH * 35}")
-
         for i in range( len(self.template)): 
             user_input = input(f"{i+1}. {self.template[i] + ':':<30} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
@@ -56,7 +55,7 @@ class ContractCreate:
         
     def printcontractinfo(self, number = None):
 
-        contractstring = ''
+        contractstring = f"{'| ' + self.mainttype + ' |':^35}\n{DASH * 35}\n"
         for i in range( len(self.template)):
             if number != None and i == number - 1:
                 contractstring += f"{i+1}. {self.template[i] + ':':<30} ____\n"
