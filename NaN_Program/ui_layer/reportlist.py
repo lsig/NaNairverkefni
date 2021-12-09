@@ -11,8 +11,8 @@ DONOTPRINT = ['Report-id', 'Request-id', 'Employee-id', 'Property-number', 'Prop
 
 
 class ReportList: 
-    def __init__(self, id, position, header, jobsection, reportdict = None) -> None:
-        self.reportdict = reportdict
+    def __init__(self, id, position, header, jobsection, propertyinfo = None) -> None:
+        self.propertyinfo = propertyinfo
         self.llapi = LLAPI()
         self.jobsection = jobsection
         self.rows = MAXROWS
@@ -22,7 +22,7 @@ class ReportList:
         self.position = position
         
         if jobsection == 'property':
-            self.reportlist_backup = self.llapi.get_property_reports(reportdict['id'])
+            self.reportlist_backup = self.llapi.get_property_reports(propertyinfo['id'])
         elif jobsection == 'Employee':
             pass
         else:
@@ -30,10 +30,10 @@ class ReportList:
 
 
         self.reportlist = self.reportlist_backup
-        if self.reportdict == None:
+        if self.propertyinfo == None:
             menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'
         else:
-            menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.reportdict["Address"]}'
+            menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.propertyinfo["Address"]}'
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
     {STAR*14}
