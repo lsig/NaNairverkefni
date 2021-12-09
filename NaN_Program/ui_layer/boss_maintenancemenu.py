@@ -31,7 +31,7 @@ class BossMaintenanceMenu:
 
             if user_input == '1':
                 contrcreate = ContractCreate(self.id, self.position)
-                contrcreate.display()
+                contrcreate.run_screen()
 
             elif user_input == '2':
                 contrlist = ContractList(self.id, self.position)

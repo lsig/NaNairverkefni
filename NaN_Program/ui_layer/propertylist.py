@@ -148,7 +148,8 @@ class PropertyList:
         if (self.slide + 1) * self.rows < len(self.propertylist):
             print("n. Next - ", end='')
             dashlen += 10
-        print(f"#. to Select Property\n{DASH*dashlen}")
+        if len(self.propertylist) > 0:
+            print(f"#. to Select Property\n{DASH*dashlen}")
         
 
 

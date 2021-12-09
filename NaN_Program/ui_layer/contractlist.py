@@ -1,5 +1,6 @@
 #Verkbeiðnalisti
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR, JOBDICT
+
 from ui_layer.boss_seecontract import SeeContract
 from time import sleep
 import os
@@ -9,8 +10,9 @@ CONTRACTPRINTER = [ (5, "id"), (12, 'Date-created'), (15, 'Employee'), (0, 'Empl
 CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 # REGCONTRACTPRINTER = [ (5, "id"), (12, 'Date-from'), (12, 'Date-to'), (20, "Frequency"), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'Propertynumber'), (0, 'propertyid'), (15, "Priority"), (30, "Suggested-contractors"), (0, "Suggested-contractors(id)"), (0, 'Status') ]
 # REGCONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
-JOBHEADER = ['READY JOBS', 'UNREADY JOBS', 'FINISHED JOBS']
+JOBHEADER = ['READY JOBS', 'JOBS IN PROGRESS', 'FINISHED JOBS']
 PRIORITYFILTER = ['emergency', 'now', 'asap']
+SEARCHFILTERS = ['Priority', 'Title','Property','Employee']
 
 
 class ContractList: 
@@ -39,7 +41,7 @@ class ContractList:
             returnvalue = ''
             returnall = self.init_request()
 
-            while returnvalue != 'B': 
+            while returnvalue != 'B' and returnall != 'Back': 
                 self.display_list()
                 returnvalue = self.prompt_user()
     
@@ -50,7 +52,7 @@ class ContractList:
 
         os.system(CLEAR)
         print(self.screen)
-        print(JOBHEADER[self.reqsection] + '\n')
+        print(f"{'| ' + JOBHEADER[self.reqsection] + ' |':^{sum(JOBDICT.values())}}" + '\n')
 
         self.print_header()
 
@@ -73,20 +75,18 @@ class ContractList:
                 print()
         else:
             print("No results :(")
+        
+        self.print_footer()
 
         
-        print(f"{DASH* sum(JOBDICT.values())}\n")
-        if self.slide > 0:
-            print("p. Previous - ", end='')
-        if (self.slide + 1) * self.rows < len(self.contractlist):
-            print("n. Next - ", end='')
+
     
 
     def which_request(self):
         while True:
             os.system(CLEAR)
             print(self.screen)
-            mainttype = input("1. Ready jobs\n2. Unready jobs\n3. Finished jobs\n")
+            mainttype = input(f"1. {JOBHEADER[0].capitalize()}\n2. {JOBHEADER[1].capitalize()}\n3. {JOBHEADER[2].capitalize()}\n")
             if mainttype == '1' or mainttype == '2' or mainttype == '3':
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
@@ -129,7 +129,7 @@ class ContractList:
 
     
     def prompt_user(self):
-        user_input = input(f"#. to Select Contract\n")
+        user_input = input()
 
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
@@ -144,8 +144,7 @@ class ContractList:
             self.rows = int(input("Rows: ")) #TODO validate 
         
         elif user_input.upper() == 'L': #TODO
-            #seeproperty = SeeProperty(self.id) 
-            pass 
+            self.find_job()
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
 
@@ -174,3 +173,70 @@ class ContractList:
 
             print(f"{'| ' + keyprint:<{value}}",end=extra)
         print(f"\n{DASH* sum(JOBDICT.values()) }")
+    
+
+    def print_footer(self):
+        print(f"{DASH* sum(JOBDICT.values())}\n")
+        dashlen = 21
+        if self.slide > 0:
+            print("p. Previous - ", end='')
+            dashlen += 14
+
+        if (self.slide + 1) * self.rows < len(self.contractlist):
+            print("n. Next - ", end='')
+            dashlen += 10
+
+        if len(self.contractlist) > 0:
+            print(f"#. to Select Contract\n{DASH*dashlen}")
+
+def find_job(self):
+        for index, filter in enumerate(SEARCHFILTERS):
+            print(f"{index + 1}: {filter}")
+        if self.contractlist != self.contractlist_backup:
+            print('R: Reset')
+        userint = self.validate('userint')
+
+        if userint == 'B':
+            return 'B'
+        elif userint == 'R' and self.contractlist != self.contractlist_backup:
+            self.contractlist = self.contractlist_backup
+            return
+        key = SEARCHFILTERS[userint - 1]
+        userstring = input(f"Search in {key.lower()}: ")
+
+        filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
+
+        if filteredlist == False:
+            print(f"The filter {key.lower()}: {userstring} did not match any result.")
+            sleep(SLEEPTIME*3)
+        else:
+            self.contractlist = filteredlist
+ 
+def validate(self, userint = None, userrows = None):
+    if userint is not None:
+        while True:
+            userint = input(" ")
+            if userint.upper() == 'B':
+                return 'B'
+            elif userint.upper() == 'R' and self.propertylist != self.propertylist_backup:
+                return 'R'
+            elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
+                return int(userint)
+
+            print(INVALID)
+            sleep(SLEEPTIME)
+            self.display_list()
+            self.prompt_user('L')
+    
+    if userrows is not None:
+        while True:
+            userrows = input("Rows: ")
+            if userrows.isdigit() == True and (1 <= int(userrows)):
+                if int(userrows) > MAXROWS:
+                    print(f"Keep the row length under {MAXROWS}")
+                else:
+                    return int(userrows)
+            else:
+                print(INVALID)
+            sleep(SLEEPTIME*2)
+            self.display_list()

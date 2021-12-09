@@ -65,7 +65,7 @@ class LLAPI:
         return self.empll.add_employee(emp_lis)
 
     def edit_emp(self, emp_dic):
-        self.empll.edit_employee(emp_dic)
+        return self.empll.edit_employee(emp_dic)
 
     def filter_employee_id(self, id, emp_lis):
         return self.empll.find_emp_id(id, emp_lis)
@@ -122,6 +122,9 @@ class LLAPI:
     
     def filter_job_id(self, idstring, job_list):
         return self.jLL.find_job_id(idstring, job_list)
+    
+    def search_job(self,string, joblist, key):
+        return self.jLL.find_jobs_by_str(string, joblist, key)
 
     
     #MaintenanceLL

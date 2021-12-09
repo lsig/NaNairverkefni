@@ -17,12 +17,20 @@ class ContractCreate:
     | VIÐHALD |
      - Skrá nýja verkbeiðni
       {DASH*15}
-    {QUIT}. Hætta við
+    B. Back
 
 '''
+    def run_screen(self):
+        self.mainttype  = ''
+        while self.mainttype != 'Back':
+            returnvalue = ''
+            self.mainttype, self.template = self.regular_or_single()
+
+            while returnvalue != 'B' and self.mainttype != 'Back': 
+                returnvalue = self.display()
+
 
     def display(self):
-        self.mainttype, self.template = self.regular_or_single()
 
         os.system(CLEAR)
         print(self.screen)
@@ -30,8 +38,8 @@ class ContractCreate:
         print(f"{'| ' + self.mainttype + ' |':^35}\n{DASH * 35}")
         for i in range( len(self.template)): 
             user_input = input(f"{i+1}. {self.template[i] + ':':<30} ") #The user puts in info for every section of the property
-            if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
-                return
+            if user_input.upper() == 'B': #The program exits if the user inputs q, for quitting.
+                return 'B'
             self.contractdict[self.template[i]] = user_input
         print(DASH*35)
         
@@ -47,6 +55,9 @@ class ContractCreate:
 
             elif mainttype == '2':
                 return 'STÖK VERKBEIÐNI', CONTRACTTEMPLATE
+            
+            elif mainttype.upper() == 'B':
+                return 'Back', 'Easteregg'
 
             print(INVALID)
             sleep(SLEEPTIME)

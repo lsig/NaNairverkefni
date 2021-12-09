@@ -1,5 +1,5 @@
 #velja ákveðinn starfsmann
-from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, REPORTTEMPLATE
+from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, CONTRACTTEMPLATE
 from logic_layer.LLAPI import LLAPI
 
 
@@ -9,20 +9,20 @@ import os
 
 
 class SeeContract:
-    def __init__(self, id, reportinfo, position) -> None:
+    def __init__(self, id, contractinfo, position) -> None:
         self.position = position
         self.llapi = LLAPI()
         self.id = id
-        self.report = reportinfo
+        self.contract = contractinfo
         editornot = ''
         if self.position == 'Manager':
             editornot = f"\n     E. Edit"
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
-    | VERKSKÝRSLUR |
-     - Verkskýrslulisti
-       - {self.report['Title']}
+    | VIÐHALD |
+     - Verkbeiðnilisti
+       - {self.contract['Title']}
      {DASH*15}{editornot}
      B. Til baka
 '''
@@ -35,18 +35,18 @@ class SeeContract:
                 return
 
     
-    def printreportinfo(self, number = None):
+    def printcontractinfo(self, number = None):
 
-        reportstring = f"{'| ' + self.report['Location'] + ' | ':^35}\n{DASH*35}\n"
+        contractstring = f"{'| ' + self.contract['Location'] + ' | ':^35}\n{DASH*35}\n"
 
-        for i in range(len(REPORTTEMPLATE)):
+        for i in range(len(CONTRACTTEMPLATE)):
             if number != None and i == number - 1:
-                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<17} ____\n"
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ____\n"
             else:
-                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<17} {self.report[REPORTTEMPLATE[i]]}\n"
-        reportstring += DASH*35
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} {self.contract[CONTRACTTEMPLATE[i]]}\n"
+        contractstring += DASH*35
         
-        print(reportstring)
+        print(contractstring)
     
     
     def prompt_user(self):
@@ -78,15 +78,15 @@ class SeeContract:
             user_row = row + 1
         self.reset_screen(user_row)
 
-        user_input = input(f"{REPORTTEMPLATE[user_row - 1]}: ")
-        old_input = self.report[REPORTTEMPLATE[user_row - 1]]
-        self.report[REPORTTEMPLATE[user_row - 1]] = user_input 
+        user_input = input(f"{CONTRACTTEMPLATE[user_row - 1]}: ")
+        old_input = self.contract[CONTRACTTEMPLATE[user_row - 1]]
+        self.contract[CONTRACTTEMPLATE[user_row - 1]] = user_input 
 
         returnvalue = self.confirm_edit(old_input, user_row)
         if returnvalue == 'B' or returnvalue == 'C':
             return returnvalue
         elif returnvalue is not None: #here we know that the returnvalue is neither a 'B' or a 'C', therefore the self.confirm_edit(self) has denied the submission and returnes the invalid key.
-            row = REPORTTEMPLATE.index(returnvalue)
+            row = CONTRACTTEMPLATE.index(returnvalue)
 
 
     def confirm_edit(self, old_input, user_row):
@@ -95,7 +95,7 @@ class SeeContract:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_rep(self.report)
+                valid, key = self.llapi.edit_rep(self.contract)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)
@@ -106,7 +106,7 @@ class SeeContract:
                     return key
 
             elif is_user_happy.upper() == 'B':
-                self.report[REPORTTEMPLATE[user_row - 1]] = old_input
+                self.contract[CONTRACTTEMPLATE[user_row - 1]] = old_input
                 return is_user_happy.upper()
             
             elif is_user_happy.upper() == 'E':
@@ -120,7 +120,7 @@ class SeeContract:
     def validate(self, rowinput):
         try:
             rowint = int(rowinput)
-            if 1 <= rowint <= len(REPORTTEMPLATE):
+            if 1 <= rowint <= len(CONTRACTTEMPLATE):
                 return rowint
             else:
                 raise ValueError
@@ -133,4 +133,4 @@ class SeeContract:
     def reset_screen(self, user_row = None):
         os.system(CLEAR)
         print(self.screen)
-        self.printreportinfo(user_row)
+        self.printcontractinfo(user_row)
