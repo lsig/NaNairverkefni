@@ -189,54 +189,54 @@ class ContractList:
         if len(self.contractlist) > 0:
             print(f"#. to Select Contract\n{DASH*dashlen}")
 
-def find_job(self):
-        for index, filter in enumerate(SEARCHFILTERS):
-            print(f"{index + 1}: {filter}")
-        if self.contractlist != self.contractlist_backup:
-            print('R: Reset')
-        userint = self.validate('userint')
+    def find_job(self):
+            for index, filter in enumerate(SEARCHFILTERS):
+                print(f"{index + 1}: {filter}")
+            if self.contractlist != self.contractlist_backup:
+                print('R: Reset')
+            userint = self.validate('userint')
 
-        if userint == 'B':
-            return 'B'
-        elif userint == 'R' and self.contractlist != self.contractlist_backup:
-            self.contractlist = self.contractlist_backup
-            return
-        key = SEARCHFILTERS[userint - 1]
-        userstring = input(f"Search in {key.lower()}: ")
-
-        filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
-
-        if filteredlist == False:
-            print(f"The filter {key.lower()}: {userstring} did not match any result.")
-            sleep(SLEEPTIME*3)
-        else:
-            self.contractlist = filteredlist
- 
-def validate(self, userint = None, userrows = None):
-    if userint is not None:
-        while True:
-            userint = input(" ")
-            if userint.upper() == 'B':
+            if userint == 'B':
                 return 'B'
-            elif userint.upper() == 'R' and self.propertylist != self.propertylist_backup:
-                return 'R'
-            elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
-                return int(userint)
+            elif userint == 'R' and self.contractlist != self.contractlist_backup:
+                self.contractlist = self.contractlist_backup
+                return
+            key = SEARCHFILTERS[userint - 1]
+            userstring = input(f"Search in {key.lower()}: ")
 
-            print(INVALID)
-            sleep(SLEEPTIME)
-            self.display_list()
-            self.prompt_user('L')
-    
-    if userrows is not None:
-        while True:
-            userrows = input("Rows: ")
-            if userrows.isdigit() == True and (1 <= int(userrows)):
-                if int(userrows) > MAXROWS:
-                    print(f"Keep the row length under {MAXROWS}")
-                else:
-                    return int(userrows)
+            filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
+
+            if filteredlist == False:
+                print(f"The filter {key.lower()}: {userstring} did not match any result.")
+                sleep(SLEEPTIME*3)
             else:
+                self.contractlist = filteredlist
+    
+    def validate(self, userint = None, userrows = None):
+        if userint is not None:
+            while True:
+                userint = input(" ")
+                if userint.upper() == 'B':
+                    return 'B'
+                elif userint.upper() == 'R' and self.propertylist != self.propertylist_backup:
+                    return 'R'
+                elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
+                    return int(userint)
+
                 print(INVALID)
-            sleep(SLEEPTIME*2)
-            self.display_list()
+                sleep(SLEEPTIME)
+                self.display_list()
+                self.prompt_user('L')
+        
+        if userrows is not None:
+            while True:
+                userrows = input("Rows: ")
+                if userrows.isdigit() == True and (1 <= int(userrows)):
+                    if int(userrows) > MAXROWS:
+                        print(f"Keep the row length under {MAXROWS}")
+                    else:
+                        return int(userrows)
+                else:
+                    print(INVALID)
+                sleep(SLEEPTIME*2)
+                self.display_list()
