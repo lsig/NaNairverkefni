@@ -134,7 +134,8 @@ class JobLL:
 
     def get_all_jobs_sorted(self):#Kristofer!
         all_jobs = self.dlapi.get_jobs()
-        jobs_list = self.sort_all_jobs(all_jobs)
+        jobs_list = self.sort_by_priority(all_jobs)
+        jobs_list = self.sort_all_jobs(jobs_list)
         #counter = 0
         #for row in all_jobs:#changes contractor id into name
         #    all_jobs[counter]["Suggested-contractors"] = self.get_con_name_and_location(row["Suggested-contractors"])["Name"]
@@ -154,6 +155,19 @@ class JobLL:
                 finished_jobs.append(job)
         
         return [ready_jobs, unready_jobs, finished_jobs]
+    
+    def sort_by_priority(self, oldlist):
+        new_list = []
+        for priority in ['emergency', 'now', 'asap']:
+            for job in oldlist:
+                if job['Priority(ASAP; Now; Emergency)'].lower() == priority:
+                    new_list.append(job)
+
+        for job in oldlist:
+            if job not in new_list:
+                new_list.append(job)
+
+        return new_list
 
     
     def total_jobs_count(self):

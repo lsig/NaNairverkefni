@@ -106,12 +106,16 @@ class LLAPI:
     def edit_rep(self,rep_dict):
         return self.repLL.edit_report_info(rep_dict)
 
+
     #JobLL
     def add_job(self,job_lis,id):
         return self.jLL.add_job(job_lis,id)
 
     def get_job(self):
        return self.jLL.get_all_jobs()
+    
+    def get_sorted_jobs(self):
+        return self.jLL.get_all_jobs_sorted()
     
     def count_jobs(self):
         return self.jLL.total_jobs_count()
