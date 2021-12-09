@@ -33,8 +33,13 @@ class ContractorLL:
                 if len(cont_dic[key]) < 7 or len(cont_dic[key]) > 15:
                     return False, key
             if key.lower() == "working-hours":
-                if len(cont_dic[key]) > 5:
-                    return False,key
+                if len(cont_dic[key]) == 5:
+                    if cont_dic[key][0:2].isdigit() and cont_dic[key][3:5].isdigit():
+                        lower = int(cont_dic[key][0:2])
+                        higher = int(cont_dic[key][3:5])
+                        if int(cont_dic[key][0:2]) <= 24 and cont_dic[key][2] == '-' and int(cont_dic[key][3:5]) <= 24 and lower < higher:
+                            return True,key
+                return False,key
 
             if get_validation == False:
 

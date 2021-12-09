@@ -7,7 +7,7 @@ from time import sleep
 import os
 MAXROWS = 50
 ROWS = 10
-DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (15, 'Airport'), (15, 'Phone'), (15, 'Workinghours'), (20, 'Managar'), (15,'Managerid')]
+DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (15, 'Airport'), (15, 'Phone'), (15, 'Working-hours'), (20, 'Manager'), (15,'Manager-id')]
 DESTPRINT = [element[0] for element in DESTPRINTER]
 SEARCHFILTERS = ['Name','Country','Manager', 'Phone']
 
@@ -43,15 +43,10 @@ class DestinationList:
 
             os.system(CLEAR)
             print(self.screen)
-            for index, k in enumerate(self.destinationlist[0].keys()):
-                if k == 'id':
-                    extra = '  '
-                else:
-                    extra = ''
-                print(f"{'| ' + k + extra:<{DESTPRINT[index]}}",end='')
-            print(f"\n{DASH* sum(DESTPRINT) }")
+            self.print_header()
 
             self.printedids = [self.destinationlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.destinationlist) > self.firstrow + i]
+            
 
             for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
                 try:
