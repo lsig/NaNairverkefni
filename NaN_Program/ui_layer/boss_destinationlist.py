@@ -7,7 +7,7 @@ from time import sleep
 import os
 MAXROWS = 50
 ROWS = 10
-DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (15, 'Airport'), (15, 'Phone'), (15, 'Working-hours'), (20, 'Manager'), (15,'Manager-id'),(15, 'Phone-manager'),(15,'GSM')]
+DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (15, 'Airport'), (15, 'Phone'), (15, 'Working-hours'), (20, 'Manager'), (15,'Manager-id')]
 DESTPRINT = [element[0] for element in DESTPRINTER]
 SEARCHFILTERS = ['Name','Country','Manager', 'Phone']
 
