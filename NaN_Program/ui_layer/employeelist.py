@@ -6,7 +6,7 @@ from time import sleep
 import os
 MAXROWS = 50
 ROWS = 10
-EMPPRINTER = [(4,'id'), (20,'SS'), (20,'Name'), (25, 'address') , (15, 'phone'), (15, 'GSM'), (25, 'email'), (20, 'destination'), (0,'other')]
+EMPPRINTER = [(4,'id'), (20,'Name'), (18,'SS'), (29, 'address') , (15, 'phone'), (0, 'GSM'), (30, 'email'), (18, 'destination'), (11,'Manager')]
 EMPPRINT = [element[0] for element in EMPPRINTER]
 SEARCHFILTERS = ['Name','Email','Destination', 'Social Security']
 
@@ -50,8 +50,13 @@ class EmployeeList:
                 try:
                     employeeinfostr = f'{self.printedids[i] + ".":<{EMPPRINT[0]}}- ' #id with some extra text.
                     for index, k in enumerate(self.employeelist[self.firstrow + i]):
+                        if k == 'Address':
+                            total_address_info = self.employeelist[self.firstrow + i][k].split(';')
+                            street_address = total_address_info[0]
+                            employeeinfostr += f"{'| ' + street_address :<{EMPPRINT[index]}}"
+
                         
-                        if k != 'id': #the address in the csv file stores town and country, seperated by semicommas (;), we only want the house address.
+                        elif k != 'id' and k != 'GSM': #the address in the csv file stores town and country, seperated by semicommas (;), we only want the house address.
                             employeeinfostr += f"{'| ' + self.employeelist[self.firstrow + i][k] :<{EMPPRINT[index]}}"
                     print(employeeinfostr, end='') #here we print an employee's information.
                         
@@ -126,10 +131,11 @@ class EmployeeList:
     def print_header(self):
         for index, k in enumerate(self.employeelist[0].keys()):
             if k == 'id':
-                extra = '   '
+                extra = '  '
             else:
                 extra = ''
-            print(f"{'| ' + k + extra:<{EMPPRINT[index]}}",end='')
+            if k != 'GSM':
+                print(f"{'| ' + k + extra:<{EMPPRINT[index]}}",end='')
         print(f"\n{DASH* sum(EMPPRINT) }")
     
 
