@@ -65,11 +65,11 @@ class JobLL:
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 get_validation = job_dic[key].replace(" ", "").isalpha()
-                if key == "Priority":
+                if key == "Priority(ASAP; Now; Emergency)":
                     for row in self.priority_word_check():
-                        if job_dic["Priority"].lower() == row.lower():
+                        if job_dic["Priority(ASAP; Now; Emergency)"].lower() == row.lower():
                             priority_check = True
-                            job_dic["Priority"] = row
+                            job_dic["Priority(ASAP; Now; Emergency)"] = row
                     if priority_check == False:
                         return False, key
             elif dic[key] == int and dic[key] != "both":
@@ -216,7 +216,7 @@ class JobLL:
 if __name__ == "__main__":
     g = JobLL()
     #print(g.find_employee_name("5"))
-    print(g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"Asap","Suggested-contractors-id":"1","Suggested-contractors":"1"},"1"))
+    print(g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":"1","Suggested-contractors":"1"},"1"))
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))

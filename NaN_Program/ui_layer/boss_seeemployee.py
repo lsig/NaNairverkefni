@@ -25,17 +25,16 @@ class SeeEmployee:
 '''
 
     def display(self):
-        returnvalue = ''
-        while returnvalue != 'B' or returnvalue != 'C':
+        while True:
             self.reset_screen()
             returnvalue = self.prompt_user()
             if returnvalue == 'C':
                 return
 
-
+    
     def printemployeeinfo(self, number = None):
 
-        employeestring = f"{'| ' + self.employee['Address'] + ' | ':^35}\n{DASH*35}\n"
+        employeestring = f"{'| ' + self.employee['Name'] + ' | ':^35}\n{DASH*35}\n"
 
         for i in range(len(CONTACTTEMPLATE)):
             if number != None and i == number - 1:
@@ -46,6 +45,7 @@ class SeeEmployee:
         
         print(employeestring)
     
+    
     def prompt_user(self):
         user_input = input()
 
@@ -54,43 +54,82 @@ class SeeEmployee:
         
         elif user_input.upper() == 'E':
             while True:
-                self.change_row()
-                returnvalue = self.confirm_edit()
-                if returnvalue == 'B' or returnvalue == 'C':
+                returnvalue = self.change_row()
+                if returnvalue == 'C' or returnvalue == 'B':
                     return returnvalue
 
         else:
             print(INVALID)
             sleep(SLEEPTIME)
     
-    def change_row(self):
-        user_row = int(input("Row to change: "))
-        self.reset_screen(user_row)
 
-        user_input = input(f"{CONTACTTEMPLATE[user_row - 1]}: ") #TODO validate allsstaðar
-        self.employee[CONTACTTEMPLATE[user_row - 1]] = user_input
+    def change_row(self, row = None):
+        while True:
 
-        self.reset_screen()
+            if row == None:
+                user_row = None
+                while user_row is None:
+                    self.reset_screen()
+                    user_input = input("Row to change: ")
+                    user_row = self.validate(user_input)
+            else:
+                user_row = row + 1
+            self.reset_screen(user_row)
 
+            user_input = input(f"{CONTACTTEMPLATE[user_row - 1]}: ")
+            old_input = self.employee[CONTACTTEMPLATE[user_row - 1]]
+            self.employee[CONTACTTEMPLATE[user_row - 1]] = user_input 
+
+            returnvalue = self.confirm_edit(old_input, user_row)
+            if returnvalue == 'B' or returnvalue == 'C':
+                return returnvalue
+            elif returnvalue is not None: #here we know that the returnvalue is neither a 'B' or a 'C', therefore the self.confirm_edit(self) has denied the submission and returnes the invalid key.
+                row = CONTACTTEMPLATE.index(returnvalue)
+
+
+    def confirm_edit(self, old_input, user_row):
+        while True:
+            self.reset_screen()
+            is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
+                
+            if is_user_happy.upper() == 'C':
+                valid, key = self.llapi.edit_emp(self.employee)
+                if valid:
+                    print("Changes saved!")
+                    sleep(SLEEPTIME)
+                    return 'C'
+                else:
+                    print(f"Invalid {key}!")
+                    sleep(SLEEPTIME)
+                    return key
+
+            elif is_user_happy.upper() == 'B':
+                self.employee[CONTACTTEMPLATE[user_row - 1]] = old_input
+                return is_user_happy.upper()
+            
+            elif is_user_happy.upper() == 'E':
+                return None
+
+            else:
+                print(INVALID)
+                sleep(SLEEPTIME)
+    
+
+    def validate(self, rowinput):
+        try:
+            rowint = int(rowinput)
+            if 1 <= rowint <= len(CONTACTTEMPLATE):
+                return rowint
+            else:
+                raise ValueError
+        except ValueError:
+            print(INVALID)
+            sleep(SLEEPTIME)
+            return None
+        
 
     def reset_screen(self, user_row = None):
         os.system(CLEAR)
         print(self.screen)
         self.printemployeeinfo(user_row)
     
-    def confirm_edit(self):
-        self.reset_screen()
-        is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
-            
-        if is_user_happy.upper() == 'C':
-            self.llapi.edit_emp(self.employee)
-            print("Changes saved :)")
-            sleep(SLEEPTIME)
-            return 'C'
-
-        elif is_user_happy.upper() == 'B':
-            return 'B'
-        
-        elif is_user_happy.upper() != 'E':
-            print(INVALID)
-            sleep(SLEEPTIME)
