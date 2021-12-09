@@ -52,7 +52,5 @@ class WhichContractMenu:
             if self.reqsection == 'B':
                 return
 
-            self.contractlist = self.llapi.get_sorted_jobs()[self.reqsection]
-            self.contractlist_backup = self.llapi.get_sorted_jobs()[self.reqsection]
-            contrlist = ContractList(self.id, self.position, JOBHEADER[int(self.reqsection) - 1], self.contractlist)
+            contrlist = ContractList(self.id, self.position, JOBHEADER[int(self.reqsection)], self.reqsection)
             contrlist.run_screen()

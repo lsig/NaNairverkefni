@@ -5,27 +5,30 @@ import os
 from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
 REPORTHEADER = ['PENDING REPORTS', 'FINISHED REPORTS', 'OTHER REPORTS']
-SEARCHFILTERS = ['Title', 'Description', 'Employee', 'Contractor-rating']
+SEARCHFILTERS = ['Report-id', 'Employee', 'Location', 'Property', 'Date']
+
 DONOTPRINT = ['Report-id', 'Request-id', 'Employee-id', 'Property-number', 'Property-id', 'Contractor-id']
 
 
 class ReportList: 
-    def __init__(self, id, position, reportdict = None) -> None:
+    def __init__(self, id, position, header, jobsection, reportdict = None) -> None:
         self.reportdict = reportdict
         self.llapi = LLAPI()
+        self.jobsection = jobsection
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
+        self.header = header
         self.position = position
-        self.reportlist = self.llapi.get_report_info()
-        self.reportlist_backup = self.llapi.get_report_info()
+        self.reportlist_backup = self.llapi.get_sorted_reports()[self.jobsection]
+        self.reportlist = self.reportlist_backup
         if self.reportdict == None:
             menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'
         else:
             menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.reportdict["Address"]}'
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
+    {STAR*14}
 {menutravel}
      {DASH*15}
      L. Leita
@@ -35,14 +38,11 @@ class ReportList:
 '''
 
     def run_screen(self):
-        returnall = ''
-        while returnall != 'Back':
-            returnvalue = ''
-            returnall = self.init_request()
+        returnvalue = ''
 
-            while returnvalue != 'B' and returnall != 'Back':
-                self.display_list()
-                returnvalue = self.prompt_user()
+        while returnvalue != 'B':
+            self.display_list()
+            returnvalue = self.prompt_user()
     
 
     def display_list(self):
@@ -51,7 +51,7 @@ class ReportList:
 
         os.system(CLEAR)
         print(self.screen)
-        print(f"{'| ' + REPORTHEADER[self.reqsection] + ' |':^{sum(REPORTDICT.values())}}" + '\n')
+        print(f"{'| ' + self.header + ' |':^{sum(REPORTDICT.values())}}" + '\n')
         
         self.print_header()
 
@@ -75,29 +75,6 @@ class ReportList:
 
         self.print_footer()
     
-
-    def which_request(self):
-        while True:
-            os.system(CLEAR)
-            print(self.screen)
-            mainttype = input(f"1. {REPORTHEADER[0].capitalize()}\n2. {REPORTHEADER[1].capitalize()}\n3. {REPORTHEADER[2].capitalize()}") #ma gera for loopu
-            if mainttype == '1' or mainttype == '2' or mainttype == '3':
-                return int(mainttype) - 1
-            elif mainttype.upper() == 'B':
-                return 'Back'
-
-            print(INVALID)
-            sleep(SLEEPTIME)
-        
-
-    def init_request(self):
-    
-        self.reqsection = self.which_request()
-        if self.reqsection == 'Back':
-            return 'Back'
-
-        self.reportlist = self.llapi.get_sorted_reports()[self.reqsection]
-        self.reportlist_backup = self.llapi.get_sorted_reports()[self.reqsection]
 
 
 
@@ -123,13 +100,13 @@ class ReportList:
         elif user_input.upper() == 'L': #TODO
            self.find_report()
         
-        elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
+        elif user_input.isdigit(): #hér selectum við ákveðna fasteign
 
             if user_input in self.printedids:
-                reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist)
+                reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist, 'Report-id')
                 seereport= SeeReport(self.id, reportinfo, self.position)
                 seereport.display()
-                self.reportlist = self.llapi.get_report_info() #we want to update the list that we display, now that we may have changed info for the selected property.
+                self.reportlist = self.llapi.get_sorted_reports()[self.jobsection] #we want to update the list that we display, now that we may have changed info for the selected property.
             else: 
                 print(INVALID)
                 sleep(SLEEPTIME)
