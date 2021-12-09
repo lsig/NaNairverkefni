@@ -111,7 +111,7 @@ class JobLL:
         return "","",""
 
     def priority_word_check(self):
-        priority = ["ASAP","Now","Emergancy"]
+        priority = ["ASAP","Now","Emergency"]
         return priority
    
 
