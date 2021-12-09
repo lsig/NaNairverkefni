@@ -16,6 +16,7 @@ class ReportsLL:
         if self.report_validation(rep_dic, cont_dic):
             rep_dic["Status"] = "1"
             current_date = datetime.date(datetime.now())
+
             #rep_dic = self.replace_loc_num_with_name(rep_dic)
             rep = Report(self.generate_id(), job_dic["Report-id"],job_dic["Employee"],job_dic["Employee-id"],rep_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], rep_dic["Contractor-name"], rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"], "0")
             # Status, Property, Property-number, Property-id, Contractor-Rating, Location
@@ -34,6 +35,7 @@ class ReportsLL:
     def list_all_reports(self): #klárt
         all_rep = self.dlapi.get_all_report()
         return all_rep
+
 
     def edit_report_info(self, edit_rep_dic, rep_dic, status): # klárt
         # NOTETOSELF:yfirmaður þarf að geta samþykkt viðhaldsskýrslur, og starfsmenn þurfa að geta séð hvaða skýrslur, sem þeir eiga, eru samþykktar og hverjar ekki.
