@@ -29,11 +29,11 @@ class EmployeeMaintenanceMenu:
 
             if user_input == '1':
                 contrcreate = ContractList(self.id, self.position)
-                contrcreate.display_list()
+                contrcreate.run_screen()
 
             elif user_input == '2':
                 reportlist = ReportList(self.id, self.position)
-                reportlist.display_list()
+                reportlist.run_screen()
 
             elif user_input.upper() == 'B':
                 return

@@ -14,14 +14,16 @@ class SeeProperty:
         self.llapi = LLAPI()
         self.id = id
         self.property = propertyinfo
+        editornot = ''
+        if position == 'Manager':
+            editornot = f"\n     E. Edit"
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
     | FASTEIGNIR |
      - Fasteignalisti
        - {self.property['Address']}
-     {DASH*15}
-     E. Edit
+     {DASH*15}{editornot}
      R. Property reports
      B. Til baka
 '''
@@ -58,7 +60,7 @@ class SeeProperty:
             propreport = ReportList(self.id, self.position, self.property['id'])
             propreport.display_list()
 
-        elif user_input.upper() == 'E':
+        elif user_input.upper() == 'E' and self.position == 'Manager':
             while True:
                 returnvalue = self.change_row()
                 if returnvalue == 'C' or returnvalue == 'B':
@@ -70,26 +72,27 @@ class SeeProperty:
     
 
     def change_row(self, row = None):
+        while True:
 
-        if row == None:
-            user_row = None
-            while user_row is None:
-                self.reset_screen()
-                user_input = input("Row to change: ")
-                user_row = self.validate(user_input)
-        else:
-            user_row = row + 1
-        self.reset_screen(user_row)
+            if row == None:
+                user_row = None
+                while user_row is None:
+                    self.reset_screen()
+                    user_input = input("Row to change: ")
+                    user_row = self.validate(user_input)
+            else:
+                user_row = row + 1
+            self.reset_screen(user_row)
 
-        user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ")
-        old_input = self.property[PROPERTYTEMPLATE[user_row - 1]]
-        self.property[PROPERTYTEMPLATE[user_row - 1]] = user_input 
+            user_input = input(f"{PROPERTYTEMPLATE[user_row - 1]}: ")
+            old_input = self.property[PROPERTYTEMPLATE[user_row - 1]]
+            self.property[PROPERTYTEMPLATE[user_row - 1]] = user_input 
 
-        returnvalue = self.confirm_edit(old_input, user_row)
-        if returnvalue == 'B' or returnvalue == 'C':
-            return returnvalue
-        elif returnvalue is not None: #here we know that the returnvalue is neither a 'B' or a 'C', therefore the self.confirm_edit(self) has denied the submission and returnes the invalid key.
-            row = PROPERTYTEMPLATE.index(returnvalue)
+            returnvalue = self.confirm_edit(old_input, user_row)
+            if returnvalue == 'B' or returnvalue == 'C':
+                return returnvalue
+            elif returnvalue is not None: #here we know that the returnvalue is neither a 'B' or a 'C', therefore the self.confirm_edit(self) has denied the submission and returnes the invalid key.
+                row = PROPERTYTEMPLATE.index(returnvalue)
 
 
     def confirm_edit(self, old_input, user_row):

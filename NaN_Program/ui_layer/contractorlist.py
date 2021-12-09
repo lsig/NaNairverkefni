@@ -87,13 +87,12 @@ class ContractorList:
             self.find_contractor()
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn verktaka
-            self.lastrow = (self.slide + 1) * self.rows + 1
             
             if user_input in self.printedids:
-                contractorinfo = self.llapi.filter_property_id(user_input, self.contractorlist) 
+                contractorinfo = self.llapi.filter_contr_id(user_input, self.contractorlist)
                 seecontractor = SeeContractor(self.id, contractorinfo, self.position) 
                 seecontractor.display()
-                self.propertylist = self.llapi.get_prop_info()
+                self.contractorlist = self.llapi.list_all_contractors() #we want to update the list that we display, now that we may have changed info for the selected property.
             else: 
                 print(INVALID)
                 sleep(SLEEPTIME)

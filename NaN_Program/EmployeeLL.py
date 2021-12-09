@@ -99,7 +99,9 @@ class EmployeeLL:
         # loc_correct = False
         for key in dic.keys():
             #get_validation
-            if dic[key] == str and dic[key] != "both":
+            if dic[key] == str:
+                if len(emp_dic[key]) > 30 :
+                    return False, key
                 if key.lower() == "extras": #replace empty string with none for extras
                     if emp_dic[key] == "":
                         emp_dic[key] = "None"
@@ -111,7 +113,7 @@ class EmployeeLL:
 
             # to check if address or property number are empty    
             if dic[key] == "both":
-                if emp_dic[key] == "":
+                if emp_dic[key] == "" or (len(emp_dic[key]) > 25):
                     return False, key
             #check if Destination is within bounds
             if key.lower() == "destination" and get_validation:
@@ -120,7 +122,7 @@ class EmployeeLL:
                         loc_correct = True
                 if loc_correct == False:
                     return False, key
-            if key.lower() == "phone" and get_validation:
+            if (key.lower() == "phone" or key.lower() == "gsm") and get_validation:
                 if 7 > len(emp_dic[key]) or len(emp_dic[key]) > 15:
                     return False, key
         

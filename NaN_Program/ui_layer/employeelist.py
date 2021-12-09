@@ -84,12 +84,12 @@ class EmployeeList:
             self.find_employee()
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
-            self.lastrow = (self.slide + 1) * self.rows + 1
             
-            if self.firstrow <= int(user_input) < self.lastrow and len(self.employeelist) >= int(user_input):
+            if user_input in self.printedids:
                 employeeinfo = self.llapi.filter_employee_id(user_input, self.employeelist) 
                 seeemp = SeeEmployee(self.id, employeeinfo, self.position)
                 seeemp.display()
+                self.employeelist = self.llapi.get_emp_info() #we want to update the list that we display, now that we may have changed info for the selected property.
             
             else: 
                 print("Invalid row, try again!")

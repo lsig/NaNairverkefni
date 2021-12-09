@@ -12,7 +12,8 @@ class LocationLL:
 
     def add_location(self,loc_dic):
         #loc_dic["Destination"] = loc_dic["Destination"].capitalize()
-        if self.is_valid(loc_dic): #þarf að bæta fancy bounce í ui :)  
+        valid, key = self.is_valid(loc_dic)
+        if valid:  
             boss_id = self.empLL.assign_id_emp()
             loc = Location(self.assign_id_loc(),loc_dic["Name"],loc_dic["Country"],loc_dic["Airport"],loc_dic["Phone"],loc_dic["Working-hours"],loc_dic["Manager"],boss_id)
             loc_dic["Destination"] = loc_dic["Name"]
@@ -21,7 +22,8 @@ class LocationLL:
             loc_dic["Manager"] = "1"
             self.empLL.add_employee(loc_dic)
             self.dlapi.add_loc(loc)
-
+            return True,None
+        return False,key
 
     def assign_id_loc(self):
         all_loc_lis = self.dlapi.get_loc_info()
@@ -38,6 +40,8 @@ class LocationLL:
             loc_dic["GSM"] = "1234567"
         for key in dic.keys():
             if dic[key] == str:
+                if len(loc_dic[key]) > 30:
+                    return False, key
                 get_validation = loc_dic[key].replace(" ", "").isalpha()
             else:
                 get_validation = loc_dic[key].replace("-","").isdigit()

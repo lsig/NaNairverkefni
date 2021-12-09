@@ -59,9 +59,8 @@ class BossDestinationCreate:
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
-            if confirm.upper() == 'C':  # TODO
-                self.destinationdict["Manager"] = "0" #Not boss
-                valid, key = self.llapi.add_emp(self.destinationdict)
+            if confirm.upper() == 'C':  
+                valid, key = self.llapi.add_loc(self.destinationdict)
 
                 if valid:
                     print("Destination successfully added!")
@@ -86,7 +85,11 @@ class BossDestinationCreate:
     
     def editdestinationinfo(self, row = None):
         if row == None:
-            user_row = int(input("Row to change: ")) #validate
+            user_row = None
+            while user_row is None:
+                self.reset_screen()
+                user_input = input("Row to change: ")
+                user_row = self.validate(user_input)
 
         else:
             user_row = row + 1
@@ -96,6 +99,19 @@ class BossDestinationCreate:
         self.destinationdict[DESTINATIONTEMPLATE[user_row - 1]] = user_input
 
         self.reset_screen()
+
+
+    def validate(self, rowinput):
+        try:
+            rowint = int(rowinput)
+            if 1 <= rowint <= len(DESTINATIONTEMPLATE):
+                return rowint
+            else:
+                raise ValueError
+        except ValueError:
+            print(INVALID)
+            sleep(SLEEPTIME)
+            return None
     
     def reset_screen(self, user_row = None):
         os.system(CLEAR)
