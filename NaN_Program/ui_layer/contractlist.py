@@ -1,13 +1,13 @@
 #Verkbeiðnalisti
-from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
+from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR, JOBDICT
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
 CONTRACTPRINTER = [ (5, "id"), (12, 'Date-created'), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'property-number'), (0, 'Property-id'), (15, "Priority"), (0, "Suggested-contractors(id)"), (30, "Suggested-contractors"), (0, 'Status'), (0, 'Type') ]
 CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
-REGCONTRACTPRINTER = [ (5, "id"), (12, 'Date-from'), (12, 'Date-to'), (20, "Frequency"), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'Propertynumber'), (0, 'propertyid'), (15, "Priority"), (30, "Suggested-contractors"), (0, "Suggested-contractors(id)"), (0, 'Status') ]
-REGCONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
+# REGCONTRACTPRINTER = [ (5, "id"), (12, 'Date-from'), (12, 'Date-to'), (20, "Frequency"), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'Propertynumber'), (0, 'propertyid'), (15, "Priority"), (30, "Suggested-contractors"), (0, "Suggested-contractors(id)"), (0, 'Status') ]
+# REGCONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 JOBHEADER = ['READY JOBS', 'UNREADY JOBS', 'FINISHED JOBS']
 
 
@@ -20,6 +20,7 @@ class ContractList:
         self.position = position
         self.contractlist = self.llapi.get_job()
         self.contractlist_backup = self.llapi.get_job()
+        self.jobscount = self.llapi.count_jobs()
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -50,14 +51,14 @@ class ContractList:
         self.printedids = []
 
         for index, joblist in enumerate(self.contractlist): #til að displaya self.rows verktaka í röð.
-            self.rows = self.print_section(JOBHEADER[index], joblist)
+            self.rowssofar += self.print_section(JOBHEADER[index], joblist)
 
         
-        # print(f"{DASH*35}\n")
-        # if self.slide > 0:
-        #     print("p. Previous - ", end='')
-        # if (self.slide + 1) * self.rows < len(self.contractlist):
-        #     print("n. Next - ", end='')
+        print(f"{DASH*35}\n")
+        if self.slide > 0:
+            print("p. Previous - ", end='')
+        if (self.slide + 1) * self.rows < self.jobscount:
+            print("n. Next - ", end='')
 
 
     def print_section(self, header, section):
@@ -65,12 +66,14 @@ class ContractList:
         rows = 0
         for job in section:
             if self.rowssofar + rows < self.rows:
-                indent = 0
+
                 for key, value in job.items():
                     if key == 'id':
                         self.printedids.append(value)
-                    print( f"{value :<{CONTRACTPRINT[indent]}}", end='')
-                    indent += 1
+                        print( f"{key + '.' :<{value}}", end='- ')
+
+                    elif key in JOBDICT.keys():
+                        print( f"{'| ' + key :<{value}}", end='')
                 rows += 1
             else:
                 return rows
@@ -87,8 +90,8 @@ class ContractList:
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
 
-        # elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.contractlist):
-        #     self.slide += 1
+        elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < self.jobscount:
+            self.slide += 1
         
         elif user_input.upper() == 'B':
             return 'B'
@@ -104,9 +107,9 @@ class ContractList:
 
             if user_input in self.printedids:
                 self.contractlist = self.contractlist_backup
-                #self.contractlist = self.llapi.filter_contract_id(user_input, self.contractlist)  #TODO 
+                self.contractlist = self.llapi.filter_contract_id(user_input, self.contractlist)  #TODO 
                 user_input = ""
-                #self.rows = len(self.contractlist)
+                self.rows = self.jobscount
 
         else:
             print(INVALID)
@@ -114,10 +117,10 @@ class ContractList:
     
 
     def print_header(self):
-        for index, k in enumerate(self.contractlist[0][0].keys()):
-            if k == 'id':
+        for key, value in JOBDICT.items():
+            if value == 'id':
                 extra = '  '
             else:
                 extra = ''
-            print(f"{'| ' + k + extra:<{CONTRACTPRINT[index]}}",end='')
-        print(f"\n{DASH* sum(CONTRACTPRINT) }")
+            print(f"{'| ' + key + extra:<{value}}",end='')
+        print(f"\n{DASH* sum(JOBDICT.values()) }")

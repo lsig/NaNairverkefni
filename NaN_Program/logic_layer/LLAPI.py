@@ -105,6 +105,9 @@ class LLAPI:
 
     def get_job(self):
        return self.jLL.get_all_jobs()
+    
+    def count_jobs(self):
+        return self.jLL.total_jobs_count()
 
     
     #MaintenanceLL
