@@ -36,6 +36,7 @@ class ReportsLL:
         return all_rep
 
     def edit_report_info(self, edit_rep_dic, rep_dic, status): # klárt
+        ''''''
         # NOTETOSELF:yfirmaður þarf að geta samþykkt viðhaldsskýrslur, og starfsmenn þurfa að geta séð hvaða skýrslur, sem þeir eiga, eru samþykktar og hverjar ekki.
         # Ef skýrsla er ekki samþykkt, þarf starfsmaður að geta breytt upplýsingum í skýrslunni.
         if self.report_validation(edit_rep_dic):
@@ -89,6 +90,8 @@ class ReportsLL:
                 return i
 
     def confirm_and_ready_report_and_grade_contractor(self, rep_dic): # klárað
+        '''Tekur við verkskýrslu með breyttum status, ber hana saman við samsvarandi skýrslu
+        og uppfærir status þeirrar skýslu sem og verkinu í nýja statusinn'''
         all_rep_lis = self.dlapi.get_all_report()
         dic = self.find_rep_id(rep_dic["Report-id"], all_rep_lis, "Report-id")
         #rep_dic = self.find_status_location(["Status"], all_rep_lis)
@@ -165,7 +168,8 @@ class ReportsLL:
 
 
     def report_validation(self, rep_dic, cont_dic): # klárt
-        # a dictionairy for title, description, contractor-name and contractor-id.
+        '''Tekur við verkskýrslu og skilar True ef engar villur fundust.
+        Skilar False og lykil þess tilviks sem var rangt'''
         dic = {"Title":str, "Description":"both", "Contractor-id":int, "Commission": int}
         counter = 0
         prev = 0
