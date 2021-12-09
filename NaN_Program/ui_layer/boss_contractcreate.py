@@ -10,7 +10,7 @@ class ContractCreate:
         self.llapi = LLAPI()
         self.position = position
         self.id = id
-        self.contractlist = {}
+        self.contractdict = {}
         self.screen = f'''
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -28,12 +28,11 @@ class ContractCreate:
         print(self.screen)
 
         print(f"{'| ' + self.mainttype + ' |':^35}\n{DASH * 35}")
-
         for i in range( len(self.template)): 
             user_input = input(f"{i+1}. {self.template[i] + ':':<30} ") #The user puts in info for every section of the property
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
-            self.contractlist[self.template[i]] = user_input
+            self.contractdict[self.template[i]] = user_input
         print(DASH*35)
         
         self.confirmcontract()
@@ -56,12 +55,12 @@ class ContractCreate:
         
     def printcontractinfo(self, number = None):
 
-        contractstring = ''
+        contractstring = f"{'| ' + self.mainttype + ' |':^35}\n{DASH * 35}\n"
         for i in range( len(self.template)):
             if number != None and i == number - 1:
                 contractstring += f"{i+1}. {self.template[i] + ':':<30} ____\n"
             else:
-                contractstring += f"{i+1}. {self.template[i] + ':':<30} {self.contractlist[self.template[i]]}\n"
+                contractstring += f"{i+1}. {self.template[i] + ':':<30} {self.contractdict[self.template[i]]}\n"
         contractstring += DASH*35
         
         print(contractstring)
@@ -72,7 +71,7 @@ class ContractCreate:
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
             if confirm.upper() == 'C':
-                valid, key = self.llapi.add_job(self.contractlist, self.id['id']) #here we tell the LLAPI to add the job, it tells us if the procedure was succesful.
+                valid, key = self.llapi.add_job(self.contractdict, self.id['id']) #here we tell the LLAPI to add the job, it tells us if the procedure was succesful.
                 if valid:
                     print('Contract succesfully added!')
                     sleep(SLEEPTIME)
@@ -104,7 +103,7 @@ class ContractCreate:
             user_row = row + 1
         self.reset_screen(user_row)
         user_input = input(f"{self.template[user_row - 1]}: ")
-        self.contractlist[self.template[user_row - 1]] = user_input
+        self.contractdict[self.template[user_row - 1]] = user_input
 
         self.reset_screen()
     

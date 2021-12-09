@@ -18,7 +18,7 @@ class ReportList:
         self.slide = 0
         self.id = id
         self.position = position
-        self.reportlist = self.llapi.get_report_info() #TODO
+        self.reportlist = self.llapi.get_report_info()
         self.reportlist_backup = self.llapi.get_report_info()
         if self.reportdict == None:
             menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'
@@ -87,12 +87,12 @@ class ReportList:
            self.find_report()
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
-            self.lastrow = (self.slide + 1) * self.rows + 1
-            
+
             if user_input in self.printedids:
-                reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist_backup) #as lists are mutable, we want to put the original list into filter_property_id as otherwise we would risk altering the filtered list.
+                reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist)
                 seereport= SeeReport(self.id, reportinfo, self.position)
                 seereport.display()
+                self.reportlist = self.llapi.get_report_info() #we want to update the list that we display, now that we may have changed info for the selected property.
             else: 
                 print(INVALID)
                 sleep(SLEEPTIME)

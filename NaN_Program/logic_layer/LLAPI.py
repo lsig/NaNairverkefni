@@ -6,6 +6,7 @@ from jobLL import JobLL
 from EmployeeLL import EmployeeLL
 from locationLL import LocationLL
 from reportsLL import ReportsLL
+from maintenanceLL import MaintenanceLL
 
 class LLAPI:
     def __init__(self):
@@ -16,6 +17,8 @@ class LLAPI:
         self.empll = EmployeeLL()
         self.locLL = LocationLL()
         self.repLL = ReportsLL()
+        self.maintLL = MaintenanceLL()
+
 
     #ContractorLL
     def add_cont(self,con_lis):
@@ -26,6 +29,9 @@ class LLAPI:
     
     def search_contractor(self, userstring, con_list, key):
         return self.contLL.find_con_by_str(userstring, con_list, key)
+    
+    def filter_contr_id(self, input, contr_list):
+        return self.contLL.find_con_id(input, contr_list)
 
 
     #PropertyLL
@@ -46,14 +52,6 @@ class LLAPI:
     
     def search_property(self, string, propertylist, key):
         return self.propLL.find_prop_by_str(string, propertylist, key)
-
-
-    #JobLL
-    def add_job(self,job_lis,id):
-        return self.jLL.add_job(job_lis,id)
-
-    def get_job(self):
-       return self.jLL.get_all_jobs()
     
 
     #EmployeeLL
@@ -75,6 +73,7 @@ class LLAPI:
     def search_employee(self, string, employeelist, key):
         return self.empll.find_emp_by_str(string, employeelist,key)
 
+
     #LocationLL
     def search_destination(self,string, destinationlist, key):
         return self.locLL.find_dest_by_str(string, destinationlist, key)
@@ -86,7 +85,8 @@ class LLAPI:
         return self.locLL.find_loc_id(id,loc_lis)
 
     def edit_loc(self,loc_dic):
-        self.locLL.edit_info(loc_dic)
+        return self.locLL.edit_info(loc_dic)
+
 
     #ReportLL
     def get_report_info(self):
@@ -97,6 +97,19 @@ class LLAPI:
     
     def filter_rep_id(self,id,rep_lis):
         return self.repLL.find_rep_id(id,rep_lis)
+    
+
+    #JobLL
+    def add_job(self,job_lis,id):
+        return self.jLL.add_job(job_lis,id)
+
+    def get_job(self):
+       return self.jLL.get_all_jobs()
+
+    
+    #MaintenanceLL
+    def get_all_maint_jobs(self):
+        return self.maintLL.get_all_main_jobs()
     
 
         

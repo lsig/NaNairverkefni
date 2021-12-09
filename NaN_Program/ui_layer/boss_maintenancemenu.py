@@ -35,7 +35,7 @@ class BossMaintenanceMenu:
 
             elif user_input == '2':
                 contrlist = ContractList(self.id, self.position)
-                contrlist.display_list()
+                contrlist.run_screen()
 
             elif user_input == '3':
                 reportlist = ReportList(self.id, self.position)
