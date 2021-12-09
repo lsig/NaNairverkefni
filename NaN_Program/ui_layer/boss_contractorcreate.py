@@ -56,7 +56,7 @@ class BossContractorCreate:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             if confirm.upper() == 'C':
-                valid, key = self.llapi.add_cont(self.contractordict)
+                valid, key = self.llapi.add_cont(self.contractordict,self.id['Destination'])
                 if valid:
                     print("Contractor succesfully added!")
                     sleep(SLEEPTIME)
