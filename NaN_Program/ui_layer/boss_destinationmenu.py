@@ -12,15 +12,15 @@ class BossDestinationMenu:
         self.position = position
         self.id = id
         self.options = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | ÁFANGASTAÐIR |
-      {DASH*15}
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+         | ÁFANGASTAÐIR |
+      {DASH*22}
       1. Skrá nýjan áfangastað
       2. Áfangastaðalisti
-      {DASH*15}
+      {DASH*22}
       B. Til baka
-{STAR*14}
+{STAR*20}
         '''
     
     def display(self):
