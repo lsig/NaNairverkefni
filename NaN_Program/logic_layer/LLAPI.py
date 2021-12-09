@@ -86,6 +86,9 @@ class LLAPI:
 
     def edit_loc(self,loc_dic):
         return self.locLL.edit_info(loc_dic)
+    
+    def add_loc(self, loc_dic):
+        return self.locLL.add_location(loc_dic)
 
 
     #ReportLL

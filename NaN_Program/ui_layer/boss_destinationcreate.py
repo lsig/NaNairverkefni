@@ -61,7 +61,7 @@ class BossDestinationCreate:
 
             if confirm.upper() == 'C':  # TODO
                 self.destinationdict["Manager"] = "0" #Not boss
-                valid, key = self.llapi.add_emp(self.destinationdict)
+                valid, key = self.llapi.add_loc(self.destinationdict)
 
                 if valid:
                     print("Destination successfully added!")
