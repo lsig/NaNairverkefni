@@ -216,7 +216,7 @@ class JobLL:
 if __name__ == "__main__":
     g = JobLL()
     #print(g.find_employee_name("5"))
-    print(g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"Asap","Suggested-contractors-id":"1","Suggested-contractors":"1"},"1"))
+    print(g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":"1","Suggested-contractors":"1"},"1"))
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))
