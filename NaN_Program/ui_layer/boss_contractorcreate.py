@@ -79,7 +79,11 @@ class BossContractorCreate:
     
     def editcontractorinfo(self, rowchange = None):
         if rowchange == None:
-            user_row = int(input("Row to change: "))
+            user_row = None
+            while user_row is None:
+                self.reset_screen()
+                user_input = input("Row to change: ")
+                user_row = self.validate(user_input)
         else:
             user_row = rowchange + 1
         self.reset_screen(user_row)
@@ -89,6 +93,18 @@ class BossContractorCreate:
 
         self.reset_screen()
     
+    def validate(self, rowinput):
+        try:
+            rowint = int(rowinput)
+            if 1 <= rowint <= len(CONTRACTORTEMPLATE):
+                return rowint
+            else:
+                raise ValueError
+        except ValueError:
+            print(INVALID)
+            sleep(SLEEPTIME)
+            return None
+
     def reset_screen(self, user_row = None):
         os.system(CLEAR)
         print(self.screen)

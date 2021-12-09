@@ -19,6 +19,7 @@ class LLAPI:
         self.repLL = ReportsLL()
         self.maintLL = MaintenanceLL()
 
+
     #ContractorLL
     def add_cont(self,con_lis):
         return self.contLL.add_contractor(con_lis)
@@ -86,6 +87,7 @@ class LLAPI:
     def edit_loc(self,loc_dic):
         return self.locLL.edit_info(loc_dic)
 
+
     #ReportLL
     def get_report_info(self):
         return self.repLL.get_all_rep()
@@ -103,10 +105,6 @@ class LLAPI:
 
     def get_job(self):
        return self.jLL.get_all_jobs()
-    
-    def get_all_jobs_sorted(self):
-        alljob_list = self.get_job() + self.get_all_maint_jobs()
-        
 
     
     #MaintenanceLL
