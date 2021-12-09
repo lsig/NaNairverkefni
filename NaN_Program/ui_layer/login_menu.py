@@ -14,9 +14,9 @@ class LoginMenu:
         self.loginscreen = f"""
 NaN Air Properties
 {STAR*18}
-{STAR} Enter ID:{' '*6 + STAR}
+{STAR + ' '*3} Enter ID {' '*3 + STAR}
 {STAR*18}
-Q. Quit
+     Q. Quit
 {DASH * 18}"""
 
     def start(self):
