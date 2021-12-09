@@ -9,7 +9,7 @@ CONTRACTPRINTER = [ (5, "id"), (12, 'Date-created'), (15, 'Employee'), (0, 'Empl
 CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 # REGCONTRACTPRINTER = [ (5, "id"), (12, 'Date-from'), (12, 'Date-to'), (20, "Frequency"), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'Propertynumber'), (0, 'propertyid'), (15, "Priority"), (30, "Suggested-contractors"), (0, "Suggested-contractors(id)"), (0, 'Status') ]
 # REGCONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
-JOBHEADER = ['READY JOBS', 'UNREADY JOBS', 'FINISHED JOBS']
+JOBHEADER = ['READY JOBS', 'JOBS IN PROGRESS', 'FINISHED JOBS']
 PRIORITYFILTER = ['emergency', 'now', 'asap']
 
 
@@ -39,7 +39,7 @@ class ContractList:
             returnvalue = ''
             returnall = self.init_request()
 
-            while returnvalue != 'B': 
+            while returnvalue != 'B' and returnall != 'Back': 
                 self.display_list()
                 returnvalue = self.prompt_user()
     
@@ -50,7 +50,7 @@ class ContractList:
 
         os.system(CLEAR)
         print(self.screen)
-        print(JOBHEADER[self.reqsection] + '\n')
+        print(f"{'| ' + JOBHEADER[self.reqsection] + ' |':^{sum(JOBDICT.values())}}" + '\n')
 
         self.print_header()
 
@@ -73,20 +73,18 @@ class ContractList:
                 print()
         else:
             print("No results :(")
+        
+        self.print_footer()
 
         
-        print(f"{DASH* sum(JOBDICT.values())}\n")
-        if self.slide > 0:
-            print("p. Previous - ", end='')
-        if (self.slide + 1) * self.rows < len(self.contractlist):
-            print("n. Next - ", end='')
+
     
 
     def which_request(self):
         while True:
             os.system(CLEAR)
             print(self.screen)
-            mainttype = input("1. Ready jobs\n2. Unready jobs\n3. Finished jobs\n")
+            mainttype = input(f"1. {JOBHEADER[0].capitalize()}\n2. {JOBHEADER[1].capitalize()}\n3. {JOBHEADER[2].capitalize()}\n")
             if mainttype == '1' or mainttype == '2' or mainttype == '3':
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
@@ -129,7 +127,7 @@ class ContractList:
 
     
     def prompt_user(self):
-        user_input = input(f"#. to Select Contract\n")
+        user_input = input()
 
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
@@ -174,3 +172,18 @@ class ContractList:
 
             print(f"{'| ' + keyprint:<{value}}",end=extra)
         print(f"\n{DASH* sum(JOBDICT.values()) }")
+    
+
+    def print_footer(self):
+        print(f"{DASH* sum(JOBDICT.values())}\n")
+        dashlen = 21
+        if self.slide > 0:
+            print("p. Previous - ", end='')
+            dashlen += 14
+
+        if (self.slide + 1) * self.rows < len(self.contractlist):
+            print("n. Next - ", end='')
+            dashlen += 10
+
+        if len(self.contractlist) > 0:
+            print(f"#. to Select Contract\n{DASH*dashlen}")
