@@ -24,7 +24,6 @@ class SeeReport:
      - Verkskýrslulisti
        - {self.report['Title']}
      {DASH*15}{editornot}
-     R. Report reports
      B. Til baka
 '''
 

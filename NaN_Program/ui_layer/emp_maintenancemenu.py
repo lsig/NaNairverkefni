@@ -33,7 +33,7 @@ class EmployeeMaintenanceMenu:
 
             elif user_input == '2':
                 reportlist = ReportList(self.id, self.position)
-                reportlist.display_list()
+                reportlist.run_screen()
 
             elif user_input.upper() == 'B':
                 return
