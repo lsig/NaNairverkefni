@@ -9,19 +9,30 @@ class JobLL:
         self.empLL = EmployeeLL()
         self.boss_loc = ""
     
-    def add_job(self,job_dic,id):
-        self.boss_loc = self.empLL.get_emp_location(id)
-        self.id = id
-        valid, key = self.is_valid(job_dic)
-        if valid:
+    def add_job(self,job_dic,id,main_job_bool=False):
+        if main_job_bool == False:
+            self.boss_loc = self.empLL.get_emp_location(id)
+            self.id = id
+            valid, key = self.is_valid(job_dic)
+            if valid:
+                auto_id = self.assign_id_job()
+                cur_date = datetime.date(datetime.now())
+                type = "Regular job"
+                emp_name = self.empLL.find_employee_name(job_dic["Employee-id"])
+                con_name = self.get_con_name_and_location(job_dic["Suggested-contractors-id"])["Name"]
+            else:
+                return False,key
+
+        else:
             auto_id = self.assign_id_job()
-            cur_date = datetime.date(datetime.now())
-            emp_name = self.empLL.find_employee_name(job_dic["Employee-id"])
-            con_name = self.get_con_name_and_location(job_dic["Suggested-contractors-id"])["Name"]
-            job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],job_dic["Suggested-contractors-id"],con_name,"0")
-            self.dlapi.add_job(job)
-            return True, None
-        return False, key
+            cur_date = job_dic["Date-created"]
+            type = "Maintenace job"
+            emp_name = job_dic["Employee"]
+            con_name = job_dic["Suggested-contractors"]
+
+        job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority"],job_dic["Suggested-contractors-id"],con_name,"0",type)
+        self.dlapi.add_job(job)
+        return True, None
 
     def assign_id_job(self):
         all_job_lis = self.dlapi.get_jobs()
@@ -156,7 +167,7 @@ class JobLL:
 if __name__ == "__main__":
     g = JobLL()
     #print(g.find_employee_name("5"))
-    g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"1","Suggested-contractors-id":"1","Suggested-contractors":"1"},"1")
+    print(g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority":"Asap","Suggested-contractors-id":"1","Suggested-contractors":"1"},"1"))
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))

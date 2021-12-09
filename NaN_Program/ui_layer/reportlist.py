@@ -4,8 +4,10 @@ from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
-REPPRINT = [4,15,15,15,15]
+REPPRINTER = [(5, 'Reportid'), (0, 'Requestid'), (20, 'Employee'), (0, 'Employeeid'), (15, 'Title'), (30, 'Description'), (20, 'Location'), (20, 'Property'), (0, 'propertynumber'), (0, 'propertyid'), (20, 'contractorname'), (0, 'contractor id'), (9, 'contractor rating'), (14, 'date'), (13, 'commission'), (10, 'status')]
+REPPRINT = [element[0] for element in REPPRINTER]
 SEARCHFILTERS = ['Title', 'Description', 'Employee', 'Contractor-rating']
+DONOTPRINT = ['Report-id', 'Request-id', 'Employee-id', 'Property-number', 'Property-id', 'Contractor-id']
 
 
 class ReportList: 
@@ -31,8 +33,7 @@ class ReportList:
      B. Til baka
      /row. Breytir lengd raðar
 
-Report-id | Request-id | Employee | Employee-id | Title | Description |Contractor-name | Contractor-id | Contractor-rating | Status - #TODO
-{DASH*35}'''
+'''
 
     def run_screen(self):
         returnvalue = ''
@@ -43,26 +44,26 @@ Report-id | Request-id | Employee | Employee-id | Title | Description |Contract
     def display_list(self):
     
 
-            self.firstrow = self.slide * self.rows 
-            os.system(CLEAR)
-            print(self.screen)
-            self.print_header()
+        self.firstrow = self.slide * self.rows 
+        os.system(CLEAR)
+        print(self.screen)
+        self.print_header()
 
-            self.printedids = [self.reportlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.reportlist) > self.firstrow + i]
+        self.printedids = [self.reportlist[self.firstrow + i]['Report-id'] for i in range(self.rows) if len(self.reportlist) > self.firstrow + i]
 
-            for i in range(self.rows): #til að displaya self.rows verktaka í röð.
-                try:
-                    reportinfostr = f'{self.printedids[i] + ".":<{REPPRINT[0]}}- ' #id with some extra text.
-                    for index, k in enumerate(self.reportlist[self.firstrow + i]):
-                        if k != 'id': #We dont want to print the id again.
-                            reportinfostr += f"{'| ' + self.reportlist[self.firstrow + i][k] :<{REPPRINT[index]}}"
-                    print(reportinfostr, end='') #here we print an employee's information.
-                            
-                except IndexError:
-                    pass
-                print()
+        for i in range(self.rows): #til að displaya self.rows verktaka í röð.
+            try:
+                reportinfostr = f'{self.printedids[i] + ".":<{REPPRINT[0]}}- ' #id with some extra text.
+                for index, k in enumerate(self.reportlist[self.firstrow + i]):
+                    if k not in DONOTPRINT: #We dont want to print the id again.
+                        reportinfostr += f"{'| ' + self.reportlist[self.firstrow + i][k] :<{REPPRINT[index]}}"
+                print(reportinfostr, end='') #here we print an employee's information.
+                        
+            except IndexError:
+                pass
+            print()
 
-            self.print_footer()
+        self.print_footer()
     
     def prompt_user(self,oldinput = None):
         if oldinput == None:
@@ -89,7 +90,7 @@ Report-id | Request-id | Employee | Employee-id | Title | Description |Contract
             self.lastrow = (self.slide + 1) * self.rows + 1
             
             if user_input in self.printedids:
-                reportinfo = self.llapi.filter_rep_id(user_input, self.propertylist_backup) #as lists are mutable, we want to put the original list into filter_property_id as otherwise we would risk altering the filtered list.
+                reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist_backup) #as lists are mutable, we want to put the original list into filter_property_id as otherwise we would risk altering the filtered list.
                 seereport= SeeReport(self.id, reportinfo, self.position)
                 seereport.display()
             else: 
@@ -127,11 +128,20 @@ Report-id | Request-id | Employee | Employee-id | Title | Description |Contract
 
     def print_header(self):
         for index, k in enumerate(self.reportlist[0].keys()):
-            if k == 'id':
-                extra = '  '
-            else:
+
+            if k == 'Report-id':
+                k = 'id'
+                extra = '   '
+            elif k not in DONOTPRINT:
+                if k == 'Contractor-name':
+                    k = 'Contractor'
+                elif k == 'Contractor-rating':
+                    k = 'Rating'
                 extra = ''
+            else:
+                continue
             print(f"{'| ' + k + extra:<{REPPRINT[index]}}",end='')
+
         print(f"\n{DASH* sum(REPPRINT) }")
     
 
