@@ -84,14 +84,15 @@ class ContractorLL:
 
 
     def edit_info(self,edit_con_dic):
-        if self.is_valid(edit_con_dic):
+        valid, key = self.is_valid(edit_con_dic)
+        if valid:
             all_lis_cont= self.dlapi.get_all_cont()
             dic = self.find_con_id(edit_con_dic["id"],all_lis_cont)
             con_loc_in_lis = self.find_id_location_con(dic,all_lis_cont)
             all_lis_cont[con_loc_in_lis]= edit_con_dic
             self.dlapi.change_cont(all_lis_cont)
-            return True
-        return False
+            return True, key
+        return False, key
         
 
 

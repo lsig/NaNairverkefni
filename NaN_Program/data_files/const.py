@@ -31,4 +31,4 @@ JOBDICT = {'id': 5, 'Date-created': 15, 'Employee': 20, 'Title': 15, 'Location':
 # CONTACTTEMPLATE = ['Nafn', 'Kennitala', 'Heimilisfang', 'Heimasími', 'GSM símanúmer', 'Netfang', 'Áfangastaður', 'Yfirmaður'] #listi fyrir starfsmenn
 
 if __name__ == '__main__':
-    pass
+    print( '-4'.isdigit())

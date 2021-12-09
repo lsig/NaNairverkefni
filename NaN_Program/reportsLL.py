@@ -14,7 +14,7 @@ class ReportsLL:
     def add_report(self, rep_dic, job_dic): # klárt
         cont_dic = self.dlapi.get_all_cont()
         if self.report_validation(rep_dic, cont_dic):
-            rep_dic["Status"] = "1"
+            #rep_dic["Status"] = "1"
             current_date = datetime.date(datetime.now())
             #rep_dic = self.replace_loc_num_with_name(rep_dic)
             rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],rep_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], self.get_cont_name(rep_dic["Contractor-id"]), rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"], "0")
@@ -89,7 +89,7 @@ class ReportsLL:
             if dic == all_rep_lis[i]:
                 return i
 
-    def confirm_and_ready_report_and_grade_contractor(self, rep_dic): # klárað
+    def confirm_and_ready_report_and_grade_contractor(self, rep_dic): # klárað #.replace(' ','')
         all_rep_lis = self.dlapi.get_all_report()
         dic = self.find_rep_id(rep_dic["Report-id"], all_rep_lis, "Report-id")
         #rep_dic = self.find_status_location(["Status"], all_rep_lis)
@@ -211,10 +211,10 @@ class ReportsLL:
             return False #skoða þetta svo filter drepur ekki forritið
         return ret_lis
 
-    def find_rep_id(self,id,all_rep_lis):
+    def find_rep_id(self,id,all_rep_lis,key):
         if id.isdigit():
             for dic in all_rep_lis:
-                if int(dic["Report-id"]) == int(id):
+                if int(dic[key]) == int(id):
                     dic = dic
                     return dic 
             return None #[{"Text":"No employee with this id"}]
@@ -231,10 +231,10 @@ class ReportsLL:
 if __name__ == "__main__":
     r = ReportsLL()
     # print("maxim er king")
-    r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor": "1", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
+    #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor": "1", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
     #r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-Rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "1"})
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
-    #r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "0"})
+    r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "1"})
     #1,1,Jacob Yxa,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,kris,1,3,2021-12-07,5000,0
     #print(r.get_all_rep())
     # print(r.get_cont_name("1"))

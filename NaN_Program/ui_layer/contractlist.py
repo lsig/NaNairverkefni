@@ -1,5 +1,6 @@
 #Verkbeiðnalisti
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR, JOBDICT
+from ui_layer.boss_seecontract import SeeContract
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
@@ -9,6 +10,7 @@ CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 # REGCONTRACTPRINTER = [ (5, "id"), (12, 'Date-from'), (12, 'Date-to'), (20, "Frequency"), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'Propertynumber'), (0, 'propertyid'), (15, "Priority"), (30, "Suggested-contractors"), (0, "Suggested-contractors(id)"), (0, 'Status') ]
 # REGCONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 JOBHEADER = ['READY JOBS', 'UNREADY JOBS', 'FINISHED JOBS']
+PRIORITYFILTER = ['emergency', 'now', 'asap']
 
 
 class ContractList: 
@@ -48,25 +50,29 @@ class ContractList:
 
         os.system(CLEAR)
         print(self.screen)
-        print(JOBHEADER[self.reqsection])
+        print(JOBHEADER[self.reqsection] + '\n')
 
         self.print_header()
 
 
         self.printedids = [self.contractlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.contractlist) > self.firstrow + i]
 
-        for i in range(self.rows): #to display self.rows contracts each time.
-            try:
-                contractinfost = f'{self.printedids[i] + ".":<{JOBDICT["id"]}}- ' #id with some extra string.
-                for key in self.contractlist[self.firstrow + i]:
+        if len(self.printedids) > 0:
 
-                    if key != 'id': #We dont want to print the id again.
-                        contractinfost += f"{'| ' + self.contractlist[self.firstrow + i][key] :<{JOBDICT[key]}}"
-                print(contractinfost, end='') #here we print the contract's information.
-                    
-            except IndexError: #if the contract id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
-                pass
-            print()
+            for i in range(self.rows): #to display self.rows contracts each time.
+                try:
+                    contractinfost = f'{self.printedids[i] + ".":<{JOBDICT["id"]}}- ' #id with some extra string.
+                    for key in self.contractlist[self.firstrow + i]:
+
+                        if key != 'id' and key in JOBDICT.keys(): #We dont want to print the id again.
+                            contractinfost += f"{'| ' + self.contractlist[self.firstrow + i][key] :<{JOBDICT[key]}}"
+                    print(contractinfost, end='') #here we print the contract's information.
+                        
+                except IndexError: #if the contract id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
+                    pass
+                print()
+        else:
+            print("No results :(")
 
         
         print(f"{DASH* sum(JOBDICT.values())}\n")
@@ -80,10 +86,10 @@ class ContractList:
         while True:
             os.system(CLEAR)
             print(self.screen)
-            mainttype = input("1. Ready jobs\n2. Unready jobs\n3. Finished jobs\n") #1. maintenance job, 2. regular job
+            mainttype = input("1. Ready jobs\n2. Unready jobs\n3. Finished jobs\n")
             if mainttype == '1' or mainttype == '2' or mainttype == '3':
                 return int(mainttype) - 1
-            elif mainttype == 'B':
+            elif mainttype.upper() == 'B':
                 return 'Back'
 
             print(INVALID)
@@ -96,33 +102,30 @@ class ContractList:
         if self.reqsection == 'Back':
             return 'Back'
 
-        self.contractlist = self.llapi.get_job()[self.reqsection]
-        self.contractlist_backup = self.llapi.get_job()[self.reqsection]
+        self.contractlist = self.llapi.get_sorted_jobs()[self.reqsection]
+        self.contractlist_backup = self.llapi.get_sorted_jobs()[self.reqsection]
 
 
-    def print_section(self, header, section):
-        print(f"\n{DASH* sum(JOBDICT.values()) }")
-        print(f"  - {header}")
-        rows = 0
-        for job in section:
-            if self.rowssofar + rows < self.rows:
+    # def print_section(self, header, section):
+    #     print(f"\n{DASH* sum(JOBDICT.values()) }")
+    #     print(f"  - {header}")
+    #     rows = 0
+    #     for job in section:
+    #         if self.rowssofar + rows < self.rows:
 
-                for key, value in job.items():
-                    if key == 'id':
-                        self.printedids.append(value)
-                        print( f"{value + '.' :<{JOBDICT[key]}}", end='- ')
+    #             for key, value in job.items():
+    #                 if key == 'id':
+    #                     self.printedids.append(value)
+    #                     print( f"{value + '.' :<{JOBDICT[key]}}", end='- ')
 
-                    elif key in JOBDICT.keys():
-                        print( f"{'| ' + value :<{JOBDICT[key]}}", end='')
-                rows += 1
-                print()
-            else:
-                return rows
+    #                 elif key in JOBDICT.keys():
+    #                     print( f"{'| ' + value :<{JOBDICT[key]}}", end='')
+    #             rows += 1
+    #             print()
+    #         else:
+    #             return rows
             
-        return rows
-
-
-
+    #     return rows
 
     
     def prompt_user(self):
@@ -147,8 +150,9 @@ class ContractList:
         elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
 
             if user_input in self.printedids:
-                self.contractlist = self.contractlist_backup
-                self.contractlist = self.llapi.filter_contract_id(user_input, self.contractlist)  #TODO 
+                contractinfo = self.llapi.filter_job_id(user_input, self.contractlist)  #TODO 
+                seecontract = SeeContract(self.id, contractinfo, self.position)
+                seecontract.display()
                 user_input = ""
                 self.rows = len(self.contractlist)
 
@@ -169,3 +173,4 @@ class ContractList:
                 keyprint = 'Priority'
 
             print(f"{'| ' + keyprint:<{value}}",end=extra)
+        print(f"\n{DASH* sum(JOBDICT.values()) }")
