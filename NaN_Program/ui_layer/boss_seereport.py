@@ -20,7 +20,7 @@ class SeeReport:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
-    | VERKSKÝRSLUR |
+    | VIÐHALD |
      - Verkskýrslulisti
        - {self.report['Title']}
      {DASH*15}{editornot}
