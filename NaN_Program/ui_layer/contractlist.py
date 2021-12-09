@@ -22,6 +22,7 @@ class ContractList:
         self.position = position
         self.header = header
         self.contractlist = joblist
+        self.contractlist_backup = joblist
 
     
         self.screen = f''' 
