@@ -37,9 +37,9 @@ class WhichContractMenu:
             print(self.screen)
             mainttype = input(f"1. {JOBHEADER[0].capitalize()}\n2. {JOBHEADER[1].capitalize()}\n3. {JOBHEADER[2].capitalize()}\n")
             if mainttype == '1' or mainttype == '2' or mainttype == '3':
-                return int(mainttype) - 1
+                return int(mainttype)
             elif mainttype.upper() == 'B':
-                return
+                return 'B'
 
             print(INVALID)
             sleep(SLEEPTIME)
@@ -49,8 +49,8 @@ class WhichContractMenu:
         while True:
     
             self.reqsection = self.which_request()
-            if self.reqsection == 'Back':
-                return 'Back'
+            if self.reqsection == 'B':
+                return
 
             self.contractlist = self.llapi.get_sorted_jobs()[self.reqsection]
             self.contractlist_backup = self.llapi.get_sorted_jobs()[self.reqsection]
