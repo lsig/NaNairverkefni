@@ -12,7 +12,7 @@ CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 # REGCONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 JOBHEADER = ['READY JOBS', 'JOBS IN PROGRESS', 'FINISHED JOBS']
 PRIORITYFILTER = ['emergency', 'now', 'asap']
-SEARCHFILTERS = ['Priority', 'Title','Property','Employee']
+SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee']
 
 
 class ContractList: 
