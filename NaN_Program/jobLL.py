@@ -77,7 +77,11 @@ class JobLL:
                     return False,key
                 get_validation = job_dic[key].replace("-","").isdigit()
                 if key == "Employee-id":
-                    if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]) or self.id == job_dic["Employee-id"]:
+                    if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]):
+                        if job_dic["Type"] != "'Regular job'":
+                            if self.id == job_dic["Employee-id"]:
+                                return False,key
+                        else:
                             return False,key
                 if key == "Property-id":
                     if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
@@ -120,6 +124,16 @@ class JobLL:
     
     def get_all_jobs(self):
         all_jobs = self.dlapi.get_jobs()
+        #jobs_list = self.sort_all_jobs(all_jobs)
+        #counter = 0
+        #for row in all_jobs:#changes contractor id into name
+        #    all_jobs[counter]["Suggested-contractors"] = self.get_con_name_and_location(row["Suggested-contractors"])["Name"]
+        #    counter += 1
+        return all_jobs
+
+
+    def get_all_jobs_sorted(self):#Kristofer!
+        all_jobs = self.dlapi.get_jobs()
         jobs_list = self.sort_all_jobs(all_jobs)
         #counter = 0
         #for row in all_jobs:#changes contractor id into name
@@ -158,15 +172,16 @@ class JobLL:
         
 
     def edit_info(self,edit_job_dic,id): #virkar ekki find id location virkar ekki
-        self.boss_loc = self.empLL.get_emp_location(id)
-        if self.is_valid(edit_job_dic):
+        self.boss_loc = edit_job_dic["Location"]
+        valid, key = self.is_valid(edit_job_dic)
+        if valid:
             all_lis_job = self.dlapi.get_jobs()
             dic = self.find_job_id(edit_job_dic["id"],all_lis_job)
             job_loc_in_lis = self.find_id_location_job(dic,all_lis_job)
             all_lis_job[job_loc_in_lis]= edit_job_dic
             self.dlapi.change_job(all_lis_job)
-            return True
-        return False
+            return True,None
+        return False,key
 
     def find_job_id(self,id,all_job_lis):
         if id.isdigit():
