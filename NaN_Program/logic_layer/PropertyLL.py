@@ -37,7 +37,7 @@ class PropertyLL:
                         prop_dic[key] = "None"
                 get_validation = prop_dic[key].replace(" ", "").isalpha()
             elif dic[key] == int and dic[key] != "both":
-                get_validation = prop_dic[key].replace("-","").isdigit()
+                get_validation = prop_dic[key].replace("-","").isdigit() and (int(prop_dic[key]) > 0)
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if prop_dic[key] == "":
@@ -98,3 +98,4 @@ if __name__ == "__main__":
     #print(d)
     #g.edit_info({"id":"33","Destination":"1", "Address":"Heima 2", "Size":"10", "Rooms":"15","Type":"Best","Property-number":"poom street 2","Extras":"Windows"})
     #print(g.find_prop_by_str("ud",g.get_all_prop(),"Extras"))
+    pass
