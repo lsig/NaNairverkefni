@@ -1,11 +1,10 @@
-from data_files.const import CLEAR, DASH, INVALID, REPORTTEMPLATE, SLEEPTIME, STAR 
+from data_files.const import CLEAR, DASH, INVALID,SLEEPTIME, STAR, REPORTDICT
 from ui_layer.boss_seereport import SeeReport
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
-REPPRINTER = [(5, 'Reportid'), (0, 'Requestid'), (20, 'Employee'), (0, 'Employeeid'), (15, 'Title'), (30, 'Description'), (20, 'Location'), (20, 'Property'), (0, 'propertynumber'), (0, 'propertyid'), (20, 'contractorname'), (0, 'contractor id'), (9, 'contractor rating'), (14, 'date'), (13, 'commission'), (10, 'status')]
-REPPRINT = [element[0] for element in REPPRINTER]
+REPORTHEADER = ['PENDING REPORTS', 'FINISHED REPORTS', 'OTHER REPORTS']
 SEARCHFILTERS = ['Title', 'Description', 'Employee', 'Contractor-rating']
 DONOTPRINT = ['Report-id', 'Request-id', 'Employee-id', 'Property-number', 'Property-id', 'Contractor-id']
 
@@ -36,35 +35,72 @@ class ReportList:
 '''
 
     def run_screen(self):
-        returnvalue = ''
-        while returnvalue != 'B':
-            self.display_list()
-            returnvalue = self.prompt_user()
-    
-    def display_list(self):
+        returnall = ''
+        while returnall != 'Back':
+            returnvalue = ''
+            returnall = self.init_request()
+
+            while returnvalue != 'B' and returnall != 'Back':
+                self.display_list()
+                returnvalue = self.prompt_user()
     
 
+    def display_list(self):
+
         self.firstrow = self.slide * self.rows 
+
         os.system(CLEAR)
         print(self.screen)
+        print(f"{'| ' + REPORTHEADER[self.reqsection] + ' |':^{sum(REPORTDICT.values())}}" + '\n')
+        
         self.print_header()
 
         self.printedids = [self.reportlist[self.firstrow + i]['Report-id'] for i in range(self.rows) if len(self.reportlist) > self.firstrow + i]
 
-        for i in range(self.rows): #til að displaya self.rows verktaka í röð.
-            try:
-                reportinfostr = f'{self.printedids[i] + ".":<{REPPRINT[0]}}- ' #id with some extra text.
-                for index, k in enumerate(self.reportlist[self.firstrow + i]):
-                    if k not in DONOTPRINT: #We dont want to print the id again.
-                        reportinfostr += f"{'| ' + self.reportlist[self.firstrow + i][k] :<{REPPRINT[index]}}"
-                print(reportinfostr, end='') #here we print an employee's information.
-                        
-            except IndexError:
-                pass
-            print()
+        if len(self.printedids) > 0:
+            for i in range(self.rows): #til að displaya self.rows verktaka í röð.
+                try:
+                    reportinfostr = f'{self.printedids[i] + ".":<{REPORTDICT["Report-id"]}}- ' #id with some extra text.
+                    for key in self.reportlist[self.firstrow + i]:
+
+                        if key != 'Report-id' and key in REPORTDICT.keys(): #We dont want to print the id again.
+                            reportinfostr += f"{'| ' + self.reportlist[self.firstrow + i][key] :<{REPORTDICT[key]}}"
+                    print(reportinfostr, end='') #here we print an employee's information.
+                            
+                except IndexError:
+                    pass
+                print()
+        else:
+            print("No results :(")
 
         self.print_footer()
     
+
+    def which_request(self):
+        while True:
+            os.system(CLEAR)
+            print(self.screen)
+            mainttype = input(f"1. {REPORTHEADER[0].capitalize()}\n2. {REPORTHEADER[1].capitalize()}\n3. {REPORTHEADER[2].capitalize()}") #ma gera for loopu
+            if mainttype == '1' or mainttype == '2' or mainttype == '3':
+                return int(mainttype) - 1
+            elif mainttype.upper() == 'B':
+                return 'Back'
+
+            print(INVALID)
+            sleep(SLEEPTIME)
+        
+
+    def init_request(self):
+    
+        self.reqsection = self.which_request()
+        if self.reqsection == 'Back':
+            return 'Back'
+
+        self.reportlist = self.llapi.get_sorted_reports()[self.reqsection]
+        self.reportlist_backup = self.llapi.get_sorted_reports()[self.reqsection]
+
+
+
     def prompt_user(self,oldinput = None):
         if oldinput == None:
             user_input = input()
@@ -83,6 +119,7 @@ class ReportList:
 
         elif user_input.upper() == '/ROW':
             self.rows = self.validate(None, '/ROW')
+    
         elif user_input.upper() == 'L': #TODO
            self.find_report()
         
@@ -127,34 +164,37 @@ class ReportList:
         
 
     def print_header(self):
-        for index, k in enumerate(self.reportlist[0].keys()):
+        for key, value in REPORTDICT.items():
+            keyprint = key
 
-            if k == 'Report-id':
-                k = 'id'
-                extra = '   '
-            elif k not in DONOTPRINT:
-                if k == 'Contractor-name':
-                    k = 'Contractor'
-                elif k == 'Contractor-rating':
-                    k = 'Rating'
-                extra = ''
+            if key == 'Report-id':
+                keyprint = 'id'
+                extra = '  '
             else:
-                continue
-            print(f"{'| ' + k + extra:<{REPPRINT[index]}}",end='')
+                extra = ''
 
-        print(f"\n{DASH* sum(REPPRINT) }")
+            if key == 'Contractor-name':
+                keyprint = 'Contractor'
+            elif key == 'Contractor-rating':
+                keyprint = 'Rating'
+            print(f"{'| ' + keyprint:<{value}}",end=extra)
+
+        print(f"\n{DASH * sum(REPORTDICT.values())}")
     
 
     def print_footer(self):
+        print(f"{DASH* sum(REPORTDICT.values())}\n")
         dashlen = 21
-        print(f"{DASH * sum(REPPRINT)}\n")
         if self.slide > 0:
             print("p. Previous - ", end='')
             dashlen += 14
+
         if (self.slide + 1) * self.rows < len(self.reportlist):
             print("n. Next - ", end='')
             dashlen += 10
-        print(f"#. to Select Report\n{DASH*dashlen}")
+        
+        if len(self.reportlist) > 0:
+            print(f"#. to Select Report\n{DASH * dashlen}")
 
 
     def validate(self, userint = None, userrows = None):

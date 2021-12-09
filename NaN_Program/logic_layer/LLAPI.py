@@ -105,6 +105,9 @@ class LLAPI:
         return self.repLL.find_rep_id(id,rep_lis)
     def edit_rep(self,rep_dict):
         return self.repLL.edit_report_info(rep_dict)
+    
+    def get_sorted_reports(self):
+        return self.repLL.sort_all_reports()
 
 
     #JobLL

@@ -6,22 +6,28 @@ from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
+
+JOBHEADER = ['READY JOBS', 'JOBS IN PROGRESS', 'FINISHED JOBS']
+PRIORITYFILTER = ['emergency', 'now', 'asap']
+SEARCHFILTERS = ['Priority', 'Title', 'Property', 'Employee']
 CONTRACTPRINTER = [ (5, "id"), (12, 'Date-created'), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'property-number'), (0, 'Property-id'), (15, "Priority"), (0, "Suggested-contractors(id)"), (30, "Suggested-contractors"), (0, 'Status'), (0, 'Type') ]
 CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
-# REGCONTRACTPRINTER = [ (5, "id"), (12, 'Date-from'), (12, 'Date-to'), (20, "Frequency"), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'Propertynumber'), (0, 'propertyid'), (15, "Priority"), (30, "Suggested-contractors"), (0, "Suggested-contractors(id)"), (0, 'Status') ]
-# REGCONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
-JOBHEADER = ['READY JOBS', 'JOBS IN PROGRESS', 'FINISHED JOBS']
+
 PRIORITYFILTER = ['emergency', 'now', 'asap']
 SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee']
 
 
 class ContractList: 
-    def __init__(self, id, position) -> None:
+    def __init__(self, id, position, header, joblist) -> None:
         self.llapi = LLAPI()
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
         self.position = position
+        self.header = header
+        self.contractlist = joblist
+        self.contractlist_backup = joblist
+
     
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
@@ -36,14 +42,11 @@ class ContractList:
 '''
 
     def run_screen(self):
-        returnall  = ''
-        while returnall != 'Back':
-            returnvalue = ''
-            returnall = self.init_request()
+        returnvalue = ''
 
-            while returnvalue != 'B' and returnall != 'Back': 
-                self.display_list()
-                returnvalue = self.prompt_user()
+        while returnvalue != 'B': 
+            self.display_list()
+            returnvalue = self.prompt_user()
     
 
     def display_list(self):
@@ -52,7 +55,7 @@ class ContractList:
 
         os.system(CLEAR)
         print(self.screen)
-        print(f"{'| ' + JOBHEADER[self.reqsection] + ' |':^{sum(JOBDICT.values())}}" + '\n')
+        print(f"{'| ' + self.header + ' |':^{sum(JOBDICT.values())}}" + '\n')
 
         self.print_header()
 
@@ -78,9 +81,6 @@ class ContractList:
         
         self.print_footer()
 
-        
-
-    
 
     def which_request(self):
         while True:
@@ -91,41 +91,9 @@ class ContractList:
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
                 return 'Back'
-
-            print(INVALID)
-            sleep(SLEEPTIME)
         
 
-    def init_request(self):
-    
-        self.reqsection = self.which_request()
-        if self.reqsection == 'Back':
-            return 'Back'
 
-        self.contractlist = self.llapi.get_sorted_jobs()[self.reqsection]
-        self.contractlist_backup = self.llapi.get_sorted_jobs()[self.reqsection]
-
-
-    # def print_section(self, header, section):
-    #     print(f"\n{DASH* sum(JOBDICT.values()) }")
-    #     print(f"  - {header}")
-    #     rows = 0
-    #     for job in section:
-    #         if self.rowssofar + rows < self.rows:
-
-    #             for key, value in job.items():
-    #                 if key == 'id':
-    #                     self.printedids.append(value)
-    #                     print( f"{value + '.' :<{JOBDICT[key]}}", end='- ')
-
-    #                 elif key in JOBDICT.keys():
-    #                     print( f"{'| ' + value :<{JOBDICT[key]}}", end='')
-    #             rows += 1
-    #             print()
-    #         else:
-    #             return rows
-            
-    #     return rows
 
     
     def prompt_user(self):
@@ -141,7 +109,7 @@ class ContractList:
             return 'B'
 
         elif user_input.upper() == '/ROW':
-            self.rows = int(input("Rows: ")) #TODO validate 
+            self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
             self.find_job()
@@ -218,7 +186,7 @@ class ContractList:
                 userint = input(" ")
                 if userint.upper() == 'B':
                     return 'B'
-                elif userint.upper() == 'R' and self.propertylist != self.propertylist_backup:
+                elif userint.upper() == 'R' and self.contractlist != self.contractlist_backup:
                     return 'R'
                 elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
                     return int(userint)
