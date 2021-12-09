@@ -12,7 +12,7 @@ class BossEmployeesMenu:
         self.position = position
         self.id = id
         self.options = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
          | STARFSMENN |
       {DASH*24}
