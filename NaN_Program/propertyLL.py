@@ -57,7 +57,7 @@ class PropertyLL:
                         prop_dic[key] = "None"
                 get_validation = prop_dic[key].replace(" ", "").isalpha()
             elif dic[key] == int and dic[key] != "both":
-                get_validation = prop_dic[key].replace("-","").isdigit() and (int(prop_dic[key]) > 0)
+                get_validation = (prop_dic[key].isdigit() or (len(prop_dic[key]) > 1 and prop_dic[key][1:].isdigit())) and (int(prop_dic[key]) > 0)
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if prop_dic[key] == "":
