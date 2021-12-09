@@ -65,11 +65,11 @@ class JobLL:
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 get_validation = job_dic[key].replace(" ", "").isalpha()
-                if key == "Priority":
+                if key == "Priority(ASAP; Now; Emergency)":
                     for row in self.priority_word_check():
-                        if job_dic["Priority"].lower() == row.lower():
+                        if job_dic["Priority(ASAP; Now; Emergency)"].lower() == row.lower():
                             priority_check = True
-                            job_dic["Priority"] = row
+                            job_dic["Priority(ASAP; Now; Emergency)"] = row
                     if priority_check == False:
                         return False, key
             elif dic[key] == int and dic[key] != "both":
