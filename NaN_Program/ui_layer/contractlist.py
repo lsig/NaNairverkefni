@@ -8,6 +8,7 @@ CONTRACTPRINTER = [ (5, "id"), (12, 'Date-created'), (15, 'Employee'), (0, 'Empl
 CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 REGCONTRACTPRINTER = [ (5, "id"), (12, 'Date-from'), (12, 'Date-to'), (20, "Frequency"), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'Propertynumber'), (0, 'propertyid'), (15, "Priority"), (30, "Suggested-contractors"), (0, "Suggested-contractors(id)"), (0, 'Status') ]
 REGCONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
+JOBHEADER = ['READY JOBS', 'UNREADY JOBS', 'FINISHED JOBS']
 
 
 class ContractList: 
@@ -44,24 +45,40 @@ class ContractList:
         print(self.screen)
         self.print_header()
 
-        self.printedids = [self.contractlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.contractlist) > self.firstrow + i]
+        self.rowssofar = 0
 
-        for i in range(self.rows): #til að displaya self.rows verktaka í röð.
-            contractinfostr = f'{self.firstrow + i + 1}. - '
-            try:
-                for key in self.contractlist[self.firstrow + i]:
-                
-                    contractinfostr += f"{self.contractlist[self.firstrow + i][key] :<10}" # afh 10?
-                    
-            except IndexError:
-                pass
-            print(contractinfostr)
+        self.printedids = []
+
+        for index, joblist in enumerate(self.contractlist): #til að displaya self.rows verktaka í röð.
+            self.rows = self.print_section(JOBHEADER[index], joblist)
+
         
-        print(f"{DASH*35}\n")
-        if self.slide > 0:
-            print("p. Previous - ", end='')
-        if (self.slide + 1) * self.rows < len(self.contractlist):
-            print("n. Next - ", end='')
+        # print(f"{DASH*35}\n")
+        # if self.slide > 0:
+        #     print("p. Previous - ", end='')
+        # if (self.slide + 1) * self.rows < len(self.contractlist):
+        #     print("n. Next - ", end='')
+
+
+    def print_section(self, header, section):
+        print(f"\n  - {header}")
+        rows = 0
+        for job in section:
+            if self.rowssofar + rows < self.rows:
+                indent = 0
+                for key, value in job.items():
+                    if key == 'id':
+                        self.printedids.append(value)
+                    print( f"{value :<{CONTRACTPRINT[indent]}}", end='')
+                    indent += 1
+                rows += 1
+            else:
+                return rows
+            
+        return rows
+
+
+
 
     
     def prompt_user(self):
@@ -70,8 +87,8 @@ class ContractList:
         if user_input.upper() == 'P' and self.slide > 0:
             self.slide -= 1
 
-        elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.contractlist):
-            self.slide += 1
+        # elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.contractlist):
+        #     self.slide += 1
         
         elif user_input.upper() == 'B':
             return 'B'
@@ -87,9 +104,9 @@ class ContractList:
 
             if user_input in self.printedids:
                 self.contractlist = self.contractlist_backup
-                self.contractlist = self.llapi.filter_contract_id(user_input, self.contractlist)  #TODO 
+                #self.contractlist = self.llapi.filter_contract_id(user_input, self.contractlist)  #TODO 
                 user_input = ""
-                self.rows = len(self.contractlist)
+                #self.rows = len(self.contractlist)
 
         else:
             print(INVALID)
@@ -97,7 +114,7 @@ class ContractList:
     
 
     def print_header(self):
-        for index, k in enumerate(self.contractlist[0].keys()):
+        for index, k in enumerate(self.contractlist[0][0].keys()):
             if k == 'id':
                 extra = '  '
             else:

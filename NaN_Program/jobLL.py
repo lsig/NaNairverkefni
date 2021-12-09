@@ -120,12 +120,28 @@ class JobLL:
     
     def get_all_jobs(self):
         all_jobs = self.dlapi.get_jobs()
+        jobs_list = self.sort_all_jobs(all_jobs)
         #counter = 0
         #for row in all_jobs:#changes contractor id into name
         #    all_jobs[counter]["Suggested-contractors"] = self.get_con_name_and_location(row["Suggested-contractors"])["Name"]
         #    counter += 1
-        return all_jobs
+        return jobs_list
     
+    def sort_all_jobs(self, job_list):
+        ready_jobs = []
+        unready_jobs = []
+        finished_jobs = []
+        for job in job_list:
+            if job['Status'] == '0':
+                unready_jobs.append(job) 
+            elif job['Status'] == '1':
+                ready_jobs.append(job)
+            elif job['Status'] == '2':
+                finished_jobs.append(job)
+        
+        return [ready_jobs, unready_jobs, finished_jobs]
+
+
 
     def get_con_name_and_location(self,id):#fer líklegast í contractorLL
         con_list = self.dlapi.get_all_cont()
