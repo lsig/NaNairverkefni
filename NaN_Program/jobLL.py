@@ -14,6 +14,7 @@ class JobLL:
         if main_job_bool == False:
             self.id = id
             self.boss_loc = self.empLL.get_emp_location(id)
+            job_dic["Type"] = ''
             valid, key = self.is_valid(job_dic)
             if valid:
                 cur_date = datetime.date(datetime.now())
@@ -80,17 +81,16 @@ class JobLL:
                 if job_dic[key] == "":
                     return False,key
                 get_validation = job_dic[key].replace("-","").isdigit()
-                if key == "Employee-id":
+                if key == "Employee-id" and get_validation:
                     if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]):
-                        if job_dic["Type"] != "'Regular job'":
-                            if self.id == job_dic["Employee-id"]:
-                                return False,key
-                        else:
+                        return False,key
+                    if job_dic["Type"] == "":
+                        if self.id == job_dic["Employee-id"]:
                             return False,key
-                if key == "Property-id":
+                if key == "Property-id" and get_validation:
                     if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
                         return False,key
-                if key == "Suggested-contractor(id)":
+                if key == "Suggested-contractor(id)" and get_validation:
                     if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
                         return False,key
             # to check if address or property number are empty    
@@ -260,7 +260,7 @@ if __name__ == "__main__":
     g = JobLL()
     (g.get_all_jobs_sorted())
     #print(g.find_employee_name("5"))
-    # print(g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":"1","Suggested-contractors":"1"},"1"))
+    print(g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":"1","Suggested-contractors":"1"},"1"))
     #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
     #print(bool2)
     #print(g.prop_address_from_id("1"))
