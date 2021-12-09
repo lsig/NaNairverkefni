@@ -2,3 +2,4 @@ id,Name,Country,Airport,Phone,Working-hours,Manager,Manager-id
 1,Kulusuk,Greenland,NaN,969594050,00,Minik Wallace,4
 2,Tórshavn,Faroe Islands,NaN,00,00,Annette Djurhuus,7
 3,Longyearbyen,Svalbard,NaN,00,00,Jan Jacobsen,1
+4,Bahamas,Bahamas,Bahamas Airport,8646789,05-15,Turbo,10
