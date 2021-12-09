@@ -125,6 +125,13 @@ Morgunfundur:
 Uppgjör:
 Strákarnir stöðu sig vel, Maxim kláraði location LL og hjálpaði strákunum með reportLL, Markús og Kristó komust langt með reportLL, Marteinn komst vel á leið í MaintennceLL og hjálpaði strákunum í reportLL. Ég og Kristó kláruðum nánast allt UI layerið en alltaf hægt að bæta það aðeins, Maxim og Marteinn voru til halds ef við lentum í einhverjum vandræðum. Um kvöldmatarleytið var mórallinn á gólfinu en ákvað ekki Maxim, kóngurinn sem hann er, að splæsa á okkur sushi á Tokyo sushi enda Tokyo sushi baróninn. Unnum vel í dag alveg frá 12 til 23:30. Solid vakt, mic drop. 
 
+Dagur 3 8.12.21
+Morgunfundur:
+Markmiðið er að reyna klára forritunina í dag en við vitum að það er ólíklegt. Það eina sem við eigum eftir er viðhaldsglugginn í UI svo kristó og Logi fóru að vinna í því og gera UI roobust. Marteinn ætlar að vinna í MaintenenceLL, Maxim ætlar að laga logicLL og hjálpa Markús og Kristó í ReportLL.
+
+Uppgjör:
+Logi og Kristó komust langt með það að klára UI, það er að taka aðeins lengri tíma en við höldum lol. Marteinn kláraði MainteneceLL, Maxim lagið logicLL og hjálpaði strákunum að klára ReportLL. Markús vann í reportLL og henti í uppfært klasarit. Hinn Kristó vann í reportLL og það var klárað í dag.
+
 
 
 
