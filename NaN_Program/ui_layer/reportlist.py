@@ -4,7 +4,7 @@ from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
 MAXROWS = 10
-REPORTHEADER = ['PENDING REPORTS', 'FINISHED REPORTS']
+REPORTHEADER = ['PENDING REPORTS', 'FINISHED REPORTS', 'OTHER REPORTS']
 SEARCHFILTERS = ['Title', 'Description', 'Employee', 'Contractor-rating']
 DONOTPRINT = ['Report-id', 'Request-id', 'Employee-id', 'Property-number', 'Property-id', 'Contractor-id']
 
@@ -38,6 +38,7 @@ class ReportList:
         returnall = ''
         while returnall != 'Back':
             returnvalue = ''
+            returnall = self.init_request()
 
             while returnvalue != 'B' and returnall != 'Back':
                 self.display_list()
@@ -79,8 +80,8 @@ class ReportList:
         while True:
             os.system(CLEAR)
             print(self.screen)
-            mainttype = input(f"1. {REPORTHEADER[0].capitalize()}\n2. {REPORTHEADER[1].capitalize()}\n") #ma gera for loopu
-            if mainttype == '1' or mainttype == '2':
+            mainttype = input(f"1. {REPORTHEADER[0].capitalize()}\n2. {REPORTHEADER[1].capitalize()}\n3. {REPORTHEADER[2].capitalize()}") #ma gera for loopu
+            if mainttype == '1' or mainttype == '2' or mainttype == '3':
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
                 return 'Back'
@@ -163,34 +164,37 @@ class ReportList:
         
 
     def print_header(self):
-        for index, k in enumerate(self.reportlist[0].keys()):
+        for key, value in REPORTDICT.items():
+            keyprint = key
 
-            if k == 'Report-id':
-                k = 'id'
-                extra = '   '
-            elif k not in DONOTPRINT:
-                if k == 'Contractor-name':
-                    k = 'Contractor'
-                elif k == 'Contractor-rating':
-                    k = 'Rating'
-                extra = ''
+            if key == 'Report-id':
+                keyprint = 'id'
+                extra = '  '
             else:
-                continue
-            print(f"{'| ' + k + extra:<{REPPRINT[index]}}",end='')
+                extra = ''
 
-        print(f"\n{DASH* sum(REPPRINT) }")
+            if key == 'Contractor-name':
+                keyprint = 'Contractor'
+            elif key == 'Contractor-rating':
+                keyprint = 'Rating'
+            print(f"{'| ' + keyprint:<{value}}",end=extra)
+
+        print(f"\n{DASH * sum(REPORTDICT.values())}")
     
 
     def print_footer(self):
+        print(f"{DASH* sum(REPORTDICT.values())}\n")
         dashlen = 21
-        print(f"{DASH * sum(REPPRINT)}\n")
         if self.slide > 0:
             print("p. Previous - ", end='')
             dashlen += 14
+
         if (self.slide + 1) * self.rows < len(self.reportlist):
             print("n. Next - ", end='')
             dashlen += 10
-        print(f"#. to Select Report\n{DASH*dashlen}")
+        
+        if len(self.reportlist) > 0:
+            print(f"#. to Select Report\n{DASH * dashlen}")
 
 
     def validate(self, userint = None, userrows = None):
