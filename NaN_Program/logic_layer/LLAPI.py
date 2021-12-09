@@ -21,8 +21,8 @@ class LLAPI:
 
 
     #ContractorLL
-    def add_cont(self,con_lis):
-        return self.contLL.add_contractor(con_lis)
+    def add_cont(self,con_lis,loc):
+        return self.contLL.add_contractor(con_lis,loc)
 
     def list_all_contractors(self):
         return self.contLL.lis_all_cont()

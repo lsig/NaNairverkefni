@@ -23,6 +23,8 @@ class ContractorLL:
         dic = {"Name":str, "Contact-name":str,"Profession":str, "Phone":int, "Working-hours":int}
         for key in dic.keys():
             if dic[key] == str:
+                if len(cont_dic[key]) > 30:
+                    return False, key
                 get_validation = cont_dic[key].replace(" ", "").isalpha()
             else:
                 get_validation = cont_dic[key].replace("-","").isdigit()
@@ -30,7 +32,9 @@ class ContractorLL:
             if key.lower() == "phone" and get_validation:
                 if len(cont_dic[key]) < 7 or len(cont_dic[key]) > 15:
                     return False, key
-
+            if key.lower() == "working-hours":
+                if len(cont_dic[key]) > 5:
+                    return False,key
 
             if get_validation == False:
 
@@ -56,19 +60,7 @@ class ContractorLL:
         return ret_lis
 
     def lis_all_cont(self): # þarf að breyta 
-
-
         return self.dlapi.get_all_cont()
-
-    def update_cont_rating(self):
-        all_cont_lis = self.dlapi.get_all_cont()
-        all_rep_lis = self.dlapi.get_all_report()
-        for cont_dic in all_cont_lis:
-            counter = 0
-            for rep_dic in all_rep_lis:
-                if cont_dic["id"] == rep_dic["Contractor-id"]:
-                    counter += 1
-
 
     def edit_info(self,edit_con_dic):
         if self.is_valid(edit_con_dic):
