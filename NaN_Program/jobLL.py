@@ -30,7 +30,7 @@ class JobLL:
             emp_name = job_dic["Employee"]
             con_name = job_dic["Suggested-contractors"]
 
-        job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority(ASAP,Now,Emergency)"],job_dic["Suggested-contractor(id)"],con_name,"0",type)
+        job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,self.prop_address_from_id(job_dic["Property-id"])[0],self.prop_address_from_id(job_dic["Property-id"])[1],job_dic["Property-id"],job_dic["Priority(ASAP; Now; Emergency)"],job_dic["Suggested-contractor(id)"],con_name,"0",type)
         self.dlapi.add_job(job)
         return True, None
 
@@ -61,7 +61,7 @@ class JobLL:
         #big validation check
     def is_valid(self,job_dic) -> bool:
         priority_check = False
-        dic = {"Employee-id":int, "Title":"both", "Description":"both", "Property-id":int,"Priority(ASAP,Now,Emergency)":str,"Suggested-contractor(id)":int}
+        dic = {"Employee-id":int, "Title":"both", "Description":"both", "Property-id":int,"Priority(ASAP; Now; Emergency)":str,"Suggested-contractor(id)":int}
         for key in dic.keys():
             if dic[key] == str and dic[key] != "both":
                 get_validation = job_dic[key].replace(" ", "").isalpha()
@@ -140,6 +140,10 @@ class JobLL:
                 finished_jobs.append(job)
         
         return [ready_jobs, unready_jobs, finished_jobs]
+
+    
+    def total_jobs_count(self):
+        return len(self.dlapi.get_jobs())
 
 
 
