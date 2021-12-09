@@ -196,6 +196,12 @@ class ReportsLL:
             prev = rep_dic[key]
             return True
 
+    def check_cont_dic(self,cont_id):
+        all_cont = self.dlapi.get_all_cont()
+        for dic in all_cont:
+            if dic["id"] == cont_id:
+                    return True     
+        return False
 
     def find_rep_by_str(self,user_string,rep_lis,key):
         ret_lis=[]
@@ -216,6 +222,7 @@ class ReportsLL:
         return False
 
     def get_cont_name(self,cont_id):
+        pass
 
 
 

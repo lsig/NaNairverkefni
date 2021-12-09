@@ -90,7 +90,6 @@ class MaintenanceLL:
                     return False,key
             if key == "Suggested-contractor(id)"  and main_dic[key] != "":
                 get_validation = main_dic[key].replace(",","").replace(" ","").isdigit()
-                print(get_validation)
                 if get_validation == False:
                     return False,key
                 cont_booL = self.check_cont_dic(main_dic[key].replace(" ", "").split(","))
