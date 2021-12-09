@@ -98,10 +98,10 @@ class ReportsLL:
             if dic == all_rep_lis[i]:
                 return i
             
-    def find_rep_id(self, id, all_rep_lis): # klárt
+    def find_rep_id(self, id, all_rep_lis, key): # klárt
         if id.isdigit():
             for dic in all_rep_lis:
-                if int(dic['Report-id']) == int(id):
+                if int(dic[key]) == int(id):
                     dic = dic
                     return dic
             return None

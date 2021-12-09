@@ -103,7 +103,7 @@ class ReportList:
         elif user_input.isdigit(): #hér selectum við ákveðna fasteign
 
             if user_input in self.printedids:
-                reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist)
+                reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist, 'Report-id')
                 seereport= SeeReport(self.id, reportinfo, self.position)
                 seereport.display()
                 self.reportlist = self.llapi.get_sorted_reports()[self.jobsection] #we want to update the list that we display, now that we may have changed info for the selected property.
