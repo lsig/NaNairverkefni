@@ -213,18 +213,39 @@ class JobLL:
 
 
 
-    def search_time_period(self,time_period_from,time_period_to,all_job_lis):
-        if time_period_from.replace("-","").isdigit() and time_period_to.replace("-","").isdigit() and len(time_period_from) == 2:
-            all_job_lis = self.get_all_jobs()
+    def search_time_period(self,time_period_from,time_period_to,all_job_lis=None):
+        all_job_lis = self.get_all_jobs()
+        if self.check_date(time_period_from) and self.check_date(time_period_to):
+            time_period_from = time_period_from.split("-")
+            time_period_to = time_period_to.split("-")
+            date_from = datetime(int(time_period_from[2]),int(time_period_from[1]),int(time_period_from[0])).date()
+            date_to = datetime(int(time_period_to[2]),int(time_period_to[1]),int(time_period_to[0])).date()
+            print(date_from,date_to)
+            if date_from <= date_to:
+                ret_lis = []
+                for dic in all_job_lis:
+                    job_date_lis = dic["Date-created"].split("-")
+                    job_date = datetime(int(job_date_lis[0]),int(job_date_lis[1]),int(job_date_lis[2])).date()
+                    if date_from <= job_date and date_to >= job_date:
+                        ret_lis.append(dic)
+                if ret_lis != []:
+                    return ret_lis
+        return False
 
-    def check_dates(self,date):
+
+
+
+            # all_job_lis = self.get_all_jobs()
+
+    def check_date(self,date):
         ## dd-mm-yyyy or 
         if date.replace("-","").isdigit():
             date = date.split("-")
             if len(date) == 3:
                 if len(date[0]) == 2 and len(date[1]) == 2 and len(date[2]) == 4:
                     if int(date[0]) > 0 and int(date[0]) < 32 and int(date[1]) > 0 and int(date[1]) < 13:
-                        pass
+                        return True
+        return False
 
                 
 
@@ -248,14 +269,18 @@ if __name__ == "__main__":
     #g.edit_info({"id":"1","Date-created":"2021-12-05","Employee":"Jan Jacobsen","Employee-id":"1","Title":"small window clean","Description":"cleandd the windows!","Location":"Longyearbyen","Property":"Vei 217","Property-number":"F959594","Property-id":"1","Priority":"1","Suggested-contractors":"1","Status":"0"},"1")
     #print(g.get_all_jobs())
 
-    date_1 = datetime(4441,10,10).date()
+    date_1 = datetime(4441,10,13).date()
     date_2 = datetime(2021,12,10).date()
     print(date_1,date_2)
     date_3 = datetime.date(datetime.now())
     if date_1 <= date_3 and date_2 >= date_3:
         print(len("2222-22-22"))
 
-    print("09-22-2012".split("-"),len(""),("09"))
+    print("09-22-2012".split("-"),len(""),int("-09"))
+    # str_test = "2222-10-10"
+    # datetime.strptime(str_test,'%y-%m-%d') 
+    print(datetime(4441,10,13))
+    print(g.search_time_period("09-12-2021","09-12-2021"))
 
 
 
