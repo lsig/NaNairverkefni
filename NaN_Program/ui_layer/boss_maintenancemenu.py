@@ -1,7 +1,7 @@
 #viðhaldsgluggi
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 from ui_layer.boss_contractcreate import ContractCreate
-from ui_layer.contractlist import ContractList
+from ui_layer.whichcontractmenu import WhichContractMenu
 from ui_layer.reportlist import ReportList
 from time import sleep
 import os
@@ -34,8 +34,8 @@ class BossMaintenanceMenu:
                 contrcreate.run_screen()
 
             elif user_input == '2':
-                contrlist = ContractList(self.id, self.position)
-                contrlist.run_screen()
+                contrlist = WhichContractMenu(self.id, self.position)
+                contrlist.init_request()
 
             elif user_input == '3':
                 reportlist = ReportList(self.id, self.position)
