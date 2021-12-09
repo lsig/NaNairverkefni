@@ -99,7 +99,9 @@ class EmployeeLL:
         # loc_correct = False
         for key in dic.keys():
             #get_validation
-            if dic[key] == str and dic[key] != "both":
+            if dic[key] == str:
+                if len(emp_dic[key]) > 30 :
+                    return False, key
                 if key.lower() == "extras": #replace empty string with none for extras
                     if emp_dic[key] == "":
                         emp_dic[key] = "None"
