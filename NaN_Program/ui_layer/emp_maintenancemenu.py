@@ -10,15 +10,15 @@ class EmployeeMaintenanceMenu:
         self.id = id
         self.position = position
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | VIÐHALD |
-      {DASH*15}
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*18}
+          | VIÐHALD |
+      {DASH*20}
       1. Verkbeiðnalisti
       2. Verkskýrslulisti
-      {DASH*15}
+      {DASH*20}
       B. Til baka
-{STAR*14}
+{STAR*18}
         '''
 
     def display(self):

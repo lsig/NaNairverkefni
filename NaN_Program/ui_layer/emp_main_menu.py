@@ -12,8 +12,8 @@ class EmployeeMenu:
         self.position = position
         self.options = f''' 
 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*18}
       {DASH*15}
       1. Fasteignir 
       2. Viðhald
@@ -21,7 +21,7 @@ class EmployeeMenu:
       {DASH*15}
       L. Log out
       Q. Quit 
-{STAR*14}
+{STAR*18}
         '''
 
     def print_menu(self):

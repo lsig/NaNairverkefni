@@ -10,15 +10,15 @@ class PropertyMenu:
         self.id = id
         self.position = position
         self.screen =  f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | FASTEIGNIR |
-      {DASH*15}
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+         | FASTEIGNIR |
+      {DASH*22}
       1. Skrá nýja fasteign
       2. Fasteignalisti
-      {DASH*15}
+      {DASH*22}
       B. Til baka
-{STAR*14}
+{STAR*20}
         '''
     
     def display(self):

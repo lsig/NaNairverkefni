@@ -6,6 +6,9 @@ from ui_layer.emp_main_menu import EmployeeMenu
 from data_files.const import CLEAR, DASH, QUIT, SLEEPTIME
 import os
 from time import sleep
+from data_files.chucknorris import CHUCKNORRIS
+import random
+
 STAR = '*' # not the same star as in the constants 
 
 class LoginMenu:
@@ -14,9 +17,9 @@ class LoginMenu:
         self.loginscreen = f"""
 NaN Air Properties
 {STAR*18}
-{STAR} Enter ID:{' '*6 + STAR}
+{STAR + ' '*3} Enter ID {' '*3 + STAR}
 {STAR*18}
-Q. Quit
+     Q. Quit
 {DASH * 18}"""
 
     def start(self):
@@ -34,8 +37,10 @@ Q. Quit
                 return
 
             if staffid is not None: 
-                print(f"Welcome, {staffid['Name']}") 
-                sleep(SLEEPTIME)
+                print(f"Welcome, {staffid['Name']}")
+                sleep(SLEEPTIME*2) 
+                print(random.choice(CHUCKNORRIS))
+                sleep(SLEEPTIME*3)
                 if staffid['Manager'] == '1': #TODO, vantar gagnaskrá fyrir staff id. (bossid her)
                     bossmenu = BossMenu(staffid, 'Manager')
                     returnvalue = bossmenu.print_menu()

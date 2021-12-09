@@ -63,7 +63,7 @@ class MaintenanceLL:
                 get_validation = True
 
             if key == "Date-to(dd-mm-yyyy)" and main_dic[key] != "":
-                if len(main_dic[key]) != 10:
+                if len(main_dic[key]) != 10 and main_dic.split("-") != 3:
                     return False, key
 
                 date_time = self.check_date(main_dic[key].split("-"))
