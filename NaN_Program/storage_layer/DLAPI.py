@@ -19,6 +19,7 @@ class DlAPI:
         self.maintenjobDL = MaintenanceDL()
 
 
+    #EmployeeDL
     def get_all_emp(self):
         return self.empDL.get_all_employee()
 
@@ -28,6 +29,8 @@ class DlAPI:
     def change_emp_info(self,all_emp_lis):
         self.empDL.change_emp_info(all_emp_lis)
 
+
+    #LocationDL
     def get_loc_info(self):
         return self.locDL.get_all_loc()
 
@@ -37,6 +40,8 @@ class DlAPI:
     def change_loc_info(self,all_loc_lis):
         self.locDL.change_loc_info(all_loc_lis)
 
+
+    #PropertyDl
     def get_property_info(self):
         return self.propDL.get_all_property() 
 
@@ -46,6 +51,7 @@ class DlAPI:
     def change_property_info(self,all_prop_lis):
         self.propDL.change_prop_info(all_prop_lis) 
 
+    #ContractorDL
     def get_all_cont(self):
         return self.contDL.get_all_contractor() 
 
@@ -55,6 +61,8 @@ class DlAPI:
     def change_cont(self,all_con_lis):
         self.contDL.change_con_info(all_con_lis)
 
+
+    #ReportDL
     def get_all_report(self):
         return self.reportDL.get_all_reports()
 
@@ -64,6 +72,8 @@ class DlAPI:
     def change_report(self,all_report_lis):
         self.reportDL.change_report_info(all_report_lis)
 
+
+    #JobDL
     def get_jobs(self):
         return self.jobDL.get_all_jobs()  
 
@@ -73,6 +83,8 @@ class DlAPI:
     def change_job(self,jobs):
         self.jobDL.change_job_info(jobs) 
 
+
+    #MaintenanceDL
     def get_maintenance_jobs(self):
         return self.maintenjobDL.get_all_maintenance_jobs()
 

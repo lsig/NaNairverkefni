@@ -17,8 +17,8 @@ class ContractList:
         self.slide = 0
         self.id = id
         self.position = position
-        self.contractlist = self.llapi.get_job() 
-        self.contractlist_backup = self.llapi.get_job()
+        self.contractlist = self.llapi.get_job() + self.llapi.get_all_maint_jobs()
+        self.contractlist_backup = self.llapi.get_job() + self.llapi.get_all_maint_jobs()
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
@@ -29,8 +29,7 @@ class ContractList:
      B. Til baka
      /row. Breytir lengd raðar
 
-id | Destination | Address | Size | Rooms | Property number | Extras #TODO
-{DASH*35}'''
+'''
 
     def run_screen(self):
         returnvalue = ''

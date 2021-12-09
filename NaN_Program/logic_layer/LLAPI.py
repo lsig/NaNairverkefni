@@ -6,6 +6,7 @@ from jobLL import JobLL
 from EmployeeLL import EmployeeLL
 from locationLL import LocationLL
 from reportsLL import ReportsLL
+from maintenanceLL import MaintenanceLL
 
 class LLAPI:
     def __init__(self):
@@ -16,6 +17,7 @@ class LLAPI:
         self.empll = EmployeeLL()
         self.locLL = LocationLL()
         self.repLL = ReportsLL()
+        self.maintLL = MaintenanceLL()
 
     #ContractorLL
     def add_cont(self,con_lis):
@@ -49,14 +51,6 @@ class LLAPI:
     
     def search_property(self, string, propertylist, key):
         return self.propLL.find_prop_by_str(string, propertylist, key)
-
-
-    #JobLL
-    def add_job(self,job_lis,id):
-        return self.jLL.add_job(job_lis,id)
-
-    def get_job(self):
-       return self.jLL.get_all_jobs()
     
 
     #EmployeeLL
@@ -77,6 +71,7 @@ class LLAPI:
     
     def search_employee(self, string, employeelist, key):
         return self.empll.find_emp_by_str(string, employeelist,key)
+
 
     #LocationLL
     def search_destination(self,string, destinationlist, key):
@@ -100,6 +95,23 @@ class LLAPI:
     
     def filter_rep_id(self,id,rep_lis):
         return self.repLL.find_rep_id(id,rep_lis)
+    
+
+    #JobLL
+    def add_job(self,job_lis,id):
+        return self.jLL.add_job(job_lis,id)
+
+    def get_job(self):
+       return self.jLL.get_all_jobs()
+    
+    def get_all_jobs_sorted(self):
+        alljob_list = self.get_job() + self.get_all_maint_jobs()
+        
+
+    
+    #MaintenanceLL
+    def get_all_maint_jobs(self):
+        return self.maintLL.get_all_main_jobs()
     
 
         
