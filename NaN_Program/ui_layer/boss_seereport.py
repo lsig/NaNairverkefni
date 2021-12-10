@@ -63,6 +63,8 @@ class SeeReport:
         elif self.reportvar == 'PM':
             if user_input.upper() == 'C':
                 self.report['Status'] = '2'
+                boss_feedback = input('Feedback: ')
+                self.report['Feedback'] = boss_feedback
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
 
