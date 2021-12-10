@@ -25,6 +25,9 @@ class BossPropertyCreate:
 
 
     def display(self):
+        '''
+        displays the menu info
+        '''
 
         os.system(CLEAR)
         print(self.screen)
@@ -43,6 +46,9 @@ class BossPropertyCreate:
 
         
     def printpropertyinfo(self, number = None):
+        '''
+        prints the property info
+        '''
 
         propertystring = ''
         for i in range( len(PROPERTYTEMPLATE)):
@@ -56,6 +62,10 @@ class BossPropertyCreate:
     
     #1:Kulsuk, 2:Þórshöfn, 3: longyearbyen
     def confirmproperty(self):
+        '''
+        confirms that the new property is valid through the ll and is then
+        stored in the db
+        '''
 
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
@@ -83,6 +93,9 @@ class BossPropertyCreate:
                 self.reset_screen()
     
     def editpropertyinfo(self, row = None):
+        '''
+        edit the property's info
+        '''
         if row == None:
             user_row = None
             while user_row is None:
@@ -100,6 +113,9 @@ class BossPropertyCreate:
     
 
     def validate(self, rowinput):
+        '''
+        validates various basic user errors 
+        '''
         try:
             rowint = int(rowinput)
             if 1 <= rowint <= len(PROPERTYTEMPLATE):
@@ -113,6 +129,9 @@ class BossPropertyCreate:
     
     
     def reset_screen(self, user_row = None):
+        '''
+        resets the screen 
+        '''
 
         os.system(CLEAR)
         print(self.screen)
