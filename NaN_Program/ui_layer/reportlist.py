@@ -11,8 +11,8 @@ DONOTPRINT = ['Report-id', 'Request-id', 'Employee-id', 'Property-number', 'Prop
 
 
 class ReportList: 
-    def __init__(self, id, position, header, jobsection, propertyinfo = None) -> None:
-        self.propertyinfo = propertyinfo
+    def __init__(self, id, position, header, jobsection, info = None) -> None:
+        self.info = info
         self.llapi = LLAPI()
         self.jobsection = jobsection
         self.rows = MAXROWS
@@ -20,20 +20,28 @@ class ReportList:
         self.id = id
         self.header = header
         self.position = position
+        self.menutravel = ''
         
         if jobsection == 'property':
-            self.reportlist_backup = self.llapi.get_property_reports(propertyinfo['id'])
-        elif jobsection == 'Employee':
-            pass
+            self.reportlist_backup = self.llapi.get_property_reports(info['id'])
+        elif jobsection == 'employee':
+            self.reportlist_backup = self.llapi.get_emp_reports(info['id'])
+        elif jobsection == 'contractor':
+            self.reportlist_backup = self.llapi.get_contractor_reports(info['id'])
+
         else:
             self.reportlist_backup = self.llapi.get_sorted_reports()[self.jobsection]
 
 
         self.reportlist = self.reportlist_backup
-        if self.propertyinfo == None:
+        if self.info == None:
             menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'
-        else:
-            menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.propertyinfo["Address"]}'
+        elif jobsection == 'property':
+            menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.info["Address"]}'
+        elif jobsection == 'employee':
+            menutravel = f'    | STARFSMENN |\n     - Starfsmannalisti\n       - {self.info["Name"]}'
+        elif jobsection == 'contractor':
+            menutravel = f'    | VERKTAKAR |\n     - Verktakalisti\n       - {self.info["Name"]}'
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
     {STAR*14}
