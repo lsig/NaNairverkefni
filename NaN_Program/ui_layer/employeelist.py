@@ -32,41 +32,50 @@ class EmployeeList:
 
 '''
     def run_screen(self):
+        '''
+        initates the class in a way
+        '''
         returnvalue = ''
         while returnvalue != 'B':
             self.display_list()
             returnvalue = self.prompt_user()
     
     def display_list(self):
-            self.firstrow = self.slide * self.rows 
+        '''
+        Displays the employee list in an orderly manner 
+        '''
+        self.firstrow = self.slide * self.rows 
 
-            os.system(CLEAR)
-            print(self.screen)
-            self.print_header()
+        os.system(CLEAR)
+        print(self.screen)
+        self.print_header()
 
-            self.printedids = [self.employeelist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.employeelist) > self.firstrow + i]
+        self.printedids = [self.employeelist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.employeelist) > self.firstrow + i]
 
-            for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
-                try:
-                    employeeinfostr = f'{self.printedids[i] + ".":<{EMPPRINT[0]}}- ' #id with some extra text.
-                    for index, k in enumerate(self.employeelist[self.firstrow + i]):
-                        if k == 'Address':
-                            total_address_info = self.employeelist[self.firstrow + i][k].split(';')
-                            street_address = total_address_info[0]
-                            employeeinfostr += f"{'| ' + street_address :<{EMPPRINT[index]}}"
+        for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
+            try:
+                employeeinfostr = f'{self.printedids[i] + ".":<{EMPPRINT[0]}}- ' #id with some extra text.
+                for index, k in enumerate(self.employeelist[self.firstrow + i]):
+                    if k == 'Address':
+                        total_address_info = self.employeelist[self.firstrow + i][k].split(';')
+                        street_address = total_address_info[0]
+                        employeeinfostr += f"{'| ' + street_address :<{EMPPRINT[index]}}"
 
-                        
-                        elif k != 'id' and k != 'GSM': #the address in the csv file stores town and country, seperated by semicommas (;), we only want the house address.
-                            employeeinfostr += f"{'| ' + self.employeelist[self.firstrow + i][k] :<{EMPPRINT[index]}}"
-                    print(employeeinfostr, end='') #here we print an employee's information.
-                        
-                except IndexError: #if the employee id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
-                    pass
-                print()
-            
-            self.print_footer()
+                    
+                    elif k != 'id' and k != 'GSM': #the address in the csv file stores town and country, seperated by semicommas (;), we only want the house address.
+                        employeeinfostr += f"{'| ' + self.employeelist[self.firstrow + i][k] :<{EMPPRINT[index]}}"
+                print(employeeinfostr, end='') #here we print an employee's information.
+                    
+            except IndexError: #if the employee id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
+                pass
+            print()
+        
+        self.print_footer()
     
     def prompt_user(self, oldinput = None):
+        '''
+        prompts the user for input
+        '''
         if oldinput == None:
             user_input = input()
         else:
@@ -107,6 +116,10 @@ class EmployeeList:
             sleep(SLEEPTIME)
 
     def find_employee(self):
+        '''
+        takes in search parameters sends them to the ll
+        and gets a updated list back
+        '''
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.employeelist != self.employeelist_backup:
@@ -133,6 +146,9 @@ class EmployeeList:
         
 
     def print_header(self):
+        '''
+        prints the header
+        '''
         for index, k in enumerate(self.employeelist[0].keys()):
             if k == 'id':
                 extra = '  '
@@ -144,6 +160,9 @@ class EmployeeList:
     
 
     def print_footer(self):
+        '''
+        prints the footer 
+        '''
         dashlen = 21
         print(f"{DASH * sum(EMPPRINT)}\n")
         if self.slide > 0:
@@ -157,6 +176,9 @@ class EmployeeList:
 
 
     def validate(self, userint = None, userrows = None):
+        '''
+        validates various user inputs that are easy to spot
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")
