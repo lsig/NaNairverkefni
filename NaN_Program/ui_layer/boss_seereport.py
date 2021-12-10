@@ -62,12 +62,12 @@ class SeeReport:
 
         elif self.reportvar == 'PM':
             if user_input.upper() == 'C':
-                self.report['Status'] == '2'
+                self.report['Status'] = '2'
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
 
             elif user_input.upper() == 'D':
-                self.report['Status'] == '0'
+                self.report['Status'] = '0'
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
 
