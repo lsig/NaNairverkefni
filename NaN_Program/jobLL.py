@@ -214,13 +214,13 @@ class JobLL:
 
 
     def search_time_period(self,time_period_from,time_period_to,all_job_lis=None):
-        all_job_lis = self.get_all_jobs()
+        # all_job_lis = self.get_all_jobs()
         if self.check_date(time_period_from) and self.check_date(time_period_to):
             time_period_from = time_period_from.split("-")
             time_period_to = time_period_to.split("-")
             date_from = datetime(int(time_period_from[2]),int(time_period_from[1]),int(time_period_from[0])).date()
             date_to = datetime(int(time_period_to[2]),int(time_period_to[1]),int(time_period_to[0])).date()
-            print(date_from,date_to)
+            #print(date_from,date_to)
             if date_from <= date_to:
                 ret_lis = []
                 for dic in all_job_lis:
@@ -239,8 +239,10 @@ class JobLL:
             date = date.split("-")
             if len(date) == 3:
                 if len(date[0]) == 2 and len(date[1]) == 2 and len(date[2]) == 4:
-                    if int(date[0]) > 0 and int(date[0]) < 32 and int(date[1]) > 0 and int(date[1]) < 13:
-                        return True
+                    if int(date[1]) > 0 and int(date[1]) < 13:
+                        nr_days_in_months=[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                        if 0 < int(date[0]) <= nr_days_in_months[int(date[1])-1]:
+                            return True
         return False
 
                 
@@ -276,7 +278,7 @@ if __name__ == "__main__":
     # str_test = "2222-10-10"
     # datetime.strptime(str_test,'%y-%m-%d') 
     print(datetime(4441,10,13))
-    print(g.search_time_period("09-12-2021","09-12-2021"))
+    print(g.search_time_period("28-02-2021","11-12-2021"))
 
 
 
