@@ -13,15 +13,16 @@ class ReportsLL:
 
     def add_report(self, rep_dic, job_dic): # klárt
         cont_dic = self.dlapi.get_all_cont()
-        if self.report_validation(rep_dic, cont_dic):
+        valid, key = self.report_validation(rep_dic, cont_dic)
+        if valid:
             #rep_dic["Status"] = "1"
             current_date = datetime.date(datetime.now())
             #rep_dic = self.replace_loc_num_with_name(rep_dic)
-            rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],rep_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], self.get_cont_name(rep_dic["Contractor-id"]), rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"], "0")
+            rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],job_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], self.get_cont_name(rep_dic["Contractor-id"]), rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"], "0")
             # Status, Property, Property-number, Property-id, Contractor-Rating, Location
             self.dlapi.add_report(rep)
-            return True
-        return False
+            return True, key
+        return False, key
 
     def generate_id(self): # klárt
         all_rep_lis = self.dlapi.get_all_report()
@@ -220,8 +221,9 @@ class ReportsLL:
 
 
     def report_validation(self, rep_dic, cont_dic): # klárt
+        get_validation = True
         # a dictionairy for title, description, contractor-name and contractor-id.
-        dic = {"Title":str, "Description":"both", "Contractor-id":int, "Commission": int}
+        dic = {"Description":"both", "Contractor-id":int, "Commission": int}
         counter = 0
         prev = 0
         for key in dic.keys():
@@ -247,7 +249,7 @@ class ReportsLL:
             if get_validation == False:
                     return False, key
             prev = rep_dic[key]
-            return True
+            return True, None
 
     def check_cont_dic(self,cont_id):
         all_cont = self.dlapi.get_all_cont()
@@ -273,6 +275,12 @@ class ReportsLL:
                     return dic 
             return None #[{"Text":"No employee with this id"}]
         return False
+    
+    def find_rep_id_2(self,id):
+        all_rep = self.get_all_rep()
+        for dic in all_rep:
+            if dic['Request-id'] == id:
+                return dic
 
     def get_cont_name(self,cont_id):
         all_cont_lis = self.dlapi.get_all_cont()
@@ -286,7 +294,7 @@ if __name__ == "__main__":
     r = ReportsLL()
     # print("maxim er king")
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor": "1", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
-    r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim cock", "Description": "something something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "2"})
+    #r.confirm_and_ready_report_and_grade_contractor({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim cock", "Description": "something something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "2"})
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "kris", "Contractor-id": "1", "Contractor-rating":"3", "Status":"0", "Commission":"5000"}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
     #r.add_report({"Title":"Maxim", "Description":"something", "Priority":"ASAP", "Suggested-contractor":"1", "Contractor-name": "", "Contractor-id": "", "Contractor-rating":"", "Status":"0", "Commission":""}, {"id":"1", "Date-created":"2021-12-06", "Employee":"Jacob Yxa", "Employee-id":"2", "Location":"Longyearbyen", "Property":"Vei 217", "Property-number":"F959594", "Property-id":"1"})
     #r.edit_report_info({"Report-id": "1", "Request-id": "1", "Employee": "Yxa", "Employee-id": "2", "Title": "Maxim", "Description": "something", "Location": "Longyearbyen", "Property": "Vei 217", "Property-number": "F959594", "Property-id": "1","Contractor-name": "kris", "Contractor-id": "1", "Contractor-Rating": "3", "Date": "2021-12-07", "Commission": "5000", "Status": "1"})

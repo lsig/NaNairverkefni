@@ -120,6 +120,13 @@ class LLAPI:
 
     def get_contractor_reports(self, reportdict):
         return self.repLL.get_contractor_reports(reportdict)
+    
+    def create_report(self, reportdict, jobdict):
+        return self.repLL.add_report(reportdict, jobdict)
+
+    def id_for_report_create(self, id):
+        return self.repLL.find_rep_id_2(id)
+
 
     #JobLL
     def add_job(self,job_lis,id):

@@ -14,8 +14,8 @@ class EmployeeMaintenanceMenu:
 {STAR*18}
           | VIÐHALD |
       {DASH*20}
-      1. Verkbeiðnalisti
-      2. Verkskýrslulisti
+      1. My Requests
+      2. My Reports
       {DASH*20}
       B. Til baka
 {STAR*18}
@@ -28,11 +28,11 @@ class EmployeeMaintenanceMenu:
             user_input = input()
 
             if user_input == '1':
-                contrcreate = ContractList(self.id, self.position)
-                contrcreate.run_screen()
+                empreport = ContractList(self.id, self.position, 'My Requests', 'employee', self.id)
+                empreport.run_screen()
 
             elif user_input == '2':
-                reportlist = ReportList(self.id, self.position)
+                reportlist =  ReportList(self.id, self.position, 'My Reports', 'employee', self.id)
                 reportlist.run_screen()
 
             elif user_input.upper() == 'B':
