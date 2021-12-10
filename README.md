@@ -6,6 +6,7 @@ NaN_Program: inniheldur allar python files, skiptist í 6 mismunandi foldera og 
     storage_layer: inniheldur alla fila sem sjá um data handling 
     csv_files: inniheldur öll gögnin sem við erum að vinna með
     data_files: inniheldur chuch_norris djók files (lélegt nafn á folder)
+    models: inniheldur model af employee, property etc.
 
 Komist inn í forritið með því að slá inn email hjá starfsmanni eða yfirmanni (mismunandi interface)
 
@@ -15,4 +16,5 @@ NaN_Air yfirmenn:
 NaN_Air starfsmenn:
 
 
-YouTube hlekkur: 
+YouTube hlekkur: https://www.youtube.com/watch?v=XlROJkjpnUw
+(vonandi virkar hann:))
