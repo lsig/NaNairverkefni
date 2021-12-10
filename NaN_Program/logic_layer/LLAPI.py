@@ -113,6 +113,9 @@ class LLAPI:
     def get_property_reports(self, reportdict):
         return self.repLL.get_property_reports(reportdict)
 
+    def confirm_or_deny_pending_report(self, reportinfo):
+        self.repLL.confirm_and_ready_report_and_grade_contractor(reportinfo)
+
     #JobLL
     def add_job(self,job_lis,id):
         return self.jLL.add_job(job_lis,id)
