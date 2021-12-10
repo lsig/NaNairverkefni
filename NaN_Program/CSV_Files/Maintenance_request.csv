@@ -1,4 +1,2 @@
 id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority(ASAP; Now; Emergency),Suggested-contractor(id),Suggested-contractors,Status,Type
-1,2021-12-10,Jacob arons,2,Clean the pool,Clean the pool with bleach,Longyearbyen,Vei 217,F959594,1,ASAP,,,0,Regular job
-2,2021-12-10,Jacob arons,2,Clean the floor ,Mop the floors,Longyearbyen,Vei 217,F959594,1,Now,,,0,Regular job
-3,2021-12-10,Jacob arons,2,Clean the reactor,Clean the nuclear Reactor,Longyearbyen,Longyearbyen Harbor 1,AA999-1,31,ASAP,1,John Core,0,Regular job
+2,2021-11-01,Jacob Yxa,2,Hengja upp jólaskrautið.,gera vel,Longyearbyen,Longyearbyen Harbor 1,AA999-1,31,Now,,,0,Regular job
