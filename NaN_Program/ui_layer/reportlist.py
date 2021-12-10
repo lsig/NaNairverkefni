@@ -134,10 +134,19 @@ class ReportList:
                 reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist, 'Report-id')
                 seereport= SeeReport(self.id, reportinfo, self.position)
                 seereport.display()
+
+            if self.jobsection == 'property':
+                self.reportlist_backup = self.llapi.get_property_reports(self.info['id'])
+                
+            elif self.jobsection == 'employee':
+                self.reportlist_backup = self.llapi.get_emp_reports(self.info['id'])
+
+            elif self.jobsection == 'contractor':
+                self.reportlist_backup = self.llapi.get_contractor_reports(self.info['id'])
+
+            else:
                 self.reportlist = self.llapi.get_sorted_reports()[self.jobsection] #we want to update the list that we display, now that we may have changed info for the selected property.
-            else: 
-                print(INVALID)
-                sleep(SLEEPTIME)
+
 
         else:
             print(INVALID)
