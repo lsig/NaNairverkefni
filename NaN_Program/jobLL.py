@@ -276,7 +276,7 @@ if __name__ == "__main__":
     # str_test = "2222-10-10"
     # datetime.strptime(str_test,'%y-%m-%d') 
     print(datetime(4441,10,13))
-    print(g.search_time_period("09-12-2021","09-12-2021"))
+    print(g.search_time_period("11-12-2021","11-12-2021"))
 
 
 
