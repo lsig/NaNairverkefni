@@ -137,7 +137,14 @@ Morgunfundur:
 Í dag er markmiðið að klára forritið alveg, kristó og logi vinna í ui og debugga það, marteinn og maxim eru að debugga logic layer og bæta við klösum. Kristó og Markús ætla að bæta við chuck norris packa við kóðan og gera stöðu og klasarit. 
 
 Uppgjör: 
-Það var tekið alvöru grind í dag og lögðu menn af stað heim klukkan 05:00. Forritið er næstum því tilbúið það vantar aðeins að fara í gegnum það og debugga og síðan að bæta útlitið smá. Kristó fannar og Logi bættu nokkrum klösum við í UI og debugguðu vel lengi, maxim og marteinn unnu hörðum höndum að logic layerinu og passa að allt væri upp á 10 þar, bjuggu til nýjan klasa fyrir regular maintenece og svoleiðis. Kristór orri og markús bjuggu til stöðu og klasarit og bættu við chuck norris packa við. 
+Það var tekið alvöru grind í dag og lögðu menn af stað heim klukkan 05:00. Forritið er næstum því tilbúið það vantar aðeins að fara í gegnum það og debugga og síðan að bæta útlitið smá. Kristó fannar og Logi bættu nokkrum klösum við í UI og debugguðu vel lengi, maxim og marteinn unnu hörðum höndum að logic layerinu og passa að allt væri upp á 10 þar, bjuggu til nýjan klasa fyrir regular maintenece og svoleiðis. Kristór orri og markús bjuggu til stöðu og klasarit og bættu við chuck norris packa við.
+
+Dagur 5 10.12.21
+Morgunfundur:
+Menn voru vel ryðgaðir í dag, sérstaklega Marteinn (wink, wink). Vorum mættir um eitt leytið. Markús og K orri fóru í skýrslugerð. Maxim og Marteinn fóru í logic, og data layer og fine tunuðu kóðann og ætla síðan að gera vidjóið. 
+
+Uppgjör:
+Menn kláruðu allt, Marteinn ofpeppaðist og hellti í sig áður en klukkan sló níu en það er nú bara hann Marteinn okkar.  
 
 
 
