@@ -88,8 +88,9 @@ class JobLL:
                         if self.id == job_dic["Employee-id"]:
                             return False,key
                 if key == "Property-id" and get_validation:
-                    if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
-                        return False,key
+                    if job_dic[key] != '':      
+                        if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
+                            return False,key
                 if key == "Suggested-contractor(id)" and get_validation:
                     if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
                         return False,key
