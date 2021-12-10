@@ -86,7 +86,9 @@ class EmployeeList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            self.find_employee()
+            returnvalue = self.find_employee()
+            if returnvalue == 'B':
+                return
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
             
@@ -113,9 +115,11 @@ class EmployeeList:
 
         if userint == 'B':
             return 'B'
+
         elif userint == 'R':
             self.employeelist = self.employeelist_backup
             return
+            
         key = SEARCHFILTERS[userint - 1]
         userstring = input(f"Search in {key.lower()}: ")
 

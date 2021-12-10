@@ -7,7 +7,7 @@ from time import sleep
 import os
 MAXROWS = 50
 ROWS = 10
-DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (15, 'Airport'), (15, 'Phone'), (15, 'Working-hours'), (20, 'Manager'), (15,'Manager-id')]
+DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (20, 'Airport'), (15, 'Phone'), (15, 'Working-hours'), (20, 'Manager'), (15,'Manager-id')]
 DESTPRINT = [element[0] for element in DESTPRINTER]
 SEARCHFILTERS = ['Name','Country','Manager', 'Phone']
 
@@ -83,7 +83,9 @@ class DestinationList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            self.find_destination()
+            returnvalue = self.find_destination()
+            if returnvalue == 'B':
+                return
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
             
@@ -109,9 +111,11 @@ class DestinationList:
 
         if userint == 'B':
             return 'B'
+
         elif userint == 'R' and self.destinationlist != self.destinationlist_backup:
             self.destinationlist = self.destinationlist_backup
             return
+
         key = SEARCHFILTERS[userint - 1]
         userstring = input(f"Search in {key.lower()}: ")
 
@@ -127,7 +131,7 @@ class DestinationList:
     def print_header(self):
         for index, k in enumerate(self.destinationlist[0].keys()):
             if k == 'id':
-                extra = '   '
+                extra = '  '
             else:
                 extra = ''
             print(f"{'| ' + k + extra:<{DESTPRINT[index]}}",end='')

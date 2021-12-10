@@ -8,7 +8,7 @@ MAXROWS = 50
 ROWS = 10
 SEARCHFILTERS = ['Destination', 'Type', 'Rooms', 'Property-number']
 
-PROPPRINT = [4, 15, 20, 8, 8, 15, 19, 15]
+PROPPRINT = [4, 15, 25, 8, 8, 15, 19, 15]
 
 
 class PropertyList: 
@@ -85,7 +85,9 @@ class PropertyList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L':
-            self.find_property()
+            returnvalue = self.find_property()
+            if returnvalue == 'B':
+                return
         
         elif user_input.isdigit():
             
