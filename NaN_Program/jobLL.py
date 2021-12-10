@@ -29,10 +29,10 @@ class JobLL:
             cur_date = job_dic["Date-created"]
             type = "Maintenace job"
             emp_name = job_dic["Employee"]
-            con_name = job_dic["Suggested-contractors"]
+            con_name = job_dic["Suggested-contractor"]
             self.boss_loc = job_dic["Location"]
             prop_nr = job_dic["Property-number"]
-            prop_addr = ["Property-id"]
+            prop_addr = job_dic["Property"]
 
         auto_id = self.assign_id_job()
         job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,prop_addr,prop_nr,job_dic["Property-id"],job_dic["Priority(ASAP; Now; Emergency)"],job_dic["Suggested-contractor(id)"],con_name,"0",type)
@@ -232,10 +232,6 @@ class JobLL:
                     return ret_lis
         return False
 
-
-
-
-            # all_job_lis = self.get_all_jobs()
 
     def check_date(self,date):
         ## dd-mm-yyyy or 
