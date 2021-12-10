@@ -71,7 +71,7 @@ class SeeContract:
         elif self.position == 'Employee' and self.contract['Status'] == '0' and user_input.upper() == 'C':
             reportcreate = EmpReportCreate(self.id, self.contract)
             reportcreate.display()
-
+    
 
         else:
             print(INVALID)

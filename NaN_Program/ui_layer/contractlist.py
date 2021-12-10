@@ -115,7 +115,12 @@ class ContractList:
                 contractinfo = self.llapi.filter_job_id(user_input, self.contractlist)  #TODO 
                 seecontract = SeeContract(self.id, contractinfo, self.position)
                 seecontract.display()
-                self.contractlist = self.llapi.get_sorted_jobs()[self.jobsection]
+                if self.jobsection == 'employee':
+                    allcontracts = self.llapi.get_sorted_jobs()
+                    self.contractlist_backup = allcontracts[1] + allcontracts[2]
+                    self.contractlist_backup= self.llapi.search_job(self.id['id'], self.contractlist_backup, 'Employee-id')
+                else:
+                    self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection]
 
         else:
             print(INVALID)
