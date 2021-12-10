@@ -24,12 +24,12 @@ class DestinationList:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | ÁFANGASTAÐIR |
-     - Áfangastaðalisti
+    | DESTINATIONS |
+     - Destinationlist
      {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+     L. Look
+     B. Back
+     /row. Change row length
 
 '''
     def run_screen(self):

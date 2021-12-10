@@ -16,8 +16,8 @@ class WhichReportMenu:
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
-    | VIÐHALD |
-     - Verkskýrslulisti
+    | MAINTENANCE |
+     - Reportlist
       {DASH*18}
 '''
 
@@ -52,5 +52,5 @@ class WhichReportMenu:
         report_string = ''
         for index, word in enumerate(REPORTHEADER):
             report_string += f'{indentstring}{index+1}. {word.capitalize()}\n'
-        report_string += f'{indentstring}{DASH*18}\n{indentstring}B. Til baka\n{STAR*20}'
+        report_string += f'{indentstring}{DASH*18}\n{indentstring}B. Back\n{STAR*20}'
         return report_string

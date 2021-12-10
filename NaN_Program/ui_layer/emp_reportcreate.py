@@ -127,3 +127,5 @@ class EmpReportCreate:
         os.system(CLEAR)
         print(self.screen)
         self.printcontractinfo(user_row)
+    
+    

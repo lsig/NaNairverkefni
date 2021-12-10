@@ -15,12 +15,12 @@ class BossDestinationCreate:
         self.screen = f'''
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | ÁFANGASTAÐIR |
-     - Skrá nýjan áfangastað
+    | DESTINATIONS |
+     - Create new destination
       {DASH*15}
-    {QUIT}. Hætta við
+    {QUIT}. Quit
 
-    | ÁFANGASTAÐUR |
+    | DESTINATION |
 {DASH * 25}'''
 
     def display_menu(self):
