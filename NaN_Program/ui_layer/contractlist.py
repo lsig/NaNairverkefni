@@ -18,7 +18,7 @@ SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee'
 
 
 class ContractList: 
-    def __init__(self, id, position, header, jobsection) -> None:
+    def __init__(self, id, position, header, jobsection, info = None) -> None:
         self.llapi = LLAPI()
         self.jobsection = jobsection
         self.rows = MAXROWS
@@ -26,7 +26,12 @@ class ContractList:
         self.id = id
         self.position = position
         self.header = header
-        self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection]
+        if jobsection == 'employee':
+            allcontracts = self.llapi.get_sorted_jobs()
+            self.contractlist_backup = allcontracts[1] + allcontracts[2]
+            self.contractlist_backup= self.llapi.search_job(self.id['id'], self.contractlist_backup, 'Employee-id')
+        else:
+            self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection]
         self.contractlist = self.contractlist_backup
 
     

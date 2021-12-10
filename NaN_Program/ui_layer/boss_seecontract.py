@@ -15,8 +15,10 @@ class SeeContract:
         self.id = id
         self.contract = contractinfo
         editornot = ''
-        if self.position == 'Manager':
+        if self.position == 'Manager' and contractinfo['Status'] == '0':
             editornot = f"\n     E. Edit"
+        elif self.position == 'Employee' and contractinfo['Status'] == '0':
+            editornot = f"\n     C. Create Report"
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
@@ -55,11 +57,15 @@ class SeeContract:
         if user_input.upper() == 'B':
             return 'C'
 
-        elif user_input.upper() == 'E' and self.position == 'Manager':
+        elif user_input.upper() == 'E' and self.position == 'Manager' and self.contract['Status'] == '0':
             while True:
                 returnvalue = self.change_row()
                 if returnvalue == 'C' or returnvalue == 'B':
                     return returnvalue
+        
+        elif self.position == 'Employee' and self.contract['Status'] == '0' and user_input.upper() == 'C':
+            pass #vantar create report
+
 
         else:
             print(INVALID)
