@@ -1,6 +1,6 @@
 #Employee Main Menu 
 import os
-from data_files.const import CLEAR, STAR, DASH, SLEEPTIME
+from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 from ui_layer.propertylist import PropertyList
 from ui_layer.contractorlist import ContractorList
 from ui_layer.emp_maintenancemenu import EmployeeMaintenanceMenu
@@ -48,5 +48,5 @@ class EmployeeMenu:
                 return 'Q'
 
             else:
-                print('Invalid choice, try again!')
+                print(INVALID) #if the user input is not one of those above, it must be invalid and the user must try again.
                 sleep(SLEEPTIME)

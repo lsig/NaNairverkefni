@@ -1,4 +1,4 @@
-#verktakagluggi
+#The Contractor Menu, only available for the boss.
 from ui_layer.boss_contractorcreate import BossContractorCreate
 from ui_layer.contractorlist import ContractorList
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
@@ -23,8 +23,11 @@ class BossContractorMenu:
         '''
     
     def display(self):
+        '''
+        displays the menu
+        '''
         while True:
-            os.system(CLEAR)
+            os.system(CLEAR) #clears the screen
             print(self.options)
             user_choice = input()
 
@@ -39,5 +42,5 @@ class BossContractorMenu:
             elif user_choice.upper() == 'B':
                 return
             else:
-                print(INVALID)
+                print(INVALID) # if the user input is not one of those above it must be invalid
                 sleep(SLEEPTIME)

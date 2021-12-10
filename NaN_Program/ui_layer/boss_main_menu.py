@@ -1,4 +1,4 @@
-#Employee Main Menu 
+#Boss Main Menu 
 from ui_layer.boss_destinationmenu import BossDestinationMenu
 from ui_layer.boss_propertymenu import PropertyMenu
 from ui_layer.boss_employeesmenu import BossEmployeesMenu
@@ -6,7 +6,7 @@ from ui_layer.boss_contractormenu import BossContractorMenu
 from ui_layer.boss_maintenancemenu import BossMaintenanceMenu
 import os
 from time import sleep
-from data_files.const import CLEAR, INVALID, QUIT, STAR, DASH, SLEEPTIME
+from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 
 class BossMenu: 
     def __init__(self, id, position):
@@ -23,11 +23,14 @@ class BossMenu:
         5. Destinations
         {DASH*15}
         L. Log out
-        {QUIT}. Quit 
+        Q. Quit 
 {STAR*20}
         '''
 
     def print_menu(self):
+        '''
+        prints the menu
+        '''
         while True:   
             os.system(CLEAR) # Clears the terminal screen 
             print(self.options)
@@ -56,9 +59,9 @@ class BossMenu:
             elif user_choice.upper() == 'L':
                 return 
             
-            elif user_choice.upper() == QUIT:
-                return QUIT
+            elif user_choice.upper() == 'Q':
+                return 'Q'
 
             else:
-                print(INVALID)
+                print(INVALID) # if the user input is not one of those above it must be invalid
                 sleep(SLEEPTIME)

@@ -1,4 +1,4 @@
-#fasteignagluggi
+#The property main menu, only available for the boss.
 from ui_layer.boss_propertycreate import BossPropertyCreate
 from ui_layer.propertylist import PropertyList
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
@@ -22,6 +22,9 @@ class PropertyMenu:
         '''
     
     def display(self):
+        '''
+        displays the menu.
+        '''
         while True:
             os.system(CLEAR)
             print(self.screen)
@@ -38,5 +41,5 @@ class PropertyMenu:
             elif user_input.upper() == 'B':
                 return
             else:
-                print(INVALID)
+                print(INVALID) # if the user input is not one of those above it must be invalid
                 sleep(SLEEPTIME)
