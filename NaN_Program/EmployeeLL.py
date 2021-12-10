@@ -18,11 +18,11 @@ class EmployeeLL:
             new_id = int(all_emp_lis[len(all_emp_lis)-1]["id"])+1
         return str(new_id)
 
-#id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager    
+#Adds employee, add manager if add location is used  
     def add_employee(self,emp_dic):
         loc_add = False
         valid = False
-        if ("Country" in emp_dic) == False:
+        if ("Country" in emp_dic) == False:#will only be true if location is added
             valid, key = self.validation(emp_dic)
         else:
             loc_add = True
@@ -34,9 +34,9 @@ class EmployeeLL:
             return True, None #spurja afhverju key?
         return False, key
 
-
+#Function used for editing location
     def edit_employee(self, edit_emp_dic):
-        valid, key = self.validation(edit_emp_dic)
+        valid, key = self.validation(edit_emp_dic)#Bounces nack to ui if row is invalid
         if valid:
             edit_emp_dic["Destination"] = edit_emp_dic["Destination"].capitalize()
             all_list_emp = self.dlapi.get_all_emp()
@@ -48,7 +48,7 @@ class EmployeeLL:
             return True, None
         return False, key
 
-
+#Get location names for validation. only 3 location allowed originally. kulusuk, Tórshavn and longyearbyen
     def get_destination_name(self):
         desti_names = []
         all_desti_lis = self.dlapi.get_loc_info()
@@ -56,13 +56,13 @@ class EmployeeLL:
             desti_names.append(row["Name"])
         return desti_names
 
-
+#find location index in list for edit
     def find_id_location_emp(self, dic, all_list_emp):
         for i in range(len(all_list_emp)):
             if dic == all_list_emp[i]:
                 return i
 
-
+#returns whole dic of employee with specific id
     def find_emp_id(self, id, all_emp_lis):
         if id.isdigit():
             for dic in all_emp_lis:
@@ -70,7 +70,7 @@ class EmployeeLL:
                     return dic 
             return None
         return False
-
+#Check if login exists
     def login_info(self, email):
         all_emp_lis = self.dlapi.get_all_emp()
         email = email + "@nanair.is"
@@ -80,7 +80,7 @@ class EmployeeLL:
                 dic_return = key
                 return dic_return
 
-
+#generates email for new employee
     def email_generate(self, name):
         name = name.replace(" ",".")
         email = name + "@nanair.is"
@@ -92,7 +92,7 @@ class EmployeeLL:
 
 
 
-
+#Validates all inputed information
     def validation(self, emp_dic):
         loc_correct = False
         dic = {"Name":str, "Social Security":int, "Address":"both", "Phone":int,"GSM":int, "Destination":"unique"}
@@ -112,9 +112,9 @@ class EmployeeLL:
                 emp_dic[key] = emp_dic[key].replace(" ","")
                 get_validation = emp_dic[key].replace("-","").isdigit() #social security, Phone, GSM
 
-            # to check if address or property number are empty    
+            #Both cannot be empty
             if dic[key] == "both":
-                if emp_dic[key] == "" or (len(emp_dic[key]) > 25):
+                if emp_dic[key] == "" or (len(emp_dic[key]) > 25): #both annot be longer than 25
                     return False, key
             #check if Destination is within bounds
             if key.lower() == "destination" and get_validation:
@@ -124,23 +124,24 @@ class EmployeeLL:
                 if loc_correct == False:
                     return False, key
             if (key.lower() == "phone" or key.lower() == "gsm") and get_validation:
-                if 7 > len(emp_dic[key]) or len(emp_dic[key]) > 15:
+                if 7 > len(emp_dic[key]) or len(emp_dic[key]) > 15:#phone has to be in specific length range
                     return False, key
         
             if key.lower() == "social security" and get_validation:
-                if 8 > len(emp_dic[key]) or len(emp_dic[key]) > 12:
+                if 8 > len(emp_dic[key]) or len(emp_dic[key]) > 12:#social security has to be in specific length range
+
                     return False, key
             if get_validation == False:
 
                     return False, key
         return True, key
 
-
+#return all emplployees
     def list_all_employees(self):
         return self.dlapi.get_all_emp()
 
 
-
+#searches by string
     def find_emp_by_str(self, user_str, emp_lis, key):
         ret_lis = []
         for dic in emp_lis:
@@ -149,14 +150,14 @@ class EmployeeLL:
         if ret_lis == []:
             return False
         return ret_lis
-
+#find name of employee by id
     def find_employee_name(self,id):
         employee_names = self.dlapi.get_all_emp()
         for dic in employee_names:
             if int(id) == int(dic["id"]):
                 emp_name = dic["Name"]
         return emp_name
-
+#get employee destiantion
     def get_emp_location(self,id):
         emp_lis = self.dlapi.get_all_emp()
         for dic in emp_lis:
@@ -166,16 +167,5 @@ class EmployeeLL:
         none_val = "None"
         return none_val
 
-
-
-if __name__ == "__main__":
-    e = EmployeeLL()
-    #e.add_employee({"Name": "John", "Social Security": "1234567890", "Address": "Home", "Phone": "1111111", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1"})
-    #id,Name,Social Security,Address,Phone,GSM,Email,Destination,Manager
-    #e.edit_employee({"id": "10", "Name": "Bob", "Social Security": "9876543212", "Address": "Home", "Phone": "9999999", "GSM": "5555555", "Email": "John@nan.is", "Destination": "1", "Manager": "0"})
-    #print(e.email_generate("Kalli"))
-    #f = {"key":"lala","lo":"sda"}
-    #print("ky" in f)
-    print(e.login_info("nanna.daema"))
 
 

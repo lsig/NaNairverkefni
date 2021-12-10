@@ -7,6 +7,8 @@ class MaintenanceDL():
 
 
     def get_all_maintenance_jobs(self):
+        ''' this function lists dicts of all reports from in a csv file
+        '''
         ret_lis = []
         with open(self.csv, newline='', encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -18,6 +20,8 @@ class MaintenanceDL():
         return ret_lis
 
     def add_maintenance_job(self,main_job):
+        ''' this function adds regular maintenance to a csv file
+        '''
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["id","Date-from","Date-to","Frequency:Week(1) or Month(2)","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Priority(ASAP; Now; Emergency)","Suggested-contractor","Suggested-contractor(id)","Status"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -28,6 +32,8 @@ class MaintenanceDL():
 
     
     def change_maintenance_job_info(self,main_job_lis):
+        ''' This function edits the csv file if something is edited
+        '''
          with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = main_job_lis[0]

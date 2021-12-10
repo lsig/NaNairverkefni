@@ -7,6 +7,8 @@ class JobDL:
         self.csv = f"CSV_Files{sep}Maintenance_request.csv"
 
     def get_all_jobs(self):
+        ''' this function lists dicts of all reports from in a csv file
+        '''
         ret_lis = []
         with open(self.csv, newline='', encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -19,6 +21,8 @@ class JobDL:
         return ret_lis
 
     def add_job(self,jobinfo):
+        ''' this function adds jobs to a csv file
+        '''
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["id","Date-created","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Priority(ASAP; Now; Emergency)","Suggested-contractor(id)","Suggested-contractors","Status","Type"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -26,6 +30,8 @@ class JobDL:
 
 
     def change_job_info(self,job_lis):
+        ''' This function edits the csv file if something is edited
+        '''
         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = job_lis[0]

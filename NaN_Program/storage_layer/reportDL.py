@@ -7,6 +7,8 @@ class ReportDL():
 
 
     def get_all_reports(self):
+        ''' this function lists dicts of all reports from in a csv file
+        '''
         ret_lis = []
         with open(self.csv, newline='', encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -18,6 +20,8 @@ class ReportDL():
         return ret_lis
 
     def add_report(self,rep):
+        ''' this function adds reports to a csv file
+        '''
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["Report-id","Request-id","Employee","Employee-id","Title","Description","Location","Property","Property-number","Property-id","Contractor-name","Contractor-id","Contractor-rating","Date","Commission","Total-cost","Status","Feedback"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -27,7 +31,9 @@ class ReportDL():
 
     
     def change_report_info(self,rep_lis):
-         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
+        ''' This function edits the csv file if something is edited
+        '''
+        with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = rep_lis[0]
             writer.writerow(header)

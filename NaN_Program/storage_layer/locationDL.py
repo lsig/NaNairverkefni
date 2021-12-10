@@ -7,6 +7,8 @@ class LocationDL():
 
 
     def get_all_loc(self):
+        ''' this function lists dicts of all reports from in a csv file
+        '''
         ret_lis = []
         with open(self.csv, newline='', encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -18,6 +20,8 @@ class LocationDL():
         return ret_lis
 
     def add_loc(self,loc):
+        ''' this function adds location to a csv file
+        '''
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["id","Name","Country","Airport","Phone","Working-hours","Manager","Manager-id"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -25,6 +29,8 @@ class LocationDL():
 
     
     def change_loc_info(self,loc_lis):
+        ''' This function edits the csv file if something is edited
+        '''
          with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = loc_lis[0]
