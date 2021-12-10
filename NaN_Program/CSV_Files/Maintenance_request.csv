@@ -1,10 +1,6 @@
 id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority(ASAP; Now; Emergency),Suggested-contractor(id),Suggested-contractors,Status,Type
 1,2021-12-10,Jacob arons,2,Fix this UI shit,this ui shit is fucking disgusting,Longyearbyen,Longyearbyen Harbor 1,AA999-9,39,Emergency,1,John Core,2,Regular job
-<<<<<<< HEAD
 2,2021-12-10,Jacob arons,2,Clean oven,do it!,Longyearbyen,Longyearbyen Harbor 1,AA999-5,35,Now,1,John Core,0,Regular job
-=======
-2,2021-12-10,Jacob arons,2,Teini,Doggy kóngurinn,Longyearbyen,Vei 217,F959594,1,ASAP,1,John Core,0,Regular job
-3,2021-12-10,Jacob arons,2,Maxim,Huge schlong,Longyearbyen,Vei 217,F959594,1,ASAP,1,John Core,0,Regular job
-4,2021-12-10,Jacob arons,2,ble,ble,Longyearbyen,Vei 217,F959594,1,ASAP,1,John Core,0,Regular job
-5,2021-12-10,Jacob arons,2,Teini,ble,Longyearbyen,Vei 217,F959594,1,Now,1,John Core,0,Regular job
->>>>>>> 74a166baeb61f833e6fa48568669875dd97a6280
+3,2021-12-11,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,Asap,,,0,Maintenace job
+4,2021-12-11,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,Asap,,,0,Maintenace job
+5,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,Asap,,,0,Maintenace job
