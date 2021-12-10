@@ -1,10 +1,10 @@
+#Employee Menu, only available for the boss. 
 from ui_layer.boss_employeecreate import BossEmployeeCreate
 from ui_layer.employeelist import EmployeeList
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 import os
 from time import sleep
-#starfsmannagluggi
-#Employee Main Menu 
+
 
 
 class BossEmployeesMenu: 
@@ -24,6 +24,9 @@ class BossEmployeesMenu:
         '''
     
     def display(self):
+        '''
+        displays the menu
+        '''
         while True:
             os.system(CLEAR)
             print(self.options)
@@ -41,5 +44,5 @@ class BossEmployeesMenu:
                 return
 
             else:
-                print(INVALID)
+                print(INVALID) # if the user input is not one of those above it must be invalid
                 sleep(SLEEPTIME)

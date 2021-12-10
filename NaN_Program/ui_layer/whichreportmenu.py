@@ -1,9 +1,10 @@
-from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR, JOBDICT
+#A class for guiding bosses to their desired statuses of reports.
+from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
 from ui_layer.reportlist import ReportList
-REPORTHEADER = ['PENDING REPORTS', 'FINISHED REPORTS', 'OTHER REPORTS']
+REPORTHEADER = ['PENDING REPORTS', 'FINISHED REPORTS', 'OTHER REPORTS'] #different statuses of reports
 
 
 
@@ -23,6 +24,9 @@ class WhichReportMenu:
 
 
     def which_request(self):
+        '''
+        Asks the user which report type he wants
+        '''
         while True:
             os.system(CLEAR)
             print(self.screen + self.report_choice())
@@ -32,11 +36,14 @@ class WhichReportMenu:
             elif mainttype.upper() == 'B':
                 return 'B'
 
-            print(INVALID)
+            print(INVALID) #if the input is neither a valid integer nor a request to go back, it is invalid
             sleep(SLEEPTIME)
         
 
     def init_request(self):
+        '''
+        runs the class, by asking for a filter and putting the filter info into the ReportList window.
+        '''
         while True:
     
             self.reqsection = self.which_request()
@@ -48,6 +55,9 @@ class WhichReportMenu:
     
 
     def report_choice(self):
+        '''
+        Prints out all report filters
+        '''
         indentstring = '      '
         report_string = ''
         for index, word in enumerate(REPORTHEADER):

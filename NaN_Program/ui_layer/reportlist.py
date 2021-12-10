@@ -1,9 +1,11 @@
+#Here we display all kinds of reports in a list for the user
 from data_files.const import CLEAR, DASH, INVALID,SLEEPTIME, STAR, REPORTDICT
 from ui_layer.boss_seereport import SeeReport
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
-MAXROWS = 10
+MAXROWS = 50 #max number of rows allowed to be printed
+ROWS = 10 #default number of rows printed
 REPORTHEADER = ['PENDING REPORTS', 'FINISHED REPORTS', 'OTHER REPORTS']
 SEARCHFILTERS = ['Report-id', 'Employee', 'Location', 'Property', 'Date']
 
@@ -16,7 +18,7 @@ class ReportList:
         self.info = info
         self.llapi = LLAPI()
         self.jobsection = jobsection
-        self.rows = MAXROWS
+        self.rows = ROWS
         self.slide = 0
         self.id = id
         self.header = header
@@ -36,7 +38,7 @@ class ReportList:
 
         self.reportlist = self.reportlist_backup
         spacebar = '        '
-        if self.info == None or self.empmenu == True:
+        if self.info == None or self.empmenu == True: #A user can access this screen from various places in the program. self.menutravel makes sure that the menu header is in line with where the user traveled from.
             self.menutravel = f'{spacebar}  | MAINTENANCE |\n{spacebar}  - Reportlist'
         elif jobsection == 'property':
             self.menutravel = f'{spacebar}  | PROPERTIES |\n{spacebar}  - Propertylist\n{spacebar}    - Reports: {self.info["Address"]}'
@@ -82,7 +84,7 @@ class ReportList:
         self.printedids = [self.reportlist[self.firstrow + i]['Report-id'] for i in range(self.rows) if len(self.reportlist) > self.firstrow + i]
 
         if len(self.printedids) > 0:
-            for i in range(self.rows): #til að displaya self.rows verktaka í röð.
+            for i in range(self.rows): #to display self.rows reports.
                 try:
                     reportinfostr = f'{self.printedids[i] + ".":<{REPORTDICT["Report-id"]}}- ' #id with some extra text.
                     for key in self.reportlist[self.firstrow + i]:
@@ -100,7 +102,7 @@ class ReportList:
                             reportinfostr += f"{'| ' + keyprint :<{REPORTDICT[key]}}"
                     print(reportinfostr, end='') #here we print an employee's information.
                             
-                except IndexError:
+                except IndexError:#if the contract id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
                     pass
                 print()
         else:
@@ -138,7 +140,7 @@ class ReportList:
            if returnvalue == 'B':
                return
         
-        elif user_input.isdigit(): #hér selectum við ákveðna fasteign
+        elif user_input.isdigit(): #here we select a report
 
             if user_input in self.printedids:
                 reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist, 'Report-id')
@@ -187,7 +189,7 @@ class ReportList:
                 datefrom = input("Date from (dd-mm-yyyy): ")
                 dateto =   input("Date to (dd-mm-yyyy): ")
                 userstring = ''
-                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.reportlist)
+                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.reportlist) #searches all jobs in between the from-date and the to-date. Returns false if no jobs found.
         
         else:
             userstring = input(f"Search in {key.lower()}: ")

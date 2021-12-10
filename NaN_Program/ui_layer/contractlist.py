@@ -5,32 +5,31 @@ from ui_layer.boss_seecontract import SeeContract
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
-MAXROWS = 10
+MAXROWS = 50 #max number of rows allowed to be printed
+ROWS = 10 #default number of rows printed
 
-JOBHEADER = ['READY JOBS', 'JOBS IN PROGRESS', 'FINISHED JOBS']
-PRIORITYFILTER = ['emergency', 'now', 'asap']
-SEARCHFILTERS = ['Priority', 'Title', 'Property', 'Employee']
+JOBHEADER = ['READY JOBS', 'JOBS IN PROGRESS', 'FINISHED JOBS'] #used to ask the user what kind of contract he wants to see.
 CONTRACTPRINTER = [ (5, "id"), (12, 'Date-created'), (15, 'Employee'), (0, 'Employee-id'), (10, "Title"), (0, "Description"), (20, 'Location'), (15, 'Property'), (0, 'property-number'), (0, 'Property-id'), (15, "Priority"), (0, "Suggested-contractors(id)"), (30, "Suggested-contractors"), (0, 'Status'), (0, 'Type') ]
-CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
+CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER] #used to indent the columns in the list. CONCTRACTPRINTER is only for telling the user which column the indent applies to.
 
-PRIORITYFILTER = ['emergency', 'now', 'asap']
-SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee', 'Date']
+PRIORITYFILTER = ['emergency', 'now', 'asap'] #used to filter priorities
+SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee', 'Date'] #used to ask the user what he wants to search by.
 
 
 class ContractList: 
     def __init__(self, id, position, header, jobsection, info = None) -> None:
         self.llapi = LLAPI()
-        self.jobsection = jobsection
-        self.rows = MAXROWS
-        self.slide = 0
+        self.jobsection = jobsection #used to filter the status of contracts which the user wants to see.
+        self.rows = ROWS
+        self.slide = 0 #for tracking on which page the user has surfed to.
         self.id = id
         self.position = position
         self.header = header
-        if jobsection == 'employee':
+        if jobsection == 'employee': #if the user is an employee we only want to display the contracts that he can report to.
             allcontracts = self.llapi.get_sorted_jobs()
             self.contractlist_backup = allcontracts[1] + allcontracts[2]
             self.contractlist_backup= self.llapi.search_job(self.id['id'], self.contractlist_backup, 'Employee-id')
-        else:
+        else: #else we show 'a boss' the entire contract list.
             self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection]
         self.contractlist = self.contractlist_backup
 
@@ -112,19 +111,19 @@ class ContractList:
         '''
         user_input = input()
 
-        if user_input.upper() == 'P' and self.slide > 0:
+        if user_input.upper() == 'P' and self.slide > 0: #previous slide
             self.slide -= 1
 
-        elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.contractlist):
+        elif user_input.upper() == 'N' and (self.slide + 1) * self.rows < len(self.contractlist): #next slide
             self.slide += 1
         
-        elif user_input.upper() == 'B':
+        elif user_input.upper() == 'B': #back
             return 'B'
 
-        elif user_input.upper() == '/ROW':
+        elif user_input.upper() == '/ROW': #change row length
             self.rows = self.validate(None, '/ROW')
         
-        elif user_input.upper() == 'L': #TODO
+        elif user_input.upper() == 'L': #filter
             returnvalue = self.find_job()
             if returnvalue == 'B':
                 return
@@ -140,7 +139,7 @@ class ContractList:
                     self.contractlist_backup = allcontracts[1] + allcontracts[2]
                     self.contractlist_backup= self.llapi.search_job(self.id['id'], self.contractlist_backup, 'Employee-id')
                 else:
-                    self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection]
+                    self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection] #we want to update the list that we display, now that we may have changed info for the selected property.
                 self.contractlist = self.contractlist_backup
 
         else:
@@ -189,9 +188,9 @@ class ContractList:
         takes in search parameter, send them to the ll and gets
         back a updated list, matching the parameters
         '''
-        for index, filter in enumerate(SEARCHFILTERS):
+        for index, filter in enumerate(SEARCHFILTERS): 
             print(f"{index + 1}: {filter}")
-        if self.contractlist != self.contractlist_backup:
+        if self.contractlist != self.contractlist_backup: #we allow the option to reset the filter if it has been altered.
             print('R: Reset')
         userint = self.validate('userint')
 
@@ -206,11 +205,11 @@ class ContractList:
             datefrom = input("Date from (dd-mm-yyyy): ")
             dateto =   input("Date to (dd-mm-yyyy): ")
             userstring = ''
-            filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist)
+            filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist) #searches all jobs in between the from-date and the to-date. Returns false if no jobs found.
 
         else:
             userstring = input(f"Search in {key.lower()}: ")
-            filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
+            filteredlist = self.llapi.search_job(userstring, self.contractlist, key) #here we filter the list
             userstring = ' ' + userstring
 
         if filteredlist == False:
