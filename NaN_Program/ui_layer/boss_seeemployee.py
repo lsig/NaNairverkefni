@@ -21,6 +21,7 @@ class SeeEmployee:
        - {employeedict['Name']}
      {DASH*15}
      E. Edit
+     R. Property reports
      B. Til baka
 '''
 

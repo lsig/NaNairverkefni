@@ -23,6 +23,7 @@ class SeeContractor:
      - Verktakalisti
        - {self.contractor['Name']}
      {DASH*15}{editornot}
+     R. Property reports
      B. Til baka
 '''
 
