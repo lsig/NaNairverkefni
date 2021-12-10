@@ -1,10 +1,10 @@
+#Destination Menu, only available for the boss. 
 from ui_layer.boss_destinationcreate import BossDestinationCreate
 from ui_layer.boss_destinationlist import DestinationList
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 import os
 from time import sleep
-#áfangastaðsgluggi
-#Destination Main Menu 
+
 
 
 class BossDestinationMenu: 
@@ -24,8 +24,11 @@ class BossDestinationMenu:
         '''
     
     def display(self):
+        '''
+        displays the menu
+        '''
         while True:
-            os.system(CLEAR)
+            os.system(CLEAR) #clear the screen.
             print(self.options)
             user_choice = input()
 
@@ -41,5 +44,5 @@ class BossDestinationMenu:
                 return
 
             else:
-                print(INVALID)
+                print(INVALID) # if the user input is not one of those above it must be invalid
                 sleep(SLEEPTIME)

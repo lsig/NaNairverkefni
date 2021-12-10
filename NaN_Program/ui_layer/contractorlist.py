@@ -1,14 +1,14 @@
-#verktakalisti
+#contractorlist window
 from data_files.const import CLEAR, DASH, INVALID, SLEEPTIME, STAR 
 from ui_layer.boss_seecontractor import SeeContractor
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
-MAXROWS = 50
-ROWS = 10
-SEARCHFILTERS = ['Name', 'Profession', 'Location', 'Rating(0-10)']
+MAXROWS = 50 #max row length
+ROWS = 10 #default row length
+SEARCHFILTERS = ['Name', 'Profession', 'Location', 'Rating(0-10)'] #controls what the user can filter the list by.
 
-CONTRPRINT = [5, 25, 25, 20, 14, 17, 20, 15]
+CONTRPRINT = [5, 25, 25, 20, 14, 17, 20, 15] #for indenting columns.
 
 
 class ContractorList: 
@@ -19,8 +19,8 @@ class ContractorList:
         self.id = id
         self.position = position
         self.contractorlist = self.llapi.list_all_contractors()
-        self.contractorlist_backup = self.llapi.list_all_contractors() #vantar fyrir employee
-        if self.position == 'Employee':
+        self.contractorlist_backup = self.llapi.list_all_contractors() 
+        if self.position == 'Employee': #if the user is an employee we only want to see contractors in the same location as the employee.
             self.contractorlist = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
             self.contractorlist_backup = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
         self.screen = f''' 
@@ -51,10 +51,10 @@ class ContractorList:
         self.firstrow = self.slide * self.rows 
 
         os.system(CLEAR)
-        print(self.screen)
+        print(self.screen) #resets the screen
         self.print_header()
 
-        self.printedids = [self.contractorlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.contractorlist) > self.firstrow + i]
+        self.printedids = [self.contractorlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.contractorlist) > self.firstrow + i] #keeps info about all the id's of the contractors which were printed.
 
         for i in range(self.rows): #til að displaya self.rows verktaka í röð.
             try:
@@ -95,19 +95,19 @@ class ContractorList:
         elif user_input.upper() == '/ROW':
             self.rows = self.validate(None, '/ROW')
         
-        elif user_input.upper() == 'L': #TODO
+        elif user_input.upper() == 'L': #filter
             returnvalue = self.find_contractor()
             if returnvalue == 'B':
                 return
         
-        elif user_input.isdigit(): #TODO, hér selectum við ákveðinn verktaka
+        elif user_input.isdigit(): #here we select a contractor
             
             if user_input in self.printedids:
-                contractorinfo = self.llapi.filter_contr_id(user_input, self.contractorlist)
+                contractorinfo = self.llapi.filter_contr_id(user_input, self.contractorlist) #here we find the contractor that we searched for.
                 seecontractor = SeeContractor(self.id, contractorinfo, self.position) 
                 seecontractor.display()
                 self.contractorlist = self.llapi.list_all_contractors() #we want to update the list that we display, now that we may have changed info for the selected contractor.
-                if self.position == 'Employee':
+                if self.position == 'Employee': #the same for the employee
                     self.contractorlist = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
             else: 
                 print(INVALID)
@@ -123,7 +123,7 @@ class ContractorList:
         takes in search parameters sends them to the 
         ll and gets back a list that is updated
         '''
-        for index, filter in enumerate(SEARCHFILTERS):
+        for index, filter in enumerate(SEARCHFILTERS): #here we print all different filters
             print(f"{index + 1}: {filter}")
         if self.contractorlist != self.contractorlist_backup:
             print('R: Reset')
@@ -132,16 +132,16 @@ class ContractorList:
         if userint == 'B':
             return 'B'
         
-        elif userint == 'R' and self.contractorlist != self.contractorlist_backup:
+        elif userint == 'R' and self.contractorlist != self.contractorlist_backup: #here we reset the filter
             self.contractorlist = self.contractorlist_backup
             return
 
         key = SEARCHFILTERS[userint - 1]
         userstring = input(f"Search in {key.lower()}: ")
 
-        filteredlist = self.llapi.search_contractor(userstring, self.contractorlist, key)
+        filteredlist = self.llapi.search_contractor(userstring, self.contractorlist, key) #creates the filteredlist
 
-        if filteredlist == False:
+        if filteredlist == False: #this means that the search found no contractors.
             print(f"The filter {key.lower()}: {userstring} did not match any result.")
             sleep(SLEEPTIME*3)
         else:
@@ -188,7 +188,7 @@ class ContractorList:
                 elif userint.upper() == 'R':
                     return 'R'
                 elif userint.isdigit() == True and (1 <= int(userint) <= len(SEARCHFILTERS)):
-                    return int(userint)
+                    return int(userint) #
                 
                 print(INVALID)
                 sleep(SLEEPTIME)

@@ -1,4 +1,4 @@
-#viðhaldsgluggi, hjá starfsmönnum og yfirmönnum
+#The maintenancemenu for an employee.
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 from ui_layer.contractlist import ContractList
 from ui_layer.reportlist import ReportList
@@ -35,9 +35,9 @@ class EmployeeMaintenanceMenu:
                 reportlist =  ReportList(self.id, self.position, 'My Reports', 'employee', self.id, True)
                 reportlist.run_screen()
 
-            elif user_input.upper() == 'B':
+            elif user_input.upper() == 'B': 
                 return
 
             else:
-                print(INVALID)
+                print(INVALID) #if the user input is not one of the above, it is invalid.
                 sleep(SLEEPTIME)
