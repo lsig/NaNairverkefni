@@ -10,11 +10,12 @@ NaN_Program: inniheldur allar python files, skiptist í 6 mismunandi foldera og 
 
 Komist inn í forritið með því að slá inn email hjá starfsmanni eða yfirmanni (mismunandi interface)
 
-NaN_Air yfirmenn:
+NaN_Air yfirmenn: jan.jacobsen
 
 
-NaN_Air starfsmenn:
+NaN_Air starfsmenn: jacob.yxa
 
+python version v3.9
 
 YouTube hlekkur: https://www.youtube.com/watch?v=XlROJkjpnUw
 (vonandi virkar hann:))
