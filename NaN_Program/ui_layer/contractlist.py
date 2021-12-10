@@ -75,9 +75,18 @@ class ContractList:
                 try:
                     contractinfost = f'{self.printedids[i] + ".":<{JOBDICT["id"]}}- ' #id with some extra string.
                     for key in self.contractlist[self.firstrow + i]:
+                        keyprint = self.contractlist[self.firstrow + i][key]
+
+                        if key == 'Status':
+                            if keyprint == '0':
+                                keyprint = 'Declined'
+                            elif keyprint == '1':
+                                keyprint = 'Ready'
+                            elif keyprint == '2':
+                                keyprint = 'Finished'
 
                         if key != 'id' and key in JOBDICT.keys(): #We dont want to print the id again.
-                            contractinfost += f"{'| ' + self.contractlist[self.firstrow + i][key] :<{JOBDICT[key]}}"
+                            contractinfost += f"{'| ' + keyprint :<{JOBDICT[key]}}"
                     print(contractinfost, end='') #here we print the contract's information.
                         
                 except IndexError: #if the contract id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
