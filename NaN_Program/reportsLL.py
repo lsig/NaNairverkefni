@@ -15,7 +15,7 @@ class ReportsLL:
         cont_dic = self.dlapi.get_all_cont()
         rep_dic['Contractor-rating'] = ''
         rep_dic["Feedback"] = 'None'
-        valid, key = self.report_validation(rep_dic, cont_dic)
+        valid, key = self.report_validation(rep_dic)
         if valid:
             #rep_dic["Status"] = "1"
             current_date = datetime.date(datetime.now())
@@ -222,7 +222,8 @@ class ReportsLL:
             return None
 
 
-    def report_validation(self, rep_dic, cont_dic): # klárt
+    def report_validation(self, rep_dic): # klárt
+        cont_dic = self.dlapi.get_all_cont()
         get_validation = True
         # a dictionairy for title, description, contractor-name and contractor-id.
         dic = {"Description":"both", "Contractor-id":int, "Commission": int,"Total-cost":int}
@@ -240,25 +241,24 @@ class ReportsLL:
                 get_validation = rep_dic[key].isdigit()
             # checking if the dictionairy key is both a string and integer, and if so, check if the key is empty. If so, the program will return False.
             if key == "Total-cost":
-                if rep_dic["Comission"] != '' and rep_dic[key] < rep_dic["Comission"]:
+                if rep_dic["Commission"] != '' and rep_dic[key] <= rep_dic["Commission"]:
                     return False, key
             if dic[key] == "both":
                 if rep_dic[key] == "":
                     return False, key
 
             if key == "Contractor-id" and get_validation:
-                con_id_bool = self.check_cont_dic(cont_dic["Contractor-id"])
+                con_id_bool = self.check_cont_dic(rep_dic["Contractor-id"],cont_dic)
                 if con_id_bool == False:
                     return False,key
                 
             if get_validation == False:
                     return False, key
             prev = rep_dic[key]
-            return True, None
+        return True, None
 
-    def check_cont_dic(self,cont_id):
-        all_cont = self.dlapi.get_all_cont()
-        for dic in all_cont:
+    def check_cont_dic(self,cont_id,cont_dic):
+        for dic in cont_dic:
             if dic["id"] == cont_id:
                     return True     
         return False
