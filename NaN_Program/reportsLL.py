@@ -151,6 +151,7 @@ class ReportsLL:
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
             dic = rep_dic
             dic["Status"] = "1"
+            dic["Feedback"] = ""
             all_rep_lis[rep_loc_in_list] = dic
             self.dlapi.change_report(all_rep_lis)
             all_job_lis = self.jobll.get_all_jobs()
@@ -170,7 +171,7 @@ class ReportsLL:
             job["Status"] = "2"
             self.jobll.edit_info(job,rep_dic["Request-id"])          
 
-        if dic["Status"] == "2" and rep_dic["Status"] == "0":
+        if dic["Status"] == "2" and rep_dic["Status"] == "0" or dic["Status"] =="1" and rep_dic["Status"] == "0":
             # Reopen job and change status, request-id
             dic["Status"] = "0"
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
