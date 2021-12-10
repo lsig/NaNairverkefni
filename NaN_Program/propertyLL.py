@@ -5,7 +5,7 @@ from datetime import datetime
 class PropertyLL:
     def __init__(self):
         self.dlapi = DlAPI()
-
+#Adds property with validation
     def add_property(self,prop_dic):
         valid, key = self.is_valid(prop_dic)
         if valid:
@@ -15,18 +15,16 @@ class PropertyLL:
             self.dlapi.add_property(prop)
             return True, key
         return False, key
-
+#Auto assigns id 
     def assign_id_prop(self):
         all_prop_lis = self.dlapi.get_property_info()
-        new_id = int(all_prop_lis[len(all_prop_lis)-1]["id"])+1
+        if all_prop_lis == []:#retuns 1 if csv has only header
+            new_id = 1
+        else:
+            new_id = int(all_prop_lis[len(all_prop_lis)-1]["id"])+1
         return str(new_id)
     
-    def get_destination_count(self):
-        all_desti_lis = self.dlapi.get_loc_info()
-        desti_count = int(all_desti_lis[len(all_desti_lis)-1]["id"])
-        return desti_count
-
-        
+#Gets and add to a list all location names, is used to check if location name exists
     def get_destination_name(self):
         desti_names = []
         all_desti_lis = self.dlapi.get_loc_info()
@@ -34,18 +32,7 @@ class PropertyLL:
             desti_names.append(row["Name"])
         return desti_names
 
-    # def replace_loc_num_with_name(self,dic):
-    #     loc_names_lis = self.dlapi.get_loc_info()
-    #     dic["Destination"] = loc_names_lis[int(dic["Destination"])-1]['Name']
-    #     return dic
-
-    # def replace_loc_name_with_num(self,dic_edit):
-    #     loc_info = self.dlapi.get_loc_info()
-    #     for dic in loc_info:
-    #         if dic_edit["Destination"].lower() == dic["Name"].lower():
-    #             dic_edit["Destination"] = dic["id"]
-    #             return dic_edit
-    
+#Validates that information added by the user is correct
     def is_valid(self,prop_dic) -> bool:
         dic = {"Destination":"unique", "Address":"both", "Size":int, "Rooms":int,"Type":str,"Property-number":"both","Extras":str}
         get_validation = True
@@ -76,12 +63,12 @@ class PropertyLL:
         return True, key
 
         
-    
+#Gets and returns list of dictionaries with properties. from database
     def get_all_prop(self):
         all_prop = self.dlapi.get_property_info()
         return all_prop
 
-
+#find correct property by id, used to select specific property by id
     def find_prop_id(self,id,all_prop_lis):
         if id.isdigit():
             for dic in all_prop_lis:
@@ -91,6 +78,7 @@ class PropertyLL:
             return None #[{"Text":"No employee with this id"}]
         return False
 
+#Edits and validates edit_info
     def edit_info(self,edit_prop_dic):
         #edit_prop_dic = self.replace_loc_name_with_num(edit_prop_dic)
         valid, key = self.is_valid(edit_prop_dic)
@@ -104,33 +92,23 @@ class PropertyLL:
             return True, key
         return False, key
     
+#Gets index in list of dictionaries for editing.
     def find_id_location_prop(self,dic,all_lis_prop):
         for i in range(len(all_lis_prop)):
             if dic == all_lis_prop[i]:
                 return i
 
-
+#Search engine for properties. Searches by string.
     def find_prop_by_str(self,user_string,prop_lis,key):
         ret_lis=[]
-        #if user_string.replace(" ",""):
         for dic in prop_lis:
             if user_string.lower() in dic[key].lower():
                 ret_lis.append(dic)
         if ret_lis == []:
-            return False #skoða þetta svo filter drepur ekki forritið
+            return False
         return ret_lis
-        #return False
 
 
-if __name__ == "__main__":
-    g = PropertyLL()
-    #d = g.get_all_prop()
-    #d = g.find_prop_id("2",g.get_all_prop())
-    #print(d[0]["id"])
-    #g.edit_info({"id":"31","Destination":"Kulsuk", "Address":"lol", "Size":"2", "Rooms":"3","Type":"biiiig","Property-number":"poom street 2","Extras":"Windows"})
-    print(g.find_prop_by_str("windowss",g.get_all_prop(),"Extras"))
-    #print(g.get_all_prop)
-    #{"Name":"John"}
-    #d=g.get_destination_name()
-    #print(d[0].capitalize())
+
+
  
