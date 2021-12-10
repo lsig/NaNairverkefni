@@ -16,4 +16,5 @@ NaN_Air yfirmenn:
 NaN_Air starfsmenn:
 
 
-YouTube hlekkur: 
+YouTube hlekkur: https://www.youtube.com/watch?v=XlROJkjpnUw
+(vonandi virkar hann:))
