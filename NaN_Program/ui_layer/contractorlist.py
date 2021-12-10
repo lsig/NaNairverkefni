@@ -26,12 +26,12 @@ class ContractorList:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | VERKTAKAR |
-     - Verktakalisti
+    | CONTRACTORS |
+     - Contractorlist
      {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+     L. Look
+     B. Back
+     /row. Change row length
 
 '''
 

@@ -1,2 +1,6 @@
 id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority(ASAP; Now; Emergency),Suggested-contractor(id),Suggested-contractors,Status,Type
+<<<<<<< HEAD
 1,2021-12-10,Jacob arons,2,oven,oven broken fix pls,Longyearbyen,Vei 217,F959594,1,ASAP,,,0,Regular job
+=======
+1,2021-12-10,Jacob arons,2,Clean,big,Longyearbyen,Vei 217,F959594,1,ASAP,,,1,Regular job
+>>>>>>> fa9fe2fecd23595b7bbf1029035edc8a66a6b56a

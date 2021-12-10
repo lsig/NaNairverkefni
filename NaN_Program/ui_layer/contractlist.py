@@ -38,12 +38,12 @@ class ContractList:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | VIÐHALD |
-     - Verkbeiðnalisti
+    | MAINTENANCE |
+     - Contract list
      {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+     L. Look
+     B. Back
+     /row. Change row length
 
 '''
 

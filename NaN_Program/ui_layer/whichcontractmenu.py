@@ -24,8 +24,8 @@ class WhichContractMenu:
             self.screen = f''' 
     {self.id['Destination']} | {self.id['Name']} | {self.position}
     {STAR*14}
-        | VIÐHALD |
-        - Verkbeiðnalisti
+        | MAINTENANCE |
+        - Contractlist
         {DASH*15}
 '''
 
@@ -59,5 +59,5 @@ class WhichContractMenu:
         report_string = ''
         for index, word in enumerate(JOBHEADER):
             report_string += f'{indentstring}{index+1}. {word.capitalize()}\n'
-        report_string += f'{indentstring}{DASH*18}\n{indentstring}B. Til baka\n{STAR*20}'
+        report_string += f'{indentstring}{DASH*18}\n{indentstring}B. Back\n{STAR*20}'
         return report_string

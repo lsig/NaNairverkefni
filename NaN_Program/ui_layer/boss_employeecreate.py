@@ -15,12 +15,12 @@ class BossEmployeeCreate:
         self.screen = f'''
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | STARFSMENN |
-     - Skrá nýja starfsmann
+    | EMPLOYEES |
+     - Create new employee
       {DASH*15}
-    {QUIT}. Hætta við
+    {QUIT}. Quit
 
-    | STARFSMAÐUR |
+    | EMPLOYEE |
 {DASH * 25}'''
 
     def display_menu(self):

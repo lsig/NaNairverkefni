@@ -3,7 +3,7 @@ from data_files.const import CLEAR, CONTRACTTEMPLATE, INVALID, REGCONTRACTTEMPLA
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
-REGORNO = ['REGLULEG VERKBEIÐNI', 'STÖK VERKBEIÐNI']
+REGORNO = ['REPEATED MAINTENANCE', 'MAINTENANCE']
 
 
 class ContractCreate:
@@ -15,11 +15,9 @@ class ContractCreate:
         self.screen = f'''
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | VIÐHALD |
-     - Skrá nýja verkbeiðni
+    | MAINTENANCE |
+     - Create new contract
       {DASH*15}
-    B. Back
-
 '''
     def run_screen(self):
         self.mainttype  = ''
@@ -34,7 +32,7 @@ class ContractCreate:
     def display(self):
 
         os.system(CLEAR)
-        print(self.screen)
+        print(self.screen + self.report_choice())
 
         print(f"{'| ' + REGORNO[self.mainttype] + ' |':^60}\n{DASH * 60}")
         for i in range( len(self.template)): 
@@ -51,8 +49,8 @@ class ContractCreate:
     def regular_or_single(self):
         while True:
             os.system(CLEAR)
-            print(self.screen)
-            mainttype = input("1. Regluleg verkbeiðni\n2. Stök verkbeiðni\n") #1. maintenance job, 2. regular job
+            print(self.screen + self.report_choice() )
+            mainttype = input() #1. maintenance job, 2. regular job
             if mainttype == '1':
                 return 0, REGCONTRACTTEMPLATE
 
@@ -131,6 +129,7 @@ class ContractCreate:
         print(self.screen)
         self.printcontractinfo(user_row)
 
+
     def validate(self, rowinput):
         try:
             rowint = int(rowinput)
@@ -142,4 +141,13 @@ class ContractCreate:
             print(INVALID)
             sleep(SLEEPTIME)
             return None
+    
+
+    def report_choice(self):
+        indentstring = '      '
+        report_string = ''
+        for index, word in enumerate(REGORNO):
+            report_string += f'{indentstring}{index+1}. {word.capitalize()}\n'
+        report_string += f'{indentstring}{DASH*18}\n{indentstring}B. Back\n{STAR*20}\n'
+        return report_string
 

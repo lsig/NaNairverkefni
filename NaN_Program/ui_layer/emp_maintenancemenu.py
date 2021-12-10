@@ -12,7 +12,7 @@ class EmployeeMaintenanceMenu:
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*18}
-          | VIÐHALD |
+          | MAINTENANCE |
       {DASH*20}
       1. My Requests
       2. My Reports

@@ -232,7 +232,7 @@ if __name__ == "__main__":
     dic_fromat = {"Date-to(dd-mm-yyyy)":"17-12-2021","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":""}
     g = MaintenanceLL()
     # # print(dic_fromat[])
-    print(g.add_maintenance(dic_fromat,4))
+    # print(g.add_maintenance(dic_fromat,4))
     # t =",S, i,                                        i"
     # a = " ".join(t.strip(",").split()).split(",")
     # print(a)
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     # if x:
     #     print("yeah")
     g.add_to_job()
-    
+    print("-2".isdigit())
     # print(g.get_all_main_jobs())
     # g.update_main_job(DlAPI.get_maintenance_jobs())
     # x1 = datetime.date(datetime.now())

@@ -35,21 +35,21 @@ class ReportList:
 
         self.reportlist = self.reportlist_backup
         if self.info == None:
-            menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'
+            menutravel = f'    | MAINTENANCE |\n     - Reportlist'
         elif jobsection == 'property':
-            menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.info["Address"]}'
+            menutravel = f'    | PROPERTIES |\n     - Propertylist\n       - {self.info["Address"]}'
         elif jobsection == 'employee':
-            menutravel = f'    | STARFSMENN |\n     - Starfsmannalisti\n       - {self.info["Name"]}'
+            menutravel = f'    | EMPLOYEES |\n     - Employeelist\n       - {self.info["Name"]}'
         elif jobsection == 'contractor':
-            menutravel = f'    | VERKTAKAR |\n     - Verktakalisti\n       - {self.info["Name"]}'
+            menutravel = f'    | CONTRACTORS |\n     - Contractorlist\n       - {self.info["Name"]}'
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
     {STAR*14}
 {menutravel}
      {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+     L. Look
+     B. Back
+     /row. Change row length
 
 '''
 

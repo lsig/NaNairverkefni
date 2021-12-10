@@ -13,12 +13,12 @@ class BossContractorMenu:
         self.options = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
-          | VERKTAKAR |
+          | CONTRACTORS |
       {DASH*22}
-      1. Skrá nýjan verktaka
-      2. Verktakalisti
+      1. Create new contractor
+      2. Contractorlist
       {DASH*22}
-      B. Til baka
+      B. Back
 {STAR*20}
         '''
     

@@ -23,12 +23,12 @@ class EmployeeList:
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*14}
-    | STARFSMENN |
-     - Starfsmannalisti
+    | EMPLOYEES |
+     - Employeelist
      {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+     L. Look
+     B. Back
+     /row. Change row length
 
 '''
     def run_screen(self):
@@ -119,7 +119,7 @@ class EmployeeList:
         elif userint == 'R':
             self.employeelist = self.employeelist_backup
             return
-            
+
         key = SEARCHFILTERS[userint - 1]
         userstring = input(f"Search in {key.lower()}: ")
 
