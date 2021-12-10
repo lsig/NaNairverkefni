@@ -20,7 +20,7 @@ class ReportsLL:
             #rep_dic["Status"] = "1"
             current_date = datetime.date(datetime.now())
             #rep_dic = self.replace_loc_num_with_name(rep_dic)
-            rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],job_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], self.get_cont_name(rep_dic["Contractor-id"]), rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"], "0",rep_dic["Feedback"])
+            rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],job_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], self.get_cont_name(rep_dic["Contractor-id"]), rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"],rep_dic["Total-cost"], "0",rep_dic["Feedback"])
             # Status, Property, Property-number, Property-id, Contractor-Rating, Location
             self.dlapi.add_report(rep)
             return True, key
