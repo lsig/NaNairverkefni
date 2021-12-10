@@ -221,7 +221,11 @@ class JobLL:
 
 
     def search_time_period(self,time_period_from,time_period_to,all_job_lis=None):
-        # all_job_lis = self.get_all_jobs()
+        ''' this functions searches for all job or reports for a specific time period it first checks if the dates
+        are valid and then if the end of time period is bigger or equals to the start of the time period if and then if
+        it is a report or a job. it returns false if the dates are invalid or there are no jobs or reports at that
+        time period other wise it returns a list of all the jobs or reports at that time period
+        '''
         if self.check_date(time_period_from) and self.check_date(time_period_to):
             time_period_from = time_period_from.split("-")
             time_period_to = time_period_to.split("-")
@@ -245,7 +249,9 @@ class JobLL:
 
 
     def check_date(self,date):
-        ## dd-mm-yyyy or 
+        ''' this functions checks if the date are valid from date time and it returns false if the the date is not valid
+        other wise true
+        '''
         if date.replace("-","").isdigit():
             date = date.split("-")
             if len(date) == 3:
@@ -289,7 +295,7 @@ if __name__ == "__main__":
     # str_test = "2222-10-10"
     # datetime.strptime(str_test,'%y-%m-%d') 
     print(datetime(4441,10,13))
-    print(g.search_time_period("28-02-2021","11-12-2021"))
+    # print(g.search_time_period("28-02-2021","11-12-2021"))
 
 
 

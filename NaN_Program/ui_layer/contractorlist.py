@@ -36,12 +36,18 @@ class ContractorList:
 '''
 
     def run_screen(self):
+        '''
+        initiates the class in a way
+        '''
         returnvalue = ''
         while returnvalue != 'B':
             self.display_list()
             returnvalue = self.prompt_user()
     
     def display_list(self):
+        '''
+        displays the contractors in a list 
+        '''
         self.firstrow = self.slide * self.rows 
 
         os.system(CLEAR)
@@ -68,6 +74,9 @@ class ContractorList:
     
 
     def prompt_user(self, oldinput = None):
+        '''
+        promts the user for input
+        '''
         if oldinput == None:
             user_input = input()
         else:
@@ -110,6 +119,10 @@ class ContractorList:
 
 
     def find_contractor(self):
+        '''
+        takes in search parameters sends them to the 
+        ll and gets back a list that is updated
+        '''
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.contractorlist != self.contractorlist_backup:
@@ -136,6 +149,9 @@ class ContractorList:
 
 
     def print_header(self):
+        '''
+        prints the header
+        '''
         for index, k in enumerate(self.contractorlist[0].keys()):
             if k == 'id':
                 extra = '  '
@@ -146,6 +162,9 @@ class ContractorList:
     
     
     def print_footer(self):
+        '''
+        prints the footer 
+        '''
         dashlen = 21
         print(f"{DASH * sum(CONTRPRINT)}\n")
         if self.slide > 0:
@@ -158,6 +177,9 @@ class ContractorList:
     
 
     def validate(self, userint = None, userrows = None):
+        '''
+        validates various inputs that are easily prevantble
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")

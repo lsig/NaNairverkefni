@@ -33,37 +33,47 @@ class DestinationList:
 
 '''
     def run_screen(self):
+        '''
+        initates the class in a way
+        '''
         returnvalue = ''
         while returnvalue != 'B':
             self.display_list()
             returnvalue = self.prompt_user()
     
     def display_list(self):
-            self.firstrow = self.slide * self.rows 
+        '''
+        displays a list of destination in an orderly fashion
+        '''
 
-            os.system(CLEAR)
-            print(self.screen)
-            self.print_header()
+        self.firstrow = self.slide * self.rows 
 
-            self.printedids = [self.destinationlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.destinationlist) > self.firstrow + i]
-            
+        os.system(CLEAR)
+        print(self.screen)
+        self.print_header()
 
-            for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
-                try:
-                    destinationinfostr = f'{self.printedids[i] + ".":<{DESTPRINT[0]}}- ' #id with some extra text.
-                    for index, k in enumerate(self.destinationlist[self.firstrow + i]):
-                        if k != 'id':
-                            destinationinfostr += f"{'| ' + self.destinationlist[self.firstrow + i][k][0:22] :<{DESTPRINT[index]}}"
+        self.printedids = [self.destinationlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.destinationlist) > self.firstrow + i]
+        
 
-                    print(destinationinfostr, end='') #here we print an destination's information.
-                        
-                except IndexError: #if the destination id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
-                    pass
-                print()
-            
-            self.print_footer()
+        for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
+            try:
+                destinationinfostr = f'{self.printedids[i] + ".":<{DESTPRINT[0]}}- ' #id with some extra text.
+                for index, k in enumerate(self.destinationlist[self.firstrow + i]):
+                    if k != 'id':
+                        destinationinfostr += f"{'| ' + self.destinationlist[self.firstrow + i][k][0:22] :<{DESTPRINT[index]}}"
+
+                print(destinationinfostr, end='') #here we print an destination's information.
+                    
+            except IndexError: #if the destination id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
+                pass
+            print()
+        
+        self.print_footer()
     
     def prompt_user(self, oldinput = None):
+        '''
+        prompts the user for input
+        '''
         if oldinput == None:
             user_input = input()
         else:
@@ -103,6 +113,10 @@ class DestinationList:
             sleep(SLEEPTIME)
 
     def find_destination(self):
+        '''
+        takes in search parameters, sends them to
+        the ll and gets back an updated list of dest
+        '''
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.destinationlist != self.destinationlist_backup:
@@ -129,6 +143,9 @@ class DestinationList:
         
 
     def print_header(self):
+        '''
+        prints the header 
+        '''
         for index, k in enumerate(self.destinationlist[0].keys()):
             if k == 'id':
                 extra = '  '
@@ -139,6 +156,9 @@ class DestinationList:
     
 
     def print_footer(self):
+        '''
+        prints the footer
+        '''
         dashlen = 21
         print(f"{DASH * sum(DESTPRINT)}\n")
         if self.slide > 0:
@@ -152,6 +172,10 @@ class DestinationList:
 
 
     def validate(self, userint = None, userrows = None):
+        '''
+        validates various user inputs that are easily 
+        preventable
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")
