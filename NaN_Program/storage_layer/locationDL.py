@@ -31,7 +31,7 @@ class LocationDL():
     def change_loc_info(self,loc_lis):
         ''' This function edits the csv file if something is edited
         '''
-         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
+        with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = loc_lis[0]
             writer.writerow(header)

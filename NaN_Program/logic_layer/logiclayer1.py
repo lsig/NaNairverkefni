@@ -1,1 +1,0 @@
-#hér kemur logical layer

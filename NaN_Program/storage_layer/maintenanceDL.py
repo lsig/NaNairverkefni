@@ -34,7 +34,7 @@ class MaintenanceDL():
     def change_maintenance_job_info(self,main_job_lis):
         ''' This function edits the csv file if something is edited
         '''
-         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
+        with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = main_job_lis[0]
             writer.writerow(header)
@@ -44,9 +44,3 @@ class MaintenanceDL():
                 ,dic["Property-id"],dic["Priority(ASAP; Now; Emergency)"],dic["Suggested-contractor"],dic["Suggested-contractor(id)"],dic["Status"]]) #dic["Status"]
 
 
-
-if __name__ == "__main__":
-    g = MaintenanceDL()
-    t = Maintenance("1","10","20","þrif","þarf að þrýfa húsið","nuuk","siggastaðir","20","50","Haraldur","23","7","High","Arnar, guðni, Ármann")
-    g.add_maintenance_job(t)
-    g.change_maintenance_job_info(g.get_all_maintenance_jobs())

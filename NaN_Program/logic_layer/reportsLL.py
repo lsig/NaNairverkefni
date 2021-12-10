@@ -1,7 +1,7 @@
 from storage_layer.DLAPI import DlAPI
 from models.report import Report
 from datetime import datetime
-from jobLL import JobLL
+from logic_layer.jobLL import JobLL
 
 # NOTETOSELF - sum verk krefjast verktaka, en ekki öll. Td gluggaþvottur krefst ekki en að laga pípulagnir krefst þess. 
 # Ef verktaki er nauðsynlegur, þarf að taka fram þóknun verktaka, en ekki þarf að gera það ef enginn verktaki er ráðinn.

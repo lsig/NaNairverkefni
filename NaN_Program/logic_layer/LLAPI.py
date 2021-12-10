@@ -1,12 +1,12 @@
 
 from os import name
-from contractorLL import ContractorLL
-from propertyLL import PropertyLL
-from jobLL import JobLL
-from EmployeeLL import EmployeeLL
-from locationLL import LocationLL
-from reportsLL import ReportsLL
-from maintenanceLL import MaintenanceLL
+from logic_layer.contractorLL import ContractorLL
+from logic_layer.propertyLL import PropertyLL
+from logic_layer.jobLL import JobLL
+from logic_layer.EmployeeLL import EmployeeLL
+from logic_layer.locationLL import LocationLL
+from logic_layer.reportsLL import ReportsLL
+from logic_layer.maintenanceLL import MaintenanceLL
 
 class LLAPI:
     def __init__(self):

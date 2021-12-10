@@ -2,9 +2,9 @@
 
 from models.maintenance import Maintenance
 from storage_layer.DLAPI import DlAPI
-from EmployeeLL import EmployeeLL
-from propertyLL import PropertyLL
-from jobLL import JobLL
+from logic_layer.EmployeeLL import EmployeeLL
+from logic_layer.propertyLL import PropertyLL
+from logic_layer.jobLL import JobLL
 from datetime import date, datetime,timedelta
 
 

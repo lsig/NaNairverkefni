@@ -111,3 +111,7 @@ id,Destination,Address,Size,Rooms,Type,Property-number,Extras
 109,Longyearbyen,Longyearbyen Harbor 1,62.5,1,submarine,AA999-79,None
 110,Longyearbyen,Longyearbyen Harbor 1,62.5,1,submarine,AA999-80,None
 111,Longyearbyen,Longyearbyen Harbor 1,62.5,1,submarine,AA999-81,None
+<<<<<<< Updated upstream
+=======
+112,Kulusuk,Cool street 20,30,3,igloo,1,None
+>>>>>>> Stashed changes

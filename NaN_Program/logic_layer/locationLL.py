@@ -1,6 +1,6 @@
 from storage_layer.DLAPI import DlAPI
 from models.location import Location
-from EmployeeLL import EmployeeLL
+from logic_layer.EmployeeLL import EmployeeLL
 
 
 

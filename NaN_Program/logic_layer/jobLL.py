@@ -1,7 +1,7 @@
 from storage_layer.DLAPI import DlAPI
 from models.job import Job
 from datetime import datetime
-from EmployeeLL import EmployeeLL
+from logic_layer.EmployeeLL import EmployeeLL
 #change job will require self.boss fetching!!!!!!!!!!!!!!!!!!!!! note to self
 class JobLL:
     def __init__(self):
