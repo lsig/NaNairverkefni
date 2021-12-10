@@ -14,7 +14,7 @@ CONTRACTPRINTER = [ (5, "id"), (12, 'Date-created'), (15, 'Employee'), (0, 'Empl
 CONTRACTPRINT = [element[0] for element in CONTRACTPRINTER]
 
 PRIORITYFILTER = ['emergency', 'now', 'asap']
-SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee']
+SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee', 'Date']
 
 
 class ContractList: 
@@ -156,6 +156,7 @@ class ContractList:
         if len(self.contractlist) > 0:
             print(f"#. to Select Contract\n{DASH*dashlen}")
 
+
     def find_job(self):
             for index, filter in enumerate(SEARCHFILTERS):
                 print(f"{index + 1}: {filter}")
@@ -169,9 +170,15 @@ class ContractList:
                 self.contractlist = self.contractlist_backup
                 return
             key = SEARCHFILTERS[userint - 1]
-            userstring = input(f"Search in {key.lower()}: ")
+            if key == 'Date':
+                datefrom = input("Date from (dd-mm-yyyy): ")
+                dateto =   input("Date to (dd-mm-yyyy): ")
+                userstring = 'Dates'
+                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist)
 
-            filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
+            else:
+                userstring = input(f"Search in {key.lower()}: ")
+                filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
 
             if filteredlist == False:
                 print(f"The filter {key.lower()}: {userstring} did not match any result.")
@@ -179,6 +186,7 @@ class ContractList:
             else:
                 self.contractlist = filteredlist
     
+
     def validate(self, userint = None, userrows = None):
         if userint is not None:
             while True:
