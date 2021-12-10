@@ -68,6 +68,8 @@ class SeeContract:
                 while True:
                     returnvalue = self.change_row()
                     if returnvalue == 'C' or returnvalue == 'B':
+                        if returnvalue == 'C':
+                            pass
                         return returnvalue
             
             if self.contract['Status'] == '1' and user_input.upper() == 'R':
@@ -118,7 +120,7 @@ class SeeContract:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_rep(self.contract)
+                valid, key = self.llapi.edit_contract(self.contract, self.id)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)

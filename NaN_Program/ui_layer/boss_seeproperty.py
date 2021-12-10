@@ -16,7 +16,7 @@ class SeeProperty:
         self.property = propertyinfo
         editornot = ''
         if position == 'Manager':
-            editornot = f"\n     E. Edit"
+            editornot = f"\n\tE. Edit"
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*20}

@@ -149,6 +149,9 @@ class LLAPI:
     
     def search_job_by_time(self, datefrom, dateto, joblist):
         return self.jLL.search_time_period(datefrom, dateto, joblist)
+    
+    def edit_contract(self, jobdict, id):
+        return self.jLL.edit_info(jobdict, id )
 
     
     #MaintenanceLL

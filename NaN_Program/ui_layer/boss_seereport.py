@@ -15,9 +15,11 @@ class SeeReport:
         self.id = id
         self.report = reportinfo
         editornot = ''
-        if self.position == 'Manager' and self.report['Status'] == '1':
+        if self.position == 'Manager' and (self.report['Status'] == '1' or self.report['Status'] == '2') :
             self.reportvar = 'PM' #PendingManager
-            editornot = f"\n\tC. Confirm\n\tD. Deny"
+            editornot = f"\n\tC. Confirm"
+            if self.report['Status'] == '1':
+                editornot += f"\n\tD. Deny"
         
         elif self.position == 'Employee' and self.report['Status'] == '0':
             self.reportvar = 'DE' #DeniedEmployee
