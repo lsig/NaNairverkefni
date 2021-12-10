@@ -155,7 +155,8 @@ class ReportList:
                 self.reportlist_backup = self.llapi.get_contractor_reports(self.info['id'])
 
             else:
-                self.reportlist = self.llapi.get_sorted_reports()[self.jobsection] #we want to update the list that we display, now that we may have changed info for the selected property.
+                self.reportlist_backup = self.llapi.get_sorted_reports()[self.jobsection] #we want to update the list that we display, now that we may have changed info for the selected property.
+            self.reportlist = self.reportlist_backup
 
 
         else:

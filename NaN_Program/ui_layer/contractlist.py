@@ -141,6 +141,7 @@ class ContractList:
                     self.contractlist_backup= self.llapi.search_job(self.id['id'], self.contractlist_backup, 'Employee-id')
                 else:
                     self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection]
+                self.contractlist = self.contractlist_backup
 
         else:
             print(INVALID)
