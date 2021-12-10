@@ -13,6 +13,7 @@ class ReportsLL:
 
     def add_report(self, rep_dic, job_dic): # klárt
         cont_dic = self.dlapi.get_all_cont()
+        rep_dic['Contractor-rating'] = '0'
         valid, key = self.report_validation(rep_dic, cont_dic)
         if valid:
             #rep_dic["Status"] = "1"

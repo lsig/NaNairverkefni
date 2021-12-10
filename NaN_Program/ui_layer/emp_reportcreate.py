@@ -63,9 +63,9 @@ class EmpReportCreate:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             if confirm.upper() == 'C':  # TODO
-                self.reportdict['Contractor-rating'] = '0'
+                #self.reportdict['Contractor-rating'] = '0'
                 valid, key = self.llapi.create_report(self.reportdict, self.contract)
-                self.contract['Status'] = '1'
+                #self.contract['Status'] = '1'
                 new_report_dict = self.llapi.id_for_report_create(self.contract['id'])
                 new_report_dict['Status'] = '1'
 
