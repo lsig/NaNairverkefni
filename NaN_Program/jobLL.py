@@ -214,13 +214,13 @@ class JobLL:
 
 
     def search_time_period(self,time_period_from,time_period_to,all_job_lis=None):
-        all_job_lis = self.get_all_jobs()
+        #all_job_lis = self.get_all_jobs()
         if self.check_date(time_period_from) and self.check_date(time_period_to):
             time_period_from = time_period_from.split("-")
             time_period_to = time_period_to.split("-")
             date_from = datetime(int(time_period_from[2]),int(time_period_from[1]),int(time_period_from[0])).date()
             date_to = datetime(int(time_period_to[2]),int(time_period_to[1]),int(time_period_to[0])).date()
-            print(date_from,date_to)
+            #print(date_from,date_to)
             if date_from <= date_to:
                 ret_lis = []
                 for dic in all_job_lis:

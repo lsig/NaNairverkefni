@@ -146,6 +146,9 @@ class LLAPI:
     
     def search_job(self,string, joblist, key):
         return self.jLL.find_jobs_by_str(string, joblist, key)
+    
+    def search_job_by_time(self, datefrom, dateto, joblist):
+        return self.jLL.search_time_period(datefrom, dateto, joblist)
 
     
     #MaintenanceLL
@@ -157,6 +160,8 @@ class LLAPI:
     
     def update_reg_jobs(self):
         self.maintLL.add_to_job()
+    
+    
     
 
         
