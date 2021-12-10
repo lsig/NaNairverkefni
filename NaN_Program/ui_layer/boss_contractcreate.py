@@ -3,6 +3,7 @@ from data_files.const import CLEAR, CONTRACTTEMPLATE, INVALID, REGCONTRACTTEMPLA
 from time import sleep
 import os
 from logic_layer.LLAPI import LLAPI
+REGORNO = ['REGLULEG VERKBEIÐNI', 'STÖK VERKBEIÐNI']
 
 
 class ContractCreate:
@@ -35,13 +36,13 @@ class ContractCreate:
         os.system(CLEAR)
         print(self.screen)
 
-        print(f"{'| ' + self.mainttype + ' |':^35}\n{DASH * 35}")
+        print(f"{'| ' + REGORNO[self.mainttype] + ' |':^60}\n{DASH * 60}")
         for i in range( len(self.template)): 
             user_input = input(f"{i+1}. {self.template[i] + ':':<30} ") #The user puts in info for every section of the property
             if user_input.upper() == 'B': #The program exits if the user inputs q, for quitting.
                 return 'B'
             self.contractdict[self.template[i]] = user_input
-        print(DASH*35)
+        print(DASH*60)
         
         contract_confirm = self.confirmcontract()
         if contract_confirm is True:
@@ -53,10 +54,10 @@ class ContractCreate:
             print(self.screen)
             mainttype = input("1. Regluleg verkbeiðni\n2. Stök verkbeiðni\n") #1. maintenance job, 2. regular job
             if mainttype == '1':
-                return 'REGLULEG VERKBEIÐNI', REGCONTRACTTEMPLATE
+                return 0, REGCONTRACTTEMPLATE
 
             elif mainttype == '2':
-                return 'STÖK VERKBEIÐNI', CONTRACTTEMPLATE
+                return 1, CONTRACTTEMPLATE
             
             elif mainttype.upper() == 'B':
                 return 'Back', 'Easteregg'
@@ -68,13 +69,13 @@ class ContractCreate:
         
     def printcontractinfo(self, number = None):
 
-        contractstring = f"{'| ' + self.mainttype + ' |':^35}\n{DASH * 35}\n"
+        contractstring = f"{'| ' + self.mainttype + ' |':^60}\n{DASH * 60}\n"
         for i in range( len(self.template)):
             if number != None and i == number - 1:
                 contractstring += f"{i+1}. {self.template[i] + ':':<30} ____\n"
             else:
                 contractstring += f"{i+1}. {self.template[i] + ':':<30} {self.contractdict[self.template[i]]}\n"
-        contractstring += DASH*35
+        contractstring += DASH*60
         
         print(contractstring)
     
@@ -84,7 +85,11 @@ class ContractCreate:
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
             if confirm.upper() == 'C':
-                valid, key = self.llapi.add_job(self.contractdict, self.id['id']) #here we tell the LLAPI to add the job, it tells us if the procedure was succesful.
+                if self.mainttype == 0:
+                    valid, key = self.llapi.add_maint_job(self.contractdict, self.id['id'])
+                elif self.mainttype == 1:
+                    valid, key = self.llapi.add_job(self.contractdict, self.id['id']) #here we tell the LLAPI to add the job, it tells us if the procedure was succesful.
+                
                 if valid:
                     print('Contract succesfully added!')
                     sleep(SLEEPTIME)

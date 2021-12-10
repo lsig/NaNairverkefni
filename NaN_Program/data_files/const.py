@@ -13,7 +13,7 @@ QUIT = 'Q'
 
 CONTACTTEMPLATE = ['Name', 'Social Security', 'Address', 'Phone', 'GSM', 'Destination'] #listi fyrir starfsmenn
 CONTRACTTEMPLATE = ["Employee-id", "Title", "Description", "Property-id", "Priority(ASAP; Now; Emergency)", "Suggested-contractor(id)"] #listi fyrir verkbeiðnir
-REGCONTRACTTEMPLATE = CONTRACTTEMPLATE + ["Frequency(Week: 1, or Month: 2)", '"Date-to(dd-mm-yyyy)"']
+REGCONTRACTTEMPLATE = CONTRACTTEMPLATE + ["Frequency(Week: 1, or Month: 2)", "Date-to(dd-mm-yyyy)"]
 PROPERTYTEMPLATE = ['Destination', 'Address', 'Size', 'Rooms', 'Type', 'Property-number', 'Extras'] # listi fyrir fasteignir
 CONTRACTORTEMPLATE = ["Name","Contact-name","Profession","Phone","Working-hours"] #listi fyrir verktaka, location kemur frá boss
 DESTINATIONTEMPLATE = ['Name', 'Country' ,'Airport', 'Phone', 'Working-hours', 'Manager', 'Social Security', 'Address', 'Phone-manager', 'GSM']
