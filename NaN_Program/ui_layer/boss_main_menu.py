@@ -16,11 +16,11 @@ class BossMenu:
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
         {DASH*15}
-        1. Fasteignir 
-        2. Starfsmenn
-        3. Viðhald
-        4. Verktakar
-        5. Áfangastaðir
+        1. Properties 
+        2. Employees
+        3. Maintenance
+        4. Contractors
+        5. Destinations
         {DASH*15}
         L. Log out
         {QUIT}. Quit 

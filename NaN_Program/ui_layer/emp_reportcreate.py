@@ -29,30 +29,30 @@ class EmpReportCreate:
         os.system(CLEAR)
         print(self.screen)
 
-        print(f"{'| ' + self.contract['Title'] + ' |':^70}\n{DASH*70}\n")
+        print(f"{'| ' + self.contract['Title'] + ' |':^70}\n{DASH*70}")
 
         for i in range( len(CREATEREPORTTEMPLATE)): 
-            user_input = input(f"{i+1}. {CREATEREPORTTEMPLATE[i] + ':':<17} ") #The user puts in info for every section of the contract
+            user_input = input(f"{i+1}. {CREATEREPORTTEMPLATE[i] + ':':<35} ") #The user puts in info for every section of the contract
             if user_input.upper() == QUIT: #The program exits if the user inputs q, for quitting.
                 return
             #check validity
             #while self.input_is_valid(user_input) == False:
                 #user_input = input(f"{i+1}: {CREATEREPORTTEMPLATE[i]}")
             self.reportdict[CREATEREPORTTEMPLATE[i]] = user_input
-        print(DASH*25)
+        print(DASH*70)
         
         self.confirmcontract()
 
         
     def printcontractinfo(self, number = None):
 
-        contractstring = ''
+        contractstring = f"{'| ' + self.contract['Title'] + ' |':^70}\n{DASH*70}\n"
         for i in range( len(CREATEREPORTTEMPLATE)):
             if number != None and i == number - 1:
-                contractstring += f"{i+1}. {CREATEREPORTTEMPLATE[i] + ':':<17} ____\n"
+                contractstring += f"{i+1}. {CREATEREPORTTEMPLATE[i] + ':':<35} ____\n"
             else:
-                contractstring += f"{i+1}. {CREATEREPORTTEMPLATE[i] + ':':<17} {self.reportdict[CREATEREPORTTEMPLATE[i]]}\n"
-        contractstring += DASH*25
+                contractstring += f"{i+1}. {CREATEREPORTTEMPLATE[i] + ':':<35} {self.reportdict[CREATEREPORTTEMPLATE[i]]}\n"
+        contractstring += DASH*70
         
         print(contractstring)
     
@@ -96,7 +96,6 @@ class EmpReportCreate:
             user_row = None
             while user_row is None:
                 self.reset_screen()
-                self.display()
                 user_input = input("Row to change: ")
                 user_row = self.validate(user_input)
         else:

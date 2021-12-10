@@ -14,12 +14,12 @@ class BossDestinationMenu:
         self.options = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
-         | ÁFANGASTAÐIR |
+         | DESTINATIONS |
       {DASH*22}
-      1. Skrá nýjan áfangastað
-      2. Áfangastaðalisti
+      1. Create new destination
+      2. Destinationlist
       {DASH*22}
-      B. Til baka
+      B. Back
 {STAR*20}
         '''
     
