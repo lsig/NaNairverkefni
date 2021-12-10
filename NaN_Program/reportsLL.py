@@ -85,8 +85,23 @@ class ReportsLL:
         for report in all_reports:
             if report['Property-id'] == propertyid:
                 propertyreports.append(report)
-        
         return propertyreports
+    
+    def get_emp_reports(self, empid):
+        empreports = []
+        all_reports = self.get_all_rep()
+        for report in all_reports:
+            if report['id'] == empid:
+                empreports.append(report)
+        return empreports
+    
+    def get_contractor_reports(self, contractorid):
+        contractorreports = []
+        all_reports = self.get_all_rep()
+        for report in all_reports:
+            if report['id'] == contractorid:
+                contractorreports.append(report)
+        return contractorreports
             
 
 
