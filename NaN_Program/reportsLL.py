@@ -91,7 +91,7 @@ class ReportsLL:
         empreports = []
         all_reports = self.get_all_rep()
         for report in all_reports:
-            if report['id'] == empid:
+            if report['Employee-id'] == empid:
                 empreports.append(report)
         return empreports
     
@@ -99,7 +99,7 @@ class ReportsLL:
         contractorreports = []
         all_reports = self.get_all_rep()
         for report in all_reports:
-            if report['id'] == contractorid:
+            if report['Contractor-id'] == contractorid:
                 contractorreports.append(report)
         return contractorreports
             
