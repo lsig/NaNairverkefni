@@ -90,6 +90,7 @@ class SeeReport:
                 emp_description = input("Add description: ")
                 self.report['Description'] = emp_description
                 self.llapi.confirm_or_deny_pending_report(self.report)
+                return 'notpending'
                 
 
         print(INVALID)
