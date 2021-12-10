@@ -248,9 +248,10 @@ class ReportsLL:
                     return False, key
 
             if key == "Contractor-id" and get_validation:
-                con_id_bool = self.check_cont_dic(rep_dic["Contractor-id"],cont_dic)
-                if con_id_bool == False:
-                    return False,key
+                if rep_dic["Contractor-id"] != '':
+                    con_id_bool = self.check_cont_dic(rep_dic["Contractor-id"],cont_dic)
+                    if con_id_bool == False:
+                        return False,key
                 
             if get_validation == False:
                     return False, key

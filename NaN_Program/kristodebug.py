@@ -5,6 +5,7 @@ from ui_layer.boss_propertycreate import BossPropertyCreate
 
 
 if __name__ == "__main__":
-    testingclasses = BossPropertyCreate('1')
-    testingclasses.display() 
+    # testingclasses = BossPropertyCreate('1')
+    # testingclasses.display() 
+    print( '-4'.isdigit() )
 
