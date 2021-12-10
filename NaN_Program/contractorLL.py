@@ -16,7 +16,10 @@ class ContractorLL:
 
     def assign_id_cont(self):
         all_cont_lis = self.dlapi.get_all_cont()
-        new_id = int(all_cont_lis[len(all_cont_lis)-1]["id"])+1
+        if all_cont_lis == []:
+            new_id = 1
+        else:
+            new_id = int(all_cont_lis[len(all_cont_lis)-1]["id"])+1
         return new_id
 
     def is_valid(self,cont_dic) -> bool: # þarf að bæta við því ef location sé til
