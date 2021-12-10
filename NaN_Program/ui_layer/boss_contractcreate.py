@@ -20,6 +20,9 @@ class ContractCreate:
         {DASH*15}
 '''
     def run_screen(self):
+        '''
+        initiates the class in a way
+        '''
         self.mainttype  = ''
         while self.mainttype != 'Back':
             returnvalue = ''
@@ -30,13 +33,16 @@ class ContractCreate:
 
 
     def display(self):
+        '''
+        displays the info we want the user to see
+        '''
 
         os.system(CLEAR)
         print(self.screen + self.report_choice())
 
         print(f"{'| ' + REGORNO[self.mainttype] + ' |':^60}\n{DASH * 60}")
         for i in range( len(self.template)): 
-            user_input = input(f"{i+1}. {self.template[i] + ':':<30} ") #The user puts in info for every section of the property
+            user_input = input(f"{i+1}. {self.template[i] + ':':<30} ") #The user puts in info for every section of the contract
             if user_input.upper() == 'B': #The program exits if the user inputs q, for quitting.
                 return 'B'
             self.contractdict[self.template[i]] = user_input
@@ -47,6 +53,11 @@ class ContractCreate:
             return 'B'
 
     def regular_or_single(self):
+        '''
+        takes in user inpunt and returns 
+        whether the request is a one time request or 
+        a recurring request
+        '''
         while True:
             os.system(CLEAR)
             print(self.screen + self.report_choice() )
@@ -66,6 +77,9 @@ class ContractCreate:
 
         
     def printcontractinfo(self, number = None):
+        '''
+        prints the contract info 
+        '''
 
         contractstring = f"{'| ' + REGORNO[self.mainttype] + ' |':^60}\n{DASH * 60}\n"
         for i in range( len(self.template)):
@@ -79,12 +93,15 @@ class ContractCreate:
     
 
     def confirmcontract(self):
+        '''
+        Takes the new contract info, send to ll which validates the info
+        '''
 
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
             if confirm.upper() == 'C':
                 if self.mainttype == 0:
-                    valid, key = self.llapi.add_maint_job(self.contractdict, self.id['id'])
+                    valid, key = self.llapi.add_maint_job(self.contractdict, self.id['id']) 
                 elif self.mainttype == 1:
                     valid, key = self.llapi.add_job(self.contractdict, self.id['id']) #here we tell the LLAPI to add the job, it tells us if the procedure was succesful.
                 
@@ -97,7 +114,7 @@ class ContractCreate:
                     sleep(SLEEPTIME)
                     self.editcontractinfo( self.template.index(key) )
         
-            elif confirm.upper() == 'E': # TODO
+            elif confirm.upper() == 'E': 
                 self.editcontractinfo()
 
             elif confirm.upper() == 'Q':
@@ -109,6 +126,9 @@ class ContractCreate:
                 self.reset_screen()
     
     def editcontractinfo(self, row = None):
+        '''
+        edits the contract info 
+        '''
         if row == None:
             user_row = None
             while user_row is None:
@@ -124,6 +144,9 @@ class ContractCreate:
         self.reset_screen()
     
     def reset_screen(self, user_row = None):
+        '''
+        resets the screen
+        '''
 
         os.system(CLEAR)
         print(self.screen)
@@ -131,6 +154,9 @@ class ContractCreate:
 
 
     def validate(self, rowinput):
+        '''
+        validates some basic user inputs 
+        '''
         try:
             rowint = int(rowinput)
             if 1 <= rowint <= len(self.template):
@@ -144,6 +170,9 @@ class ContractCreate:
 
 
     def report_choice(self):
+        '''
+        what kind of report the user wants to see 
+        '''
         indentstring = '      '
         report_string = ''
         for index, word in enumerate(REGORNO):
