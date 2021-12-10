@@ -8,7 +8,7 @@ class JobLL:
         self.dlapi = DlAPI()
         self.empLL = EmployeeLL()
         self.boss_loc = ""
-    
+    #Add job, Ignores validation if regular maintenance is using this class
     def add_job(self,job_dic,id,main_job_bool=False):
 
         if main_job_bool == False:
@@ -29,6 +29,7 @@ class JobLL:
                 return False,key
 
         else:
+            #Getting information from regular_maintenance
             cur_date = job_dic["Date-created"]
             type = "Maintenace job"
             emp_name = job_dic["Employee"]
@@ -42,6 +43,7 @@ class JobLL:
         self.dlapi.add_job(job)
         return True, None
 
+#Auto incremented id
     def assign_id_job(self):
         all_job_lis = self.dlapi.get_jobs()
         if all_job_lis == []:
@@ -50,23 +52,10 @@ class JobLL:
             new_id = int(all_job_lis[len(all_job_lis)-1]["id"])+1
         return str(new_id)
     
-    # def find_employee_name(self,id):
-    #     employee_names = self.dlapi.get_all_emp()
-    #     for dic in employee_names:
-    #         if int(id) == int(dic["id"]):
-    #             emp_name = dic["Name"]
-    #     return emp_name
 
-    # def get_emp_location(self,id):
-    #     emp_lis = self.dlapi.get_all_emp()
-    #     for dic in emp_lis:
-    #         if int(id) == int(dic["id"]):
-    #             boss_location = dic["Destination"]
-    #             return boss_location
-    #     none_val = "None"
-    #     return none_val
         
-        #big validation check
+        #Validation check makes sure that property, employee and contractor is located in the same location/destination
+        #Also checks for incorrect input
     def is_valid(self,job_dic) -> bool:
         priority_check = False
         dic = {"Employee-id":int, "Title":"both", "Description":"both", "Property-id":int,"Priority(ASAP; Now; Emergency)":str,"Suggested-contractor(id)":int}
@@ -94,34 +83,32 @@ class JobLL:
                 if key == "Property-id" and get_validation:
                         if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
                             return False,key
-                if key == "Suggested-contractor(id)" and get_validation:
+                if key == "Suggested-contractor(id)" and get_validation: #Contractor can be empty string
                     if job_dic["Suggested-contractor(id)"] != '':
                         if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
                             return False,key
                     else:
-                        job_dic["Suggested-contractor(id)"] = ''
-            # to check if address or property number are empty    
+                        job_dic["Suggested-contractor(id)"] = '' 
             if dic[key] == "both":
                 if job_dic[key] == "":
                     return False,key
-            #check if Destination is within bounds
             if get_validation == False:
                     return False,key
         return True, None
 
-
+#getting property address and destination
     def prop_address_from_id(self,id):
         addresses = self.dlapi.get_property_info()
         for dic in addresses:
             if int(id) == int(dic["id"]):
                 return  [dic["Address"],dic["Property-number"],dic["Destination"]]
         return "","",""
-
+#Three allowed priority words
     def priority_word_check(self):
         priority = ["ASAP","Now","Emergency"]
         return priority
    
-
+#Search engine that searches by string
     def find_jobs_by_str(self,user_string,job_lis,key):
         ret_lis=[]
         if user_string.replace(" ",""):
@@ -132,11 +119,11 @@ class JobLL:
         return False
 
 
-    
+#Returns all jobs list of dictrionaries
     def get_all_jobs(self):
         return self.dlapi.get_jobs()
 
-
+#sorts all jobs for ui
     def get_all_jobs_sorted(self):#Kristofer!
         all_jobs = self.get_all_jobs()
         jobs_list = self.sort_by_priority(all_jobs)
@@ -146,7 +133,7 @@ class JobLL:
         #    all_jobs[counter]["Suggested-contractors"] = self.get_con_name_and_location(row["Suggested-contractors"])["Name"]
         #    counter += 1
         return jobs_list
-    
+#sorts jobs by status
     def sort_all_jobs(self, job_list):
         ready_jobs = []
         unready_jobs = []
@@ -161,6 +148,7 @@ class JobLL:
         
         return [ready_jobs, unready_jobs, finished_jobs]
     
+#sort by priority for ui
     def sort_by_priority(self, oldlist):
         new_list = []
         for priority in ['emergency', 'now', 'asap']:
@@ -174,12 +162,12 @@ class JobLL:
 
         return new_list
 
-    
+#Return total number of jobs for avg rating    
     def total_jobs_count(self):
         return len(self.dlapi.get_jobs())
 
 
-
+#For validation. get Contractor name and location
     def get_con_name_and_location(self,id):#fer líklegast í contractorLL
         con_list = self.dlapi.get_all_cont()
         for dic in con_list:
@@ -189,7 +177,7 @@ class JobLL:
         con_info = {"Name":"null","Location":"null"}
         return con_info 
         
-
+#this functiion replaces one line from a list, for edit
     def edit_info(self,edit_job_dic,id): #virkar ekki find id location virkar ekki
         self.boss_loc = edit_job_dic["Location"]
         valid, key = self.is_valid(edit_job_dic)
@@ -201,7 +189,7 @@ class JobLL:
             self.dlapi.change_job(all_lis_job)
             return True,None
         return False,key
-
+#Returns dictionary for job with specific id
     def find_job_id(self,id,all_job_lis):
         if id.isdigit():
             for dic in all_job_lis:
@@ -211,7 +199,7 @@ class JobLL:
             return None #[{"Text":"No employee with this id"}]
         return False
 
-
+#find index in list for edit
     def find_id_location_job(self,dic,all_lis_job):
         for i in range(len(all_lis_job)):
             if dic == all_lis_job[i]:
@@ -269,33 +257,6 @@ class JobLL:
 
 
 
-
-
-if __name__ == "__main__":
-    g = JobLL()
-    (g.get_all_jobs_sorted())
-    #print(g.find_employee_name("5"))
-    print(g.add_job({"Employee-id":"2","Title":"Maxim","Description":"something","Property-id":"1","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":"1","Suggested-contractors":"1"},"1"))
-    #bool2 = g.is_valid({"Employee-id":"2","Title":"something1","Description":"Do something","Property-id":"1","Priority":"1","Suggested-contractors":"1"})
-    #print(bool2)
-    #print(g.prop_address_from_id("1"))
-    #print(g.find_jobs_by_str("o",g.get_all_jobs(),"Title"))
-    #print(g.get_con_name_and_location("1")["Name"])
-    #g.edit_info({"id":"1","Date-created":"2021-12-05","Employee":"Jan Jacobsen","Employee-id":"1","Title":"small window clean","Description":"cleandd the windows!","Location":"Longyearbyen","Property":"Vei 217","Property-number":"F959594","Property-id":"1","Priority":"1","Suggested-contractors":"1","Status":"0"},"1")
-    #print(g.get_all_jobs())
-
-    date_1 = datetime(4441,10,13).date()
-    date_2 = datetime(2021,12,10).date()
-    print(date_1,date_2)
-    date_3 = datetime.date(datetime.now())
-    if date_1 <= date_3 and date_2 >= date_3:
-        print(len("2222-22-22"))
-
-    print("09-22-2012".split("-"),len(""),int("-09"))
-    # str_test = "2222-10-10"
-    # datetime.strptime(str_test,'%y-%m-%d') 
-    print(datetime(4441,10,13))
-    # print(g.search_time_period("28-02-2021","11-12-2021"))
 
 
 
