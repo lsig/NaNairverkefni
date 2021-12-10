@@ -63,8 +63,13 @@ class EmpReportCreate:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
 
             if confirm.upper() == 'C':  # TODO
-                self.llapi.create_report(self.reportdict, self.contract)
-                self.llapi.confirm_or_deny_pending_report(self.reportdict)
+                self.reportdict['Contractor-rating'] = '0'
+                valid, key = self.llapi.create_report(self.reportdict, self.contract)
+                self.contract['Status'] = '1'
+                new_report_dict = self.llapi.id_for_report_create(self.contract['id'])
+                new_report_dict['Status'] = '1'
+
+                self.llapi.confirm_or_deny_pending_report(new_report_dict)
                 if valid: 
                     print("Contract succesfully added!")
                     sleep(SLEEPTIME)

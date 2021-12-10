@@ -21,7 +21,7 @@ REPORTTEMPLATE = ['Report-id', 'Request-id', 'Employee', 'Employee-id', 'Title',
 
 CREATEREPORTTEMPLATE = ['Description', 'Contractor-id', 'Commission']
 
-JOBDICT = {'id': 5, 'Date-created': 15, 'Employee': 20, 'Title': 25, 'Location': 20, 'Property': 25, 'Priority(ASAP; Now; Emergency)': 12, 'Suggested-contractors': 30, 'Type': 20}
+JOBDICT = {'id': 5, 'Date-created': 15, 'Employee': 20, 'Title': 25, 'Location': 20, 'Property': 25, 'Priority(ASAP; Now; Emergency)': 12, 'Suggested-contractors': 30, 'Status':10,  'Type': 10}
 REPORTDICT = {'Report-id': 5, 'Employee': 20, 'Title': 15, 'Location': 20, 'Property': 25, 'Contractor-rating': 15, 'Date': 15, 'Commission': 15, 'Status': 10}
 
 
