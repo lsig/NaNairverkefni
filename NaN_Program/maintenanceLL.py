@@ -118,10 +118,12 @@ class MaintenanceLL:
 
     def check_date(self,date):
         if len(date[0]) == 2 and len(date[1]) == 2 and len(date[2]) == 4:
-            if int(date[0]) > 0 and int(date[0]) < 32 and int(date[1]) > 0 and int(date[1]) < 13:
-                date_time=datetime(int(date[2]),int(date[1]),int(date[0])).date()
-                if date_time > datetime.date(datetime.now()):
-                    return date_time
+            if int(date[1]) > 0 and int(date[1]) < 13:
+                nr_days_in_months=[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                if 0 < int(date[0]) <= nr_days_in_months[int(date[1])-1]:
+                    date_time=datetime(int(date[2]),int(date[1]),int(date[0])).date()
+                    if date_time > datetime.date(datetime.now()):
+                        return date_time
         return False
 
 
@@ -227,10 +229,10 @@ if __name__ == "__main__":
     # print((x1- x).days)
     # print(x.strftime("%B"))
 
-    dic_fromat = {"Date-to(dd-mm-yyyy)":"11-12-2021","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":""}
+    dic_fromat = {"Date-to(dd-mm-yyyy)":"31-02-2021","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":""}
     g = MaintenanceLL()
     # # print(dic_fromat[])
-    # print(g.add_maintenance(dic_fromat,4))
+    print(g.add_maintenance(dic_fromat,4))
     # t =",S, i,                                        i"
     # a = " ".join(t.strip(",").split()).split(",")
     # print(a)
