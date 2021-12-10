@@ -2,7 +2,7 @@ from datetime import date
 
 
 class Report:
-    def __init__(self,report_id,request_id,emp,emp_id,title,descript,location,property,property_number,property_id,contract_name,contract_id,contract_rating,date,commission,status):
+    def __init__(self,report_id,request_id,emp,emp_id,title,descript,location,property,property_number,property_id,contract_name,contract_id,contract_rating,date,commission,status,feedback):
         self.report_id = report_id
         self.request_id = request_id
         self.emp = emp
@@ -19,6 +19,7 @@ class Report:
         self.date = date
         self.comm = commission
         self.status = status
+        self.feed = feedback
         
 
 

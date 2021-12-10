@@ -13,13 +13,14 @@ class ReportsLL:
 
     def add_report(self, rep_dic, job_dic): # klárt
         cont_dic = self.dlapi.get_all_cont()
-        rep_dic['Contractor-rating'] = '0'
+        rep_dic['Contractor-rating'] = ''
+        rep_dic["Feedback"] = 'None'
         valid, key = self.report_validation(rep_dic, cont_dic)
         if valid:
             #rep_dic["Status"] = "1"
             current_date = datetime.date(datetime.now())
             #rep_dic = self.replace_loc_num_with_name(rep_dic)
-            rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],job_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], self.get_cont_name(rep_dic["Contractor-id"]), rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"], "0")
+            rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],job_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], self.get_cont_name(rep_dic["Contractor-id"]), rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"], "0",rep_dic["Feedback"])
             # Status, Property, Property-number, Property-id, Contractor-Rating, Location
             self.dlapi.add_report(rep)
             return True, key
@@ -146,7 +147,6 @@ class ReportsLL:
             dic = rep_dic
             all_rep_lis[rep_loc_in_list] = dic
             self.dlapi.change_report(all_rep_lis)
-            all_job_lis = self.jobll.get_all_jobs()
         if dic["Status"] == "0" and rep_dic["Status"] == "1":
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
             dic = rep_dic
