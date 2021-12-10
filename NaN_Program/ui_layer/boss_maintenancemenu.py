@@ -2,7 +2,6 @@
 from data_files.const import CLEAR, INVALID, STAR, DASH, SLEEPTIME
 from ui_layer.boss_contractcreate import ContractCreate
 from ui_layer.whichcontractmenu import WhichContractMenu
-from ui_layer.reportlist import ReportList
 from time import sleep
 import os
 
@@ -15,13 +14,13 @@ class BossMaintenanceMenu:
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
-            | VIÐHALD |
-      {DASH*24}
-      1. Skrá nýja verkbeiðni
-      2. Verkbeiðnalisti
-      3. Verkskýrslulisti
-      {DASH*24}
-      B. Til baka
+          | MAINTENANCE |
+        {DASH*15}
+        1. Create new contract
+        2. Contractlist
+        3. Reportlist
+        {DASH*15}
+        B. Back
 {STAR*20}
         '''
 

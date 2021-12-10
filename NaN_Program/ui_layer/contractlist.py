@@ -36,18 +36,21 @@ class ContractList:
 
     
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | MAINTENANCE |
-     - Contract list
-     {DASH*15}
-     L. Look
-     B. Back
-     /row. Change row length
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | MAINTENANCE |
+          - Contract list
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
 
     def run_screen(self):
+        '''
+        initates the class in a way 
+        '''
         returnvalue = ''
 
         while returnvalue != 'B': 
@@ -56,6 +59,9 @@ class ContractList:
     
 
     def display_list(self):
+        '''
+        displays the contract list in an orderly manner 
+        '''
         self.llapi.update_reg_jobs() #this checks all regular jobs in the Regular_maintenance.csv file and checks whether any job is coming up in the near future. If so, the program adds the job to the Maintenance_request.csv
 
         self.firstrow = self.slide * self.rows 
@@ -101,6 +107,9 @@ class ContractList:
 
     
     def prompt_user(self):
+        '''
+        prompts the user for input 
+        '''
         user_input = input()
 
         if user_input.upper() == 'P' and self.slide > 0:
@@ -120,7 +129,7 @@ class ContractList:
             if returnvalue == 'B':
                 return
         
-        elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
+        elif user_input.isdigit(): #Here we select a contract
 
             if user_input in self.printedids:
                 contractinfo = self.llapi.filter_job_id(user_input, self.contractlist)  #TODO 
@@ -139,6 +148,9 @@ class ContractList:
     
 
     def print_header(self):
+        '''
+        prints the header 
+        '''
         for key, value in JOBDICT.items():
             if key == 'id':
                 extra = '  '
@@ -154,6 +166,9 @@ class ContractList:
     
 
     def print_footer(self):
+        '''
+        prints the footer 
+        '''
         print(f"{DASH* sum(JOBDICT.values())}\n")
         dashlen = 21
         if self.slide > 0:
@@ -169,38 +184,45 @@ class ContractList:
 
 
     def find_job(self):
-            for index, filter in enumerate(SEARCHFILTERS):
-                print(f"{index + 1}: {filter}")
-            if self.contractlist != self.contractlist_backup:
-                print('R: Reset')
-            userint = self.validate('userint')
+        '''
+        takes in search parameter, send them to the ll and gets
+        back a updated list, matching the parameters
+        '''
+        for index, filter in enumerate(SEARCHFILTERS):
+            print(f"{index + 1}: {filter}")
+        if self.contractlist != self.contractlist_backup:
+            print('R: Reset')
+        userint = self.validate('userint')
 
-            if userint == 'B':
-                return 'B'
-            elif userint == 'R' and self.contractlist != self.contractlist_backup:
-                self.contractlist = self.contractlist_backup
-                return
-            key = SEARCHFILTERS[userint - 1]
+        if userint == 'B':
+            return 'B'
+        elif userint == 'R' and self.contractlist != self.contractlist_backup:
+            self.contractlist = self.contractlist_backup
+            return
+        key = SEARCHFILTERS[userint - 1]
 
-            if key == 'Date':
-                datefrom = input("Date from (dd-mm-yyyy): ")
-                dateto =   input("Date to (dd-mm-yyyy): ")
-                userstring = ''
-                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist)
+        if key == 'Date':
+            datefrom = input("Date from (dd-mm-yyyy): ")
+            dateto =   input("Date to (dd-mm-yyyy): ")
+            userstring = ''
+            filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist)
 
-            else:
-                userstring = input(f"Search in {key.lower()}: ")
-                filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
-                userstring = ' ' + userstring
+        else:
+            userstring = input(f"Search in {key.lower()}: ")
+            filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
+            userstring = ' ' + userstring
 
-            if filteredlist == False:
-                print(f"The filter {key.lower()}:{userstring} did not match any result.")
-                sleep(SLEEPTIME*3)
-            else:
-                self.contractlist = filteredlist
+        if filteredlist == False:
+            print(f"The filter {key.lower()}:{userstring} did not match any result.")
+            sleep(SLEEPTIME*3)
+        else:
+            self.contractlist = filteredlist
     
 
     def validate(self, userint = None, userrows = None):
+        '''
+        validates various user inputs that are easily preventable 
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")

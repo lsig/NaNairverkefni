@@ -34,26 +34,30 @@ class ReportList:
 
 
         self.reportlist = self.reportlist_backup
+        spacebar = '        '
         if self.info == None:
-            menutravel = f'    | MAINTENANCE |\n     - Reportlist'
+            menutravel = f'{spacebar}  | MAINTENANCE |\n{spacebar}  - Reportlist'
         elif jobsection == 'property':
-            menutravel = f'    | PROPERTIES |\n     - Propertylist\n       - {self.info["Address"]}'
+            menutravel = f'{spacebar}  | PROPERTIES |\n{spacebar}  - Propertylist\n{spacebar}    - {self.info["Address"]}'
         elif jobsection == 'employee':
-            menutravel = f'    | EMPLOYEES |\n     - Employeelist\n       - {self.info["Name"]}'
+            menutravel = f'{spacebar}  | EMPLOYEES |\n{spacebar}  - Employeelist\n{spacebar}    - {self.info["Name"]}'
         elif jobsection == 'contractor':
-            menutravel = f'    | CONTRACTORS |\n     - Contractorlist\n       - {self.info["Name"]}'
+            menutravel = f'{spacebar}  | CONTRACTORS |\n{spacebar}  - Contractorlist\n{spacebar}    - {self.info["Name"]}'
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-    {STAR*14}
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
 {menutravel}
-     {DASH*15}
-     L. Look
-     B. Back
-     /row. Change row length
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
 
     def run_screen(self):
+        '''
+        This function iniates the class
+        '''
         returnvalue = ''
 
         while returnvalue != 'B':
@@ -62,6 +66,9 @@ class ReportList:
     
 
     def display_list(self):
+        '''
+        This function displays the report list
+        '''
 
         self.firstrow = self.slide * self.rows 
 
@@ -104,6 +111,9 @@ class ReportList:
 
 
     def prompt_user(self,oldinput = None):
+        '''
+        This function propmt the user for input
+        '''
         if oldinput == None:
             user_input = input()
         else:
@@ -133,10 +143,19 @@ class ReportList:
                 reportinfo = self.llapi.filter_rep_id(user_input, self.reportlist, 'Report-id')
                 seereport= SeeReport(self.id, reportinfo, self.position)
                 seereport.display()
+
+            if self.jobsection == 'property':
+                self.reportlist_backup = self.llapi.get_property_reports(self.info['id'])
+                
+            elif self.jobsection == 'employee':
+                self.reportlist_backup = self.llapi.get_emp_reports(self.info['id'])
+
+            elif self.jobsection == 'contractor':
+                self.reportlist_backup = self.llapi.get_contractor_reports(self.info['id'])
+
+            else:
                 self.reportlist = self.llapi.get_sorted_reports()[self.jobsection] #we want to update the list that we display, now that we may have changed info for the selected property.
-            else: 
-                print(INVALID)
-                sleep(SLEEPTIME)
+
 
         else:
             print(INVALID)
@@ -144,6 +163,10 @@ class ReportList:
         
 
     def find_report(self):
+        '''
+        This function takes in search parameters 
+        sendt to the ll and gets an updated list back
+        '''
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.reportlist != self.reportlist_backup:
@@ -162,7 +185,7 @@ class ReportList:
                 datefrom = input("Date from (dd-mm-yyyy): ")
                 dateto =   input("Date to (dd-mm-yyyy): ")
                 userstring = ''
-                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist)
+                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.reportlist)
         
         else:
             userstring = input(f"Search in {key.lower()}: ")
@@ -177,6 +200,9 @@ class ReportList:
         
 
     def print_header(self):
+        '''
+        default header printer
+        '''
         for key, value in REPORTDICT.items():
             keyprint = key
 
@@ -196,6 +222,9 @@ class ReportList:
     
 
     def print_footer(self):
+        '''
+        Default printer footer
+        '''
         print(f"{DASH* sum(REPORTDICT.values())}\n")
         dashlen = 21
         if self.slide > 0:
@@ -211,6 +240,9 @@ class ReportList:
 
 
     def validate(self, userint = None, userrows = None):
+        '''
+        Validating various inputs from users which are easy to spot
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")

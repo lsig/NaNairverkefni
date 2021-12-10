@@ -11,14 +11,14 @@ class EmployeeMaintenanceMenu:
         self.position = position
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*18}
+{STAR*20}
           | MAINTENANCE |
-      {DASH*20}
-      1. My Requests
-      2. My Reports
-      {DASH*20}
-      B. Til baka
-{STAR*18}
+        {DASH*15}
+        1. My Requests
+        2. My Reports
+        {DASH*15}
+        B. Til baka
+{STAR*20}
         '''
 
     def display(self):

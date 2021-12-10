@@ -17,24 +17,29 @@ class SeeReport:
         editornot = ''
         if self.position == 'Manager' and self.report['Status'] == '1':
             self.reportvar = 'PM' #PendingManager
-            editornot = f"\n     C. Confirm\n     D. Deny"
+            editornot = f"\n\tC. Confirm\n\tD. Deny"
+        
+        elif self.position == 'Employee' and self.report['Status'] == '0':
+            self.reportvar = 'DE' #DeniedEmployee
+            editornot = f"\n\tE. Edit & resubmit"
+    
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
-    | VIÐHALD |
-     - Verkskýrslulisti
-       - Report
-     {DASH*15}{editornot}
-     B. Til baka
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
+          | MAINTENANCE |
+          - Reportlist
+            - {self.report['Title']}
+        {DASH*15}{editornot}
+        B. Back
 '''
 
     def display(self):
-        while True:
+        returnvalue = ''
+        while returnvalue != 'B':
             self.reset_screen()
             returnvalue = self.prompt_user()
-            if returnvalue == 'B':
-                return
-            elif returnvalue == 'notpending':
+
+            if returnvalue == 'notpending':
                 print('Changes saved')
                 sleep(SLEEPTIME)
                 return
@@ -65,6 +70,10 @@ class SeeReport:
                 self.report['Status'] = '2'
                 boss_feedback = input('Report feedback: ')
                 self.report['Feedback'] = boss_feedback
+                if self.report['Contractor-id'] != '':
+                    contractor_rating = input('Contractor Rating: ')
+                    self.report['Contractor-rating'] = contractor_rating
+
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
 
@@ -74,6 +83,14 @@ class SeeReport:
                 self.report['Feedback'] = boss_feedback
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
+
+        elif self.reportvar == 'DE':
+            if user_input.upper() == 'E':
+                self.report['Status'] = '1'
+                emp_description = input("Add description: ")
+                self.report['Description'] = emp_description
+                self.llapi.confirm_or_deny_pending_report(self.report)
+                
 
         print(INVALID)
         sleep(SLEEPTIME)

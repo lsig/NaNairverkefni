@@ -14,15 +14,15 @@ class SeeEmployee:
         self.id = id
         self.employee = employeedict
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | STARFSMENN |
-     - Starfsmannalisti
-       - {employeedict['Name']}
-     {DASH*15}
-     E. Edit
-     R. Property reports
-     B. Til baka
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | EMPLOYEES |
+          - Employeelist
+            - {employeedict['Name']}
+        {DASH*15}
+        E. Edit
+        R. Property reports
+        B. Back
 '''
 
     def display(self):

@@ -12,12 +12,12 @@ class PropertyMenu:
         self.screen =  f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
-         | FASTEIGNIR |
-      {DASH*22}
-      1. Skrá nýja fasteign
-      2. Fasteignalisti
-      {DASH*22}
-      B. Til baka
+          | PROPERTIES |
+        {DASH*15}
+        1. Create new property
+        2. Propertylist
+        {DASH*15}
+        B. Back
 {STAR*20}
         '''
     

@@ -22,14 +22,14 @@ class DestinationList:
         self.destinationlist = self.llapi.get_dest_info()
         self.destinationlist_backup = self.llapi.get_dest_info()
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | DESTINATIONS |
-     - Destinationlist
-     {DASH*15}
-     L. Look
-     B. Back
-     /row. Change row length
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | DESTINATIONS |
+          - Destinationlist
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
     def run_screen(self):

@@ -12,13 +12,13 @@ class EmpReportCreate:
         self.id = id
         self.reportdict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | Employee
-{STAR*14}
-    | VIÐHALD |
-     - Verkbeiðnalisti
-      - Report: {self.contract['Title']}
-      {DASH*15}
-    {QUIT}. Quit / Cancel
+ {self.id['Destination']} | {self.id['Name']} | Employee
+{STAR*20}
+          | MAINTENANCE |
+          - Contractlist
+            - Report: {self.contract['Title']}
+        {DASH*15}
+        {QUIT}. Quit / Cancel
 
 '''
 
@@ -60,7 +60,7 @@ class EmpReportCreate:
     def confirmcontract(self):
 
         while True:
-            confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
+            confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel\n""")
 
             if confirm.upper() == 'C':  # TODO
                 #self.reportdict['Contractor-rating'] = '0'

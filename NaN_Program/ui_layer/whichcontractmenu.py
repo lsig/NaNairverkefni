@@ -22,10 +22,10 @@ class WhichContractMenu:
             self.position = position
         
             self.screen = f''' 
-    {self.id['Destination']} | {self.id['Name']} | {self.position}
-    {STAR*14}
-        | MAINTENANCE |
-        - Contractlist
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | MAINTENANCE |
+          - Contractlist
         {DASH*15}
 '''
 
