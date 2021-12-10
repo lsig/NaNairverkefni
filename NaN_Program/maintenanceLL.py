@@ -33,7 +33,8 @@ class MaintenanceLL:
             
             emp_name =self.empLL.find_employee_name(main_dic["Employee-id"])
             prop_addr,prop_nr = self.get_property_info(main_dic["Property-id"])
-            cont_names = self.get_cont_names(main_dic["Suggested-contractor(id)"]) # þarf að bæta við þessu í dl
+            cont_names = self.get_cont_names(main_dic["Suggested-contractor(id)"]) 
+            print(cont_names)# þarf að bæta við þessu í dl
             # bæta við nöfnunum9
             main_job = Maintenance(self.assign_id(),curr_date,main_dic["Date-to(dd-mm-yyyy)"],main_dic["Frequency(Week: 1, or Month: 2)"],emp_name,main_dic["Employee-id"],main_dic["Title"],
             main_dic["Description"],self.boss_loc,prop_addr,prop_nr,main_dic["Property-id"],main_dic["Priority(ASAP; Now; Emergency)"],cont_names,main_dic["Suggested-contractor(id)"].replace(" ",""),"0")
@@ -99,7 +100,7 @@ class MaintenanceLL:
                 get_validation = main_dic[key].replace(",","").replace(" ","").isdigit()
                 if get_validation == False:
                     return False,key
-                cont_booL = self.check_cont_dic(main_dic[key].replace(" ", "").split(","))
+                cont_booL = self.check_cont_dic(main_dic[key].replace(" ", ""))
                 if cont_booL == False:
                     return False,key
                     
@@ -144,50 +145,59 @@ class MaintenanceLL:
         return self.empLL.find_emp_id(id,self.dlapi.get_all_emp())
 
     def get_property(self,id):
-        ''' this function used a function in PropertyLL to find a the property by its id and return a dict of
-        his info and returns false if the id is invalid, none if there is no employee with that id and 
-        the dict of the employee if the exist and is a valid id
+        ''' this function used a function in PropertyLL to find a the property by it's id and return a dict of
+        his info and returns false if the id is invalid, none if there is no property with that id and 
+        the dict of the property if the exist and is a valid id
         '''
         return self.propLL.find_prop_id(id,self.dlapi.get_property_info())
 
-    def check_cont_dic(self,id_lis):
+    def check_cont_dic(self,id):
+        ''' this function checks if the location of the contractor is the same as the location of the boss 
+        that is creating the maintenance job retrun false if they are not in the same location and true other
+        wise
+        '''
         all_cont = self.dlapi.get_all_cont()
-        counter = 0
         for dic in all_cont:
-            for id in id_lis:
-                if dic["id"] == id:
-                    if dic["Location"] != self.boss_loc:
-                        return False
-                    else:
-                        counter += 1
-        if counter != len(id_lis):
-            return False             
-        return True
+            if dic["id"] == id:
+                if dic["Location"] == self.boss_loc:
+                        return True
+                else:
+                    return False     
+        return False        
         
 
 
-    def get_cont_names(self,conts_str):
-        ret_str = ""
-        if conts_str != "":
+    def get_cont_names(self,cont_id):
+        ''' this functions find the name of the contractor by his id and returns his name if there is 
+        no contractor the this function returns a empty string
+        '''
+        if cont_id != "":
             all_conts_lis = self.dlapi.get_all_cont()
-            conts_lis = "".join(conts_str.strip().split()).split(",")
             for dic in all_conts_lis:
-                for id in conts_lis:
-                    if dic["id"] == id:
-                        ret_str += ","+str(dic["Name"])
-        return ret_str.strip(",")
+                if dic["id"] == cont_id:
+                   return dic["Name"]
+        return ""
 
 
     def get_property_info(self,prop_id):
+        ''' this function finds the property address and Property-number by it's id and returns
+         it's address and Property-number if the id exists and two empty strings if the id does not exist
+        '''
         prop_dic = self.get_property(prop_id)
         if prop_id != {}:
             return prop_dic["Address"],prop_dic["Property-number"]
         return " "," "
 
     def get_all_main_jobs(self):
+        ''' this functions gets all the maintenance jobs that are in the data files
+        '''
         return self.dlapi.get_maintenance_jobs()
 
     def add_to_job(self):
+        ''' This functions add jobs to the job request if the maintenance job was last added job is either 2 days from a week or 
+        2 days from a month this functions does this for all maintenance job but it first checks if the 
+        maintenance job is expered if the job is expiered this function stops to add to jobs
+        '''
         all_main_job_lis = self.get_all_main_jobs()
         self.update_status(all_main_job_lis)
         counter = 0
@@ -215,6 +225,9 @@ class MaintenanceLL:
         
 
     def update_status(self,all_main_jobs):
+        ''' this functions check if the maintenance job is expiered or not. if the job is expiered this function
+        changes the status to 1 
+        '''
         counter = 0
         for main_dic in all_main_jobs:
             if main_dic["Date-to"] != "":
@@ -247,10 +260,10 @@ if __name__ == "__main__":
     # print((x1- x).days)
     # print(x.strftime("%B"))
 
-    dic_fromat = {"Date-to(dd-mm-yyyy)":"17-12-2021","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":""}
+    dic_fromat = {"Date-to(dd-mm-yyyy)":"21-12-2021","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":"2"}
     g = MaintenanceLL()
     # # print(dic_fromat[])
-    # print(g.add_maintenance(dic_fromat,4))
+    print(g.add_maintenance(dic_fromat,4))
     # t =",S, i,                                        i"
     # a = " ".join(t.strip(",").split()).split(",")
     # print(a)
@@ -260,7 +273,7 @@ if __name__ == "__main__":
     # print(lis[len(lis)-1])
     # if x:
     #     print("yeah")
-    g.add_to_job()
+    # g.add_to_job()
     print("-2".isdigit())
     # print(g.get_all_main_jobs())
     # g.update_main_job(DlAPI.get_maintenance_jobs())
