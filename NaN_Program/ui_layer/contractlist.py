@@ -36,14 +36,14 @@ class ContractList:
 
     
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | MAINTENANCE |
-     - Contract list
-     {DASH*15}
-     L. Look
-     B. Back
-     /row. Change row length
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | MAINTENANCE |
+          - Contract list
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
 

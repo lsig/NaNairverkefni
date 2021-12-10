@@ -14,15 +14,15 @@ class SeeDestination:
         self.id = id
         self.destination = destinationinfo
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
-    | ÁFANGASTAÐUR |
-     - Áfangalisti
-       - {self.destination['Name']}
-     {DASH*15}
-     E. Edit
-     R. Destination reports
-     B. Til baka
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
+        | DESTINATIONS |
+          - Destinationlist
+            - {self.destination['Name']}
+        {DASH*15}
+        E. Edit
+        R. Destination reports
+        B. Back
 '''
 
     def display(self):

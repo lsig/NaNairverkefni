@@ -24,14 +24,14 @@ class ContractorList:
             self.contractorlist = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
             self.contractorlist_backup = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | CONTRACTORS |
-     - Contractorlist
-     {DASH*15}
-     L. Look
-     B. Back
-     /row. Change row length
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | CONTRACTORS |
+          - Contractorlist
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
 

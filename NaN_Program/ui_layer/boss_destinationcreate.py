@@ -13,12 +13,12 @@ class BossDestinationCreate:
         self.id = id
         self.destinationdict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | DESTINATIONS |
-     - Create new destination
-      {DASH*15}
-    {QUIT}. Quit
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | DESTINATIONS |
+          - Create new destination
+        {DASH*15}
+        {QUIT}. Quit
 
     | DESTINATION |
 {DASH * 25}'''

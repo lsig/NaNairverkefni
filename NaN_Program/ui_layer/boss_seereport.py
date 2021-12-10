@@ -19,13 +19,13 @@ class SeeReport:
             self.reportvar = 'PM' #PendingManager
             editornot = f"\n     C. Confirm\n     D. Deny"
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
-    | VIÐHALD |
-     - Verkskýrslulisti
-       - Report
-     {DASH*15}{editornot}
-     B. Til baka
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
+          | MAINTENANCE |
+          - Reportlist
+            - {self.report['Title']}
+        {DASH*15}{editornot}
+        B. Back
 '''
 
     def display(self):

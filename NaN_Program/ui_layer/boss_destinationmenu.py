@@ -14,12 +14,12 @@ class BossDestinationMenu:
         self.options = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
-         | DESTINATIONS |
-      {DASH*22}
-      1. Create new destination
-      2. Destinationlist
-      {DASH*22}
-      B. Back
+          | DESTINATIONS |
+        {DASH*15}
+        1. Create new destination
+        2. Destinationlist
+        {DASH*15}
+        B. Back
 {STAR*20}
         '''
     

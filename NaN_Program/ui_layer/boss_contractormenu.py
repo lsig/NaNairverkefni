@@ -14,11 +14,11 @@ class BossContractorMenu:
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
           | CONTRACTORS |
-      {DASH*22}
-      1. Create new contractor
-      2. Contractorlist
-      {DASH*22}
-      B. Back
+        {DASH*15}
+        1. Create new contractor
+        2. Contractorlist
+        {DASH*15}
+        B. Back
 {STAR*20}
         '''
     

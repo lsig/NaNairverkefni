@@ -13,12 +13,12 @@ class BossEmployeeCreate:
         self.id = id
         self.contactdict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | EMPLOYEES |
-     - Create new employee
-      {DASH*15}
-    {QUIT}. Quit
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | EMPLOYEES |
+          - Create new employee
+        {DASH*15}
+        {QUIT}. Quit
 
     | EMPLOYEE |
 {DASH * 25}'''

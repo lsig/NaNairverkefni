@@ -16,9 +16,9 @@ class WhichReportMenu:
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
-    | MAINTENANCE |
-     - Reportlist
-      {DASH*18}
+          | MAINTENANCE |
+          - Reportlist
+        {DASH*15}
 '''
 
 

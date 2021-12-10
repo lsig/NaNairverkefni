@@ -12,14 +12,14 @@ class BossPropertyCreate:
         self.id = id
         self.propertydict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
-    | FASTEIGNIR |
-     - Skrá nýja fasteign
-      {DASH*15}
-    {QUIT}. Quit / Cancel
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
+          | PROPERTIES |
+          - Create new property
+        {DASH*15}
+        {QUIT}. Quit / Cancel
 
-    | FASTEIGN |
+    | PROPERTY |
 {DASH*25}'''
 
 

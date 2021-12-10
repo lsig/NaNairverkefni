@@ -21,14 +21,14 @@ class EmployeeList:
         self.employeelist = self.llapi.get_emp_info()
         self.employeelist_backup = self.llapi.get_emp_info()
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | EMPLOYEES |
-     - Employeelist
-     {DASH*15}
-     L. Look
-     B. Back
-     /row. Change row length
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | EMPLOYEES |
+          - Employeelist
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
     def run_screen(self):

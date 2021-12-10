@@ -24,14 +24,14 @@ class PropertyList:
             self.propertylist = self.llapi.search_property(self.id['Destination'], self.propertylist,'Destination' )
             self.propertylist_backup = self.llapi.search_property(self.id['Destination'], self.propertylist,'Destination' )
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | FASTEIGNIR |
-     - Fasteignalisti
-     {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | PROPERTIES |
+          - Propertylist
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
     def run_screen(self):

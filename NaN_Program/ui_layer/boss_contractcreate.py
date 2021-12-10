@@ -13,11 +13,11 @@ class ContractCreate:
         self.id = id
         self.contractdict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | MAINTENANCE |
-     - Create new contract
-      {DASH*15}
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | MAINTENANCE |
+          - Create new contract
+        {DASH*15}
 '''
     def run_screen(self):
         self.mainttype  = ''
@@ -141,7 +141,7 @@ class ContractCreate:
             print(INVALID)
             sleep(SLEEPTIME)
             return None
-    
+
 
     def report_choice(self):
         indentstring = '      '
@@ -150,4 +150,3 @@ class ContractCreate:
             report_string += f'{indentstring}{index+1}. {word.capitalize()}\n'
         report_string += f'{indentstring}{DASH*18}\n{indentstring}B. Back\n{STAR*20}\n'
         return report_string
-

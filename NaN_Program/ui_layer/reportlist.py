@@ -34,22 +34,23 @@ class ReportList:
 
 
         self.reportlist = self.reportlist_backup
+        spacebar = '        '
         if self.info == None:
-            menutravel = f'    | MAINTENANCE |\n     - Reportlist'
+            menutravel = f'{spacebar}  | MAINTENANCE |\n{spacebar}  - Reportlist'
         elif jobsection == 'property':
-            menutravel = f'    | PROPERTIES |\n     - Propertylist\n       - {self.info["Address"]}'
+            menutravel = f'{spacebar}  | PROPERTIES |\n{spacebar}  - Propertylist\n{spacebar}    - {self.info["Address"]}'
         elif jobsection == 'employee':
-            menutravel = f'    | EMPLOYEES |\n     - Employeelist\n       - {self.info["Name"]}'
+            menutravel = f'{spacebar}  | EMPLOYEES |\n{spacebar}  - Employeelist\n{spacebar}    - {self.info["Name"]}'
         elif jobsection == 'contractor':
-            menutravel = f'    | CONTRACTORS |\n     - Contractorlist\n       - {self.info["Name"]}'
+            menutravel = f'{spacebar}  | CONTRACTORS |\n{spacebar}  - Contractorlist\n{spacebar}    - {self.info["Name"]}'
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-    {STAR*14}
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
 {menutravel}
-     {DASH*15}
-     L. Look
-     B. Back
-     /row. Change row length
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
 

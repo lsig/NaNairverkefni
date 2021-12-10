@@ -11,12 +11,12 @@ class BossContractorCreate:
         self.id = id
         self.contractordict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | CONTRACTORS |
-     - Create new contractor
-      {DASH*15}
-    Q. Quit
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | CONTRACTORS |
+          - Create new contractor
+        {DASH*15}
+        Q. Quit
 
     | CONTRACTOR |
 {DASH * 25}'''
