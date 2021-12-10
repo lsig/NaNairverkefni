@@ -29,12 +29,12 @@ class SeeReport:
 '''
 
     def display(self):
-        while True:
+        returnvalue = ''
+        while returnvalue != 'B':
             self.reset_screen()
             returnvalue = self.prompt_user()
-            if returnvalue == 'B':
-                return
-            elif returnvalue == 'notpending':
+
+            if returnvalue == 'notpending':
                 print('Changes saved')
                 sleep(SLEEPTIME)
                 return

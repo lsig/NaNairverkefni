@@ -1,8 +1,3 @@
 id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority(ASAP; Now; Emergency),Suggested-contractor(id),Suggested-contractors,Status,Type
 1,2021-12-10,Jacob arons,2,Clean,big,Longyearbyen,Vei 217,F959594,1,ASAP,,,1,Regular job
-<<<<<<< HEAD
-2,2021-12-10,Jacob arons,2,suck,suck it,Longyearbyen,Vei 217,F959594,1,ASAP,,,1,Regular job
-3,2021-12-10,Jacob arons,2,Check,does it work,Longyearbyen,Longyearbyen Harbor 1,AA999-3,33,ASAP,1,John Core,0,Regular job
-=======
 2,2021-12-10,Jacob arons,2,suck,suck it,Longyearbyen,Vei 217,F959594,1,ASAP,,,0,Regular job
->>>>>>> 16a952db5f5378774ebbe49ebd6673a07fde7dbb
