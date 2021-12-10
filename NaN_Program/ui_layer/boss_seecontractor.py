@@ -56,7 +56,7 @@ class SeeContractor:
         
         elif user_input.upper() == 'R':
             contractorreport = ReportList(self.id, self.position, self.contractor['Name'],'contractor',self.contractor)
-            contractorreport.display_list()
+            contractorreport.run_screen()
 
         elif user_input.upper() == 'E' and self.position == 'Manager':
             while True:
