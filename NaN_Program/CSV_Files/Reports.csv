@@ -1,2 +1,2 @@
-Report-id,Request-id,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Contractor-name,Contractor-id,Contractor-rating,Date,Commission,Status
-1,1,Jacob arons,2,Fix this UI shit,This went very well!,Longyearbyen,Longyearbyen Harbor 1,AA999-9,39,,,0,2021-12-10,,2
+Report-id,Request-id,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Contractor-name,Contractor-id,Contractor-rating,Date,Commission,Total-cost,Status,Feedback
+1,10,Jacob arons,2,Maxim Rudkov,very nice,Longyearbyen,Vei 217,F959594,1,John Core,1,,2021-12-10,5000,20000,0,

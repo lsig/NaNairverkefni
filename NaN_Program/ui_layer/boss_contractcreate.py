@@ -69,7 +69,7 @@ class ContractCreate:
         
     def printcontractinfo(self, number = None):
 
-        contractstring = f"{'| ' + self.mainttype + ' |':^60}\n{DASH * 60}\n"
+        contractstring = f"{'| ' + REGORNO[self.mainttype] + ' |':^60}\n{DASH * 60}\n"
         for i in range( len(self.template)):
             if number != None and i == number - 1:
                 contractstring += f"{i+1}. {self.template[i] + ':':<30} ____\n"

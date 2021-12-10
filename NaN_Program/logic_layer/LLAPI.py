@@ -155,6 +155,9 @@ class LLAPI:
     def add_maint_job(self, maintdict, bossid):
         return self.maintLL.add_maintenance(maintdict, bossid)
     
+    def update_reg_jobs(self):
+        self.maintLL.add_to_job()
+    
 
         
 
