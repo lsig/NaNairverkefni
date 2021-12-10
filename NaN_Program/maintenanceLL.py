@@ -110,8 +110,8 @@ class MaintenanceLL:
             freq = 7
         else:
             freq = 30
-        if   date_time != 0  and today >= date_time:
-            if (date_time-today).days() <= freq:
+        if   date_time != 0  and today <= date_time:
+            if (date_time-today).days <= freq:
                 return False,"Date-to(dd-mm-yyyy)"
         return True,"" 
 
@@ -202,7 +202,7 @@ class MaintenanceLL:
                 date_lis = main_dic["Date-to"].split("-")
                 date=datetime(int(date_lis[2]),int(date_lis[1]),int(date_lis[0])).date()
                 today = datetime.date(datetime.now())
-                if (date-today).days <= 0:
+                if (date-today).days < 0:
                     main_dic["Status"] = "1"
                     all_main_jobs[counter] = main_dic
             counter += 1
@@ -215,6 +215,8 @@ class MaintenanceLL:
     # þarf að bæta við search by sting 
 if __name__ == "__main__":
     x1 = datetime.date(datetime.now())
+    if x1 != 0:
+        print("w")
     # print(x1)
     # date = "20-12-2000".split("-")
     # print(len(date))
@@ -225,10 +227,10 @@ if __name__ == "__main__":
     # print((x1- x).days)
     # print(x.strftime("%B"))
 
-    dic_fromat = {"Date-to(dd-mm-yyyy)":"","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP,Now,Emergency)":"Asap","Suggested-contractor(id)":""}
+    dic_fromat = {"Date-to(dd-mm-yyyy)":"11-12-2021","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP; Now; Emergency)":"Asap","Suggested-contractor(id)":""}
     g = MaintenanceLL()
     # # print(dic_fromat[])
-    print(g.add_maintenance(dic_fromat,4))
+    # print(g.add_maintenance(dic_fromat,4))
     # t =",S, i,                                        i"
     # a = " ".join(t.strip(",").split()).split(",")
     # print(a)
