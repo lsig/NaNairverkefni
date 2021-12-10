@@ -225,7 +225,7 @@ class ReportsLL:
     def report_validation(self, rep_dic, cont_dic): # klárt
         get_validation = True
         # a dictionairy for title, description, contractor-name and contractor-id.
-        dic = {"Description":"both", "Contractor-id":int, "Commission": int}
+        dic = {"Description":"both", "Contractor-id":int, "Commission": int,"Total-cost":int}
         counter = 0
         prev = 0
         for key in dic.keys():
@@ -239,6 +239,9 @@ class ReportsLL:
             elif dic[key] == int and dic[key] != "both" and rep_dic[key] != "":
                 get_validation = rep_dic[key].isdigit()
             # checking if the dictionairy key is both a string and integer, and if so, check if the key is empty. If so, the program will return False.
+            if key == "Total-cost":
+                if rep_dic["Comission"] != '' and rep_dic[key] < rep_dic["Comission"]:
+                    return False, key
             if dic[key] == "both":
                 if rep_dic[key] == "":
                     return False, key
