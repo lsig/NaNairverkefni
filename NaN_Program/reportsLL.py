@@ -10,36 +10,34 @@ class ReportsLL:
     def __init__(self):
         self.dlapi = DlAPI()
         self.jobll = JobLL()
-
-    def add_report(self, rep_dic, job_dic): # klárt
+    #Adds report to the report.csv file. Validates if everything is correct first
+    def add_report(self, rep_dic, job_dic): 
         cont_dic = self.dlapi.get_all_cont()
-        rep_dic['Contractor-rating'] = ''
-        rep_dic["Feedback"] = 'None'
-        valid, key = self.report_validation(rep_dic)
+        rep_dic['Contractor-rating'] = ''#reports starts with no rating
+        rep_dic["Feedback"] = 'None' #report starts with no Feedback 
+        valid, key = self.report_validation(rep_dic,job_dic)
         if valid:
-            #rep_dic["Status"] = "1"
             current_date = datetime.date(datetime.now())
-            #rep_dic = self.replace_loc_num_with_name(rep_dic)
             rep = Report(self.generate_id(), job_dic["id"],job_dic["Employee"],job_dic["Employee-id"],job_dic["Title"],rep_dic["Description"],job_dic["Location"], job_dic["Property"], job_dic["Property-number"], job_dic["Property-id"], self.get_cont_name(rep_dic["Contractor-id"]), rep_dic["Contractor-id"], rep_dic["Contractor-rating"], current_date, rep_dic["Commission"],rep_dic["Total-cost"], "0",rep_dic["Feedback"])
-            # Status, Property, Property-number, Property-id, Contractor-Rating, Location
-            self.dlapi.add_report(rep)
+            #Generated info and info from user added to the model
+            self.dlapi.add_report(rep)#report created in csv
             return True, key
-        return False, key
+        return False, key #bounces back if user input is wrong
 
-    def generate_id(self): # klárt
+    def generate_id(self): #Auto incremented id for new report
         all_rep_lis = self.dlapi.get_all_report()
         if all_rep_lis == []:
             new_id = 1
         else:
             new_id = int(all_rep_lis[len(all_rep_lis)-1]["Report-id"])+1
-        return str(new_id)
+        return str(new_id)#returns generated id
 
-    def list_all_reports(self): #klárt Líklegast useless þar sem get_all_rep gerir það sama núna
-        all_rep = self.dlapi.get_all_report()
-        return all_rep
+    # def list_all_reports(self): #klárt Líklegast useless þar sem get_all_rep gerir það sama núna
+    #     all_rep = self.dlapi.get_all_report()
+    #     return all_rep
 
 
-    def edit_report_info(self, edit_rep_dic): # klárt
+    def edit_report_info(self, edit_rep_dic): # klárt useless!
         # NOTETOSELF:yfirmaður þarf að geta samþykkt viðhaldsskýrslur, og starfsmenn þurfa að geta séð hvaða skýrslur, sem þeir eiga, eru samþykktar og hverjar ekki.
         # Ef skýrsla er ekki samþykkt, þarf starfsmaður að geta breytt upplýsingum í skýrslunni.
         if self.report_validation(edit_rep_dic):
@@ -56,16 +54,12 @@ class ReportsLL:
         # yfirmaður getur merkt skýrslu accepted eða rejected, en starfsmaður getur merkt skýrslu pending.
         # # # 
 
-    def get_all_rep(self): # klárt
+    def get_all_rep(self): #Gets all reports from csv file
         all_reports = self.dlapi.get_all_report()
-        # counter = 0
-        # for i in all_reports:
-        #     all_reports[counter]["Suggested-contractor"] = self.get_report_name_and_location(i["Suggested-contractor"])["Name"]
-        #     counter += 1
         return all_reports
     
 
-    def sort_all_reports(self):
+    def sort_all_reports(self):#gets all reports from csv and sorts them by status
         all_reports = self.get_all_rep()
         finished_reports = []
         pending_reports = []
@@ -82,7 +76,7 @@ class ReportsLL:
         
         return [pending_reports, finished_reports, other_reports]
     
-    def get_property_reports(self, propertyid):
+    def get_property_reports(self, propertyid):#reports by property id
         propertyreports = []
         all_reports = self.get_all_rep()
         for report in all_reports:
@@ -90,7 +84,7 @@ class ReportsLL:
                 propertyreports.append(report)
         return propertyreports
     
-    def get_emp_reports(self, empid):
+    def get_emp_reports(self, empid):#reports by employee-id
         empreports = []
         all_reports = self.get_all_rep()
         for report in all_reports:
@@ -98,7 +92,7 @@ class ReportsLL:
                 empreports.append(report)
         return empreports
     
-    def get_contractor_reports(self, contractorid):
+    def get_contractor_reports(self, contractorid):#reports by contractor id
         contractorreports = []
         all_reports = self.get_all_rep()
         for report in all_reports:
@@ -119,12 +113,14 @@ class ReportsLL:
         rep_info = {"Name":"null","Location":"null"}
         return rep_info 
 
-    def find_id_location_rep(self, dic, all_rep_lis): # þurfum við þetta ???
+#finds correct list index. For changing specific line in the the csv file, used for changing information the the csv file
+    def find_id_location_rep(self, dic, all_rep_lis):
         for i in range(len(all_rep_lis)):
             if dic == all_rep_lis[i]:
                 return i
             
-    def find_rep_id(self, id, all_rep_lis, key): # klárt
+    #searches after correct dictionary in the list of dictionaries is used for changing csv file
+    def find_rep_id(self, id, all_rep_lis, key):
         if id.isdigit():
             for dic in all_rep_lis:
                 if int(dic[key]) == int(id):
@@ -133,21 +129,18 @@ class ReportsLL:
             return None
         return False
 
-    def find_status_location(self, dic, all_rep_lis): # þurfum við þetta ??? 
-        for i in range(len(all_rep_lis)):
-            if dic == all_rep_lis[i]:
-                return i
 
+
+#This function takes in report_dictionary from the ui layer and changes status of the report and the job according to the action performed by the user
     def confirm_and_ready_report_and_grade_contractor(self, rep_dic): # klárað #.replace(' ','')
         all_rep_lis = self.dlapi.get_all_report()
         dic = self.find_rep_id(rep_dic["Report-id"], all_rep_lis, "Report-id")
-        #rep_dic = self.find_status_location(["Status"], all_rep_lis)
-        if dic["Status"] == "0" and rep_dic["Status"] == "0":
+        if dic["Status"] == "0" and rep_dic["Status"] == "0": #Used to change report without making it ready. Possible feature
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
             dic = rep_dic
             all_rep_lis[rep_loc_in_list] = dic
             self.dlapi.change_report(all_rep_lis)
-        if dic["Status"] == "0" and rep_dic["Status"] == "1":
+        if dic["Status"] == "0" and rep_dic["Status"] == "1": #if staus was (0=not ready) and now (1=ready) markes job as ready for confirmation by the boss 
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
             dic = rep_dic
             dic["Status"] = "1"
@@ -160,7 +153,7 @@ class ReportsLL:
             self.jobll.edit_info(job,rep_dic["Request-id"])           
 
 
-        if dic["Status"] == "1" and rep_dic["Status"] == "2":
+        if dic["Status"] == "1" and rep_dic["Status"] == "2": #Markes report and job as completed, with feedback
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
             dic = rep_dic
             dic["Status"] = "2"
@@ -170,7 +163,7 @@ class ReportsLL:
             job = self.find_rep_id(rep_dic["Request-id"], all_job_lis,"id")
             job["Status"] = "2"
             self.jobll.edit_info(job,rep_dic["Request-id"])          
-
+#Reopems job and report, if boss wants to reopen the job. Declines report, with Feedback
         if dic["Status"] == "2" and rep_dic["Status"] == "0" or dic["Status"] =="1" and rep_dic["Status"] == "0":
             # Reopen job and change status, request-id
             rep_loc_in_list = self.find_id_location_rep(dic, all_rep_lis)
@@ -182,48 +175,12 @@ class ReportsLL:
             job = self.find_rep_id(rep_dic["Request-id"], all_job_lis,"id")
             job["Status"] = "0"
             self.jobll.edit_info(job,rep_dic["Request-id"])  
-
-
-    def change_con_rating(self, id, rating):
-        all_rep_lis = self.dlapi.get_all_report()
-        if id.isdigit():
-            for dic in all_rep_lis:
-                if int(dic["Report-id"] == int(id)):
-                    dic = dic["Contractor-Rating"] == rating
-        rep_loc_in_lis = self.find_id_location_rep(dic, all_rep_lis)
-        all_rep_lis[rep_loc_in_lis] = dic
-        self.dlapi.change_report(all_rep_lis)
-
-    def list_all_confirmed_con_rep(self, id):  # óklárað
-        all_rep_lis = self.dlapi.get_all_report()
-        ret_lis = []    
-        if id.isdigit():
-            for dic in all_rep_lis:
-                if int(dic["Report-id"]) == int(id) and dic["Status"] == "2":
-                    ret_lis.append(dic["Contractor-rating"])
-            return ret_lis
-
-    def calculate_average_con_grade(self): # klárt
-        list_of_ratings = self.list_all_confirmed_con_rep()
-        if list_of_ratings is not None:
-            average = sum(list_of_ratings)/len(list_of_ratings)
-            return average        
+     
     
 
-    def list_all_rep_from_con(self, id): # klárað 
-        all_con_lis = self.dlapi.get_all_cont()
-        ret_lis = []    
-        if id.isdigit():
-            for dic in all_con_lis:
-                if int(dic["id"]) == int(id):
-                    ret_lis.append(dic["Contractor-rating"])
-        if len(ret_lis) != 0:
-            return ret_lis
-        else:
-            return None
-
-
-    def report_validation(self, rep_dic): # klárt
+#Validates that everything is correct. Description not empty, checks if contractor is located in the same location as the property.
+#check is commission is lower than Total-cost
+    def report_validation(self, rep_dic,job_dic): # 
         cont_dic = self.dlapi.get_all_cont()
         get_validation = True
         # a dictionairy for title, description, contractor-name and contractor-id.
@@ -250,22 +207,24 @@ class ReportsLL:
 
             if key == "Contractor-id" and get_validation:
                 if rep_dic["Contractor-id"] != '':
-                    con_id_bool = self.check_cont_dic(rep_dic["Contractor-id"],cont_dic)
+                    con_id_bool,dic_con = self.check_cont_dic(rep_dic["Contractor-id"],cont_dic)
                     if con_id_bool == False:
                         return False,key
-                
+                    else:
+                        if dic_con["Location"] != job_dic["Location"]:
+                            return False,key
             if get_validation == False:
                     return False, key
             prev = rep_dic[key]
         return True, None
 
-    def check_cont_dic(self,cont_id,cont_dic):
+    def check_cont_dic(self,cont_id,cont_dic):#checks if contractor is in database and returns his dic
         for dic in cont_dic:
             if dic["id"] == cont_id:
-                    return True     
+                return True,dic     
         return False
 
-    def find_rep_by_str(self,user_string,rep_lis,key):
+    def find_rep_by_str(self,user_string,rep_lis,key):#search engine which searches by dic key
         ret_lis=[]
         for dic in rep_lis:
             if user_string.lower() in dic[key].lower():
@@ -274,7 +233,7 @@ class ReportsLL:
             return False #skoða þetta svo filter drepur ekki forritið
         return ret_lis
 
-    def find_rep_id(self,id,all_rep_lis,key):
+    def find_rep_id(self,id,all_rep_lis,key):#Find one report with exact id
         if id.isdigit():
             for dic in all_rep_lis:
                 if int(dic[key]) == int(id):
@@ -283,13 +242,13 @@ class ReportsLL:
             return None #[{"Text":"No employee with this id"}]
         return False
     
-    def find_rep_id_2(self,id):
+    def find_rep_id_2(self,id):#used for confimation and declining of reports
         all_rep = self.get_all_rep()
         for dic in all_rep:
             if dic['Request-id'] == id:
                 return dic
 
-    def get_cont_name(self,cont_id):
+    def get_cont_name(self,cont_id):#gets contractor name from id
         all_cont_lis = self.dlapi.get_all_cont()
         for cont_dic in all_cont_lis:
             if cont_dic["id"] == cont_id:
