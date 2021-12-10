@@ -183,10 +183,11 @@ class MaintenanceLL:
                 ref_date=(datetime(int(date_lis[0]),int(date_lis[1]),int(date_lis[2]))+ timedelta(days=freq)).date()
                 today = datetime.date(datetime.now())
                 if (ref_date-today).days <= 2:
+                    add_to_job_dic = main_dic
                     main_dic["Date-from"] = ref_date
                     all_main_job_lis[counter] = main_dic
-                    main_dic["Date-created"] = ref_date
-                    self.jobLL.add_job(main_dic,None,True)
+                    add_to_job_dic["Date-created"] = ref_date
+                    self.jobLL.add_job(add_to_job_dic,None,True)
             counter += 1
         self.update_main_job(all_main_job_lis)
 
