@@ -1,7 +1,7 @@
 
 from os import name
 from logic_layer.contractorLL import ContractorLL
-from logic_layer.propertyLL import PropertyLL
+from logic_layer.PropertyLL import PropertyLL
 from logic_layer.jobLL import JobLL
 from logic_layer.EmployeeLL import EmployeeLL
 from logic_layer.locationLL import LocationLL
