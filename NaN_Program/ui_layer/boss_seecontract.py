@@ -6,6 +6,8 @@ from logic_layer.LLAPI import LLAPI
 from time import sleep
 import os
 
+from ui_layer.emp_reportcreate import EmpReportCreate
+
 
 
 class SeeContract:
@@ -23,8 +25,8 @@ class SeeContract:
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
     | VIÐHALD |
-     - Verkbeiðnilisti
-       - {self.contract['Title']}
+     - Verkbeiðnalisti
+       - Maintenance Request
      {DASH*15}{editornot}
      B. Til baka
 '''
@@ -39,14 +41,14 @@ class SeeContract:
     
     def printcontractinfo(self, number = None):
 
-        contractstring = f"{'| ' + self.contract['Location'] + ' | ':^35}\n{DASH*35}\n"
+        contractstring = f"{'| ' + self.contract['Title'] + ' | ':^70}\n{DASH*70}\n"
 
         for i in range(len(CONTRACTTEMPLATE)):
             if number != None and i == number - 1:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ____\n"
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<35} ____\n"
             else:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} {self.contract[CONTRACTTEMPLATE[i]]}\n"
-        contractstring += DASH*35
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<35} {self.contract[CONTRACTTEMPLATE[i]]}\n"
+        contractstring += DASH*70
         
         print(contractstring)
     
@@ -64,7 +66,8 @@ class SeeContract:
                     return returnvalue
         
         elif self.position == 'Employee' and self.contract['Status'] == '0' and user_input.upper() == 'C':
-            pass #vantar create report
+            reportcreate = EmpReportCreate(self.id, self.contract)
+            reportcreate.display()
 
 
         else:

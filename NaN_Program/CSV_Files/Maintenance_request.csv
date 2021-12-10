@@ -22,13 +22,10 @@ id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Propert
 21,2021-12-09,Jacob arons,2,Chungus,Big chungus,Longyearbyen,Vei 217,F959594,1,Now,1,bob big dick,0,Regular job
 22,2021-12-09,Jacob arons,2,maxim,maxim lost his pants,Longyearbyen,Vei 217,F959594,1,Now,1,bob big dick,0,Regular job
 23,2021-12-09,Jacob arons,2,Turbo,Turbo is extremely horny,Longyearbyen,Vei 217,F959594,1,Emergency,1,bob big dick,0,Regular job
-<<<<<<< HEAD
 24,2021-12-10,Nanna Daema,3,Fix this knudsen!,if you dont fix this right away you're fired!,Longyearbyen,Longyearbyen Harbor 1,AA999-1,31,Emergency,1,bob big dick,0,Regular job
-=======
 24,2021-12-11,Aqqaluk Lynge,5,hani,hehe,Kulusuk,['Property-id'],64-3900,2,Asap,5,arnar,0,Maintenace job
 25,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,['Property-id'],64-3900,2,Asap,5,arnar,0,Maintenace job
 26,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,['Property-id'],64-3900,2,Asap,5,arnar,0,Maintenace job
 27,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,['Property'],64-3900,2,Asap,5,arnar,0,Maintenace job
 28,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,Asap,5,arnar,0,Maintenace job
 29,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,Asap,,,0,Maintenace job
->>>>>>> 2cb7d12717ab182de43bb69069d79626b1278b48
