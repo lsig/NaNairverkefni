@@ -20,6 +20,7 @@ class ReportList:
         self.id = id
         self.header = header
         self.position = position
+        self.menutravel = ''
         
         if jobsection == 'property':
             self.reportlist_backup = self.llapi.get_property_reports(info['id'])
@@ -35,8 +36,12 @@ class ReportList:
         self.reportlist = self.reportlist_backup
         if self.info == None:
             menutravel = f'    | VIÐHALD |\n     - Verkskýrslulisti'
-        else:
+        elif jobsection == 'property':
             menutravel = f'    | FASTEIGNIR |\n     - Fasteignalisti\n       - {self.info["Address"]}'
+        elif jobsection == 'employee':
+            menutravel = f'    | STARFSMENN |\n     - Starfsmannalisti\n       - {self.info["Name"]}'
+        elif jobsection == 'contractor':
+            menutravel = f'    | VERKTAKAR |\n     - Verktakalisti\n       - {self.info["Name"]}'
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
     {STAR*14}
