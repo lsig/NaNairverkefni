@@ -113,16 +113,13 @@ class LLAPI:
     def get_property_reports(self, reportdict):
         return self.repLL.get_property_reports(reportdict)
 
-<<<<<<< HEAD
     def confirm_or_deny_pending_report(self, reportinfo):
         self.repLL.confirm_and_ready_report_and_grade_contractor(reportinfo)
-=======
     def get_emp_reports(self, reportdict):
         return self.repLL.get_emp_reports(reportdict)
 
     def get_contractor_reports(self, reportdict):
         return self.repLL.get_contractor_reports(reportdict)
->>>>>>> 792db6580a26a73e03d91bcd637b674a833bb248
 
     #JobLL
     def add_job(self,job_lis,id):
