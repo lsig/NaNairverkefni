@@ -13,14 +13,14 @@ class BossEmployeeCreate:
         self.id = id
         self.contactdict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | STARFSMENN |
-     - Skrá nýja starfsmann
-      {DASH*15}
-    {QUIT}. Hætta við
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | EMPLOYEES |
+          - Create new employee
+        {DASH*15}
+        {QUIT}. Quit
 
-    | STARFSMAÐUR |
+    | EMPLOYEE |
 {DASH * 25}'''
 
     def display_menu(self):

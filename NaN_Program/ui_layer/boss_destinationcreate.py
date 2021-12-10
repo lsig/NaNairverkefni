@@ -13,14 +13,14 @@ class BossDestinationCreate:
         self.id = id
         self.destinationdict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | ÁFANGASTAÐIR |
-     - Skrá nýjan áfangastað
-      {DASH*15}
-    {QUIT}. Hætta við
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | DESTINATIONS |
+          - Create new destination
+        {DASH*15}
+        {QUIT}. Quit
 
-    | ÁFANGASTAÐUR |
+    | DESTINATION |
 {DASH * 25}'''
 
     def display_menu(self):

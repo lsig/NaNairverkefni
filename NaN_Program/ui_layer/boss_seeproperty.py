@@ -16,16 +16,16 @@ class SeeProperty:
         self.property = propertyinfo
         editornot = ''
         if position == 'Manager':
-            editornot = f"\n     E. Edit"
+            editornot = f"\n\tE. Edit"
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
-    | FASTEIGNIR |
-     - Fasteignalisti
-       - {self.property['Address']}
-     {DASH*15}{editornot}
-     R. Property reports
-     B. Til baka
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
+          | PROPERTIES |
+          - Propertylist
+            - {self.property['Address']}
+        {DASH*15}{editornot}
+        R. Property reports
+        B. Back
 '''
 
     def display(self):

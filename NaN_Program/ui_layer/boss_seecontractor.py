@@ -15,16 +15,16 @@ class SeeContractor:
         self.contractor = contractorinfo
         editornot = ''
         if position == 'Manager':
-            editornot = f"\n     E. Edit"
+            editornot = f"\n\tE. Edit"
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | VERKTAKAR |
-     - Verktakalisti
-       - {self.contractor['Name']}
-     {DASH*15}{editornot}
-     R. Property reports
-     B. Til baka
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+        | CONTRACTORS |
+          - Contractorlist
+            - {self.contractor['Name']}
+        {DASH*15}{editornot}
+        R. Property reports
+        B. Back
 '''
 
     def display(self):

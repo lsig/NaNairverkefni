@@ -20,7 +20,10 @@ class JobLL:
                 cur_date = datetime.date(datetime.now())
                 type = "Regular job"
                 emp_name = self.empLL.find_employee_name(job_dic["Employee-id"])
-                con_name = self.get_con_name_and_location(job_dic["Suggested-contractor(id)"])["Name"]
+                if job_dic["Suggested-contractor(id)"] != '':
+                    con_name = self.get_con_name_and_location(job_dic["Suggested-contractor(id)"])["Name"]
+                else:
+                    con_name = ''
                 prop_addr,prop_nr, prop_loc = self.prop_address_from_id(job_dic["Property-id"])
             else:
                 return False,key
@@ -29,10 +32,10 @@ class JobLL:
             cur_date = job_dic["Date-created"]
             type = "Maintenace job"
             emp_name = job_dic["Employee"]
-            con_name = job_dic["Suggested-contractors"]
+            con_name = job_dic["Suggested-contractor"]
             self.boss_loc = job_dic["Location"]
             prop_nr = job_dic["Property-number"]
-            prop_addr = ["Property-id"]
+            prop_addr = job_dic["Property"]
 
         auto_id = self.assign_id_job()
         job = Job(auto_id,cur_date,emp_name,job_dic["Employee-id"],job_dic["Title"],job_dic["Description"],self.boss_loc,prop_addr,prop_nr,job_dic["Property-id"],job_dic["Priority(ASAP; Now; Emergency)"],job_dic["Suggested-contractor(id)"],con_name,"0",type)
@@ -78,9 +81,10 @@ class JobLL:
                     if priority_check == False:
                         return False, key
             elif dic[key] == int and dic[key] != "both":
-                if job_dic[key] == "":
+                if job_dic[key] == "" and key != "Suggested-contractor(id)":
                     return False,key
-                get_validation = job_dic[key].replace("-","").isdigit()
+                if key != "Suggested-contractor(id)":    
+                    get_validation = job_dic[key].replace("-","").isdigit()
                 if key == "Employee-id" and get_validation:
                     if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]):
                         return False,key
@@ -88,11 +92,14 @@ class JobLL:
                         if self.id == job_dic["Employee-id"]:
                             return False,key
                 if key == "Property-id" and get_validation:
-                    if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
-                        return False,key
+                        if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
+                            return False,key
                 if key == "Suggested-contractor(id)" and get_validation:
-                    if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
-                        return False,key
+                    if job_dic["Suggested-contractor(id)"] != '':
+                        if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
+                            return False,key
+                    else:
+                        job_dic["Suggested-contractor(id)"] = ''
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if job_dic[key] == "":
@@ -214,17 +221,25 @@ class JobLL:
 
 
     def search_time_period(self,time_period_from,time_period_to,all_job_lis=None):
-        all_job_lis = self.get_all_jobs()
+        ''' this functions searches for all job or reports for a specific time period it first checks if the dates
+        are valid and then if the end of time period is bigger or equals to the start of the time period if and then if
+        it is a report or a job. it returns false if the dates are invalid or there are no jobs or reports at that
+        time period other wise it returns a list of all the jobs or reports at that time period
+        '''
         if self.check_date(time_period_from) and self.check_date(time_period_to):
             time_period_from = time_period_from.split("-")
             time_period_to = time_period_to.split("-")
             date_from = datetime(int(time_period_from[2]),int(time_period_from[1]),int(time_period_from[0])).date()
             date_to = datetime(int(time_period_to[2]),int(time_period_to[1]),int(time_period_to[0])).date()
-            print(date_from,date_to)
+            #print(date_from,date_to)
             if date_from <= date_to:
                 ret_lis = []
                 for dic in all_job_lis:
-                    job_date_lis = dic["Date-created"].split("-")
+                    if "Date-created" in dic.keys():
+                        job_date_lis = dic["Date-created"].split("-")
+                    elif "Date" in dic.key.keys():
+                        job_date_lis = dic["Date"].split("-")
+
                     job_date = datetime(int(job_date_lis[0]),int(job_date_lis[1]),int(job_date_lis[2])).date()
                     if date_from <= job_date and date_to >= job_date:
                         ret_lis.append(dic)
@@ -233,18 +248,18 @@ class JobLL:
         return False
 
 
-
-
-            # all_job_lis = self.get_all_jobs()
-
     def check_date(self,date):
-        ## dd-mm-yyyy or 
+        ''' this functions checks if the date are valid from date time and it returns false if the the date is not valid
+        other wise true
+        '''
         if date.replace("-","").isdigit():
             date = date.split("-")
             if len(date) == 3:
                 if len(date[0]) == 2 and len(date[1]) == 2 and len(date[2]) == 4:
-                    if int(date[0]) > 0 and int(date[0]) < 32 and int(date[1]) > 0 and int(date[1]) < 13:
-                        return True
+                    if int(date[1]) > 0 and int(date[1]) < 13:
+                        nr_days_in_months=[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                        if 0 < int(date[0]) <= nr_days_in_months[int(date[1])-1]:
+                            return True
         return False
 
                 
@@ -280,7 +295,7 @@ if __name__ == "__main__":
     # str_test = "2222-10-10"
     # datetime.strptime(str_test,'%y-%m-%d') 
     print(datetime(4441,10,13))
-    print(g.search_time_period("09-12-2021","09-12-2021"))
+    # print(g.search_time_period("28-02-2021","11-12-2021"))
 
 
 

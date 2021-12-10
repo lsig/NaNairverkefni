@@ -10,12 +10,12 @@ class LocationLL:
         self.empLL = EmployeeLL()
         
 
-    def add_location(self,loc_dic):
-        #loc_dic["Destination"] = loc_dic["Destination"].capitalize()
+    def add_location(self,loc_dic): #Adds location into csv file
         valid, key = self.is_valid(loc_dic)
         if valid:  
             boss_id = self.empLL.assign_id_emp()
             loc = Location(self.assign_id_loc(),loc_dic["Name"],loc_dic["Country"],loc_dic["Airport"],loc_dic["Phone"],loc_dic["Working-hours"],loc_dic["Manager"],boss_id)
+            #Keys are renamed to avoid error in the add employee function
             loc_dic["Destination"] = loc_dic["Name"]
             loc_dic["Phone"] = loc_dic["Phone-manager"]
             loc_dic["Name"] = loc_dic["Manager"]
@@ -25,7 +25,7 @@ class LocationLL:
             return True,None
         return False,key
 
-    def assign_id_loc(self):
+    def assign_id_loc(self):#Auto increments id
         all_loc_lis = self.dlapi.get_loc_info()
         if all_loc_lis == []:
             new_id = 1
@@ -33,9 +33,9 @@ class LocationLL:
             new_id = int(all_loc_lis[len(all_loc_lis)-1]["id"])+1
         return str(new_id)
 
-    def is_valid(self,loc_dic):
+    def is_valid(self,loc_dic):#validates infomation inputed into the edit or add location
         dic = {"Name":str, "Country":str, "Airport":str, "Phone":int,"Working-hours":int,"Manager":str,"Phone-manager":int,"GSM":int}
-        if ("Phone-manager" in loc_dic) == False:#passar það að þessi key eru til
+        if ("Phone-manager" in loc_dic) == False:#If location is edit, The dic wont have Phone-manager. Adds those keys with ranondom numbers
             loc_dic["Phone-manager"] = "1234567"
             loc_dic["GSM"] = "1234567"
         for key in dic.keys():
@@ -59,35 +59,34 @@ class LocationLL:
         return True, key
 
     
-    def list_all_loc(self):
+    def list_all_loc(self):#Returns list of dictionaries with all locations
         all_loc = self.dlapi.get_loc_info()
         return all_loc
 
 
-    def find_dest_by_str(self,user_string,loc_lis,key):
+    def find_dest_by_str(self,user_string,loc_lis,key):#search engine to search by string
         ret_lis=[]
         for dic in loc_lis:
             if user_string.lower() in dic[key].lower():
                 ret_lis.append(dic)
         if ret_lis == []:
-            return False #skoða þetta svo filter drepur ekki forritið
+            return False 
         return ret_lis
     
     
-    def find_loc_id(self,id,all_loc_lis):
+    def find_loc_id(self,id,all_loc_lis): #find dictionary for a correct location, using id
         if id.isdigit():
             for dic in all_loc_lis:
                 if int(dic["id"]) == int(id):
                     dic = dic
                     return dic 
-            return None #[{"Text":"No employee with this id"}]
+            return None 
         return False
 
 
-    def edit_info(self,edit_loc_dic):
+    def edit_info(self,edit_loc_dic):#Edits information
         valid, key = self.is_valid(edit_loc_dic)
         if valid:
-            #edit_prop_dic = self.replace_loc_num_with_name(edit_prop_dic)
             all_lis_loc = self.dlapi.get_loc_info()
             dic = self.find_loc_id(edit_loc_dic["id"],all_lis_loc)
             loc_loc_in_lis = self.find_id_location_loc(dic,all_lis_loc)
@@ -97,24 +96,9 @@ class LocationLL:
         return False, key
 
     
-    def find_id_location_loc(self,dic,all_lis_prop):
+    def find_id_location_loc(self,dic,all_lis_prop):#Finds correct index in a list, for edit
         for i in range(len(all_lis_prop)):
             if dic == all_lis_prop[i]:
                 return i
 
 
-if __name__ == "__main__":
-    g = LocationLL()
-    #g.add_location({"Name":"Nuuk","Country":"Greenland","Airport":"Nan","Phone":"3548988054","Working-hours":"00","Manager":"lala","Manager-id":"5"})
-    #d = g.get_all_prop()
-    #d = g.find_prop_id("2",g.get_all_prop())
-    #print(d[0]["id"])
-    #g.edit_info({"id":"31","Destination":"Kulsuk", "Address":"lol", "Size":"2", "Rooms":"3","Type":"biiiig","Property-number":"poom street 2","Extras":"Windows"})
-    #print(g.find_prop_by_str("windowss",g.get_all_prop(),"Extras"))
-    #print(g.get_all_prop)
-    #{"Name":"John"}
-    #d=g.get_destination_name()
-    #print(d[0].capitalize())
-    #g.add_location({"Name":"kdsa","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Phone-manager":"123456789","Address":"Cool Street","GSM":"123456788","Social Security":"98876532"})
-    #print(g.find_dest_by_str("Green",g.list_all_loc(),"Country"))
-    #g.edit_info({"id":"4","Name":"Longboi","Country":"Greenland","Airport":"Nan","Phone":"56789834","Working-hours":"00","Manager":"John Nolegs","Manager-id":"10"})

@@ -8,7 +8,7 @@ MAXROWS = 50
 ROWS = 10
 SEARCHFILTERS = ['Name', 'Profession', 'Location', 'Rating(0-10)']
 
-CONTRPRINT = [4, 20, 20, 12, 12, 17, 19, 15]
+CONTRPRINT = [5, 25, 25, 20, 14, 17, 20, 15]
 
 
 class ContractorList: 
@@ -24,24 +24,30 @@ class ContractorList:
             self.contractorlist = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
             self.contractorlist_backup = self.llapi.search_contractor(self.id['Destination'], self.contractorlist,'Location' )
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | VERKTAKAR |
-     - Verktakalisti
-     {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | CONTRACTORS |
+          - Contractorlist
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
 
     def run_screen(self):
+        '''
+        initiates the class in a way
+        '''
         returnvalue = ''
         while returnvalue != 'B':
             self.display_list()
             returnvalue = self.prompt_user()
     
     def display_list(self):
+        '''
+        displays the contractors in a list 
+        '''
         self.firstrow = self.slide * self.rows 
 
         os.system(CLEAR)
@@ -68,6 +74,9 @@ class ContractorList:
     
 
     def prompt_user(self, oldinput = None):
+        '''
+        promts the user for input
+        '''
         if oldinput == None:
             user_input = input()
         else:
@@ -87,7 +96,9 @@ class ContractorList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            self.find_contractor()
+            returnvalue = self.find_contractor()
+            if returnvalue == 'B':
+                return
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn verktaka
             
@@ -108,6 +119,10 @@ class ContractorList:
 
 
     def find_contractor(self):
+        '''
+        takes in search parameters sends them to the 
+        ll and gets back a list that is updated
+        '''
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.contractorlist != self.contractorlist_backup:
@@ -134,6 +149,9 @@ class ContractorList:
 
 
     def print_header(self):
+        '''
+        prints the header
+        '''
         for index, k in enumerate(self.contractorlist[0].keys()):
             if k == 'id':
                 extra = '  '
@@ -144,6 +162,9 @@ class ContractorList:
     
     
     def print_footer(self):
+        '''
+        prints the footer 
+        '''
         dashlen = 21
         print(f"{DASH * sum(CONTRPRINT)}\n")
         if self.slide > 0:
@@ -156,6 +177,9 @@ class ContractorList:
     
 
     def validate(self, userint = None, userrows = None):
+        '''
+        validates various inputs that are easily prevantble
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")

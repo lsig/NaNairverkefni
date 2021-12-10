@@ -8,7 +8,7 @@ MAXROWS = 50
 ROWS = 10
 SEARCHFILTERS = ['Destination', 'Type', 'Rooms', 'Property-number']
 
-PROPPRINT = [4, 15, 20, 8, 8, 15, 19, 15]
+PROPPRINT = [4, 15, 25, 8, 8, 15, 19, 15]
 
 
 class PropertyList: 
@@ -24,24 +24,29 @@ class PropertyList:
             self.propertylist = self.llapi.search_property(self.id['Destination'], self.propertylist,'Destination' )
             self.propertylist_backup = self.llapi.search_property(self.id['Destination'], self.propertylist,'Destination' )
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | FASTEIGNIR |
-     - Fasteignalisti
-     {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | PROPERTIES |
+          - Propertylist
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
     def run_screen(self):
+        '''
+        This function "initiats" the class  
+        '''
         returnvalue = ''
         while returnvalue != 'B':
             self.display_list()
             returnvalue = self.prompt_user()
 
     def display_list(self):
-
+        '''
+        displays the list in an orderly manner
+        '''
         self.firstrow = self.slide * self.rows 
         os.system(CLEAR)
         print(self.screen)
@@ -66,6 +71,9 @@ class PropertyList:
     
 
     def prompt_user(self, oldinput = None):
+        '''
+        prompts the user for input 
+        '''
         if oldinput == None:
             user_input = input()
         else:
@@ -85,7 +93,9 @@ class PropertyList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L':
-            self.find_property()
+            returnvalue = self.find_property()
+            if returnvalue == 'B':
+                return
         
         elif user_input.isdigit():
             
@@ -106,6 +116,10 @@ class PropertyList:
         
 
     def find_property(self):
+        '''
+        takes search parameters sends it to the ll
+        and gets back a updated list
+        '''
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.propertylist != self.propertylist_backup:
@@ -130,6 +144,9 @@ class PropertyList:
         
 
     def print_header(self):
+        '''
+        prints the header 
+        '''
         for index, k in enumerate(self.propertylist[0].keys()):
             if k == 'id':
                 extra = '  '
@@ -140,6 +157,9 @@ class PropertyList:
     
 
     def print_footer(self):
+        '''
+        prints the footer 
+        '''
         dashlen = 21
         print(f"{DASH * sum(PROPPRINT)}\n")
         if self.slide > 0:
@@ -154,6 +174,9 @@ class PropertyList:
 
 
     def validate(self, userint = None, userrows = None):
+        '''
+        validate various user inputs that are easy to spot
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")

@@ -14,11 +14,11 @@ class WhichReportMenu:
         self.id = id
         self.position = position
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | VIÐHALD |
-     - Verkbeiðnalisti
-      {DASH*15}
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | MAINTENANCE |
+          - Reportlist
+        {DASH*15}
 '''
 
 
@@ -27,7 +27,7 @@ class WhichReportMenu:
             os.system(CLEAR)
             print(self.screen + self.report_choice())
             mainttype = input()
-            if mainttype == '1' or mainttype == '2' or mainttype == '3':
+            if mainttype.isdigit() and int(mainttype) <= len(REPORTHEADER):
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
                 return 'B'
@@ -52,5 +52,5 @@ class WhichReportMenu:
         report_string = ''
         for index, word in enumerate(REPORTHEADER):
             report_string += f'{indentstring}{index+1}. {word.capitalize()}\n'
-        report_string += f'{indentstring}{DASH*15}\n{indentstring}B. Til baka\n{STAR*14}'
+        report_string += f'{indentstring}{DASH*18}\n{indentstring}B. Back\n{STAR*20}'
         return report_string

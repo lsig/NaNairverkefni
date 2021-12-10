@@ -120,6 +120,13 @@ class LLAPI:
 
     def get_contractor_reports(self, reportdict):
         return self.repLL.get_contractor_reports(reportdict)
+    
+    def create_report(self, reportdict, jobdict):
+        return self.repLL.add_report(reportdict, jobdict)
+
+    def id_for_report_create(self, id):
+        return self.repLL.find_rep_id_2(id)
+
 
     #JobLL
     def add_job(self,job_lis,id):
@@ -139,11 +146,25 @@ class LLAPI:
     
     def search_job(self,string, joblist, key):
         return self.jLL.find_jobs_by_str(string, joblist, key)
+    
+    def search_job_by_time(self, datefrom, dateto, joblist):
+        return self.jLL.search_time_period(datefrom, dateto, joblist)
+    
+    def edit_contract(self, jobdict, id):
+        return self.jLL.edit_info(jobdict, id )
 
     
     #MaintenanceLL
     def get_all_maint_jobs(self):
         return self.maintLL.get_all_main_jobs()
+    
+    def add_maint_job(self, maintdict, bossid):
+        return self.maintLL.add_maintenance(maintdict, bossid)
+    
+    def update_reg_jobs(self):
+        self.maintLL.add_to_job()
+    
+    
     
 
         

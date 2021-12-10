@@ -1,24 +1,4 @@
 id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority(ASAP; Now; Emergency),Suggested-contractor(id),Suggested-contractors,Status,Type
-1,2021-12-08,Jacob arons,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,ASAP,1,Bob the builder,2,Regular job
-2,2021-12-08,Jacob arons,2,dsfsg,dfgds,Longyearbyen,Vei 217,F959594,1,asa,1,Bob the builder,0,Regular job
-3,2021-12-08,Jacob arons,2,sadda,dsds,Longyearbyen,Vei 217,F959594,1,asa,1,Bob the builder,0,Regular job
-4,2021-12-08,Jacob arons,2,jhfs,dfgf,Longyearbyen,Vei 217,F959594,1,sa,1,Bob the builder,0,Regular job
-5,2021-12-08,Jacob arons,2,ads,fadsf,Longyearbyen,Vei 217,F959594,1,asap,2,John nohands,0,Regular job
-6,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
-7,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
-8,2021-12-08,Jacob arons,2,Maxim,something,Longyearbyen,Vei 217,F959594,1,ASAP,1,Bob the builder,0,Regular job
-9,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
-10,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
-11,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
-12,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,ASAP,3,siggi,0,Maintenace job
-13,2021-12-10,Aqqaluk Lynge,5,hani,hehe,,iGloo-Ville,64-3900,2,Asap,5,arnar,0,Maintenace job
-14,2021-12-09,Aqqaluk Lynge,5,hani,hehe,,iGloo-Ville,64-3900,2,Asap,5,arnar,0,Maintenace job
-15,2021-12-09,Jacob arons,2,sdad,dsfs,Longyearbyen,Vei 217,F959594,1,asap,1,Bob the builder,0,Regular job
-16,2021-12-09,Jacob arons,2,Testing,sponsored by Tokyo Sushi,Longyearbyen,Vei 217,F959594,1,Now,1,bob big dick,0,Regular job
-17,2021-12-09,Jacob arons,2,sss,ss,Longyearbyen,Vei 217,F959594,1,ASAP,1,bob big dick,0,Regular job
-18,2021-12-09,Jacob arons,2,dd,dd,Longyearbyen,Vei 217,F959594,1,ASAP,1,bob big dick,0,Regular job
-19,2021-12-09,Jacob arons,2,big chungus,big chungus got out,Longyearbyen,Longyearbyen Harbor 1,AA999-4,34,ASAP,1,bob big dick,0,Regular job
-20,2021-12-09,Jacob arons,2,big dick,big dick missing,Longyearbyen,Vei 217,F959594,1,ASAP,1,bob big dick,0,Regular job
-21,2021-12-09,Jacob arons,2,Chungus,Big chungus,Longyearbyen,Vei 217,F959594,1,Now,1,bob big dick,0,Regular job
-22,2021-12-09,Jacob arons,2,maxim,maxim lost his pants,Longyearbyen,Vei 217,F959594,1,Now,1,bob big dick,0,Regular job
-23,2021-12-09,Jacob arons,2,Turbo,Turbo is extremely horny,Longyearbyen,Vei 217,F959594,1,Emergency,1,bob big dick,0,Regular job
+1,2021-12-10,Jacob arons,2,Clean the pool,Clean the pool with bleach,Longyearbyen,Vei 217,F959594,1,ASAP,,,0,Regular job
+2,2021-12-10,Jacob arons,2,Clean the floor ,Mop the floors,Longyearbyen,Vei 217,F959594,1,Now,,,0,Regular job
+3,2021-12-10,Jacob arons,2,Clean the reactor,Clean the nuclear Reactor,Longyearbyen,Longyearbyen Harbor 1,AA999-1,31,ASAP,1,John Core,0,Regular job

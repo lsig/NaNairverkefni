@@ -15,26 +15,33 @@ class SeeReport:
         self.id = id
         self.report = reportinfo
         editornot = ''
-        if self.position == 'Manager' and self.report['Status'] == '1':
+        if self.position == 'Manager' and (self.report['Status'] == '1' or self.report['Status'] == '2') :
             self.reportvar = 'PM' #PendingManager
-            editornot = f"\n     C. Confirm\n     D. Deny"
+            if self.report['Status'] == '1':
+                editornot = f"\n\tC. Confirm"
+            editornot += f"\n\tD. Deny"
+        
+        elif self.position == 'Employee' and self.report['Status'] == '0':
+            self.reportvar = 'DE' #DeniedEmployee
+            editornot = f"\n\tE. Edit & resubmit"
+    
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
-    | VIÐHALD |
-     - Verkskýrslulisti
-       - {self.report['Title']}
-     {DASH*15}{editornot}
-     B. Til baka
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
+          | MAINTENANCE |
+          - Reportlist
+            - {self.report['Title']}
+        {DASH*15}{editornot}
+        B. Back
 '''
 
     def display(self):
-        while True:
+        returnvalue = ''
+        while returnvalue != 'B':
             self.reset_screen()
             returnvalue = self.prompt_user()
-            if returnvalue == 'B':
-                return
-            elif returnvalue == 'notpending':
+
+            if returnvalue == 'notpending':
                 print('Changes saved')
                 sleep(SLEEPTIME)
                 return
@@ -42,34 +49,57 @@ class SeeReport:
     
     def printreportinfo(self, number = None):
 
-        reportstring = f"{'| ' + self.report['Location'] + ' |':^50}\n{DASH*50}\n"
+        reportstring = f"{'| ' + self.report['Title'] + ' |':^70}\n{DASH*70}\n"
 
         for i in range(len(REPORTTEMPLATE)):
             if number != None and i == number - 1:
-                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<25} ____\n"
+                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<35} ____\n"
             else:
-                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<25} {self.report[REPORTTEMPLATE[i]]}\n"
-        reportstring += DASH*50
+                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<35} {self.report[REPORTTEMPLATE[i]]}\n"
+        reportstring += DASH*70
         
         print(reportstring)
     
     
-    def prompt_user(self):
+    def prompt_user(self, old_input = None):
+        if old_input == None:
+            user_input = input()
+        else:
+            user_input = old_input
         
-        user_input = input()
         if user_input.upper() == 'B':
             return 'B'
 
         elif self.reportvar == 'PM':
-            if user_input.upper() == 'C':
-                self.report['Status'] = '2'
+            if user_input.upper() == 'C' and self.report['Status'] == '1':
+                self.boss_feedback = input('Report feedback: ')
+                self.report['Feedback'] = self.boss_feedback
+                if self.report['Contractor-id'] != '':
+                    valid = False
+                    while not valid:
+                        contractor_rating = input('Contractor Rating: ')
+                        valid = self.validate_rating(contractor_rating)
+
+                    self.report['Contractor-rating'] = contractor_rating
+                    self.report['Status'] = '2'
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
 
             elif user_input.upper() == 'D':
                 self.report['Status'] = '0'
+                boss_feedback = input('Report feedback: ')
+                self.report['Feedback'] = boss_feedback
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
+
+        elif self.reportvar == 'DE':
+            if user_input.upper() == 'E':
+                self.report['Status'] = '1'
+                emp_description = input("Add description: ")
+                self.report['Description'] = emp_description
+                self.llapi.confirm_or_deny_pending_report(self.report)
+                return 'notpending'
+                
 
         print(INVALID)
         sleep(SLEEPTIME)
@@ -138,6 +168,19 @@ class SeeReport:
             sleep(SLEEPTIME)
             return None
         
+    
+    def validate_rating(self, user_input):
+        if user_input.isdigit():
+            if 0 <= int(user_input) <= 10:
+                return True
+        
+        print(INVALID)
+        sleep(SLEEPTIME)
+        self.reset_screen()
+        print(f'Report feedback: {self.boss_feedback}')
+            
+        return False
+
 
     def reset_screen(self, user_row = None):
         os.system(CLEAR)

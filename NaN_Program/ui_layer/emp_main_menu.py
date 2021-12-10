@@ -11,17 +11,16 @@ class EmployeeMenu:
         self.id = id
         self.position = position
         self.options = f''' 
-
  {self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*18}
-      {DASH*15}
-      1. Fasteignir 
-      2. Viðhald
-      3. Verktakar
-      {DASH*15}
-      L. Log out
-      Q. Quit 
-{STAR*18}
+{STAR*20}
+        {DASH*15}
+        1. Properties 
+        2. Maintenance
+        3. Contractors
+        {DASH*15}
+        L. Log out
+        Q. Quit 
+{STAR*20}
         '''
 
     def print_menu(self):

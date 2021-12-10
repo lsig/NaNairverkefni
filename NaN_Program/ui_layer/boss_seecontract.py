@@ -5,6 +5,9 @@ from logic_layer.LLAPI import LLAPI
 
 from time import sleep
 import os
+from ui_layer.boss_seereport import SeeReport
+
+from ui_layer.emp_reportcreate import EmpReportCreate
 
 
 
@@ -16,15 +19,20 @@ class SeeContract:
         self.contract = contractinfo
         editornot = ''
         if self.position == 'Manager':
-            editornot = f"\n     E. Edit"
+            if contractinfo['Status'] == '0':
+                editornot = f"\n\tE. Edit"
+            elif contractinfo['Status'] == '1':
+                editornot = f"\n\tR. See report"
+        elif self.position == 'Employee' and contractinfo['Status'] == '0':
+            editornot = f"\n\tC. Create Report"
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position} 
-{STAR*14}
-    | VIÐHALD |
-     - Verkbeiðnilisti
-       - {self.contract['Title']}
-     {DASH*15}{editornot}
-     B. Til baka
+ {self.id['Destination']} | {self.id['Name']} | {self.position} 
+{STAR*20}
+          | MAINTENANCE |
+          - Contractlist
+            - {self.contract['Title']}
+        {DASH*15}{editornot}
+        B. Back
 '''
 
     def display(self):
@@ -37,14 +45,14 @@ class SeeContract:
     
     def printcontractinfo(self, number = None):
 
-        contractstring = f"{'| ' + self.contract['Location'] + ' | ':^35}\n{DASH*35}\n"
+        contractstring = f"{'| ' + self.contract['Title'] + ' | ':^70}\n{DASH*70}\n"
 
         for i in range(len(CONTRACTTEMPLATE)):
             if number != None and i == number - 1:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} ____\n"
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<35} ____\n"
             else:
-                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<17} {self.contract[CONTRACTTEMPLATE[i]]}\n"
-        contractstring += DASH*35
+                contractstring += f"{i+1}. {CONTRACTTEMPLATE[i] + ':':<35} {self.contract[CONTRACTTEMPLATE[i]]}\n"
+        contractstring += DASH*70
         
         print(contractstring)
     
@@ -55,11 +63,28 @@ class SeeContract:
         if user_input.upper() == 'B':
             return 'C'
 
-        elif user_input.upper() == 'E' and self.position == 'Manager':
-            while True:
-                returnvalue = self.change_row()
-                if returnvalue == 'C' or returnvalue == 'B':
-                    return returnvalue
+        elif self.position == 'Manager':
+            if self.contract['Status'] == '0' and user_input.upper() == 'E':
+                while True:
+                    returnvalue = self.change_row()
+                    if returnvalue == 'C' or returnvalue == 'B':
+                        if returnvalue == 'C':
+                            pass
+                        return returnvalue
+            
+            if self.contract['Status'] == '1' and user_input.upper() == 'R':
+                repdict = self.llapi.id_for_report_create(self.contract['id'])
+                seerep = SeeReport(self.id, repdict, self.position) 
+                seerep.display()
+        
+
+            # elif self.contract['Status'] == '1' and user_input.upper() == 'C':
+            #     self.contract['Status'] = ''
+        
+        elif self.position == 'Employee' and self.contract['Status'] == '0' and user_input.upper() == 'C':
+            reportcreate = EmpReportCreate(self.id, self.contract)
+            reportcreate.display()
+    
 
         else:
             print(INVALID)
@@ -95,7 +120,7 @@ class SeeContract:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_rep(self.contract)
+                valid, key = self.llapi.edit_contract(self.contract, self.id)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)

@@ -11,14 +11,14 @@ class BossContractorCreate:
         self.id = id
         self.contractordict = {}
         self.screen = f'''
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | VERKTAKAR |
-     - Skrá nýja verktaka
-      {DASH*15}
-    Q. Hætta við
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | CONTRACTORS |
+          - Create new contractor
+        {DASH*15}
+        Q. Quit
 
-    | VERKTAKI |
+    | CONTRACTOR |
 {DASH * 25}'''
 
     def display_contractormenu(self):

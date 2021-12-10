@@ -7,7 +7,7 @@ from time import sleep
 import os
 MAXROWS = 50
 ROWS = 10
-DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (15, 'Airport'), (15, 'Phone'), (15, 'Working-hours'), (20, 'Manager'), (15,'Manager-id')]
+DESTPRINTER = [(4,'id'), (20,'Name'), (25, 'country') , (20, 'Airport'), (15, 'Phone'), (15, 'Working-hours'), (20, 'Manager'), (15,'Manager-id')]
 DESTPRINT = [element[0] for element in DESTPRINTER]
 SEARCHFILTERS = ['Name','Country','Manager', 'Phone']
 
@@ -22,48 +22,58 @@ class DestinationList:
         self.destinationlist = self.llapi.get_dest_info()
         self.destinationlist_backup = self.llapi.get_dest_info()
         self.screen = f''' 
-{self.id['Destination']} | {self.id['Name']} | {self.position}
-{STAR*14}
-    | ÁFANGASTAÐIR |
-     - Áfangastaðalisti
-     {DASH*15}
-     L. Leita
-     B. Til baka
-     /row. Breytir lengd raðar
+ {self.id['Destination']} | {self.id['Name']} | {self.position}
+{STAR*20}
+          | DESTINATIONS |
+          - Destinationlist
+        {DASH*15}
+        L. Look
+        B. Back
+        /row. Change row length
 
 '''
     def run_screen(self):
+        '''
+        initates the class in a way
+        '''
         returnvalue = ''
         while returnvalue != 'B':
             self.display_list()
             returnvalue = self.prompt_user()
     
     def display_list(self):
-            self.firstrow = self.slide * self.rows 
+        '''
+        displays a list of destination in an orderly fashion
+        '''
 
-            os.system(CLEAR)
-            print(self.screen)
-            self.print_header()
+        self.firstrow = self.slide * self.rows 
 
-            self.printedids = [self.destinationlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.destinationlist) > self.firstrow + i]
-            
+        os.system(CLEAR)
+        print(self.screen)
+        self.print_header()
 
-            for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
-                try:
-                    destinationinfostr = f'{self.printedids[i] + ".":<{DESTPRINT[0]}}- ' #id with some extra text.
-                    for index, k in enumerate(self.destinationlist[self.firstrow + i]):
-                        if k != 'id':
-                            destinationinfostr += f"{'| ' + self.destinationlist[self.firstrow + i][k][0:22] :<{DESTPRINT[index]}}"
+        self.printedids = [self.destinationlist[self.firstrow + i]['id'] for i in range(self.rows) if len(self.destinationlist) > self.firstrow + i]
+        
 
-                    print(destinationinfostr, end='') #here we print an destination's information.
-                        
-                except IndexError: #if the destination id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
-                    pass
-                print()
-            
-            self.print_footer()
+        for i in range(self.rows): #ef að við displayum self.rows starfsmenn í röð.
+            try:
+                destinationinfostr = f'{self.printedids[i] + ".":<{DESTPRINT[0]}}- ' #id with some extra text.
+                for index, k in enumerate(self.destinationlist[self.firstrow + i]):
+                    if k != 'id':
+                        destinationinfostr += f"{'| ' + self.destinationlist[self.firstrow + i][k][0:22] :<{DESTPRINT[index]}}"
+
+                print(destinationinfostr, end='') #here we print an destination's information.
+                    
+            except IndexError: #if the destination id cant be found within the self.firstrow + i to self.firstrow + self.rows + i range, we get an indexerror and print an empty line.
+                pass
+            print()
+        
+        self.print_footer()
     
     def prompt_user(self, oldinput = None):
+        '''
+        prompts the user for input
+        '''
         if oldinput == None:
             user_input = input()
         else:
@@ -83,7 +93,9 @@ class DestinationList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            self.find_destination()
+            returnvalue = self.find_destination()
+            if returnvalue == 'B':
+                return
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn starfsmann
             
@@ -101,6 +113,10 @@ class DestinationList:
             sleep(SLEEPTIME)
 
     def find_destination(self):
+        '''
+        takes in search parameters, sends them to
+        the ll and gets back an updated list of dest
+        '''
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.destinationlist != self.destinationlist_backup:
@@ -109,9 +125,11 @@ class DestinationList:
 
         if userint == 'B':
             return 'B'
+
         elif userint == 'R' and self.destinationlist != self.destinationlist_backup:
             self.destinationlist = self.destinationlist_backup
             return
+
         key = SEARCHFILTERS[userint - 1]
         userstring = input(f"Search in {key.lower()}: ")
 
@@ -125,9 +143,12 @@ class DestinationList:
         
 
     def print_header(self):
+        '''
+        prints the header 
+        '''
         for index, k in enumerate(self.destinationlist[0].keys()):
             if k == 'id':
-                extra = '   '
+                extra = '  '
             else:
                 extra = ''
             print(f"{'| ' + k + extra:<{DESTPRINT[index]}}",end='')
@@ -135,6 +156,9 @@ class DestinationList:
     
 
     def print_footer(self):
+        '''
+        prints the footer
+        '''
         dashlen = 21
         print(f"{DASH * sum(DESTPRINT)}\n")
         if self.slide > 0:
@@ -148,6 +172,10 @@ class DestinationList:
 
 
     def validate(self, userint = None, userrows = None):
+        '''
+        validates various user inputs that are easily 
+        preventable
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")

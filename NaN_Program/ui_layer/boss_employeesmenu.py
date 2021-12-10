@@ -14,12 +14,12 @@ class BossEmployeesMenu:
         self.options = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
-         | STARFSMENN |
-      {DASH*24}
-      1. Skrá nýjan starfsmann
-      2. Starfsmannalisti
-      {DASH*24}
-      B. Til baka
+          | EMPLOYEES |
+        {DASH*15}
+        1. Create new employee
+        2. Employeelist
+        {DASH*15}
+        B. Back
 {STAR*20}
         '''
     
