@@ -20,7 +20,10 @@ class JobLL:
                 cur_date = datetime.date(datetime.now())
                 type = "Regular job"
                 emp_name = self.empLL.find_employee_name(job_dic["Employee-id"])
-                con_name = self.get_con_name_and_location(job_dic["Suggested-contractor(id)"])["Name"]
+                if job_dic["Suggested-contractor(id)"] != '':
+                    con_name = self.get_con_name_and_location(job_dic["Suggested-contractor(id)"])["Name"]
+                else:
+                    con_name = ''
                 prop_addr,prop_nr, prop_loc = self.prop_address_from_id(job_dic["Property-id"])
             else:
                 return False,key
@@ -78,9 +81,10 @@ class JobLL:
                     if priority_check == False:
                         return False, key
             elif dic[key] == int and dic[key] != "both":
-                if job_dic[key] == "":
+                if job_dic[key] == "" and key != "Suggested-contractor(id)":
                     return False,key
-                get_validation = job_dic[key].replace("-","").isdigit()
+                if key != "Suggested-contractor(id)":    
+                    get_validation = job_dic[key].replace("-","").isdigit()
                 if key == "Employee-id" and get_validation:
                     if self.boss_loc != self.empLL.get_emp_location(job_dic["Employee-id"]):
                         return False,key
@@ -88,12 +92,14 @@ class JobLL:
                         if self.id == job_dic["Employee-id"]:
                             return False,key
                 if key == "Property-id" and get_validation:
-                    if job_dic[key] != '':      
                         if self.prop_address_from_id(job_dic["Property-id"])[2] != self.boss_loc:
                             return False,key
                 if key == "Suggested-contractor(id)" and get_validation:
-                    if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
-                        return False,key
+                    if job_dic["Suggested-contractor(id)"] != '':
+                        if self.boss_loc != self.get_con_name_and_location(job_dic[key])["Location"]:
+                            return False,key
+                    else:
+                        job_dic["Suggested-contractor(id)"] = ''
             # to check if address or property number are empty    
             if dic[key] == "both":
                 if job_dic[key] == "":
