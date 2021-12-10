@@ -7,6 +7,8 @@ class EmployeeDL:
         self.csv = f"CSV_Files{sep}Employee.csv"
 
     def get_all_employee(self):
+        ''' this function lists dicts of all reports from in a csv file
+        '''
         ret_lis = []
         with open(self.csv, newline='', encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -19,12 +21,16 @@ class EmployeeDL:
         return ret_lis
 
     def add_employee(self,emp):
+        ''' this function adds employee to a csv file
+        '''
         with open(self.csv, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["id","Name","Social Security","Address","Phone","GSM","Email","Destination","Manager"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({'id': emp.id, "Name": emp.name, "Social Security": emp.social, "Address": emp.addr, "Phone": emp.phone, "GSM": emp.gsm,"Email":emp.email, "Destination":emp.dest,"Manager":emp.manager})
 
     def change_emp_info(self,emp_lis):
+        ''' This function edits the csv file if something is edited
+        '''
         with open(self.csv, 'w+', newline='',encoding='utf-8') as f:
             writer = csv.writer(f)
             header = emp_lis[0]
