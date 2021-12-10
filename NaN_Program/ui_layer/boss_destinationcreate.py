@@ -24,6 +24,9 @@ class BossDestinationCreate:
 {DASH * 25}'''
 
     def display_menu(self):
+        '''
+        display the menu info 
+        '''
         os.system(CLEAR)
         print(self.screen)
 
@@ -40,6 +43,9 @@ class BossDestinationCreate:
 
         
     def printdestinationinfo(self, number = None):
+        '''
+        prints the destination info
+        '''
         destinationstring = ''
 
         for i in range( len(DESTINATIONTEMPLATE)):
@@ -55,6 +61,9 @@ class BossDestinationCreate:
     
 
     def confirmdestination(self):
+        '''
+        confirms the new destination and sends to ll for validation
+        '''
 
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
@@ -84,6 +93,9 @@ class BossDestinationCreate:
                 self.reset_screen()
     
     def editdestinationinfo(self, row = None):
+        '''
+        edits the destination info
+        '''
         if row == None:
             user_row = None
             while user_row is None:
@@ -102,6 +114,9 @@ class BossDestinationCreate:
 
 
     def validate(self, rowinput):
+        '''
+        validates various basic user errors 
+        '''
         try:
             rowint = int(rowinput)
             if 1 <= rowint <= len(DESTINATIONTEMPLATE):
@@ -114,6 +129,9 @@ class BossDestinationCreate:
             return None
     
     def reset_screen(self, user_row = None):
+        '''
+        resets screen
+        '''
         os.system(CLEAR)
         print(self.screen)
         self.printdestinationinfo(user_row)

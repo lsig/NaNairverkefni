@@ -39,7 +39,7 @@ class ContractList:
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
           | MAINTENANCE |
-          - Contract list
+          - Contractlist
         {DASH*15}
         L. Look
         B. Back
@@ -85,7 +85,7 @@ class ContractList:
 
                         if key == 'Status':
                             if keyprint == '0':
-                                keyprint = 'Declined'
+                                keyprint = 'Open'
                             elif keyprint == '1':
                                 keyprint = 'Ready'
                             elif keyprint == '2':
@@ -141,6 +141,7 @@ class ContractList:
                     self.contractlist_backup= self.llapi.search_job(self.id['id'], self.contractlist_backup, 'Employee-id')
                 else:
                     self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection]
+                self.contractlist = self.contractlist_backup
 
         else:
             print(INVALID)

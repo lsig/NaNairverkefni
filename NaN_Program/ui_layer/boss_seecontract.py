@@ -5,6 +5,7 @@ from logic_layer.LLAPI import LLAPI
 
 from time import sleep
 import os
+from ui_layer.boss_seereport import SeeReport
 
 from ui_layer.emp_reportcreate import EmpReportCreate
 
@@ -21,7 +22,7 @@ class SeeContract:
             if contractinfo['Status'] == '0':
                 editornot = f"\n\tE. Edit"
             elif contractinfo['Status'] == '1':
-                editornot = f"\n\tC. what"
+                editornot = f"\n\tR. See report"
         elif self.position == 'Employee' and contractinfo['Status'] == '0':
             editornot = f"\n\tC. Create Report"
         self.screen = f''' 
@@ -62,11 +63,23 @@ class SeeContract:
         if user_input.upper() == 'B':
             return 'C'
 
-        elif user_input.upper() == 'E' and self.position == 'Manager' and self.contract['Status'] == '0':
-            while True:
-                returnvalue = self.change_row()
-                if returnvalue == 'C' or returnvalue == 'B':
-                    return returnvalue
+        elif self.position == 'Manager':
+            if self.contract['Status'] == '0' and user_input.upper() == 'E':
+                while True:
+                    returnvalue = self.change_row()
+                    if returnvalue == 'C' or returnvalue == 'B':
+                        if returnvalue == 'C':
+                            pass
+                        return returnvalue
+            
+            if self.contract['Status'] == '1' and user_input.upper() == 'R':
+                repdict = self.llapi.id_for_report_create(self.contract['id'])
+                seerep = SeeReport(self.id, repdict, self.position) 
+                seerep.display()
+        
+
+            # elif self.contract['Status'] == '1' and user_input.upper() == 'C':
+            #     self.contract['Status'] = ''
         
         elif self.position == 'Employee' and self.contract['Status'] == '0' and user_input.upper() == 'C':
             reportcreate = EmpReportCreate(self.id, self.contract)
@@ -107,7 +120,7 @@ class SeeContract:
             is_user_happy = input("C. Confirm\nE. Edit\nB. Back\n")
                 
             if is_user_happy.upper() == 'C':
-                valid, key = self.llapi.edit_rep(self.contract)
+                valid, key = self.llapi.edit_contract(self.contract, self.id)
                 if valid:
                     print("Changes saved!")
                     sleep(SLEEPTIME)
