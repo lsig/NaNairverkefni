@@ -19,11 +19,11 @@ class SeeContract:
         editornot = ''
         if self.position == 'Manager':
             if contractinfo['Status'] == '0':
-                editornot = f"\n     E. Edit"
+                editornot = f"\n\tE. Edit"
             elif contractinfo['Status'] == '1':
-                editornot = f"\n     C. what"
+                editornot = f"\n\tC. what"
         elif self.position == 'Employee' and contractinfo['Status'] == '0':
-            editornot = f"\n     C. Create Report"
+            editornot = f"\n\tC. Create Report"
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*20}

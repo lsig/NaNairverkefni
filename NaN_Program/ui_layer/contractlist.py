@@ -120,7 +120,7 @@ class ContractList:
             if returnvalue == 'B':
                 return
         
-        elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
+        elif user_input.isdigit(): #Here we select a contract
 
             if user_input in self.printedids:
                 contractinfo = self.llapi.filter_job_id(user_input, self.contractlist)  #TODO 
