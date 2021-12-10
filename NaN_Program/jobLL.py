@@ -231,7 +231,11 @@ class JobLL:
             if date_from <= date_to:
                 ret_lis = []
                 for dic in all_job_lis:
-                    job_date_lis = dic["Date-created"].split("-")
+                    if "Date-created" in dic.keys():
+                        job_date_lis = dic["Date-created"].split("-")
+                    elif "Date" in dic.key.keys():
+                        job_date_lis = dic["Date"].split("-")
+
                     job_date = datetime(int(job_date_lis[0]),int(job_date_lis[1]),int(job_date_lis[2])).date()
                     if date_from <= job_date and date_to >= job_date:
                         ret_lis.append(dic)

@@ -21,10 +21,10 @@ class MaintenanceLL:
 
 
     def add_maintenance(self,main_dic,boss_id):
-        # id,Date-from,Date-to,Frequency,Employee,Employee-id,Title,Description,
-        # Location,Property,Property-number,Property-id,Priority,Suggested-contractor,Status
+        '''This function add maintenance job to csv files but first the function goes to a another function to 
+        check if the inputs from the ui layer is valid if it is not valid both functions returns false and the key 
+        that was invalid and it returns true if the the input is valid and a empty string'''
         
-        # dic_fromat = {"Date-to(dd-mm-yyyy)"":int,"Frequency":int,"Employee-id":int,"Title":str,"Description":"both","Property-id":int,"Priority":int,"Suggested-contractor":str}
         self.boss_loc = self.empLL.get_emp_location(boss_id)
         self.boss_id = boss_id
         curr_date = datetime.date(datetime.now())
@@ -43,6 +43,8 @@ class MaintenanceLL:
 
 
     def assign_id(self):
+        ''' This function finds a new id that is unique to add to a new maintenance job and returns new unique id 
+        '''
         all_main_job = self.dlapi.get_maintenance_jobs()
         if all_main_job != []:
             new_id = int(all_main_job[len(all_main_job)-1]["id"])+1
@@ -50,6 +52,11 @@ class MaintenanceLL:
         return str(1)
 
     def is_valid(self,today,main_dic):
+        ''' This function validates the input, checks if the if the id exists and it is in the same 
+        location as the boss that created the job and checks if the date and frequency is valid. This function 
+        returns false if the input is invalid and the key that is invalid, it returns true if all the input is correct
+        and an empty string
+        '''
         dic = {"Date-to(dd-mm-yyyy)":int,"Frequency(Week: 1, or Month: 2)":int,"Employee-id":int,"Title":str,"Description":"both","Property-id":int,"Priority(ASAP; Now; Emergency)":str,"Suggested-contractor(id)":int}
         for key in dic.keys():
             if dic[key] == str:
@@ -81,7 +88,7 @@ class MaintenanceLL:
                 if str(self.boss_id) == main_dic["Employee-id"]:
                     return False,key
                 emp_dic = self.find_emp(main_dic[key])
-                if emp_dic == {} or emp_dic["Destination"] != self.boss_loc :
+                if emp_dic == None or emp_dic["Destination"] != self.boss_loc :
                     return False,key
 
             if key == "Property-id" and get_validation:
@@ -116,6 +123,9 @@ class MaintenanceLL:
 
 
     def check_date(self,date):
+        ''' this function takes the date checks if the input date is valid. It is used by isvalid() and returns false if the 
+        date is invalid and returns the date in datetime if the date is valid  
+        '''
         if len(date[0]) == 2 and len(date[1]) == 2 and len(date[2]) == 4:
             if int(date[1]) > 0 and int(date[1]) < 13:
                 nr_days_in_months=[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -127,9 +137,17 @@ class MaintenanceLL:
 
 
     def find_emp(self,id):
+        ''' this function used a function in EmployeeLL to find a the employee by his id and return a dict of
+        his info and returns false if the id is invalid, none if there is no employee with that id and 
+        the dict of the employee if the exist and is a valid id
+        '''
         return self.empLL.find_emp_id(id,self.dlapi.get_all_emp())
 
     def get_property(self,id):
+        ''' this function used a function in PropertyLL to find a the property by its id and return a dict of
+        his info and returns false if the id is invalid, none if there is no employee with that id and 
+        the dict of the employee if the exist and is a valid id
+        '''
         return self.propLL.find_prop_id(id,self.dlapi.get_property_info())
 
     def check_cont_dic(self,id_lis):
