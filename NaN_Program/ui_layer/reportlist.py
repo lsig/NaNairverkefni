@@ -114,7 +114,9 @@ class ReportList:
             self.rows = self.validate(None, '/ROW')
     
         elif user_input.upper() == 'L': #TODO
-           self.find_report()
+           returnvalue = self.find_report()
+           if returnvalue == 'B':
+               return
         
         elif user_input.isdigit(): #hér selectum við ákveðna fasteign
 
@@ -141,16 +143,25 @@ class ReportList:
 
         if userint == 'B':
             return 'B'
+
         elif userint == 'R' and self.reportlist != self.reportlist_backup:
             self.reportlist = self.reportlist_backup
             return
         key = SEARCHFILTERS[userint - 1]
-        userstring = input(f"Search in {key.lower()}: ")
 
-        filteredlist = self.llapi.search_report(userstring, self.reportlist, key)
+        if key == 'Date':
+                datefrom = input("Date from (dd-mm-yyyy): ")
+                dateto =   input("Date to (dd-mm-yyyy): ")
+                userstring = ''
+                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist)
+        
+        else:
+            userstring = input(f"Search in {key.lower()}: ")
+            filteredlist = self.llapi.search_report(userstring, self.reportlist, key)
+            userstring = ' ' + userstring
 
         if filteredlist == False:
-            print(f"The filter {key.lower()}: {userstring} did not match any result.")
+            print(f"The filter {key.lower()}:{userstring} did not match any result.")
             sleep(SLEEPTIME*3)
         else:
             self.reportlist = filteredlist

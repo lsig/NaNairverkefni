@@ -87,7 +87,9 @@ class ContractorList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            self.find_contractor()
+            returnvalue = self.find_contractor()
+            if returnvalue == 'B':
+                return
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðinn verktaka
             

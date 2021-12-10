@@ -107,7 +107,9 @@ class ContractList:
             self.rows = self.validate(None, '/ROW')
         
         elif user_input.upper() == 'L': #TODO
-            self.find_job()
+            returnvalue = self.find_job()
+            if returnvalue == 'B':
+                return
         
         elif user_input.isdigit(): #TODO, hér selectum við ákveðna fasteign
 
@@ -170,18 +172,20 @@ class ContractList:
                 self.contractlist = self.contractlist_backup
                 return
             key = SEARCHFILTERS[userint - 1]
+
             if key == 'Date':
                 datefrom = input("Date from (dd-mm-yyyy): ")
                 dateto =   input("Date to (dd-mm-yyyy): ")
-                userstring = 'Dates'
+                userstring = ''
                 filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist)
 
             else:
                 userstring = input(f"Search in {key.lower()}: ")
                 filteredlist = self.llapi.search_job(userstring, self.contractlist, key)
+                userstring = ' ' + userstring
 
             if filteredlist == False:
-                print(f"The filter {key.lower()}: {userstring} did not match any result.")
+                print(f"The filter {key.lower()}:{userstring} did not match any result.")
                 sleep(SLEEPTIME*3)
             else:
                 self.contractlist = filteredlist

@@ -17,7 +17,7 @@ class WhichReportMenu:
  {self.id['Destination']} | {self.id['Name']} | {self.position}
 {STAR*20}
     | VIÐHALD |
-     - Verkbeiðnalisti
+     - Verkskýrslulisti
       {DASH*18}
 '''
 
@@ -27,7 +27,7 @@ class WhichReportMenu:
             os.system(CLEAR)
             print(self.screen + self.report_choice())
             mainttype = input()
-            if mainttype == '1' or mainttype == '2' or mainttype == '3':
+            if mainttype.isdigit() and int(mainttype) <= len(REPORTHEADER):
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
                 return 'B'

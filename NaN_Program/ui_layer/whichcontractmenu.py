@@ -27,16 +27,14 @@ class WhichContractMenu:
         | VIÐHALD |
         - Verkbeiðnalisti
         {DASH*15}
-        B. Til baka
-
-    '''
+'''
 
     def which_request(self):
         while True:
             os.system(CLEAR)
-            print(self.screen)
-            mainttype = input(f"1. {JOBHEADER[0].capitalize()}\n2. {JOBHEADER[1].capitalize()}\n3. {JOBHEADER[2].capitalize()}\n")
-            if mainttype == '1' or mainttype == '2' or mainttype == '3':
+            print(self.screen + self.report_choice())
+            mainttype = input()
+            if mainttype.isdigit() and int(mainttype) <= len(JOBHEADER):
                 return int(mainttype) - 1
             elif mainttype.upper() == 'B':
                 return 'B'
@@ -54,3 +52,12 @@ class WhichContractMenu:
 
             contrlist = ContractList(self.id, self.position, JOBHEADER[int(self.reqsection)], self.reqsection)
             contrlist.run_screen()
+    
+
+    def report_choice(self):
+        indentstring = '      '
+        report_string = ''
+        for index, word in enumerate(JOBHEADER):
+            report_string += f'{indentstring}{index+1}. {word.capitalize()}\n'
+        report_string += f'{indentstring}{DASH*18}\n{indentstring}B. Til baka\n{STAR*20}'
+        return report_string
