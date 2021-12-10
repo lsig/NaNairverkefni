@@ -55,6 +55,9 @@ class ReportList:
 '''
 
     def run_screen(self):
+        '''
+        This function iniates the class
+        '''
         returnvalue = ''
 
         while returnvalue != 'B':
@@ -63,6 +66,9 @@ class ReportList:
     
 
     def display_list(self):
+        '''
+        This function displays the report list
+        '''
 
         self.firstrow = self.slide * self.rows 
 
@@ -105,6 +111,9 @@ class ReportList:
 
 
     def prompt_user(self,oldinput = None):
+        '''
+        This function propmt the user for input
+        '''
         if oldinput == None:
             user_input = input()
         else:
@@ -154,6 +163,10 @@ class ReportList:
         
 
     def find_report(self):
+        '''
+        This function takes in search parameters 
+        sendt to the ll and gets an updated list back
+        '''
         for index, filter in enumerate(SEARCHFILTERS):
             print(f"{index + 1}: {filter}")
         if self.reportlist != self.reportlist_backup:
@@ -187,6 +200,9 @@ class ReportList:
         
 
     def print_header(self):
+        '''
+        default header printer
+        '''
         for key, value in REPORTDICT.items():
             keyprint = key
 
@@ -206,6 +222,9 @@ class ReportList:
     
 
     def print_footer(self):
+        '''
+        Default printer footer
+        '''
         print(f"{DASH* sum(REPORTDICT.values())}\n")
         dashlen = 21
         if self.slide > 0:
@@ -221,6 +240,9 @@ class ReportList:
 
 
     def validate(self, userint = None, userrows = None):
+        '''
+        Validating various inputs from users which are easy to spot
+        '''
         if userint is not None:
             while True:
                 userint = input(" ")
