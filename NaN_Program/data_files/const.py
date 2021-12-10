@@ -19,7 +19,7 @@ CONTRACTORTEMPLATE = ["Name","Contact-name","Profession","Phone","Working-hours"
 DESTINATIONTEMPLATE = ['Name', 'Country' ,'Airport', 'Phone', 'Working-hours', 'Manager', 'Social Security', 'Address', 'Phone-manager', 'GSM']
 REPORTTEMPLATE = ['Report-id', 'Request-id', 'Employee', 'Employee-id', 'Title', 'Description', 'Location', 'Property', 'Property-number', 'Property-id', 'Contractor-name', 'Contractor-id', 'Contractor-rating', 'Date', 'Commission', 'Status']
 
-CREATEREPORTTEMPLATE = ['Description', 'Contractor-id', 'Commission']
+CREATEREPORTTEMPLATE = ['Description', 'Contractor-id', 'Commission','Total-cost']
 
 JOBDICT = {'id': 5, 'Date-created': 15, 'Employee': 20, 'Title': 25, 'Location': 20, 'Property': 25, 'Priority(ASAP; Now; Emergency)': 12, 'Suggested-contractors': 30, 'Status':10,  'Type': 15}
 REPORTDICT = {'Report-id': 5, 'Employee': 20, 'Title': 25, 'Location': 20, 'Property': 25, 'Contractor-rating': 10, 'Date': 15, 'Commission': 15, 'Status': 10}
