@@ -1,7 +1,7 @@
 #velja ákveðinn starfsmann
 from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, CONTRACTORTEMPLATE
 from logic_layer.LLAPI import LLAPI
-
+from ui_layer.reportlist import ReportList
 from time import sleep
 import os
 
@@ -23,6 +23,7 @@ class SeeContractor:
      - Verktakalisti
        - {self.contractor['Name']}
      {DASH*15}{editornot}
+     R. Property reports
      B. Til baka
 '''
 
@@ -53,9 +54,9 @@ class SeeContractor:
         if user_input.upper() == 'B':
             return 'C'
         
-      #  elif user_input.upper() == 'R':
-      #      propreport = ReportList(self.id, self.position, self.contractor['id'])
-      #       propreport.display_list()
+        elif user_input.upper() == 'R':
+            contractorreport = ReportList(self.id, self.position, self.contractor['Name'],'contractor',self.contractor)
+            contractorreport.run_screen()
 
         elif user_input.upper() == 'E' and self.position == 'Manager':
             while True:

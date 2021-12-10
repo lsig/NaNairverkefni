@@ -57,8 +57,8 @@ class SeeProperty:
             return 'C'
         
         elif user_input.upper() == 'R':
-            propreport = ReportList(self.id, self.position, self.property['id'])
-            propreport.display_list()
+            propreport = ReportList(self.id, self.position, self.property['Address'],'property',self.property)
+            propreport.run_screen()
 
         elif user_input.upper() == 'E' and self.position == 'Manager':
             while True:

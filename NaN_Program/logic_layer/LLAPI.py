@@ -101,14 +101,25 @@ class LLAPI:
     def search_report(self,string, reportlist, key):
         return self.repLL.find_rep_by_str(string, reportlist, key)
     
-    def filter_rep_id(self,id,rep_lis):
-        return self.repLL.find_rep_id(id,rep_lis)
+    def filter_rep_id(self,id,rep_lis, key):
+        return self.repLL.find_rep_id(id, rep_lis, key)
+        
     def edit_rep(self,rep_dict):
         return self.repLL.edit_report_info(rep_dict)
     
     def get_sorted_reports(self):
         return self.repLL.sort_all_reports()
 
+    def get_property_reports(self, reportdict):
+        return self.repLL.get_property_reports(reportdict)
+
+    def confirm_or_deny_pending_report(self, reportinfo):
+        self.repLL.confirm_and_ready_report_and_grade_contractor(reportinfo)
+    def get_emp_reports(self, reportdict):
+        return self.repLL.get_emp_reports(reportdict)
+
+    def get_contractor_reports(self, reportdict):
+        return self.repLL.get_contractor_reports(reportdict)
 
     #JobLL
     def add_job(self,job_lis,id):

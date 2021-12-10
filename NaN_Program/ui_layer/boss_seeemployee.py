@@ -1,7 +1,7 @@
 #Sjá ákveðinn starfsmanna
 from data_files.const import CLEAR, INVALID, SLEEPTIME, STAR, DASH, CONTACTTEMPLATE
 from logic_layer.LLAPI import LLAPI
-
+from ui_layer.reportlist import ReportList
 from time import sleep
 import os
 
@@ -21,6 +21,7 @@ class SeeEmployee:
        - {employeedict['Name']}
      {DASH*15}
      E. Edit
+     R. Property reports
      B. Til baka
 '''
 
@@ -51,6 +52,10 @@ class SeeEmployee:
 
         if user_input.upper() == 'B':
             return 'C'
+
+        elif user_input.upper() == 'R':
+            empreport = ReportList(self.id, self.position, self.employee['Name'],'employee',self.employee)
+            empreport.run_screen()
         
         elif user_input.upper() == 'E':
             while True:

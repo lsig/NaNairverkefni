@@ -18,15 +18,16 @@ SEARCHFILTERS = ['Priority(ASAP; Now; Emergency)', 'Title','Property','Employee'
 
 
 class ContractList: 
-    def __init__(self, id, position, header, joblist) -> None:
+    def __init__(self, id, position, header, jobsection) -> None:
         self.llapi = LLAPI()
+        self.jobsection = jobsection
         self.rows = MAXROWS
         self.slide = 0
         self.id = id
         self.position = position
         self.header = header
-        self.contractlist = joblist
-        self.contractlist_backup = joblist
+        self.contractlist_backup = self.llapi.get_sorted_jobs()[self.jobsection]
+        self.contractlist = self.contractlist_backup
 
     
         self.screen = f''' 
@@ -108,8 +109,7 @@ class ContractList:
                 contractinfo = self.llapi.filter_job_id(user_input, self.contractlist)  #TODO 
                 seecontract = SeeContract(self.id, contractinfo, self.position)
                 seecontract.display()
-                user_input = ""
-                self.rows = len(self.contractlist)
+                self.contractlist = self.llapi.get_sorted_jobs()[self.jobsection]
 
         else:
             print(INVALID)

@@ -15,8 +15,9 @@ class SeeReport:
         self.id = id
         self.report = reportinfo
         editornot = ''
-        if self.position == 'Manager':
-            editornot = f"\n     E. Edit"
+        if self.position == 'Manager' and self.report['Status'] == '1':
+            self.reportvar = 'PM' #PendingManager
+            editornot = f"\n     C. Confirm\n     D. Deny"
         self.screen = f''' 
 {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*14}
@@ -31,40 +32,48 @@ class SeeReport:
         while True:
             self.reset_screen()
             returnvalue = self.prompt_user()
-            if returnvalue == 'C':
+            if returnvalue == 'B':
+                return
+            elif returnvalue == 'notpending':
+                print('Changes saved')
+                sleep(SLEEPTIME)
                 return
 
     
     def printreportinfo(self, number = None):
 
-        reportstring = f"{'| ' + self.report['Location'] + ' | ':^35}\n{DASH*35}\n"
+        reportstring = f"{'| ' + self.report['Location'] + ' |':^50}\n{DASH*50}\n"
 
         for i in range(len(REPORTTEMPLATE)):
             if number != None and i == number - 1:
-                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<17} ____\n"
+                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<25} ____\n"
             else:
-                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<17} {self.report[REPORTTEMPLATE[i]]}\n"
-        reportstring += DASH*35
+                reportstring += f"{i+1}. {REPORTTEMPLATE[i] + ':':<25} {self.report[REPORTTEMPLATE[i]]}\n"
+        reportstring += DASH*50
         
         print(reportstring)
     
     
     def prompt_user(self):
+        
         user_input = input()
-
         if user_input.upper() == 'B':
-            return 'C'
+            return 'B'
 
-        elif user_input.upper() == 'E' and self.position == 'Manager':
-            while True:
-                returnvalue = self.change_row()
-                if returnvalue == 'C' or returnvalue == 'B':
-                    return returnvalue
+        elif self.reportvar == 'PM':
+            if user_input.upper() == 'C':
+                self.report['Status'] = '2'
+                self.llapi.confirm_or_deny_pending_report(self.report)
+                return 'notpending'
 
-        else:
-            print(INVALID)
-            sleep(SLEEPTIME)
-    
+            elif user_input.upper() == 'D':
+                self.report['Status'] = '0'
+                self.llapi.confirm_or_deny_pending_report(self.report)
+                return 'notpending'
+
+        print(INVALID)
+        sleep(SLEEPTIME)
+
 
     def change_row(self, row = None):
 
