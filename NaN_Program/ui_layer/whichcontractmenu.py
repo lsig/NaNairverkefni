@@ -37,7 +37,7 @@ class WhichContractMenu:
             print(self.screen)
             mainttype = input(f"1. {JOBHEADER[0].capitalize()}\n2. {JOBHEADER[1].capitalize()}\n3. {JOBHEADER[2].capitalize()}\n")
             if mainttype == '1' or mainttype == '2' or mainttype == '3':
-                return int(mainttype)
+                return int(mainttype) - 1
             elif mainttype.upper() == 'B':
                 return 'B'
 

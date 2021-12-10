@@ -17,8 +17,11 @@ class SeeContract:
         self.id = id
         self.contract = contractinfo
         editornot = ''
-        if self.position == 'Manager' and contractinfo['Status'] == '0':
-            editornot = f"\n     E. Edit"
+        if self.position == 'Manager':
+            if contractinfo['Status'] == '0':
+                editornot = f"\n     E. Edit"
+            elif contractinfo['Status'] == '1':
+                editornot = f"\n     C. what"
         elif self.position == 'Employee' and contractinfo['Status'] == '0':
             editornot = f"\n     C. Create Report"
         self.screen = f''' 
