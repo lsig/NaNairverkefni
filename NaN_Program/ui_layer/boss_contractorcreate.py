@@ -22,6 +22,9 @@ class BossContractorCreate:
 {DASH * 25}'''
 
     def display_contractormenu(self):
+        '''
+        displays the contractor menu and initiates the class in a way
+        '''
         os.system(CLEAR)
         print(self.screen)
 
@@ -39,6 +42,9 @@ class BossContractorCreate:
 
         
     def printcontractorinfo(self, number = None):
+        '''
+        print the contractor info
+        '''
         contractorstring = ''
         for i in range( len(CONTRACTORTEMPLATE)):
             if number != None and i == number - 1:
@@ -51,6 +57,10 @@ class BossContractorCreate:
     
 
     def confirmcontractor(self):
+        '''
+        confirm a new contractor and sends it down to ll
+        to validate and then to the dl
+        '''
 
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
@@ -78,6 +88,10 @@ class BossContractorCreate:
                 self.reset_screen()
     
     def editcontractorinfo(self, rowchange = None):
+        '''
+        edits the contractor info if the user chooses 
+        to do so
+        '''
         if rowchange == None:
             user_row = None
             while user_row is None:
@@ -94,6 +108,9 @@ class BossContractorCreate:
         self.reset_screen()
     
     def validate(self, rowinput):
+        '''
+        validates various basic user errors 
+        '''
         try:
             rowint = int(rowinput)
             if 1 <= rowint <= len(CONTRACTORTEMPLATE):
@@ -106,6 +123,9 @@ class BossContractorCreate:
             return None
 
     def reset_screen(self, user_row = None):
+        '''
+        reset the screen
+        '''
         os.system(CLEAR)
         print(self.screen)
         self.printcontractorinfo(user_row)
