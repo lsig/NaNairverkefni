@@ -112,7 +112,7 @@ class MaintenanceLL:
             freq = 30
         if   date_time != 0  and today >= date_time:
             if (date_time-today).days() <= freq:
-                return False,"Date-to(dd-mm-yyyy)","Frequency"
+                return False,"Date-to(dd-mm-yyyy)"
         return True,"" 
 
 
