@@ -56,6 +56,7 @@ class ContractList:
     
 
     def display_list(self):
+        self.llapi.update_reg_jobs() #this checks all regular jobs in the Regular_maintenance.csv file and checks whether any job is coming up in the near future. If so, the program adds the job to the Maintenance_request.csv
 
         self.firstrow = self.slide * self.rows 
 

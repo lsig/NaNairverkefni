@@ -36,7 +36,7 @@ class MaintenanceLL:
             cont_names = self.get_cont_names(main_dic["Suggested-contractor(id)"]) # þarf að bæta við þessu í dl
             # bæta við nöfnunum9
             main_job = Maintenance(self.assign_id(),curr_date,main_dic["Date-to(dd-mm-yyyy)"],main_dic["Frequency(Week: 1, or Month: 2)"],emp_name,main_dic["Employee-id"],main_dic["Title"],
-            main_dic["Description"],self.boss_loc,prop_addr,prop_nr,main_dic["Property-id"],main_dic["Priority(ASAP,Now,Emergency)"],cont_names,main_dic["Suggested-contractor(id)"].replace(" ",""),"0")
+            main_dic["Description"],self.boss_loc,prop_addr,prop_nr,main_dic["Property-id"],main_dic["Priority(ASAP; Now; Emergency)"],cont_names,main_dic["Suggested-contractor(id)"].replace(" ",""),"0")
             self.dlapi.add_maintenance_job(main_job)
             return True,key
         return False,key
@@ -50,7 +50,7 @@ class MaintenanceLL:
         return str(1)
 
     def is_valid(self,today,main_dic):
-        dic = {"Date-to(dd-mm-yyyy)":int,"Frequency(Week: 1, or Month: 2)":int,"Employee-id":int,"Title":str,"Description":"both","Property-id":int,"Priority(ASAP,Now,Emergency)":str,"Suggested-contractor(id)":int}
+        dic = {"Date-to(dd-mm-yyyy)":int,"Frequency(Week: 1, or Month: 2)":int,"Employee-id":int,"Title":str,"Description":"both","Property-id":int,"Priority(ASAP; Now; Emergency)":str,"Suggested-contractor(id)":int}
         for key in dic.keys():
             if dic[key] == str:
                 get_validation = main_dic[key].replace(" ", "").isalpha()
@@ -183,10 +183,11 @@ class MaintenanceLL:
                 ref_date=(datetime(int(date_lis[0]),int(date_lis[1]),int(date_lis[2]))+ timedelta(days=freq)).date()
                 today = datetime.date(datetime.now())
                 if (ref_date-today).days <= 2:
+                    add_to_job_dic = main_dic
                     main_dic["Date-from"] = ref_date
                     all_main_job_lis[counter] = main_dic
-                    main_dic["Date-created"] = ref_date
-                    self.jobLL.add_job(main_dic,None,True)
+                    add_to_job_dic["Date-created"] = ref_date
+                    self.jobLL.add_job(add_to_job_dic,None,True)
             counter += 1
         self.update_main_job(all_main_job_lis)
 

@@ -1,1 +1,4 @@
 id,Date-from,Date-to,Frequency:Week(1) or Month(2),Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority(ASAP; Now; Emergency),Suggested-contractor,Suggested-contractor(id),Status
+1,2021-12-10,10-12-2021,1,Nanna Daema,3,logi,fix him,Longyearbyen,Longyearbyen Harbor 1,AA999-6,36,now,John Core,1,1
+2,2021-12-10,10-12-2021,1,Nanna Daema,3,Horfa a glugga,dasdf,Longyearbyen,Longyearbyen Harbor 1,AA999-8,38,Asap,John Core,1,1
+3,2021-12-10,10-12-2021,1,Jacob arons,2,kfkffk,asdf,Longyearbyen,Vei 217,F959594,1,asap,John Core,1,1
