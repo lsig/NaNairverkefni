@@ -17,7 +17,7 @@ class SeeReport:
         editornot = ''
         if self.position == 'Manager' and self.report['Status'] == '1':
             self.reportvar = 'PM' #PendingManager
-            editornot = f"\n     C. Confirm\n     D. Deny"
+            editornot = f"\n\tC. Confirm\n\tD. Deny"
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*20}
