@@ -162,7 +162,7 @@ class ReportList:
                 datefrom = input("Date from (dd-mm-yyyy): ")
                 dateto =   input("Date to (dd-mm-yyyy): ")
                 userstring = ''
-                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.contractlist)
+                filteredlist = self.llapi.search_job_by_time(datefrom, dateto, self.reportlist)
         
         else:
             userstring = input(f"Search in {key.lower()}: ")
