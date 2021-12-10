@@ -5,5 +5,8 @@ id,Date-created,Employee,Employee-id,Title,Description,Location,Property,Propert
 4,2021-12-11,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,Asap,,,0,Maintenace job
 5,2021-12-10,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,Asap,,,0,Maintenace job
 6,2021-12-12,Aqqaluk Lynge,5,hani,hehe,Kulusuk,iGloo-Ville,64-3900,2,Asap,,,0,Maintenace job
+<<<<<<< HEAD
+=======
 7,2021-12-10,Jacob arons,2,lop,dop,Longyearbyen,Vei 217,F959594,1,ASAP,,,0,Regular job
 8,2021-12-10,Jacob arons,2,lop,dop,Longyearbyen,Vei 217,F959594,1,ASAP,1,John Core,0,Regular job
+>>>>>>> 50a3c95b8b475d4737abebc565bd6aabd65a5e1a
