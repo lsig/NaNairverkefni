@@ -43,7 +43,9 @@ class ContractCreate:
             self.contractdict[self.template[i]] = user_input
         print(DASH*35)
         
-        self.confirmcontract()
+        contract_confirm = self.confirmcontract()
+        if contract_confirm is True:
+            return 'B'
 
     def regular_or_single(self):
         while True:
@@ -86,7 +88,7 @@ class ContractCreate:
                 if valid:
                     print('Contract succesfully added!')
                     sleep(SLEEPTIME)
-                    return
+                    return True
                 else:
                     print(f'Wrong {key}') 
                     sleep(SLEEPTIME)
