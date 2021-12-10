@@ -34,7 +34,6 @@ class MaintenanceLL:
             emp_name =self.empLL.find_employee_name(main_dic["Employee-id"])
             prop_addr,prop_nr = self.get_property_info(main_dic["Property-id"])
             cont_names = self.get_cont_names(main_dic["Suggested-contractor(id)"]) # þarf að bæta við þessu í dl
-            print(cont_names)
             # bæta við nöfnunum9
             main_job = Maintenance(self.assign_id(),curr_date,main_dic["Date-to(dd-mm-yyyy)"],main_dic["Frequency(Week: 1, or Month: 2)"],emp_name,main_dic["Employee-id"],main_dic["Title"],
             main_dic["Description"],self.boss_loc,prop_addr,prop_nr,main_dic["Property-id"],main_dic["Priority(ASAP,Now,Emergency)"],cont_names,main_dic["Suggested-contractor(id)"].replace(" ",""),"0")
@@ -69,7 +68,8 @@ class MaintenanceLL:
                 date_time = self.check_date(main_dic[key].split("-"))
                 if date_time == False:
                     return False,key
-            elif key == "Date-to(dd-mm-yyyy)" and main_dic[key] != "":
+            elif key == "Date-to(dd-mm-yyyy)" and main_dic[key] == "":
+                date_time = 0
                 get_validation = True
 
             if key == "Frequency(Week: 1, or Month: 2)":
@@ -96,7 +96,7 @@ class MaintenanceLL:
                 if cont_booL == False:
                     return False,key
                     
-            elif  key == "Suggested-contractor(id)" and main_dic[key] == "":
+            elif  key == "Suggested-contractor(id)" and main_dic[key] != "":
                 get_validation = True
 
             
@@ -110,7 +110,7 @@ class MaintenanceLL:
             freq = 7
         else:
             freq = 30
-        if today >= date_time:
+        if   date_time != 0  and today >= date_time:
             if (date_time-today).days() <= freq:
                 return False,"Date-to(dd-mm-yyyy)","Frequency"
         return True,"" 
@@ -183,7 +183,6 @@ class MaintenanceLL:
                 ref_date=(datetime(int(date_lis[0]),int(date_lis[1]),int(date_lis[2]))+ timedelta(days=freq)).date()
                 today = datetime.date(datetime.now())
                 if (ref_date-today).days <= 2:
-                    print(today,ref_date,(today-ref_date).days)
                     main_dic["Date-from"] = ref_date
                     all_main_job_lis[counter] = main_dic
                     main_dic["Date-created"] = ref_date
@@ -225,10 +224,10 @@ if __name__ == "__main__":
     # print((x1- x).days)
     # print(x.strftime("%B"))
 
-    dic_fromat = {"Date-to(dd-mm-yyyy)":"20-12-2022","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP,Now,Emergency)":"Asap","Suggested-contractor(id)":"5"}
+    dic_fromat = {"Date-to(dd-mm-yyyy)":"","Frequency(Week: 1, or Month: 2)":"1","Employee-id":"5","Title":"hani","Description":"hehe","Property-id":"2","Priority(ASAP,Now,Emergency)":"Asap","Suggested-contractor(id)":""}
     g = MaintenanceLL()
     # # print(dic_fromat[])
-    # print(g.add_maintenance(dic_fromat,4))
+    print(g.add_maintenance(dic_fromat,4))
     # t =",S, i,                                        i"
     # a = " ".join(t.strip(",").split()).split(",")
     # print(a)
@@ -238,7 +237,7 @@ if __name__ == "__main__":
     # print(lis[len(lis)-1])
     # if x:
     #     print("yeah")
-    g.add_to_job(4)
+    g.add_to_job()
     
     # print(g.get_all_main_jobs())
     # g.update_main_job(DlAPI.get_maintenance_jobs())
