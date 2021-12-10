@@ -1,5 +1,1 @@
-Report-id,Request-id,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Contractor-name,Contractor-id,Contractor-rating,Date,Commission,Status,Feedback
-1,1,Jacob arons,2,Fix this UI shit,This went very well!,Longyearbyen,Longyearbyen Harbor 1,AA999-9,39,,,0,2021-12-10,,2,
-2,7,Jacob arons,2,Teini,alcholism not fixed,Longyearbyen,Vei 217,F959594,1,,,,2021-12-10,,2,
-3,8,Jacob arons,2,kok,Big kok,Longyearbyen,Vei 217,F959594,1,,,,2021-12-10,,2,Good
-4,9,Jacob arons,2,Kristó cock,cock not fixed,Longyearbyen,Vei 217,F959594,1,,,,2021-12-10,,2,ur cock is fine the way it is
+Report-id,Request-id,Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Contractor-name,Contractor-id,Contractor-rating,Date,Commission,Total-cost,Status,Feedback
