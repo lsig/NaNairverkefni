@@ -24,6 +24,9 @@ class BossEmployeeCreate:
 {DASH * 25}'''
 
     def display_menu(self):
+        '''
+        displays the menu info 
+        '''
         os.system(CLEAR)
         print(self.screen)
 
@@ -40,6 +43,9 @@ class BossEmployeeCreate:
 
         
     def printcontactinfo(self, number = None):
+        '''
+        print the contact/employee info 
+        '''
         contactstring = ''
 
         for i in range( len(CONTACTTEMPLATE)):
@@ -55,6 +61,10 @@ class BossEmployeeCreate:
     
 
     def confirmcontact(self):
+        '''
+        Confirms a new contact/employee who was added and sends it to 
+        the ll for validation
+        '''
 
         while True:
             confirm = input("""\nC. Confirm \nE. Edit \nQ. Quit / Cancel \n""")
@@ -85,6 +95,9 @@ class BossEmployeeCreate:
                 self.reset_screen()
     
     def editcontactinfo(self, row = None):
+        '''
+        edit the contact info 
+        '''
         if row == None:
             user_row = None
             while user_row is None:
@@ -102,6 +115,9 @@ class BossEmployeeCreate:
         self.reset_screen()
     
     def validate(self, rowinput):
+        '''
+        validates various basic user errors 
+        '''
         try:
             rowint = int(rowinput)
             if 1 <= rowint <= len(CONTACTTEMPLATE):
@@ -114,6 +130,9 @@ class BossEmployeeCreate:
             return None
     
     def reset_screen(self, user_row = None):
+        '''
+        resets the screen
+        '''
         os.system(CLEAR)
         print(self.screen)
         self.printcontactinfo(user_row)
