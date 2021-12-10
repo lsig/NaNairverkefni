@@ -96,6 +96,7 @@ class EmpReportCreate:
             user_row = None
             while user_row is None:
                 self.reset_screen()
+                self.display()
                 user_input = input("Row to change: ")
                 user_row = self.validate(user_input)
         else:
