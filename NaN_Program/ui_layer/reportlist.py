@@ -78,9 +78,18 @@ class ReportList:
                 try:
                     reportinfostr = f'{self.printedids[i] + ".":<{REPORTDICT["Report-id"]}}- ' #id with some extra text.
                     for key in self.reportlist[self.firstrow + i]:
+                        keyprint = self.reportlist[self.firstrow + i][key]
+
+                        if key == 'Status':
+                            if keyprint == '0':
+                                keyprint = 'Declined'
+                            elif keyprint == '1':
+                                keyprint = 'Ready'
+                            elif keyprint == '2':
+                                keyprint = 'Finished'
 
                         if key != 'Report-id' and key in REPORTDICT.keys(): #We dont want to print the id again.
-                            reportinfostr += f"{'| ' + self.reportlist[self.firstrow + i][key] :<{REPORTDICT[key]}}"
+                            reportinfostr += f"{'| ' + keyprint :<{REPORTDICT[key]}}"
                     print(reportinfostr, end='') #here we print an employee's information.
                             
                 except IndexError:
