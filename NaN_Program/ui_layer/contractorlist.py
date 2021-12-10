@@ -8,7 +8,7 @@ MAXROWS = 50
 ROWS = 10
 SEARCHFILTERS = ['Name', 'Profession', 'Location', 'Rating(0-10)']
 
-CONTRPRINT = [4, 20, 20, 12, 12, 17, 19, 15]
+CONTRPRINT = [5, 25, 25, 20, 14, 17, 20, 15]
 
 
 class ContractorList: 

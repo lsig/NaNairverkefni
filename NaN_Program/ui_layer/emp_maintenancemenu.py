@@ -32,7 +32,7 @@ class EmployeeMaintenanceMenu:
                 empreport.run_screen()
 
             elif user_input == '2':
-                reportlist =  ReportList(self.id, self.position, 'My Reports', 'employee', self.id)
+                reportlist =  ReportList(self.id, self.position, 'My Reports', 'employee', self.id, True)
                 reportlist.run_screen()
 
             elif user_input.upper() == 'B':

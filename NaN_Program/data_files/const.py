@@ -17,7 +17,7 @@ REGCONTRACTTEMPLATE = CONTRACTTEMPLATE + ["Frequency(Week: 1, or Month: 2)", "Da
 PROPERTYTEMPLATE = ['Destination', 'Address', 'Size', 'Rooms', 'Type', 'Property-number', 'Extras'] # listi fyrir fasteignir
 CONTRACTORTEMPLATE = ["Name","Contact-name","Profession","Phone","Working-hours"] #listi fyrir verktaka, location kemur frá boss
 DESTINATIONTEMPLATE = ['Name', 'Country' ,'Airport', 'Phone', 'Working-hours', 'Manager', 'Social Security', 'Address', 'Phone-manager', 'GSM']
-REPORTTEMPLATE = ['Report-id', 'Request-id', 'Employee', 'Employee-id', 'Title', 'Description', 'Location', 'Property', 'Property-number', 'Property-id', 'Contractor-name', 'Contractor-id', 'Contractor-rating', 'Date', 'Commission', 'Status']
+REPORTTEMPLATE = ['Report-id', 'Request-id', 'Employee', 'Employee-id', 'Title', 'Description', 'Location', 'Property', 'Property-number', 'Property-id', 'Contractor-name', 'Contractor-id', 'Contractor-rating', 'Date', 'Commission', 'Status', 'Feedback']
 
 CREATEREPORTTEMPLATE = ['Description', 'Contractor-id', 'Commission','Total-cost']
 

@@ -11,7 +11,8 @@ DONOTPRINT = ['Report-id', 'Request-id', 'Employee-id', 'Property-number', 'Prop
 
 
 class ReportList: 
-    def __init__(self, id, position, header, jobsection, info = None) -> None:
+    def __init__(self, id, position, header, jobsection, info = None, empmenu = None) -> None:
+        self.empmenu = empmenu
         self.info = info
         self.llapi = LLAPI()
         self.jobsection = jobsection
@@ -35,18 +36,18 @@ class ReportList:
 
         self.reportlist = self.reportlist_backup
         spacebar = '        '
-        if self.info == None:
-            menutravel = f'{spacebar}  | MAINTENANCE |\n{spacebar}  - Reportlist'
+        if self.info == None or self.empmenu == True:
+            self.menutravel = f'{spacebar}  | MAINTENANCE |\n{spacebar}  - Reportlist'
         elif jobsection == 'property':
-            menutravel = f'{spacebar}  | PROPERTIES |\n{spacebar}  - Propertylist\n{spacebar}    - {self.info["Address"]}'
+            self.menutravel = f'{spacebar}  | PROPERTIES |\n{spacebar}  - Propertylist\n{spacebar}    - Reports: {self.info["Address"]}'
         elif jobsection == 'employee':
-            menutravel = f'{spacebar}  | EMPLOYEES |\n{spacebar}  - Employeelist\n{spacebar}    - {self.info["Name"]}'
+            self.menutravel = f'{spacebar}  | EMPLOYEES |\n{spacebar}  - Employeelist\n{spacebar}    - Reports: {self.info["Name"]}'
         elif jobsection == 'contractor':
-            menutravel = f'{spacebar}  | CONTRACTORS |\n{spacebar}  - Contractorlist\n{spacebar}    - {self.info["Name"]}'
+            self.menutravel = f'{spacebar}  | CONTRACTORS |\n{spacebar}  - Contractorlist\n{spacebar}    - Reports: {self.info["Name"]}'
         self.screen = f''' 
  {self.id['Destination']} | {self.id['Name']} | {self.position} 
 {STAR*20}
-{menutravel}
+{self.menutravel}
         {DASH*15}
         L. Look
         B. Back

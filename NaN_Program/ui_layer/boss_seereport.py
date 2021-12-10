@@ -17,9 +17,9 @@ class SeeReport:
         editornot = ''
         if self.position == 'Manager' and (self.report['Status'] == '1' or self.report['Status'] == '2') :
             self.reportvar = 'PM' #PendingManager
-            editornot = f"\n\tC. Confirm"
             if self.report['Status'] == '1':
-                editornot += f"\n\tD. Deny"
+                editornot = f"\n\tC. Confirm"
+            editornot += f"\n\tD. Deny"
         
         elif self.position == 'Employee' and self.report['Status'] == '0':
             self.reportvar = 'DE' #DeniedEmployee
@@ -61,21 +61,27 @@ class SeeReport:
         print(reportstring)
     
     
-    def prompt_user(self):
+    def prompt_user(self, old_input = None):
+        if old_input == None:
+            user_input = input()
+        else:
+            user_input = old_input
         
-        user_input = input()
         if user_input.upper() == 'B':
             return 'B'
 
         elif self.reportvar == 'PM':
-            if user_input.upper() == 'C':
-                self.report['Status'] = '2'
-                boss_feedback = input('Report feedback: ')
-                self.report['Feedback'] = boss_feedback
+            if user_input.upper() == 'C' and self.report['Status'] == '1':
+                self.boss_feedback = input('Report feedback: ')
+                self.report['Feedback'] = self.boss_feedback
                 if self.report['Contractor-id'] != '':
-                    contractor_rating = input('Contractor Rating: ')
-                    self.report['Contractor-rating'] = contractor_rating
+                    valid = False
+                    while not valid:
+                        contractor_rating = input('Contractor Rating: ')
+                        valid = self.validate_rating(contractor_rating)
 
+                    self.report['Contractor-rating'] = contractor_rating
+                    self.report['Status'] = '2'
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
 
@@ -162,6 +168,19 @@ class SeeReport:
             sleep(SLEEPTIME)
             return None
         
+    
+    def validate_rating(self, user_input):
+        if user_input.isdigit():
+            if 0 <= int(user_input) <= 10:
+                return True
+        
+        print(INVALID)
+        sleep(SLEEPTIME)
+        self.reset_screen()
+        print(f'Report feedback: {self.boss_feedback}')
+            
+        return False
+
 
     def reset_screen(self, user_row = None):
         os.system(CLEAR)
