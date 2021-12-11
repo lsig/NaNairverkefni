@@ -81,7 +81,7 @@ class SeeReport:
                         valid = self.validate_rating(contractor_rating)
 
                     self.report['Contractor-rating'] = contractor_rating
-                    self.report['Status'] = '2'
+                self.report['Status'] = '2'
                 self.llapi.confirm_or_deny_pending_report(self.report)
                 return 'notpending'
 

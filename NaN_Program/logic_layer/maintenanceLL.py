@@ -34,7 +34,6 @@ class MaintenanceLL:
             emp_name =self.empLL.find_employee_name(main_dic["Employee-id"])
             prop_addr,prop_nr = self.get_property_info(main_dic["Property-id"])
             cont_names = self.get_cont_names(main_dic["Suggested-contractor(id)"]) 
-            print(cont_names)# þarf að bæta við þessu í dl
             # bæta við nöfnunum9
             main_job = Maintenance(self.assign_id(),curr_date,main_dic["Date-to(dd-mm-yyyy)"],main_dic["Frequency(Week: 1, or Month: 2)"],emp_name,main_dic["Employee-id"],main_dic["Title"],
             main_dic["Description"],self.boss_loc,prop_addr,prop_nr,main_dic["Property-id"],main_dic["Priority(ASAP; Now; Emergency)"],cont_names,main_dic["Suggested-contractor(id)"].replace(" ",""),"0")

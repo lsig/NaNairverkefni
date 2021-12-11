@@ -1,31 +1,31 @@
 id,Date-from,Date-to,Frequency:Week(1) or Month(2),Employee,Employee-id,Title,Description,Location,Property,Property-number,Property-id,Priority(ASAP; Now; Emergency),Suggested-contractor,Suggested-contractor(id),Status,Date-created
-1,2021-12-10,2025-12-10,1,Nanna Daema,3,Gera kjarnaofn subcritical.,Sáldra boron í kerfið,Longyearbyen,Longyearbyen Harbor 1,AA999-1,31,ASAP,John Core,1,0,
-2,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3900,2,ASAP,,,0,
-3,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3901,3,ASAP,,,0,
-4,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3902,4,ASAP,,,0,
-5,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3903,5,ASAP,,,0,
-6,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3904,6,ASAP,,,0,
-7,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3905,7,ASAP,,,0,
-8,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3906,8,ASAP,,,0,
-9,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3907,9,ASAP,,,0,
-10,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3908,10,ASAP,,,0,
-11,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3909,11,ASAP,,,0,
-12,2022-15-07,2022-25-8,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur.,Bæta við snjó og passa göt,Kulusuk, iGloo-Ville,64-3910,12,ASAP,,,0,
-13,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9492,20,Now,,,0,
-14,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9493,20,Now,,,0,
-15,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9494,20,Now,,,0,
-16,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9495,20,Now,,,0,
-17,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9496,20,Now,,,0,
-18,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9497,20,Now,,,0,
-19,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9498,20,Now,,,0,
-20,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9499,20,Now,,,0,
-21,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9500,20,Now,,,0,
-22,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9501,20,Now,,,0,
-23,2022-05-01,2022-09-30,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9502,20,Now,,,0,
-24,2021-12-10,2025-12-10,1,Nauja Lynge,6,Gluggaþvottur,,Kulusuk,Suloraq 42,64-3875-6,13,ASAP,,,0,
-25,2021-12-10,2025-12-10,1,Nauja Lynge,6,Gluggaþvottur,,Kulusuk,Nuussuaq 4,64-3812,15,ASAP,,,0,
-26,2021-12-10,2025-12-10,1,André Hjaltalin,9,Gluggaþvottur,,Tórshavn,Skákið 15,ix-9331,16,ASAP,,,0,
-27,2021-12-10,2025-12-10,1,André Hjaltalin,9,Gluggaþvottur,,Tórshavn,Skákið 15,ix-9332,17,ASAP,,,0,
-28,2021-12-10,2025-12-10,1,André Hjaltalin,9,Gluggaþvottur,,Tórshavn,Skákið 15,ix-9333,18,ASAP,,,0,
-29,2021-12-10,2025-12-10,1,André Hjaltalin,9,Gluggaþvottur,,Tórshavn,Svalbarðsvegur 22,ix-2239,19,ASAP,,,0,
-30,2021-12-10,2025-12-10,1,Jacob Yxa,2,Gluggaþvottur,,Longyearbyen,Vei 217,ix-2239,1,ASAP,,,0,
+1,2021-12-10,11-12-2025,1,Nanna Daema,3,Gera kjarnaofn subcritical,Sáldra boron í kerfið,Longyearbyen,Longyearbyen Harbor 1,AA999-1,31,ASAP,John Core,1,0
+2,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3900,2,ASAP,,,0
+3,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3901,3,ASAP,,,0
+4,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3902,4,ASAP,,,0
+5,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3903,5,ASAP,,,0
+6,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3904,6,ASAP,,,0
+7,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3905,7,ASAP,,,0
+8,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3906,8,ASAP,,,0
+9,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3907,9,ASAP,,,0
+10,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3908,10,ASAP,,,0
+11,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3909,11,ASAP,,,0
+12,2022-07-15,25-08-2022,1,Aqqaluk Lynge,5,Kæla niður snjóhús og stoppa í glufur,Bæta við snjó og passa göt,Kulusuk,iGloo-Ville,64-3910,12,ASAP,,,0
+13,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9492,20,Now,,,0
+14,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9493,20,Now,,,0
+15,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9494,20,Now,,,0
+16,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9495,20,Now,,,0
+17,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9496,20,Now,,,0
+18,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9497,20,Now,,,0
+19,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9498,20,Now,,,0
+20,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9499,20,Now,,,0
+21,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9500,20,Now,,,0
+22,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9501,20,Now,,,0
+23,2022-05-01,30-09-2022,1,Áki Knudsen,8,Slá og reita arfa af moldarhúsum.,Slá gras og reita arfa,Tórshavn,Nýggivegur 1,ix-9502,20,Now,,,0
+24,2021-12-10,10-12-2025,1,Nauja Lynge,6,Gluggaþvottur,,Kulusuk,Suloraq 42,64-3875-6,13,ASAP,,,0
+25,2021-12-10,10-12-2025,1,Nauja Lynge,6,Gluggaþvottur,,Kulusuk,Nuussuaq 4,64-3812,15,ASAP,,,0
+26,2021-12-10,10-12-2025,1,André Hjaltalin,9,Gluggaþvottur,,Tórshavn,Skákið 15,ix-9331,16,ASAP,,,0
+27,2021-12-10,10-12-2025,1,André Hjaltalin,9,Gluggaþvottur,,Tórshavn,Skákið 15,ix-9332,17,ASAP,,,0
+28,2021-12-10,10-12-2025,1,André Hjaltalin,9,Gluggaþvottur,,Tórshavn,Skákið 15,ix-9333,18,ASAP,,,0
+29,2021-12-10,10-12-2025,1,André Hjaltalin,9,Gluggaþvottur,,Tórshavn,Svalbarðsvegur 22,ix-2239,19,ASAP,,,0
+30,2021-12-10,10-12-2025,1,Jacob Yxa,2,Gluggaþvottur,,Longyearbyen,Vei 217,ix-2239,1,ASAP,,,0
